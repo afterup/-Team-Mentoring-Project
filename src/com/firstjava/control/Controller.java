@@ -158,8 +158,7 @@ public class Controller implements ActionListener {
 		// bt_mypage, bt_mento_demand, bt_user_photo, bt_main, bt_mento_class
 		/*-------------mainForm--------------------*/
 		if (ob == mainForm.bt_login) { // 로그인
-			
-			
+
 			if (mainForm.bt_login.getText() == "Login") {
 				loginForm.setVisible(true);
 			} else {
@@ -203,23 +202,24 @@ public class Controller implements ActionListener {
 
 			/*-------------LoginForm(로그인창)--------------------*/
 		} else if (ob == loginForm.bt_login) { // 로그인 버튼 클릭
-			
+
 			MemberDAO dao = new MemberDAO();
-			
+
 			String id = loginForm.tf_id.getText();
 			loginId = id;
 			String pass = new String(loginForm.tf_pass.getPassword());
-			
-			if(dao.findLogin(id, pass)) {
+
+			if (dao.findLogin(id, pass)) {
 				loginId = id;
 				loginForm.showMsg("로그인 성공!");
 				loginForm.setVisible(false);
 				loginForm.initText();
-				mainForm.bt_login.setText("Logout");;
-			}else {
+				mainForm.bt_login.setText("Logout");
+				;
+			} else {
 				loginForm.showMsg("아이디와 비밀번호를 확인해주세요!!");
 			}
-			 	
+
 		} else if (ob == loginForm.la_join) { // 회원가입
 
 			joinForm.setVisible(true);
@@ -239,8 +239,8 @@ public class Controller implements ActionListener {
 			String phone1 = joinForm.tf_phone1.getText();
 			String phone2 = joinForm.tf_phone2.getText();
 			String phone3 = joinForm.tf_phone3.getText();
-				String phone = phone1 + "-" + phone2 + "-" + phone3;
-			
+			String phone = phone1 + "-" + phone2 + "-" + phone3;
+
 			String email = joinForm.tf_email.getText();
 
 			if (!id.matches("^[a-zA-Z]{5,12}+$")) {
@@ -265,13 +265,12 @@ public class Controller implements ActionListener {
 				joinForm.tf_name.setText("");
 				joinForm.tf_name.requestFocus();
 				return;
-			} else if (((!phone1.matches("^[0-9]{2,3}$")) ||
-						(!phone2.matches("^[0-9]{2,4}$")) || 
-						(!phone3.matches("^[0-9]{2,4}$")))){
+			} else if (((!phone1.matches("^[0-9]{2,3}$")) || (!phone2.matches("^[0-9]{2,4}$"))
+					|| (!phone3.matches("^[0-9]{2,4}$")))) {
 				joinForm.showMsg("전화번호 확인");
 				return;
-			} 
-			
+			}
+
 			MemberVO vo = new MemberVO(id, pwd, name, email, phone);
 
 			if (dao.insert(vo)) {
@@ -286,13 +285,15 @@ public class Controller implements ActionListener {
 			} else {
 				joinForm.showMsg("다시 확인해주세요.");
 			}
-			
+
 		} else if (ob == joinForm.bt_cancel) { // 취소
 
 			joinForm.initText();
 
-		} else if (ob == joinForm.bt_checkid) {// 중복확인
-
+		} else if (ob == joinForm.bt_checkid) {
+			// 중복확인
+			System.out.println("중복확인");
+			checkId();
 			/*-------------PassChangeForm(비번변경창)--------------------*/
 		} else if (ob == pChangeForm.bt_submit) {
 
@@ -301,6 +302,20 @@ public class Controller implements ActionListener {
 		}
 
 	}
+
+	public void checkId() {
+		System.out.println("checkId()");
+		MemberDAO dao = new MemberDAO();
+		String id = joinForm.tf_id.getText();
+		if (dao.findExistId(id) == 1) {
+			joinForm.showMsg("이미 사용중인 아이디입니다!!");
+		} else {
+			joinForm.showMsg("사용가능한 아이디입니다!!");
+			if (joinForm.showConfirm("이 아이디를 사용하시겠습니까?") == 0) {
+				joinForm.tf_id.setText(id);
+			}
+		}
+	}// checkId
 
 	public static void main(String[] args) {
 		new Controller();

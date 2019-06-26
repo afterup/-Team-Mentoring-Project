@@ -137,12 +137,20 @@ public class JoinForm extends JFrame {
 
 	      
 	   }
-	   
-	   
-	   public void showMsg(String msg) {
+	 public void showMsg(String msg) {
 	      JOptionPane.showMessageDialog(this, msg);
-	   }
-	
+	   }// showMsg
+
+	   public String showInput(String msg) {
+	      return JOptionPane.showInputDialog(this, msg);
+	   }// showInput
+
+	   public int showConfirm(String msg) {
+	      return JOptionPane.showConfirmDialog(this, msg);
+	   }// showConfirm
+	   
+	   
+	   
 	
 
 	public static void main(String[] args) {
