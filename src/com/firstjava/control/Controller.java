@@ -316,16 +316,9 @@ public class Controller implements ActionListener {
 
 			joinForm.initText();
 
-<<<<<<< HEAD
 		} else if (ob == joinForm.bt_checkid) {// 중복확인
 			checkId();
-			
-=======
-		} else if (ob == joinForm.bt_checkid) {
-			// 중복확인
-			System.out.println("중복확인");
-			checkId();
->>>>>>> 4a459f578c95c3cd203376f3e589b872b6ecdd6c
+
 			/*-------------PassChangeForm(비번변경창)--------------------*/
 		} else if (ob == pChangeForm.bt_submit) {
 
@@ -335,21 +328,6 @@ public class Controller implements ActionListener {
 
 	}
 	
-	public void checkId() {
-	      System.out.println("checkId()");
-	      MemberDAO dao = new MemberDAO();
-	      String id = joinForm.tf_id.getText();
-	      
-	      if (dao.findExistId(id) == 1) {
-	         joinForm.showMsg("이미 사용중인 아이디입니다!!");
-	      } else {
-	    	  
-	         joinForm.showMsg("사용가능한 아이디입니다!!");
-	         if (joinForm.showConfirm("이 아이디를 사용하시겠습니까?") == 0) {
-	            joinForm.tf_id.setText(id);
-	         }
-	      }
-	   }// checkId
 
 	public void checkId() {
 		System.out.println("checkId()");
