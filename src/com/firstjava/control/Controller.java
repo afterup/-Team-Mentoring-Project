@@ -158,8 +158,14 @@ public class Controller implements ActionListener {
 		// bt_mypage, bt_mento_demand, bt_user_photo, bt_main, bt_mento_class
 		/*-------------mainForm--------------------*/
 		if (ob == mainForm.bt_login) { // 로그인
-	
-			loginForm.setVisible(true);
+			
+			
+			if (mainForm.bt_login.getText() == "Login") {
+				loginForm.setVisible(true);
+			} else {
+				System.out.println("로그아웃");
+				mainForm.bt_login.setText("Login");
+			}
 
 			// } else if (ob == mainForm.bt_main) {// 메인
 
@@ -197,6 +203,7 @@ public class Controller implements ActionListener {
 
 			/*-------------LoginForm(로그인창)--------------------*/
 		} else if (ob == loginForm.bt_login) { // 로그인 버튼 클릭
+			
 			MemberDAO dao = new MemberDAO();
 			
 			String id = loginForm.tf_id.getText();
@@ -208,10 +215,11 @@ public class Controller implements ActionListener {
 				loginForm.showMsg("로그인 성공!");
 				loginForm.setVisible(false);
 				loginForm.initText();
+				mainForm.bt_login.setText("Logout");;
 			}else {
 				loginForm.showMsg("아이디와 비밀번호를 확인해주세요!!");
 			}
-			
+			 	
 		} else if (ob == loginForm.la_join) { // 회원가입
 
 			joinForm.setVisible(true);
