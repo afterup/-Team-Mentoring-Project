@@ -29,6 +29,7 @@ public class Controller implements ActionListener {
 	FindIDForm findIDForm;
 	FindPwdForm findPwdForm;
 	MentorRegForm mentorRegForm;
+	String loginId;
 
 	public Controller() {
 
@@ -157,7 +158,7 @@ public class Controller implements ActionListener {
 		// bt_mypage, bt_mento_demand, bt_user_photo, bt_main, bt_mento_class
 		/*-------------mainForm--------------------*/
 		if (ob == mainForm.bt_login) { // 로그인
-
+	
 			loginForm.setVisible(true);
 
 			// } else if (ob == mainForm.bt_main) {// 메인
@@ -199,9 +200,11 @@ public class Controller implements ActionListener {
 			MemberDAO dao = new MemberDAO();
 			
 			String id = loginForm.tf_id.getText();
+			loginId = id;
 			String pass = new String(loginForm.tf_pass.getPassword());
 			
 			if(dao.findLogin(id, pass)) {
+				loginId = id;
 				loginForm.showMsg("로그인 성공!");
 				loginForm.setVisible(false);
 				loginForm.initText();
