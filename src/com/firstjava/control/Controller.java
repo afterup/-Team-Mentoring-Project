@@ -15,7 +15,7 @@ import com.firstjava.view.FindPwdForm;
 import com.firstjava.view.JoinForm;
 import com.firstjava.view.LoginForm;
 import com.firstjava.view.MainForm;
-import com.firstjava.view.MainMentorForm;
+import com.firstjava.view.ManagerForm;
 import com.firstjava.view.MentorRegForm;
 import com.firstjava.view.MentorRequest;
 import com.firstjava.view.MentorReviewForm;
@@ -23,18 +23,18 @@ import com.firstjava.view.MyPage;
 import com.firstjava.view.PassChangeForm;
 
 public class Controller implements ActionListener {
+	ClassForm classForm;
 	LoginForm loginForm;
 	JoinForm joinForm;
 	PassChangeForm pChangeForm;
-	ClassForm classForm;
-	MainForm mainForm;
-	MainMentorForm mentorForm;
 	FindIDForm findIDForm;
 	FindPwdForm findPwdForm;
+	MainForm mainForm;
 	MentorRegForm mentorRegForm;
 	MyPage myPage;
 	MentorReviewForm review;
 	MentorRequest request;
+	ManagerForm managerForm;
 	
 	String loginId;
 
@@ -44,14 +44,14 @@ public class Controller implements ActionListener {
 		joinForm = new JoinForm();
 		pChangeForm = new PassChangeForm();
 		classForm = new ClassForm();
-		mentorForm = new MainMentorForm();
-		mainForm = new MainForm(mentorForm);
+		mainForm = new MainForm();
 		findIDForm = new FindIDForm();
 		findPwdForm = new FindPwdForm();
 		mentorRegForm = new MentorRegForm();
 		myPage = new MyPage();
 		review = new MentorReviewForm();
 		request = new MentorRequest();
+		managerForm = new ManagerForm();
 		
 		eventUp();
 	}// 생성자
@@ -65,7 +65,6 @@ public class Controller implements ActionListener {
 			public void windowClosing(WindowEvent e) {
 				loginForm.setVisible(false);
 				mainForm.setVisible(true);
-				mentorForm.setVisible(true);
 			}
 		});
 
@@ -103,14 +102,13 @@ public class Controller implements ActionListener {
 		mainForm.bt_main.addActionListener(this);
 		mainForm.bt_mento_class.addActionListener(this);
 
-		// mentorForm
-
-		mentorForm.bt_search.addActionListener(this);
-		mentorForm.bt_select.addActionListener(this);
-		mentorForm.bt_create_class.addActionListener(this);
-		mentorForm.bt_class_delete.addActionListener(this);
-		mentorForm.bt_class_data.addActionListener(this);
-		mentorForm.cb_category.addActionListener(this);
+		// main-mentorForm
+		mainForm.bt_search.addActionListener(this);
+		mainForm.bt_select.addActionListener(this);
+		mainForm.bt_create_class.addActionListener(this);
+		mainForm.bt_class_delete.addActionListener(this);
+		mainForm.bt_class_data.addActionListener(this);
+		mainForm.cb_category.addActionListener(this);
 
 		// classForm
 
@@ -174,6 +172,10 @@ public class Controller implements ActionListener {
 		request.bt_search.addActionListener(this);
 		request.bt_select.addActionListener(this);
 		
+		//ManagerForm
+		managerForm.bt_search.addActionListener(this);
+		
+		
 		
 	}// eventUp
 
@@ -208,27 +210,27 @@ public class Controller implements ActionListener {
 			mentorRegForm.setVisible(true);
 
 			// mentorForm.bt_search
-			/*-------------mentorForm--------------------*/
-		} else if (ob == mentorForm.bt_search) { // 검색
+			/*-------------main_mentorForm--------------------*/
+		} else if (ob == mainForm.bt_search) { // 검색
 
 			System.out.println("검색");
 
-		} else if (ob == mentorForm.bt_select) { // 전체조회
+		} else if (ob == mainForm.bt_select) { // 전체조회
 
 			System.out.println("검색");
-		} else if (ob == mentorForm.bt_create_class) {// 강의개설
+		} else if (ob == mainForm.bt_create_class) {// 강의개설
 
 			System.out.println("반응");
 
 			classForm.setVisible(true);
 
-		} else if (ob == mentorForm.bt_class_delete) {// 강의삭제
+		} else if (ob == mainForm.bt_class_delete) {// 강의삭제
 			System.out.println("검색");
 
-		} else if (ob == mentorForm.bt_class_data) {// 수강정보
+		} else if (ob == mainForm.bt_class_data) {// 수강정보
 			System.out.println("검색");
 
-		} else if (ob == mentorForm.cb_category) { // 멘토신청
+		} else if (ob == mainForm.cb_category) { // 멘토신청
 			System.out.println("검색");
 
 			/*-------------LoginForm(로그인창)--------------------*/

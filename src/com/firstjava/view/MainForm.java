@@ -2,46 +2,113 @@ package com.firstjava.view;
 
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 public class MainForm extends JFrame  implements ActionListener{ 
 	public JTextField tf_user_id, tf_admin;
     public JPasswordField tf_pass;
     public JButton bt_login,bt_mypage, bt_mento_demand, bt_user_photo, bt_main, bt_mento_class;
     public JPanel panel_lecture;//카드레이아웃  기준             
-    public JPanel panel_empty, panel_mentor; //카드  
+    public JPanel panel_main, panel_mentor; //카드  
     public JTextArea ta_desc;
-    public CardLayout card;
+    CardLayout card;
+    
+    //MentorForm Component
+    public JButton bt_search, bt_select, bt_create_class, bt_class_delete, bt_class_data;
+    public JComboBox<String> cb_category;
+    JLabel la_category;
+    JTable table;
+    JScrollPane scroll_table;   
     
     
     
-     
-    
-   public MainForm(MainMentorForm mentorForm) {
+   public MainForm() {
       setTitle("main Form");
       card = new CardLayout();
-      
-      panel_empty = new JPanel();
-      panel_mentor = mentorForm;//new MentorForm();
-      
-      
       panel_lecture = new JPanel();
-         //panel_lecture.add(new JLabel("빈패널"));
+      panel_mentor = new JPanel();//new MentorForm();
       panel_lecture.setLayout(card);
+      
+      //----------------MENTOR FRAME------------
+      bt_search=new JButton("검색");
+      bt_search.setBounds(557,17,61,27);
+      
+      bt_select = new JButton("전체 조회");
+      bt_select.setBounds(632,17,93,27);
+      
+      bt_class_data = new JButton("신청 정보");
+      bt_class_data.setBounds(632,361,93,27);
+
+      bt_create_class = new JButton("강의 개설");
+      bt_create_class.setBounds(418,361,93,27);
+
+      bt_class_delete = new JButton("강의 삭제");
+      bt_class_delete.setBounds(525,361,93,27);
+      
+      la_category = new JLabel("카테고리");
+      la_category.setFont(new Font("맑은 고딕", Font.BOLD, 17));
+      la_category.setBounds(353,16,68,24);
+      
+      String []categoryTitle= {"IT","디자인","뷰티","외국어","음악","라이프"};
+      cb_category = new JComboBox<String>(categoryTitle);
+      cb_category.setBounds(450,10,80,40);
+      
+      String [] columnTitle = {"No.", "Name", "ID"};
+      Object[][] rowData = new Object[0][3];
+      DefaultTableModel dtm = new DefaultTableModel(rowData,columnTitle);
+      
+      table = new JTable(dtm) {
+             @Override
+           public boolean isCellEditable(int row, int column) {
+             return false;
+           }
+          };
+      
+      table.setRowHeight(30);
+      scroll_table = new JScrollPane(table);
+      scroll_table.setBounds(50, 55, 675, 287);
+      panel_mentor.setLayout(null);
+      
+      
+      panel_mentor.add(bt_search);
+      panel_mentor.add(bt_select);
+      panel_mentor.add(bt_class_data);
+      panel_mentor.add(bt_create_class);
+      panel_mentor.add(bt_class_delete);
+      panel_mentor.add(la_category);
+      panel_mentor.add(cb_category);
+      panel_mentor.add(scroll_table);
+      
+      
+      
+      //------------------MAINFORM------------------------
+      panel_main = new JPanel();
+
+      
+      
+      
+      
+      //---------------------------------------------------
 
       //카드 붙이기
-      panel_lecture.add(panel_empty,"empty");//"empty"별명
-      panel_lecture.add(panel_mentor,"mentor");//"mentor"별명
+      panel_lecture.add(panel_main,"1");//"empty"별명
+      panel_lecture.add(panel_mentor,"2");//"mentor"별명
       
       //panel_lecture.setBackground(Color.green); //메인에서의 영역확인
       panel_lecture.setBounds(0, 250, 780, 400);
@@ -105,7 +172,7 @@ public class MainForm extends JFrame  implements ActionListener{
       bt_main.addActionListener(this);
       bt_mento_class.addActionListener(this);
       
-   }
+   }//생성자
    
    
    @Override
@@ -113,17 +180,26 @@ public class MainForm extends JFrame  implements ActionListener{
      Object ob = e.getSource();
      
      if(ob==bt_main) {
-        card.show(panel_lecture, "empty");
+        card.show(panel_lecture, "1");
      }else if(ob== bt_mento_class ) { 
-        card.show(panel_lecture, "mentor");
+        card.show(panel_lecture, "2");
         
      }
       
-   }
+   }//actionPerformed
    
    
    
-   public static void main(String[] args) {
-      //new MainForm();
-   }
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					MainForm frame = new MainForm();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 }

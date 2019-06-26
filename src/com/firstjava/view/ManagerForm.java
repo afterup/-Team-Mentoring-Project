@@ -2,18 +2,23 @@ package com.firstjava.view;
 
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.JLabel;
+import javax.swing.table.DefaultTableModel;
 
 public class ManagerForm extends JFrame  implements ActionListener{ 
 	public JTextField tf_user_id, tf_admin;
@@ -24,37 +29,159 @@ public class ManagerForm extends JFrame  implements ActionListener{
     public JTextArea ta_desc;
     public CardLayout card;
     
-    
-    
-    
+    //MemberForm 컴포넌트
+    public JButton bt_search, bt_all_select,bt_info, bt_id_search, bt_id_delete;
+	public JComboBox<String> cb_category;
+	public JTable table;
+	JLabel la_category;
+	JScrollPane scroll_table;
+	 
+	
+	//PostForm 컴포넌트 
+    public JButton bt_p_search, bt_p_all_select,
+    bt_p_info, bt_p_id_search, bt_p_id_delete;
+	public JComboBox<String> cb_p_category;
+	JLabel la_p_category;
+	JTable p_table;
+	JScrollPane p_scroll_table;
     
    public ManagerForm() {
       setTitle("Login Form");
       card = new CardLayout();
-      
-      panel_member = new ManagerMemberForm();
-      panel_post = new ManagerPostForm();
-      
-      
       panel_lecture = new JPanel();
-         //panel_lecture.add(new JLabel("빈패널"));
       panel_lecture.setLayout(card);
+      
+      
+      
+      //-----------------Member Form------------------
+      panel_member = new JPanel();
+      
+      bt_search = new JButton("검색");
+      bt_search.setBounds(440,16,61,27);
+      
+      bt_all_select = new JButton("전체 조회");
+      bt_all_select.setBounds(632,16,93,27);
+      
 
-      //카드 붙이기
-      panel_lecture.add(panel_member,"empty");//"empty"별명
+      bt_info = new JButton("정보 조회");
+      bt_info.setBounds(557,361,93,27);
+   
+      bt_id_search = new JButton("아이디검색");
+      bt_id_search.setBounds(515,16,103,27);
+      
+      bt_id_delete = new JButton("삭제");
+      bt_id_delete.setBounds(664,361,61,27);
+  
+      
+      la_category = new JLabel("카테고리");
+      la_category.setFont(new Font("맑은 고딕", Font.BOLD, 17));
+      la_category.setBounds(267,15,68,24);
+      
+      String []categoryTitle= {"회원","멘티","멘토"};
+      cb_category = new JComboBox<String>(categoryTitle);
+      cb_category.setBounds(340,10,90,40);
+
+      
+      String [] columnTitle = {"No.", "Name", "value"};
+      Object[][] rowData = new Object[0][3];
+      DefaultTableModel dtm = new DefaultTableModel(rowData,columnTitle);
+      
+      table = new JTable(dtm) {
+             @Override
+           public boolean isCellEditable(int row, int column) {
+             return false;
+           }
+          };
+      
+      table.setRowHeight(30);
+      scroll_table = new JScrollPane(table);
+      scroll_table.setBounds(50, 55, 675, 287);
+      panel_member.setLayout(null);
+      
+      panel_member.add(bt_search);
+      panel_member.add(bt_all_select);
+      panel_member.add(bt_info);
+      panel_member.add(bt_id_search);
+      panel_member.add(bt_id_delete);
+      panel_member.add(la_category);
+      panel_member.add(cb_category);
+      panel_member.add(scroll_table);
       
       JLabel label = new JLabel("회원조회 (임시텍스트)");
-      label.setBounds(14, 21, 191, 18);
+      label.setBounds(14, 9, 143, 18);
       panel_member.add(label);
-      panel_lecture.add(panel_post,"mentor");//"mentor"별명
+      
+      
+      //----------------Post Form---------------------
+      panel_post = new JPanel();
+      
+      bt_p_search = new JButton("검색");
+      bt_p_search.setBounds(440,16,61,27);
+      
+      bt_p_all_select = new JButton("전체 조회");
+      bt_p_all_select.setBounds(632,16,93,27);
+      
+
+      bt_p_info = new JButton("정보 조회");
+      bt_p_info.setBounds(557,361,93,27);
+   
+      bt_p_id_search = new JButton("아이디검색");
+      bt_p_id_search.setBounds(515,16,103,27);
+      
+      bt_p_id_delete = new JButton("삭제");
+      bt_p_id_delete.setBounds(664,361,61,27);
+  
+      
+      la_p_category = new JLabel("카테고리");
+      la_p_category.setFont(new Font("맑은 고딕", Font.BOLD, 17));
+      la_p_category.setBounds(267,15,68,24);
+      
+      String []p_categoryTitle= {"회원","멘티","멘토"};
+      cb_p_category = new JComboBox<String>(p_categoryTitle);
+      cb_p_category.setBounds(340,10,90,40);
+
+      
+      String [] p_columnTitle = {"No.", "test", "value"};
+      Object[][] p_rowData = new Object[0][3];
+      DefaultTableModel p_dtm = new DefaultTableModel(p_rowData,p_columnTitle);
+      
+      p_table = new JTable(p_dtm) {
+             @Override
+           public boolean isCellEditable(int row, int column) {
+             return false;
+           }
+          };
+      
+      p_table.setRowHeight(30);
+      p_scroll_table = new JScrollPane(p_table);
+      p_scroll_table.setBounds(50, 55, 675, 287);
+      panel_post.setLayout(null);
+      
+      panel_post.add(bt_p_search);
+      panel_post.add(bt_p_all_select);
+      panel_post.add(bt_p_info);
+      panel_post.add(bt_p_id_search);
+      panel_post.add(bt_p_id_delete);
+      panel_post.add(la_p_category);
+      panel_post.add(cb_p_category);
+      panel_post.add(p_scroll_table);
+      
+      
+      
       
       JLabel label_1 = new JLabel("게시글관리 (임시텍스트)");
-      label_1.setBounds(25, 32, 191, 18);
+      label_1.setBounds(14, 9, 157, 18);
       panel_post.add(label_1);
+      //---------------------------------------------
+      //카드 붙이기
+      panel_lecture.add(panel_member,"1");
+      panel_lecture.add(panel_post,"2");
       
-      //panel_lecture.setBackground(Color.green); //메인에서의 영역확인
+
+      
+
+      
       panel_lecture.setBounds(0, 250, 780, 400);
-      //전체 setBounds(450,170,800,700);
       
       bt_member = new JButton("회원조회");
       bt_member.setBounds(30,190,150,50);
@@ -115,9 +242,9 @@ public class ManagerForm extends JFrame  implements ActionListener{
      Object ob = e.getSource();
      
      if(ob==bt_member) {
-        card.show(panel_lecture, "empty");
+        card.show(panel_lecture, "1");
      }else if(ob== bt_post ) {
-        card.show(panel_lecture, "mentor");
+        card.show(panel_lecture, "2");
         
      }
       
@@ -125,7 +252,16 @@ public class ManagerForm extends JFrame  implements ActionListener{
    
    
    
-   public static void main(String[] args) {
-      new ManagerForm();
-   }
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					ManagerForm frame = new ManagerForm();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 }
