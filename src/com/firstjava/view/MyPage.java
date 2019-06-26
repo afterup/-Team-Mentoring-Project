@@ -122,9 +122,8 @@ public class MyPage extends JFrame {
 		getContentPane().add(bt_reset);
 
 		setBounds(450, 170, 800, 700);
-		setVisible(true);
+		setVisible(false);
 		// setResizable(false);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 
 	public static void main(String[] args) {

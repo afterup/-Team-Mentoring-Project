@@ -16,7 +16,10 @@ import javax.swing.JScrollBar;
 public class ClassForm extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField_1, textField_3, textField_4, textField_4_2, textField_5;
+	public JTextField tf_name, tf_student, tf_open, tf_close, tf_desc;
+	public JComboBox jb_category;
+	public JTextArea ta_desc;
+	public JButton bt_new, bt_update, bt_delete, bt_cancel; 
 		
 	/**
 	 * Create the frame.
@@ -51,83 +54,65 @@ public class ClassForm extends JFrame {
 		contentPane.add(label_4);
 		
 		JLabel label_4_2 = new JLabel("종강일자");
-		label_4_2.setBounds(300, 160, 80, 18);
+		label_4_2.setBounds(50, 200, 80, 18);
 		contentPane.add(label_4_2);
 		
-		JLabel label_5 = new JLabel("장소");
-		label_5.setBounds(50, 200, 80, 18);
-		contentPane.add(label_5);
-		
-		JLabel label_6 = new JLabel("강사소개");
-		label_6.setBounds(50, 240, 80, 18);
-		contentPane.add(label_6);
-		
-		JLabel label_7 = new JLabel("강사설명");
-		label_7.setBounds(50, 360, 80, 18);
+		JLabel label_7 = new JLabel("강의설명");
+		label_7.setBounds(50, 240, 80, 18);
 		contentPane.add(label_7);
 		
 
 		//필드
-		textField_1 = new JTextField();
-		textField_1.setBounds(150, 40, 580, 24);
-		contentPane.add(textField_1);
-		textField_1.setColumns(10);
+		tf_name = new JTextField();
+		tf_name.setBounds(150, 40, 580, 24);
+		contentPane.add(tf_name);
+		tf_name.setColumns(10);
 		
 		String category[] = {"프로그래밍", "영어", "뷰티"};
 		
-		JComboBox comboBox = new JComboBox(category);
-		comboBox.setBounds(150, 80, 130, 24);
-		contentPane.add(comboBox);
+		jb_category = new JComboBox(category);
+		jb_category.setBounds(150, 80, 130, 24);
+		contentPane.add(jb_category);
 		
-		textField_3 = new JTextField();
-		textField_3.setBounds(150, 120, 130, 24);
-		contentPane.add(textField_3);
-		textField_3.setColumns(10);
+		tf_student = new JTextField();
+		tf_student.setBounds(150, 120, 130, 24);
+		contentPane.add(tf_student);
+		tf_student.setColumns(10);
 		
-		textField_4 = new JTextField();
-		textField_4.setBounds(150, 160, 130, 24);
-		contentPane.add(textField_4);
-		textField_4.setColumns(10);
+		tf_open = new JTextField();
+		tf_open.setBounds(150, 160, 130, 24);
+		contentPane.add(tf_open);
+		tf_open.setColumns(10);
 		
-		textField_4_2 = new JTextField();
-		textField_4_2.setBounds(380, 160, 130, 24);
-		contentPane.add(textField_4_2);
-		textField_4_2.setColumns(10);
-		
-		textField_5 = new JTextField();
-		textField_5.setBounds(150, 200, 130, 24);
-		contentPane.add(textField_5);
-		textField_5.setColumns(10);
+		tf_close = new JTextField();
+		tf_close.setBounds(150, 200, 130, 24);
+		contentPane.add(tf_close);
+		tf_close.setColumns(10);
 		
 		
-		JTextArea textArea1 = new JTextArea();
-		textArea1.setBounds(150, 240, 580, 100);
-		contentPane.add(textArea1);
-		
-		
-		JTextArea textArea2 = new JTextArea();
-		textArea2.setBounds(150, 360, 580, 180);
-		contentPane.add(textArea2);
+		ta_desc = new JTextArea();
+		ta_desc.setBounds(150, 240, 580, 300);
+		contentPane.add(ta_desc);
 		
 		
 		
 		//버튼
 		
-		JButton btnNewButton = new JButton("신청");
-		btnNewButton.setBounds(120, 580, 105, 30);
-		contentPane.add(btnNewButton);
+		bt_new = new JButton("신청");
+		bt_new.setBounds(120, 580, 105, 30);
+		contentPane.add(bt_new);
 		
-		JButton btnNewButton_1 = new JButton("수정");
-		btnNewButton_1.setBounds(280, 580, 105, 30);
-		contentPane.add(btnNewButton_1);
+		bt_update = new JButton("수정");
+		bt_update.setBounds(280, 580, 105, 30);
+		contentPane.add(bt_update);
 		
-		JButton btnNewButton_2 = new JButton("삭제");                                            
-		btnNewButton_2.setBounds(440, 580, 105, 30);
-		contentPane.add(btnNewButton_2);
+		bt_delete = new JButton("삭제");                                            
+		bt_delete.setBounds(440, 580, 105, 30);
+		contentPane.add(bt_delete);
 		
-		JButton btnNewButton_3 = new JButton("취소");
-		btnNewButton_3.setBounds(600, 580, 105, 30);
-		contentPane.add(btnNewButton_3);
+		bt_cancel = new JButton("취소");
+		bt_cancel.setBounds(600, 580, 105, 30);
+		contentPane.add(bt_cancel);
 		
 	}
 	

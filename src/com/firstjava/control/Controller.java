@@ -201,6 +201,10 @@ public class Controller implements ActionListener {
 		} else if (ob == mainForm.bt_mento_demand) { // 멘토신청
 
 			mentorRegForm.setVisible(true);
+			
+		} else if (ob == mainForm.bt_mypage) {	
+			
+			myPage.setVisible(true);
 
 			// mentorForm.bt_search
 			/*-------------mentorForm--------------------*/
