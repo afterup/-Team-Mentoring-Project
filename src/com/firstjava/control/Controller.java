@@ -191,7 +191,12 @@ public class Controller implements ActionListener {
 				System.out.println("로그아웃");
 				mainForm.bt_login.setText("Login");
 			}
-
+		
+		} else if(ob == mainForm.bt_mypage) {
+//			if(mainForm.bt_login == "")
+			
+			
+			
 			// } else if (ob == mainForm.bt_main) {// 메인
 
 			// } else if (ob == mainForm.bt_mento_class) {// 멘토강의
@@ -201,10 +206,6 @@ public class Controller implements ActionListener {
 		} else if (ob == mainForm.bt_mento_demand) { // 멘토신청
 
 			mentorRegForm.setVisible(true);
-			
-		} else if (ob == mainForm.bt_mypage) {	
-			
-			myPage.setVisible(true);
 
 			// mentorForm.bt_search
 			/*-------------mentorForm--------------------*/
