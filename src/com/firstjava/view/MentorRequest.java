@@ -73,7 +73,7 @@ public class MentorRequest extends JFrame{
 	      
 	      
 	      setBounds(450,370,800,500);
-	      setVisible(true);
+//	      setVisible(true);
 	      
 
 	}

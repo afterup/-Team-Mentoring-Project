@@ -17,6 +17,9 @@ import com.firstjava.view.LoginForm;
 import com.firstjava.view.MainForm;
 import com.firstjava.view.MainMentorForm;
 import com.firstjava.view.MentorRegForm;
+import com.firstjava.view.MentorRequest;
+import com.firstjava.view.MentorReviewForm;
+import com.firstjava.view.MyPage;
 import com.firstjava.view.PassChangeForm;
 
 public class Controller implements ActionListener {
@@ -29,6 +32,10 @@ public class Controller implements ActionListener {
 	FindIDForm findIDForm;
 	FindPwdForm findPwdForm;
 	MentorRegForm mentorRegForm;
+	MyPage myPage;
+	MentorReviewForm review;
+	MentorRequest request;
+	
 	String loginId;
 
 	public Controller() {
@@ -42,7 +49,10 @@ public class Controller implements ActionListener {
 		findIDForm = new FindIDForm();
 		findPwdForm = new FindPwdForm();
 		mentorRegForm = new MentorRegForm();
-
+		myPage = new MyPage();
+		review = new MentorReviewForm();
+		request = new MentorRequest();
+		
 		eventUp();
 	}// 생성자
 
@@ -148,7 +158,23 @@ public class Controller implements ActionListener {
 		// pchangeForm
 		pChangeForm.bt_submit.addActionListener(this);
 		pChangeForm.bt_cancel.addActionListener(this);
-
+		
+		//myPage
+		myPage.bt_drop_id.addActionListener(this);
+		myPage.bt_menti_request.addActionListener(this);
+		myPage.bt_mentor_request.addActionListener(this);
+		myPage.bt_my.addActionListener(this);
+		myPage.bt_mypage.addActionListener(this);
+		myPage.bt_reset.addActionListener(this);
+		myPage.bt_submit.addActionListener(this);
+		
+		//request
+		request.bt_renew.addActionListener(this);
+		request.bt_request_cancel.addActionListener(this);
+		request.bt_search.addActionListener(this);
+		request.bt_select.addActionListener(this);
+		
+		
 	}// eventUp
 
 	@Override
@@ -290,10 +316,16 @@ public class Controller implements ActionListener {
 
 			joinForm.initText();
 
+<<<<<<< HEAD
+		} else if (ob == joinForm.bt_checkid) {// 중복확인
+			checkId();
+			
+=======
 		} else if (ob == joinForm.bt_checkid) {
 			// 중복확인
 			System.out.println("중복확인");
 			checkId();
+>>>>>>> 4a459f578c95c3cd203376f3e589b872b6ecdd6c
 			/*-------------PassChangeForm(비번변경창)--------------------*/
 		} else if (ob == pChangeForm.bt_submit) {
 
@@ -302,6 +334,22 @@ public class Controller implements ActionListener {
 		}
 
 	}
+	
+	public void checkId() {
+	      System.out.println("checkId()");
+	      MemberDAO dao = new MemberDAO();
+	      String id = joinForm.tf_id.getText();
+	      
+	      if (dao.findExistId(id) == 1) {
+	         joinForm.showMsg("이미 사용중인 아이디입니다!!");
+	      } else {
+	    	  
+	         joinForm.showMsg("사용가능한 아이디입니다!!");
+	         if (joinForm.showConfirm("이 아이디를 사용하시겠습니까?") == 0) {
+	            joinForm.tf_id.setText(id);
+	         }
+	      }
+	   }// checkId
 
 	public void checkId() {
 		System.out.println("checkId()");
