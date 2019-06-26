@@ -12,8 +12,8 @@
 
 
 -- classID (sequence)	
-	drop sequence person_seq;
-	create sequence person_seq
+	drop sequence class_seq;
+	create sequence class_seq;
 	start with 1
 	increment by 1
 	nocycle
