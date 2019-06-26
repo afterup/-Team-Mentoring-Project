@@ -18,7 +18,6 @@ import javax.swing.JTextField;
 public class MyPage extends JFrame {
 	public JButton bt_my, bt_mentor_request, bt_menti_request, bt_mypage, bt_drop_id, bt_submit, bt_reset;
 	public JTextField tf_id, tf_name, tf_phone1, tf_phone2, tf_phone3, tf_addr;
-	public JPasswordField tf_pass, tf_pass2;
 	public JComboBox<String> cb_job;
 	JLabel[] label;
 
@@ -53,9 +52,6 @@ public class MyPage extends JFrame {
 		tf_phone3 = new JTextField();
 		tf_addr = new JTextField();
 
-		tf_pass = new JPasswordField();
-		tf_pass2 = new JPasswordField();
-
 		bt_submit = new JButton("정보 수정");
 		bt_reset = new JButton("비밀번호 변경");
 
@@ -64,11 +60,11 @@ public class MyPage extends JFrame {
 		cb_job = new JComboBox<String>(job);
 
 		// ----------------------JLabel생성-------------------------------------
-		String[] labelTitle = { "I  D", "비  번", "비번확인", "이  름", "전화번호", "주  소", "직  업", "-", "-", "-" };
+		String[] labelTitle = { "I  D", "이  름", "전화번호", "주  소", "직  업", "-", "-"};
 		label = new JLabel[labelTitle.length];
 
 		for (int i = 0; i < labelTitle.length; i++) {
-			if (i < 7)
+			if (i < 5)
 				label[i] = new JLabel(labelTitle[i] + ":");
 			else
 				label[i] = new JLabel(labelTitle[i]);
@@ -76,20 +72,16 @@ public class MyPage extends JFrame {
 
 		// ---------------------컴포넌트 바운즈--------------------------
 		tf_id.setBounds(100, 210, 100, 25);
-		tf_pass.setBounds(100, 250, 100, 25);
-		tf_pass2.setBounds(100, 290, 100, 25);
-		tf_name.setBounds(100, 330, 100, 25);
+		tf_name.setBounds(100, 250, 100, 25);
 
-		label[7].setBounds(131, 170, 8, 25);
+		tf_phone1.setBounds(100, 290, 40, 25);
+		label[5].setBounds(141, 290, 8, 25);
+		tf_phone2.setBounds(150, 290, 40, 25);
+		label[6].setBounds(191, 290, 8, 25);
+		tf_phone3.setBounds(200, 290, 40, 25);
 
-		tf_phone1.setBounds(100, 370, 40, 25);
-		label[8].setBounds(121, 230, 8, 25);
-		tf_phone2.setBounds(150, 370, 40, 25);
-		label[9].setBounds(171, 230, 8, 25);
-		tf_phone3.setBounds(200, 370, 40, 25);
-
-		tf_addr.setBounds(100, 410, 200, 25);
-		cb_job.setBounds(100, 450, 100, 25);
+		tf_addr.setBounds(100, 330, 200, 25);
+		cb_job.setBounds(100, 370, 100, 25);
 		
 		bt_my.setBounds(20, 100, 110, 50);
 		bt_mentor_request.setBounds(150, 100, 130, 50);
@@ -108,8 +100,8 @@ public class MyPage extends JFrame {
 			y += 40;
 		}
 
-		add(label[8]);// "-"
-		add(label[9]);
+		add(label[5]);// "-"
+		add(label[6]);
 
 
 
@@ -120,8 +112,6 @@ public class MyPage extends JFrame {
 		getContentPane().add(bt_mentor_request);
 		getContentPane().add(bt_menti_request);
 		getContentPane().add(tf_id);
-		getContentPane().add(tf_pass);
-		getContentPane().add(tf_pass2);
 		getContentPane().add(tf_name);
 		getContentPane().add(tf_phone1);
 		getContentPane().add(tf_phone2);
@@ -132,7 +122,7 @@ public class MyPage extends JFrame {
 		getContentPane().add(bt_reset);
 
 		setBounds(450, 170, 800, 700);
-//		setVisible(true);
+		setVisible(true);
 		// setResizable(false);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
