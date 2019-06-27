@@ -13,7 +13,7 @@
 
 -- classID (sequence)	
 	drop sequence class_seq;
-	create sequence class_seq;
+	create sequence class_seq
 	start with 1
 	increment by 1
 	nocycle
@@ -41,13 +41,12 @@ create table class
 	opendate 	date 			not null,
 	closedate 	date 			not null,
 	student 	number		    not null,
-	limit       number	        check (limit between 5 and 20),
+	limit       number	        not null check (limit between 5 and 20),
 	constraint userid_fk foreign key(userid) references member(userid),
-	constraint cateno_fk foreign key(cateno) references category(cateno)	
+	constraint cateno_fk foreign key(cateno) references category(cateno)
 );
+
 	
-
-
 
 --insert
 
@@ -76,3 +75,51 @@ select * from class;
 
 --강의 승인여부, 수강신청 테이블
 	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--제약조건 수정할 때 사용하세요!!
+
+alter table class
+drop constraint userid_fk;
+
+alter table class
+drop constraint cateno_fk;
+
+alter table member
+drop constraint member_pk;
+
+alter table category
+drop constraint category_pk;
+
+-------------------------------------------
+alter table member
+add constraint member_pk primary key (userid);
+
+alter table category
+add constraint category_pk primary key (cateno);
+
+alter table class
+add constraint userid_fk foreign key(userid) references member(userid);
+
+alter table class
+add constraint cateno_fk foreign key(cateno) references category(cateno);

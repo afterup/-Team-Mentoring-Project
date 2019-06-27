@@ -197,12 +197,13 @@ public class Controller implements ActionListener {
 
 		// bt_mypage, bt_mento_demand, bt_user_photo, bt_main, bt_mento_class
 		/*-------------mainForm--------------------*/
-		if (ob == mainForm.bt_login) { // 로그인
+		if (ob == mainForm.bt_login) { // 로그인 <-> 로그아웃
 
 			if (mainForm.bt_login.getText() == "Login") {
 				loginForm.setVisible(true);
 			} else {
 				System.out.println("로그아웃");
+				mainForm.la_user_id.setText("Welcome");
 				mainForm.bt_login.setText("Login");
 			}
 		
@@ -287,7 +288,7 @@ public class Controller implements ActionListener {
 				loginForm.setVisible(false);
 				loginForm.initText();
 				mainForm.bt_login.setText("Logout");
-				;
+				mainForm.la_user_id.setText(id);
 			} else {
 				loginForm.showMsg("아이디와 비밀번호를 확인해주세요!!");
 			}
