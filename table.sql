@@ -23,26 +23,27 @@
 -- categoryTable
 drop   table category;
 create table category(
-	cateno number primary key,
-	cname char(20) not null
+	cateno number constraint category_pk primary key,
+	cname varchar2(20) not null
 );
 	
 	
 -- classTable
 	                
-drop   table class;
+drop table class;
 create table class
 (
-	classid	 	number primary key,
+	classid 	number constraint class_pk primary key,
 	classinfo 	varchar2(800),
-	userid 		char(10),
-	cateno 		number			not null,
-	cname 		varchar2(15) 	not null,
-	opendate	date			not null,
-	closedate 	date			not null,
-	student		integer			not null,
-	foreign key(userid) references member(userid),
-	foreign key(cateno) references category(cateno)
+	userid 		varchar2(10),
+	cateno	    number 			not null,
+	cname 	    varchar2(15)  	not null,
+	opendate 	date 			not null,
+	closedate 	date 			not null,
+	student 	number		    not null,
+	limit       number	        check (limit between 5 and 20),
+	constraint userid_fk foreign key(userid) references member(userid),
+	constraint cateno_fk foreign key(cateno) references category(cateno)	
 );
 	
 
@@ -50,30 +51,28 @@ create table class
 
 --insert
 
-insert into member values ('solbi94', '1234', '°í¼Öºñ', 'gosolb0904@gmail.com', 01040109537);
-insert into member values ('gildong', '1111', 'È«±æµ¿', 'gildong@gmail.com', 01012345678);
-insert into member values ('lime', '2222', '±æ¶óÀÓ', 'lime@gmail.com', 01011112222);
-insert into member values ('juwon', '3333', '±èÁÖ¿ø', 'juwon@gmail.com', 01012457890);
+insert into member values ('solbi94', '1234', 'ê³ ì†”ë¹„', 'gosolb0904@gmail.com', 01040109537);
+insert into member values ('gildong', '1111', 'í™ê¸¸ë™', 'gildong@gmail.com', 01012345678);
+insert into member values ('lime', '2222', 'ê¸¸ë¼ì„', 'lime@gmail.com', 01011112222);
+insert into member values ('juwon', '3333', 'ê¹€ì£¼ì›', 'juwon@gmail.com', 01012457890);
 select * from member;
 
-insert into category values (1, 'ÄÄÇ»ÅÍ/IT');
-insert into category values (2, '¿¹¼ú/´ëÁß¹®È­');
-insert into category values (3, '¿ª»ç/¹®È­');
-insert into category values (4, 'Á¤Ä¡/»çÈ¸');
-insert into category values (5, 'Á¾±³');
-insert into category values (6, '±â¼ú/°øÇĞ');
-insert into category values (7, 'ÀÎ¹®');
-insert into category values (8, '°úÇĞ');
+insert into category values (1, 'IT');
+insert into category values (2, 'ë””ìì¸');
+insert into category values (3, 'ë·°í‹°');
+insert into category values (4, 'ì™¸êµ­ì–´');
+insert into category values (5, 'ìŒì•…');
+insert into category values (6, 'ë¼ì´í”„');
 select * from category;
 
 
 insert into class 
-values (class_seq.nextval, 'ÀÚ¹Ù °­ÀÇÀÔ´Ï´Ù','solbi94', 1, 'JAVA','19/07/01','19/07/08',0);
+values (class_seq.nextval, 'ìë°” ê°•ì˜ì…ë‹ˆë‹¤','solbi94', 1, 'JAVA','19/07/01','19/07/08',0,10);
 insert into class 
-values (class_seq.nextval, 'html °­ÀÇÀÔ´Ï´Ù','gildong', 1, 'html','19/07/01','19/07/10',0);
+values (class_seq.nextval, 'html ê°•ì˜ì…ë‹ˆë‹¤','gildong', 1, 'html','19/07/01','19/07/10',0,10);
 
 select * from class;
 
 
---°­ÀÇ ½ÂÀÎ¿©ºÎ, ¼ö°­½ÅÃ» Å×ÀÌºí
+--ê°•ì˜ ìŠ¹ì¸ì—¬ë¶€, ìˆ˜ê°•ì‹ ì²­ í…Œì´ë¸”
 	
