@@ -21,7 +21,8 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 public class MainForm extends JFrame  implements ActionListener{ 
-	public JTextField tf_user_id, tf_admin;
+	public JTextField tf_admin;
+	public JLabel la_user_id;
     public JPasswordField tf_pass;
     public JButton bt_login,bt_mypage, bt_mento_demand, bt_user_photo, bt_main, bt_mento_class;
     public JPanel panel_lecture;//카드레이아웃  기준             
@@ -147,8 +148,8 @@ public class MainForm extends JFrame  implements ActionListener{
       bt_user_photo.setBounds(40,30,130,130);
       bt_user_photo.setIcon(new ImageIcon("image//bt_user_photo.jpg"));
       
-      tf_user_id = new JTextField("사용자 ID");
-      tf_user_id.setBounds(190,50,150,40);
+      la_user_id = new JLabel("Welcome");
+      la_user_id.setBounds(190,50,150,40);
       
       tf_admin = new JTextField("관리자");
       tf_admin.setBounds(190,100,150,40);
@@ -160,7 +161,7 @@ public class MainForm extends JFrame  implements ActionListener{
       getContentPane().add(bt_mypage);
       getContentPane().add(bt_mento_demand);
       getContentPane().add(bt_user_photo);
-      getContentPane().add(tf_user_id);
+      getContentPane().add(la_user_id);
       getContentPane().add(tf_admin);
       getContentPane().add(panel_lecture);
       
