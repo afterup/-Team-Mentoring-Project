@@ -10,8 +10,7 @@ import java.awt.event.WindowEvent;
 import com.firstjava.model.dao.MemberDAO;
 import com.firstjava.model.vo.MemberVO;
 import com.firstjava.view.ClassForm;
-import com.firstjava.view.FindIDForm;
-import com.firstjava.view.FindPwdForm;
+import com.firstjava.view.FindForm;
 import com.firstjava.view.JoinForm;
 import com.firstjava.view.LoginForm;
 import com.firstjava.view.MainForm;
@@ -27,8 +26,7 @@ public class Controller implements ActionListener {
 	LoginForm loginForm;
 	JoinForm joinForm;
 	PassChangeForm pChangeForm;
-	FindIDForm findIDForm;
-	FindPwdForm findPwdForm;
+	FindForm findForm;
 	MainForm mainForm;
 	MentorRegForm mentorRegForm;
 	MyPage myPage;
@@ -45,8 +43,7 @@ public class Controller implements ActionListener {
 		pChangeForm = new PassChangeForm();
 		classForm = new ClassForm();
 		mainForm = new MainForm();
-		findIDForm = new FindIDForm();
-		findPwdForm = new FindPwdForm();
+		findForm = new FindForm();
 		mentorRegForm = new MentorRegForm();
 		myPage = new MyPage();
 		review = new MentorReviewForm();
@@ -131,26 +128,8 @@ public class Controller implements ActionListener {
 		loginForm.la_idPassSearch.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				findIDForm.setVisible(true);
+				findForm.setVisible(true);
 				loginForm.setVisible(false);
-			}
-		});
-
-		// findID
-		findIDForm.la_idPassSearch.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				findPwdForm.setVisible(true);
-				findIDForm.setVisible(false);
-			}
-		});
-
-		// findPwd
-		findPwdForm.la_idPassSearch.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				findIDForm.setVisible(true);
-				findPwdForm.setVisible(false);
 			}
 		});
 
@@ -299,7 +278,7 @@ public class Controller implements ActionListener {
 
 		} else if (ob == loginForm.la_idPassSearch) { // 아이디,비밀번호찾기
 
-			findIDForm.setVisible(true);
+			findForm.setVisible(true);
 
 		/*-------------JoinForm(회원가입창)--------------------*/
 		} else if (ob == joinForm.bt_submit) { // 가입 등록

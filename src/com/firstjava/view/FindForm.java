@@ -187,7 +187,7 @@ public class FindForm extends JFrame implements ActionListener
 		getContentPane().add(la_logoimage);
 		getContentPane().add(la_background);
 
-		setVisible(true);
+		setVisible(false);
 
 		bt_idView.addActionListener(this);
 		bt_passView.addActionListener(this);
@@ -206,19 +206,19 @@ public class FindForm extends JFrame implements ActionListener
 		}
 	}
 
-	public static void main(String[] args)
-	{
-		EventQueue.invokeLater(new Runnable()
-		{
-			public void run()
-			{
-				try {
-					FindForm frame = new FindForm();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args)
+//	{
+//		EventQueue.invokeLater(new Runnable()
+//		{
+//			public void run()
+//			{
+//				try {
+//					FindForm frame = new FindForm();
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 }
