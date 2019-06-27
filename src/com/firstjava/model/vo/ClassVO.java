@@ -5,18 +5,18 @@ public class ClassVO {
 	private String openDate;
 	private String closeDate;
 	private int student; // 현재 수강 인원수
-	private int quorum; // 강의 정원 수
+	private int limit; // 강의 정원 수
 	private int cateno; // 카테고리 번호
 	
 	
 	//생성자
-	public ClassVO(String cname, String openDate, String closeDate, int student, int quorum, int cateno) {
+	public ClassVO(String cname, String openDate, String closeDate, int student, int limit, int cateno) {
 		super();
 		this.cname = cname;
 		this.openDate = openDate;
 		this.closeDate = closeDate;
 		this.student = student;
-		this.quorum = quorum;
+		this.limit = limit;
 		this.cateno = cateno;
 	}
 	
@@ -46,11 +46,11 @@ public class ClassVO {
 	public void setStudent(int student) {
 		this.student = student;
 	}
-	public int getQuorum() {
-		return quorum;
+	public int getLimit() {
+		return limit;
 	}
-	public void setQuorum(int quorum) {
-		this.quorum = quorum;
+	public void setLimit(int limit) {
+		this.limit = limit;
 	}
 	public int getCateno() {
 		return cateno;
