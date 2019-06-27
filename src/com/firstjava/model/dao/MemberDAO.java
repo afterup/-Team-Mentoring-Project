@@ -106,7 +106,7 @@ public class MemberDAO {
 		return false;
 	}//findLogin
 	
-	public boolean insert(MemberVO m) {
+	public boolean memberJoin(MemberVO m) {
 		
 		connect();
 		try {
@@ -128,7 +128,27 @@ public class MemberDAO {
 			disconnect();
 		}
 		return false;
-	}// insert	
+	}// insert
+	
+	public String memberDelete(String name) {
+		connect();
+		
+		try {
+			
+			String sql = "DELETE FROM member WHERE userid=?";
+			stmt= conn.prepareStatement(sql);
+				stmt.setString(1, name);
+			
+			stmt.executeUpdate();
+			return "강퇴되었습니다.";
+		} catch (SQLException e) {
+			disconnect();
+		}
+		return "강퇴에 실패하였습니다.";
+		
+	}
+	
+	
 	
 	public ArrayList<MemberVO> MemberTable() { //회원정보 전체조회
 		connect(); 

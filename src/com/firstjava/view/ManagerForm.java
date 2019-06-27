@@ -13,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
@@ -26,7 +27,7 @@ import com.firstjava.model.vo.MemberVO;
 public class ManagerForm extends JFrame  implements ActionListener{ 
 	public JTextField tf_user_id, tf_admin;
     public JPasswordField tf_pass;
-    public JButton bt_login,bt_homepage, bt_user_photo, bt_member, bt_post;
+    public JButton bt_homepage, bt_user_photo, bt_member, bt_post;
     public JPanel panel_lecture;//카드레이아웃  기준             
     public JPanel panel_member, panel_post; //카드  
     public JTextArea ta_desc;
@@ -42,8 +43,7 @@ public class ManagerForm extends JFrame  implements ActionListener{
 	 
 	
 	//PostForm 컴포넌트 
-    public JButton bt_p_search, bt_p_all_select,
-    bt_p_info, bt_p_id_search, bt_p_id_delete;
+    public JButton bt_p_search, bt_p_all_select, bt_p_info, bt_p_id_search, bt_p_id_delete;
 	public JComboBox<String> cb_p_category;
 	JLabel la_p_category;
 	JTable p_table;
@@ -73,7 +73,7 @@ public class ManagerForm extends JFrame  implements ActionListener{
       bt_id_search = new JButton("아이디검색");
       bt_id_search.setBounds(515,16,103,27);
       
-      bt_id_delete = new JButton("삭제");
+      bt_id_delete = new JButton("강퇴");
       bt_id_delete.setBounds(664,361,61,27);
   
       
@@ -189,18 +189,10 @@ public class ManagerForm extends JFrame  implements ActionListener{
       bt_post = new JButton("게시글 관리");
       bt_post.setBounds(190,190,150,50);
       
-      bt_login = new JButton("Login");
-      bt_login.setFont(new Font("맑은 고딕", Font.BOLD, 17));
-      bt_login.setForeground(Color.BLUE);
-      bt_login.getBackground();
-      bt_login.setBounds(670,30,80,40);
-      bt_login.setBackground(Color.white);
-      bt_login.setOpaque(false);
-      bt_login.setBorderPainted ( false );
 
       bt_homepage = new JButton("홈페이지로");
       bt_homepage.setFont(new Font("맑은 고딕", Font.BOLD, 17));
-      bt_homepage.setBounds(533,30,125,40);
+      bt_homepage.setBounds(620,30,120,40);
       bt_homepage.setBackground(Color.white);
       bt_homepage.setOpaque(false);
       bt_homepage.setBorderPainted ( false );
@@ -218,7 +210,6 @@ public class ManagerForm extends JFrame  implements ActionListener{
       getContentPane().setLayout(null);
       getContentPane().add(bt_member);
       getContentPane().add(bt_post);
-      getContentPane().add(bt_login);
       getContentPane().add(bt_homepage);
       getContentPane().add(bt_user_photo);
       getContentPane().add(tf_user_id);
@@ -264,6 +255,19 @@ public class ManagerForm extends JFrame  implements ActionListener{
     //bar.setValue(bar.getMaximum());
     
    }//displayTable
+   
+   public void showMsg(String msg) {
+	   JOptionPane.showMessageDialog(this, msg);
+   }
+   
+   public boolean confirmMsg(String msg) {// yes =0 , no = 1
+	   
+	   if(JOptionPane.showConfirmDialog(this, msg)==0) {
+		   return true;
+	   }else {
+		   return false;
+	   }
+   }
    
    
    

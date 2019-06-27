@@ -175,8 +175,19 @@ public class Controller implements ActionListener {
 		
 		//ManagerForm
 		managerForm.bt_search.addActionListener(this);
+		managerForm.bt_homepage.addActionListener(this);
+		managerForm.bt_all_select.addActionListener(this);
+		managerForm.bt_id_search.addActionListener(this);
+		managerForm.bt_id_delete.addActionListener(this);
+		managerForm.bt_info.addActionListener(this);
+		//ManagerForm-post
+		managerForm.bt_p_all_select.addActionListener(this);
+		managerForm.bt_p_id_delete.addActionListener(this);
+		managerForm.bt_p_id_search.addActionListener(this);
+		managerForm.bt_p_info.addActionListener(this);
+		managerForm.bt_p_search.addActionListener(this);
 		
-		
+		// bt_home , 
 		
 	}// eventUp
 
@@ -242,8 +253,26 @@ public class Controller implements ActionListener {
 
 		} else if (ob == mainForm.cb_category) { // 멘토신청
 			System.out.println("검색");
-
-			/*-------------LoginForm(로그인창)--------------------*/
+		//------------------ManagerForm(매니저창)----------------
+		
+		} else if(ob == managerForm.bt_homepage) { //홈페이지로
+			managerForm.setVisible(false);
+			mainForm.setVisible(true);
+		} else if(ob == managerForm.bt_all_select) {//전체조회
+			MemberDAO dao = new MemberDAO();
+			managerForm.memberDisplayTable(dao.MemberTable());
+		} else if(ob== managerForm.bt_id_delete) {//강퇴
+			MemberDAO dao = new MemberDAO();
+			int row = managerForm.table.getSelectedRow();
+			String name = (managerForm.table.getValueAt(row, 0)).toString();
+			
+			if(managerForm.confirmMsg("강퇴하시겠습니까?")) {
+				managerForm.showMsg(dao.memberDelete(name));
+				managerForm.memberDisplayTable(dao.MemberTable());
+			}
+			
+	
+	    /*-------------LoginForm(로그인창)--------------------*/
 		} else if (ob == loginForm.bt_login) { // 로그인 버튼 클릭
 
 			MemberDAO dao = new MemberDAO();
@@ -271,7 +300,7 @@ public class Controller implements ActionListener {
 
 			findIDForm.setVisible(true);
 
-			/*-------------JoinForm(회원가입창)--------------------*/
+		/*-------------JoinForm(회원가입창)--------------------*/
 		} else if (ob == joinForm.bt_submit) { // 가입 등록
 			MemberDAO dao = new MemberDAO();
 
@@ -316,7 +345,7 @@ public class Controller implements ActionListener {
 
 			MemberVO vo = new MemberVO(id, pwd, name, email, phone);
 
-			if (dao.insert(vo)) {
+			if (dao.memberJoin(vo)) {
 
 				joinForm.showMsg("가입 성공");
 
@@ -336,7 +365,7 @@ public class Controller implements ActionListener {
 		} else if (ob == joinForm.bt_checkid) {// 중복확인
 			checkId();
 
-			/*-------------PassChangeForm(비번변경창)--------------------*/
+		/*-------------PassChangeForm(비번변경창)--------------------*/
 		} else if (ob == pChangeForm.bt_submit) {
 
 		} else if (ob == pChangeForm.bt_cancel) {
