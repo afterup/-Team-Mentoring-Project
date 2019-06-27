@@ -6,6 +6,7 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -19,6 +20,8 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+
+import com.firstjava.model.vo.MemberVO;
 
 public class ManagerForm extends JFrame  implements ActionListener{ 
 	public JTextField tf_user_id, tf_admin;
@@ -34,7 +37,8 @@ public class ManagerForm extends JFrame  implements ActionListener{
 	public JComboBox<String> cb_category;
 	public JTable table;
 	JLabel la_category;
-	JScrollPane scroll_table;
+	JScrollPane scroll_table;	
+	DefaultTableModel dtm;
 	 
 	
 	//PostForm 컴포넌트 
@@ -82,9 +86,9 @@ public class ManagerForm extends JFrame  implements ActionListener{
       cb_category.setBounds(340,10,90,40);
 
       
-      String [] columnTitle = {"No.", "Name", "value"};
-      Object[][] rowData = new Object[0][3];
-      DefaultTableModel dtm = new DefaultTableModel(rowData,columnTitle);
+      String [] columnTitle = {"ID", "Name", "Email","Phone"};
+      Object[][] rowData = new Object[0][4];
+      dtm = new DefaultTableModel(rowData,columnTitle);
       
       table = new JTable(dtm) {
              @Override
@@ -167,8 +171,7 @@ public class ManagerForm extends JFrame  implements ActionListener{
       panel_post.add(p_scroll_table);
       
       
-      
-      
+
       JLabel label_1 = new JLabel("게시글관리 (임시텍스트)");
       label_1.setBounds(14, 9, 157, 18);
       panel_post.add(label_1);
@@ -177,9 +180,6 @@ public class ManagerForm extends JFrame  implements ActionListener{
       panel_lecture.add(panel_member,"1");
       panel_lecture.add(panel_post,"2");
       
-
-      
-
       
       panel_lecture.setBounds(0, 250, 780, 400);
       
@@ -227,7 +227,7 @@ public class ManagerForm extends JFrame  implements ActionListener{
       
       
       setBounds(450,170,800,700);
-      setVisible(true);
+      setVisible(false);
       //setResizable(false);
       setDefaultCloseOperation(EXIT_ON_CLOSE);
       
@@ -250,18 +250,33 @@ public class ManagerForm extends JFrame  implements ActionListener{
       
    }
    
+   public void memberDisplayTable(ArrayList<MemberVO> list) {
+
+	    dtm.setRowCount(0);
+	    
+    for(int i=0; i<list.size(); i++) {
+    	MemberVO vo = list.get(i);
+    	Object []rowData= {vo.getUserId(),vo.getUname(),vo.getEmail(),vo.getPhone()};
+    	dtm.addRow(rowData);
+    }
+    
+    //JScrollBar bar= scroll_table.getVerticalScrollBar();
+    //bar.setValue(bar.getMaximum());
+    
+}//displayTable
    
    
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ManagerForm frame = new ManagerForm();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+   
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					ManagerForm frame = new ManagerForm();
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 }

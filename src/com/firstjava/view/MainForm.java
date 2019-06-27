@@ -30,7 +30,7 @@ public class MainForm extends JFrame  implements ActionListener{
     CardLayout card;
     
     //MentorForm Component
-    public JButton bt_search, bt_select, bt_create_class, bt_class_delete, bt_class_data;
+    public JButton bt_search, bt_select, bt_create_class, bt_class_delete, bt_class_data, bt_manager;
     public JComboBox<String> cb_category;
     JLabel la_category;
     JTable table;
@@ -150,7 +150,7 @@ public class MainForm extends JFrame  implements ActionListener{
       tf_user_id = new JTextField("사용자 ID");
       tf_user_id.setBounds(190,50,150,40);
       
-      tf_admin = new JTextField("괸리자");
+      tf_admin = new JTextField("관리자");
       tf_admin.setBounds(190,100,150,40);
 
       getContentPane().setLayout(null);
@@ -163,6 +163,10 @@ public class MainForm extends JFrame  implements ActionListener{
       getContentPane().add(tf_user_id);
       getContentPane().add(tf_admin);
       getContentPane().add(panel_lecture);
+      
+      bt_manager = new JButton("관리자(임시)");
+      bt_manager.setBounds(560, 100, 120, 34);
+      getContentPane().add(bt_manager);
       
       
       setBounds(450,170,800,700);

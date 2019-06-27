@@ -101,6 +101,7 @@ public class Controller implements ActionListener {
 		mainForm.bt_user_photo.addActionListener(this);
 		mainForm.bt_main.addActionListener(this);
 		mainForm.bt_mento_class.addActionListener(this);
+		mainForm.bt_manager.addActionListener(this);
 
 		// main-mentorForm
 		mainForm.bt_search.addActionListener(this);
@@ -210,7 +211,16 @@ public class Controller implements ActionListener {
 			mentorRegForm.setVisible(true);
 
 			// mentorForm.bt_search
-			/*-------------main_mentorForm--------------------*/
+		
+		}else if(ob == mainForm.bt_manager) {// 임시 관리자페이지 이동버튼
+			
+			mainForm.setVisible(false);
+			
+			MemberDAO dao = new MemberDAO();
+			managerForm.memberDisplayTable(dao.MemberTable());
+			managerForm.setVisible(true);
+			
+		/*-------------main_mentorForm--------------------*/
 		} else if (ob == mainForm.bt_search) { // 검색
 
 			System.out.println("검색");
