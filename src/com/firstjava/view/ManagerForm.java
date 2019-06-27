@@ -254,16 +254,16 @@ public class ManagerForm extends JFrame  implements ActionListener{
 
 	    dtm.setRowCount(0);
 	    
-    for(int i=0; i<list.size(); i++) {
-    	MemberVO vo = list.get(i);
-    	Object []rowData= {vo.getUserId(),vo.getUname(),vo.getEmail(),vo.getPhone()};
-    	dtm.addRow(rowData);
-    }
-    
+	    for(int i=0; i<list.size(); i++) {
+	    	MemberVO vo = list.get(i);
+	    	Object []rowData= {vo.getUserId(),vo.getUname(),vo.getEmail(),vo.getPhone()};
+	    	dtm.addRow(rowData);
+	    }
+	    
     //JScrollBar bar= scroll_table.getVerticalScrollBar();
     //bar.setValue(bar.getMaximum());
     
-}//displayTable
+   }//displayTable
    
    
    

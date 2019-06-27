@@ -124,7 +124,7 @@ public class MainForm extends JFrame  implements ActionListener{
       bt_login.setFont(new Font("맑은 고딕", Font.BOLD, 17));
       bt_login.setForeground(Color.BLUE);
       bt_login.getBackground();
-      bt_login.setBounds(670,30,80,40);
+      bt_login.setBounds(670,30,110,40);
       bt_login.setBackground(Color.white);
       bt_login.setOpaque(false);
       bt_login.setBorderPainted ( false );
