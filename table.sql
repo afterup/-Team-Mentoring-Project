@@ -57,21 +57,19 @@ insert into member values ('lime', '2222', '길라임', 'lime@gmail.com', 010111
 insert into member values ('juwon', '3333', '김주원', 'juwon@gmail.com', 01012457890);
 select * from member;
 
-insert into category values (1, '컴퓨터/IT');
-insert into category values (2, '예술/대중문화');
-insert into category values (3, '역사/문화');
-insert into category values (4, '정치/사회');
-insert into category values (5, '종교');
-insert into category values (6, '기술/공학');
-insert into category values (7, '인문');
-insert into category values (8, '과학');
+insert into category values (1, 'IT');
+insert into category values (2, '디자인');
+insert into category values (3, '뷰티');
+insert into category values (4, '외국어');
+insert into category values (5, '음악');
+insert into category values (6, '라이프');
 select * from category;
 
 
 insert into class 
-values (class_seq.nextval, '자바 강의입니다','solbi94', 1, 'JAVA','19/07/01','19/07/08',0);
+values (class_seq.nextval, '자바 강의입니다','solbi94', 1, 'JAVA','19/07/01','19/07/08',0,10);
 insert into class 
-values (class_seq.nextval, 'html 강의입니다','gildong', 1, 'html','19/07/01','19/07/10',0);
+values (class_seq.nextval, 'html 강의입니다','gildong', 1, 'html','19/07/01','19/07/10',0,10);
 
 select * from class;
 
