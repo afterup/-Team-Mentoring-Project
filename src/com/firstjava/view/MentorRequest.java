@@ -71,7 +71,7 @@ public class MentorRequest extends JFrame{
 	      add(cb_category);
 	      add(scroll_table);
 	      
-	      setVisible(true);
+	      setVisible(false);
 	      setBounds(450,370,800,500);
 //	      setVisible(true);
 	      

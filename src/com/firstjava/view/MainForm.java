@@ -182,7 +182,6 @@ public class MainForm extends JFrame {
       bt_manager.setBounds(560, 100, 120, 34);
       getContentPane().add(bt_manager);
       
-      
       setBounds(450,170,800,700);
       setVisible(true);
       //setResizable(false);

@@ -155,7 +155,7 @@ public class MyPage extends JFrame {
 		getContentPane().add(bt_reset);
 
 		setBounds(450, 170, 800, 700);
-		setVisible(true);
+		setVisible(false);
 		// setResizable(false);
 	}
 
