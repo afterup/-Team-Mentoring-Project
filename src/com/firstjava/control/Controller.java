@@ -37,7 +37,7 @@ public class Controller implements ActionListener {
 	FindForm findForm;
 	MainForm mainForm;
 	MentorRegForm mentorRegForm;
-	MyPageForm myPageFosrm;
+	MyPageForm myPageForm;
 	MentorReviewForm review;
 	MentorRequest request;
 	ManagerForm managerForm;
