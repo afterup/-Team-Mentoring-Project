@@ -36,7 +36,7 @@ public class MainForm extends JFrame {
     public CardLayout card;
     
     //MentorForm Component
-    public JButton bt_search, bt_select, bt_create_class, bt_class_delete, bt_class_update, bt_manager;
+    public JButton bt_search, bt_select, bt_create_class, bt_manager;
     public JComboBox<String> cb_category;
     public JTable table;
     JScrollPane scroll_table;   
@@ -59,13 +59,8 @@ public class MainForm extends JFrame {
       bt_select.setBounds(632,17,93,27);
       
       bt_create_class = new JButton("강의 개설");
-      bt_create_class.setBounds(418,361,93,27);
+      bt_create_class.setBounds(632,361,93,27);
 
-      bt_class_update = new JButton("강의 수정");
-      bt_class_update.setBounds(525,361,93,27);
-  
-      bt_class_delete = new JButton("신청 삭제");
-      bt_class_delete.setBounds(632,361,93,27);
       
       la_category = new JLabel("카테고리");
       la_category.setFont(new Font("맑은 고딕", Font.BOLD, 17));
@@ -104,9 +99,7 @@ public class MainForm extends JFrame {
       
       panel_mentor.add(bt_search);
       panel_mentor.add(bt_select);
-      panel_mentor.add(bt_class_update);
       panel_mentor.add(bt_create_class);
-      panel_mentor.add(bt_class_delete);
       panel_mentor.add(la_category);
       panel_mentor.add(cb_category);
       panel_mentor.add(scroll_table);

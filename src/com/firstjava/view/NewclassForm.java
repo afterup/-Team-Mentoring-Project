@@ -1,38 +1,34 @@
 package com.firstjava.view;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.JScrollBar;
+import javax.swing.border.EmptyBorder;
 
-public class ClassForm extends JFrame {
+public class NewclassForm extends JFrame {
 
 	private JPanel contentPane;
 	public JTextField tf_name, tf_student, tf_open, tf_close;
 	public JComboBox jb_category;
 	public JTextArea ta_desc;
-	public JButton bt_new, bt_update, bt_delete, bt_cancel; 
+	public JButton bt_new, bt_cancel; 
 		
 	/**
 	 * Create the frame.
 	 */
-	public ClassForm() {
-		setBounds(550, 200, 800, 700);
+	public NewclassForm() {
+		setBounds(450,170,800,700);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		
-		setTitle("강의정보");
+		setTitle("강의개설");
 		
 		
 		//라벨
@@ -97,31 +93,22 @@ public class ClassForm extends JFrame {
 		
 		
 		//버튼
-		
 		bt_new = new JButton("신청");
-		bt_new.setBounds(120, 580, 105, 30);
+		bt_new.setBounds(250, 580, 105, 30);
 		contentPane.add(bt_new);
 		
-		bt_update = new JButton("수정");
-		bt_update.setBounds(280, 580, 105, 30);
-		contentPane.add(bt_update);
-		
-		bt_delete = new JButton("삭제");                                            
-		bt_delete.setBounds(440, 580, 105, 30);
-		contentPane.add(bt_delete);
-		
 		bt_cancel = new JButton("취소");
-		bt_cancel.setBounds(600, 580, 105, 30);
+		bt_cancel.setBounds(450, 580, 105, 30);
 		contentPane.add(bt_cancel);
 		
 	}
 	
 	public void controlsetEnabled() {
-		tf_name.setEnabled(false);
-		tf_student.setEnabled(false); 
-		tf_open.setEnabled(false);
-		tf_close.setEnabled(false);
-		ta_desc.setEnabled(false);
+		tf_name.setEnabled(true);
+		tf_student.setEnabled(true); 
+		tf_open.setEnabled(true);
+		tf_close.setEnabled(true);
+		ta_desc.setEnabled(true);
 		
 		setVisible(true);
 	}
