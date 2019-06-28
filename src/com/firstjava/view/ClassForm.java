@@ -16,7 +16,7 @@ import javax.swing.JScrollBar;
 public class ClassForm extends JFrame {
 
 	private JPanel contentPane;
-	public JTextField tf_name, tf_student, tf_open, tf_close, tf_desc;
+	public JTextField tf_name, tf_student, tf_open, tf_close;
 	public JComboBox jb_category;
 	public JTextArea ta_desc;
 	public JButton bt_new, bt_update, bt_delete, bt_cancel; 
@@ -114,6 +114,16 @@ public class ClassForm extends JFrame {
 		bt_cancel.setBounds(600, 580, 105, 30);
 		contentPane.add(bt_cancel);
 		
+	}
+	
+	public void controlsetEnabled() {
+		tf_name.setEnabled(false);
+		tf_student.setEnabled(false); 
+		tf_open.setEnabled(false);
+		tf_close.setEnabled(false);
+		ta_desc.setEnabled(false);
+		
+		setVisible(true);
 	}
 	
 }
