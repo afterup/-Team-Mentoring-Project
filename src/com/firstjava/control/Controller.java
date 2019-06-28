@@ -394,7 +394,7 @@ public class Controller implements ActionListener {
 			String id = dao.findId(name, email);
 
 			if (id.equals("")) {
-				findForm.showMsg("아이디를 찾을 수 없습니다. " );
+				findForm.showMsg("일치하는 정보가 없습니다. " );
 
 			} else {
 
@@ -405,6 +405,19 @@ public class Controller implements ActionListener {
 
 //-----------------비밀번호 찾기 ----------------------
 		} else if (ob == findForm.bt_p_findID) {
+			String id = findForm.tf_p_id.getText();
+			String name = findForm.tf_p_name.getText();
+			String email = findForm.tf_p_email.getText();
+			
+			MemberDAO dao = new MemberDAO();
+			String pass = dao.findPass(id, name, email);
+			
+			if(pass.equals("")) {
+				findForm.showMsg("일치하는 정보가 없습니다.");
+			}else {
+				findForm.showMsg("당신의 비밀번호는 "+pass+"입니다");
+			}
+			
 
 		} else if (ob == findForm.bt_p_cancel) {
 
