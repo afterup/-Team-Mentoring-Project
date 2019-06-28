@@ -3,19 +3,18 @@ package com.firstjava.view;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
-import javax.swing.JApplet;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+
+import com.firstjava.model.vo.MemberVO;
 
 public class MyPage extends JFrame {
 	public JButton bt_my, bt_mentor_request, bt_menti_request, bt_mypage, bt_drop_id, bt_submit, bt_reset;
@@ -158,6 +157,20 @@ public class MyPage extends JFrame {
 		setVisible(false);
 		// setResizable(false);
 	}
+	
+	public void showInfo(ArrayList<MemberVO> list)
+	{
+		
+		for (int i = 0; i < list.size(); i++) {
+			MemberVO mVO = list.get(i);
+			tf_id.setText(mVO.getUserId());
+//			tf_name.setText(mVO.getUname());
+//			tf_email.setText(mVO.getEmail());
+//			tf_phone.setText(mVO.getPhone());
+			
+
+		}
+	}// displayTable
 
 	public static void main(String[] args) {
 		new MyPage();

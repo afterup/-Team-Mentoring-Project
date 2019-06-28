@@ -218,9 +218,19 @@ public class Controller implements ActionListener {
 
 		} else if (ob == mainForm.bt_mypage) {
 			
+			String id = mainForm.la_user_id.getText();
+			
+			if(id.equals("Welcome")) {
+				mainForm.showMsg("로그인해주세요.");
+			}else {
+			
+			MemberDAO dao = new MemberDAO();
+			myPage.showInfo(dao.mypageMember(id));
+			System.out.println("dd");
+			
 			mainForm.setVisible(false);
 			myPage.setVisible(true);
-			
+			}
 //			if(mainForm.bt_login == "")
 
 			// } else if (ob == mainForm.bt_main) {// 메인

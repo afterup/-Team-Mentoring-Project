@@ -129,6 +129,7 @@ public class MemberDAO {
 		}
 		return false;
 	}// insert
+	
 
 	public String findId(String name, String email) {
 		connect();
@@ -152,6 +153,29 @@ public class MemberDAO {
 		return id;
 
 	}
+	
+	
+	public ArrayList<MemberVO> mypageMember(String id) //회원정보 조회
+	{
+		connect();
+		ArrayList<MemberVO> list = new ArrayList<MemberVO>();
+
+		try {
+			String sql = "SELECT * FROM member WHERE userid =?";
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, id);
+			rs = stmt.executeQuery();
+			if (rs.next()) {
+				list.add(new MemberVO(rs.getString("userid"),"",rs.getString("uname"),rs.getString("email"),rs.getString("phone")));
+				return list;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+		return null;
+	}//find
 	
 	public String findPass(String id, String name, String email) {
 		connect();
