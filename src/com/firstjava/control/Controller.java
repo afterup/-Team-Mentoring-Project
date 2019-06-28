@@ -26,6 +26,7 @@ import com.firstjava.view.MentorRequest;
 import com.firstjava.view.MentorReviewForm;
 import com.firstjava.view.MyPage;
 import com.firstjava.view.PassChangeForm;
+import com.firstjava.view.NewclassForm;
 
 public class Controller implements ActionListener {
 	ClassForm classForm;
@@ -40,6 +41,7 @@ public class Controller implements ActionListener {
 	MentorReviewForm review;
 	MentorRequest request;
 	ManagerForm managerForm;
+	NewclassForm newclassForm;
 
 	String loginId;
 
@@ -58,6 +60,7 @@ public class Controller implements ActionListener {
 		managerForm = new ManagerForm();
 
 		postForm = new ClassForm();//게시글창
+		newclassForm = new NewclassForm();
 
 		
 		eventUp();
@@ -115,9 +118,7 @@ public class Controller implements ActionListener {
 		mainForm.bt_search.addActionListener(this);
 		mainForm.bt_select.addActionListener(this);
 		mainForm.bt_create_class.addActionListener(this);
-		mainForm.bt_class_delete.addActionListener(this);
 		
-		mainForm.bt_class_update.addActionListener(this);
 		mainForm.table.addMouseListener(new MouseAdapter() { // ====JTable 클릭시 게시글창뷰 오픈
 			public void mouseClicked(MouseEvent me) {
 				JTable table = (JTable)me.getSource();
@@ -257,8 +258,8 @@ public class Controller implements ActionListener {
 			
 		} else if (ob == mainForm.bt_create_class) {// 강의개설
 
-			classForm.setVisible(true);
-
+			newclassForm.setVisible(true);
+		/*
 		} else if (ob == mainForm.bt_class_delete) {// 강의삭제
 			
 			String str = mainForm.showInput("삭제할 강의 NO는? ");
@@ -281,10 +282,8 @@ public class Controller implements ActionListener {
 				}
 			}
 			
-			
+		*/	
 
-		} else if (ob == mainForm.bt_class_update) {// 강의수정
-			System.out.println("수정");
 
 		} else if (ob == mainForm.cb_category) { // 멘토신청
 			System.out.println("검색");
