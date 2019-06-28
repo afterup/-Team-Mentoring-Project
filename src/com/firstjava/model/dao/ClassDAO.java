@@ -35,7 +35,45 @@ public class ClassDAO {
 		}
 	}// 생성자
 
-	public ArrayList<ClassVO> findAll() {
+	public ArrayList<ClassVO> search(String category) { // 검색
+		connect();	
+		ArrayList<ClassVO> list = new ArrayList<ClassVO>();
+		
+		try {
+			String sql = "select  * from class " + "where lower(cname) like lower(?)";
+			stmt = conn.prepareStatement(sql);
+
+			stmt.setString(1, "%" + category + "%");
+
+			rs = stmt.executeQuery();
+
+			while (rs.next()) {
+
+				ClassVO vo = new ClassVO();
+				vo.setClassno(rs.getInt("classid"));
+				vo.setClassinfo(rs.getString("classinfo"));
+				vo.setUserid(rs.getString("userid"));
+				vo.setCateno(rs.getInt("cateno"));
+				vo.setCname(rs.getString("cname"));
+				vo.setOpenDate(rs.getString("opendate"));
+				vo.setCloseDate(rs.getString("closedate"));
+				vo.setStudent(rs.getInt("student"));
+				vo.setLimit(rs.getInt("limit"));
+
+				list.add(vo);
+
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+
+		return list;
+	}
+
+	public ArrayList<ClassVO> findAll() { // 전체검색
 		connect();
 		ArrayList<ClassVO> list = new ArrayList<ClassVO>();
 		try {
@@ -48,7 +86,7 @@ public class ClassDAO {
 				// 열데이터 얻기
 				ClassVO vo = new ClassVO();
 				// 7개의 관련있는 속성데이터를 묶어주기 위해 사용.
-				
+
 				vo.setClassno(rs.getInt("classid"));
 				vo.setClassinfo(rs.getString("classinfo"));
 				vo.setUserid(rs.getString("userid"));
@@ -69,20 +107,22 @@ public class ClassDAO {
 
 		return list;
 	}// findAll
-	
-	private void connect() {//연결객체생성
+
+	private void connect() {// 연결객체생성
 		try {
-			conn = DriverManager.getConnection(pro.getProperty("url"),pro);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-	private void disconnect() {//DB자원반환
-		try {
-			if(conn != null)conn.close();
+			conn = DriverManager.getConnection(pro.getProperty("url"), pro);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 
-}//ClassDAO
+	private void disconnect() {// DB자원반환
+		try {
+			if (conn != null)
+				conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+}// ClassDAO

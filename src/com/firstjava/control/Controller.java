@@ -6,9 +6,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 
 import com.firstjava.model.dao.ClassDAO;
 import com.firstjava.model.dao.MemberDAO;
+import com.firstjava.model.vo.ClassVO;
 import com.firstjava.model.vo.MemberVO;
 import com.firstjava.view.ClassForm;
 import com.firstjava.view.FindForm;
@@ -106,8 +108,7 @@ public class Controller implements ActionListener {
 		mainForm.bt_select.addActionListener(this);
 		mainForm.bt_create_class.addActionListener(this);
 		mainForm.bt_class_delete.addActionListener(this);
-		mainForm.bt_class_data.addActionListener(this);
-		mainForm.cb_category.addActionListener(this);
+		mainForm.bt_class_update.addActionListener(this);
 
 		// classForm
 
@@ -198,7 +199,6 @@ public class Controller implements ActionListener {
 
 		    ClassDAO dao = new ClassDAO();
 		    mainForm.displayTable(dao.findAll());
-		    mainForm.setVisible(true);
 			
 		} else if (ob == mainForm.bt_user_photo) {// 이미지수정
 
@@ -216,25 +216,33 @@ public class Controller implements ActionListener {
 			managerForm.memberDisplayTable(dao.MemberTable());
 			managerForm.setVisible(true);
 			
-		/*-------------main_mentorForm--------------------*/
 		} else if (ob == mainForm.bt_search) { // 검색
-
+			
+			
 			System.out.println("검색");
-
+			
+			String category = (String) mainForm.cb_category.getSelectedItem();
+			
+		    ClassDAO dao = new ClassDAO();
+		    
+		    ArrayList<ClassVO> list = dao.search(category);
+		    mainForm.displayTable(list);
+			
+			
 		} else if (ob == mainForm.bt_select) { // 전체조회
 
-			System.out.println("검색");
+		    ClassDAO dao = new ClassDAO();
+		    mainForm.displayTable(dao.findAll());
+			
 		} else if (ob == mainForm.bt_create_class) {// 강의개설
-
-			System.out.println("반응");
 
 			classForm.setVisible(true);
 
 		} else if (ob == mainForm.bt_class_delete) {// 강의삭제
-			System.out.println("검색");
+			System.out.println("삭제");
 
-		} else if (ob == mainForm.bt_class_data) {// 수강정보
-			System.out.println("검색");
+		} else if (ob == mainForm.bt_class_update) {// 강의수정
+			System.out.println("수정");
 
 		} else if (ob == mainForm.cb_category) { // 멘토신청
 			System.out.println("검색");
