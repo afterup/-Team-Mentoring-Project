@@ -56,6 +56,9 @@ insert into member values ('lime', '2222', '길라임', 'lime@gmail.com', 010111
 insert into member values ('juwon', '3333', '김주원', 'juwon@gmail.com', 01012457890);
 select * from member;
 
+--admin insert
+insert into member values ('admin','1234','관리자','admin@encore.com',01012345678);
+
 insert into category values (1, 'IT');
 insert into category values (2, '디자인');
 insert into category values (3, '뷰티');
