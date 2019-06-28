@@ -7,6 +7,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+import com.firstjava.model.dao.ClassDAO;
 import com.firstjava.model.dao.MemberDAO;
 import com.firstjava.model.vo.MemberVO;
 import com.firstjava.view.ClassForm;
@@ -193,8 +194,12 @@ public class Controller implements ActionListener {
 			
 			// } else if (ob == mainForm.bt_main) {// 메인
 
-			// } else if (ob == mainForm.bt_mento_class) {// 멘토강의
+		} else if (ob == mainForm.bt_mento_class) {// 멘토강의
 
+		    ClassDAO dao = new ClassDAO();
+		    mainForm.displayTable(dao.findAll());
+		    mainForm.setVisible(true);
+			
 		} else if (ob == mainForm.bt_user_photo) {// 이미지수정
 
 		} else if (ob == mainForm.bt_mento_demand) { // 멘토신청

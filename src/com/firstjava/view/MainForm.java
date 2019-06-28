@@ -6,6 +6,7 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -19,6 +20,8 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+
+import com.firstjava.model.vo.ClassVO;
 
 public class MainForm extends JFrame  implements ActionListener{ 
 	public JTextField tf_admin;
@@ -37,7 +40,7 @@ public class MainForm extends JFrame  implements ActionListener{
     JTable table;
     JScrollPane scroll_table;   
     
-    
+    DefaultTableModel dtm;
     
    public MainForm() {
       setTitle("main Form");
@@ -70,16 +73,26 @@ public class MainForm extends JFrame  implements ActionListener{
       cb_category = new JComboBox<String>(categoryTitle);
       cb_category.setBounds(450,10,80,40);
       
-      String [] columnTitle = {"No.", "Name", "ID"};
-      Object[][] rowData = new Object[0][3];
-      DefaultTableModel dtm = new DefaultTableModel(rowData,columnTitle);
+      //컬럼명 설정
       
+	  String[] columnTitle = { "NO", "분류", "강의명", "개강일", "종강일" };
+	  Object[][] rowData = new Object[0][6];
+	  dtm = new DefaultTableModel(rowData, columnTitle);
+		
       table = new JTable(dtm) {
              @Override
            public boolean isCellEditable(int row, int column) {
              return false;
            }
           };
+      
+      //컬럼 크기 설정  
+	  table.getColumn("NO").setPreferredWidth(20);
+	  table.getColumn("분류").setPreferredWidth(50);
+	  table.getColumn("강의명").setPreferredWidth(280);
+	  table.getColumn("개강일").setPreferredWidth(25);
+	  table.getColumn("종강일").setPreferredWidth(25);          
+	       
       
       table.setRowHeight(30);
       scroll_table = new JScrollPane(table);
@@ -193,7 +206,20 @@ public class MainForm extends JFrame  implements ActionListener{
       
    }//actionPerformed
    
-   
+	public void displayTable(ArrayList<ClassVO> list) {
+
+		dtm.setRowCount(0);
+
+		for (int i = 0; i < list.size(); i++) {
+
+			ClassVO vo = list.get(i);
+			Object[] rowData = { vo.getClassno(), vo.getCname(), vo.getClassinfo(), vo.getOpenDate(),
+					vo.getCloseDate() };
+			dtm.addRow(rowData);
+
+		}
+
+	}// displayTable   
    
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
