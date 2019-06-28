@@ -218,6 +218,10 @@ public class Controller implements ActionListener {
 			}
 
 		} else if (ob == mainForm.bt_mypage) {
+			
+			mainForm.setVisible(false);
+			myPage.setVisible(true);
+			
 //			if(mainForm.bt_login == "")
 
 			// } else if (ob == mainForm.bt_main) {// 메인
@@ -460,6 +464,9 @@ public class Controller implements ActionListener {
 		
 		} else if (ob == findForm.bt_p_cancel) {
 
+			
+			
+//-------------------MYPAGE FORM(마이페이지)-----------------
 		}
 
 	}
