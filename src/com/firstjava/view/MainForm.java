@@ -23,7 +23,7 @@ import javax.swing.table.DefaultTableModel;
 
 import com.firstjava.model.vo.ClassVO;
 
-public class MainForm extends JFrame  implements ActionListener{ 
+public class MainForm extends JFrame { 
 	public JTextField tf_admin;
 	public JLabel la_user_id;
     public JPasswordField tf_pass;
@@ -31,7 +31,7 @@ public class MainForm extends JFrame  implements ActionListener{
     public JPanel panel_lecture;//카드레이아웃  기준             
     public JPanel panel_main, panel_mentor; //카드  
     public JTextArea ta_desc;
-    CardLayout card;
+    public CardLayout card;
     
     //MentorForm Component
     public JButton bt_search, bt_select, bt_create_class, bt_class_delete, bt_class_update, bt_manager;
@@ -187,24 +187,8 @@ public class MainForm extends JFrame  implements ActionListener{
       setVisible(true);
       //setResizable(false);
       
-      bt_main.addActionListener(this);
-      bt_mento_class.addActionListener(this);
-      
    }//생성자
    
-   
-   @Override
-   public void actionPerformed(ActionEvent e) {
-     Object ob = e.getSource();
-     
-     if(ob==bt_main) {
-        card.show(panel_lecture, "1");
-     }else if(ob== bt_mento_class ) { 
-        card.show(panel_lecture, "2");
-        
-     }
-      
-   }//actionPerformed
    
 	public void displayTable(ArrayList<ClassVO> list) {
 

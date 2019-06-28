@@ -1,14 +1,8 @@
 package com.firstjava.view;
 
-import java.awt.AlphaComposite;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -17,17 +11,14 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.border.LineBorder;
-import javax.swing.border.SoftBevelBorder;
-import javax.swing.border.BevelBorder;
 
-public class FindForm extends JFrame implements ActionListener
+public class FindForm extends JFrame
 {
 
 	JLabel la_background, la_logoimage;
 	public JButton bt_idView, bt_passView;
 	public JPanel panel_main, panel_id, panel_pass;
-	CardLayout card;
+	public CardLayout card;
 
 	//---ID 컴포넌트
 	public JTextField tf_name, tf_email;
@@ -36,7 +27,7 @@ public class FindForm extends JFrame implements ActionListener
 	
 	//---Pass 컴포넌트
 	public JTextField tf_p_id, tf_p_name, tf_p_email;
-	public JButton bt_p_findID, bt_p_cancel;
+	public JButton bt_p_findPass, bt_p_cancel;
 	private JLabel la_p_id, la_p_name, la_p_email;
 	private JLabel label;
 
@@ -122,11 +113,11 @@ public class FindForm extends JFrame implements ActionListener
 		tf_p_email.setColumns(10);
 		tf_p_email.setBounds(136, 151, 149, 24);
 
-		bt_p_findID = new JButton("비번찾기");
-		bt_p_findID.setForeground(Color.white);
-		bt_p_findID.setBackground(new Color(140, 143, 143));
-		bt_p_findID.setFont(new Font("맑은 고딕", Font.BOLD, 13));
-		bt_p_findID.setBounds(50, 242, 100, 40);
+		bt_p_findPass = new JButton("비번찾기");
+		bt_p_findPass.setForeground(Color.white);
+		bt_p_findPass.setBackground(new Color(140, 143, 143));
+		bt_p_findPass.setFont(new Font("맑은 고딕", Font.BOLD, 13));
+		bt_p_findPass.setBounds(50, 242, 100, 40);
 
 		bt_p_cancel = new JButton("취소");
 		bt_p_cancel.setForeground(Color.WHITE);
@@ -142,7 +133,7 @@ public class FindForm extends JFrame implements ActionListener
 		panel_pass.add(tf_p_id);
 		panel_pass.add(tf_p_name);
 		panel_pass.add(tf_p_email);
-		panel_pass.add(bt_p_findID);
+		panel_pass.add(bt_p_findPass);
 		panel_pass.add(bt_p_cancel);
 		
 		
@@ -188,23 +179,9 @@ public class FindForm extends JFrame implements ActionListener
 
 		setVisible(false);
 
-		bt_idView.addActionListener(this);
-		bt_passView.addActionListener(this);
+
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent e)
-	{
-		Object ob = e.getSource();
-
-		if (ob == bt_idView) {
-			card.show(panel_main, "1");
-		} else if (ob == bt_passView) {
-			card.show(panel_main, "2");
-
-		}
-	}
-	
 	 public void showMsg(String msg) {
 	      JOptionPane.showMessageDialog(this, msg);
 	   }//showMsg
