@@ -262,7 +262,28 @@ public class Controller implements ActionListener {
 			classForm.setVisible(true);
 
 		} else if (ob == mainForm.bt_class_delete) {// 강의삭제
-			System.out.println("삭제");
+			
+			String str = mainForm.showInput("삭제할 강의 NO는? ");
+
+			int no = Integer.parseInt(str);
+			
+			ClassDAO dao = new ClassDAO();
+			
+			if(mainForm.showConfirm("정말 삭제하시겠습니까?")==0) {
+
+				if (dao.delete(no)) {
+	
+					mainForm.showMsg("삭제성공!!");
+					mainForm.displayTable(dao.findAll());
+	
+				} else {
+	
+					mainForm.showMsg("삭제실패!!");
+	
+				}
+			}
+			
+			
 
 		} else if (ob == mainForm.bt_class_update) {// 강의수정
 			System.out.println("수정");

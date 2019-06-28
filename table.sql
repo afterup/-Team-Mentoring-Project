@@ -69,6 +69,14 @@ insert into class
 values (class_seq.nextval, '자바 강의입니다','solbi94', 1, 'JAVA','19/07/01','19/07/08',0,10);
 insert into class 
 values (class_seq.nextval, 'html 강의입니다','gildong', 1, 'html','19/07/01','19/07/10',0,10);
+insert into class 
+values (class_seq.nextval, 'CSS 강의입니다','lime', 2, 'html','19/07/01','19/07/10',0,30);
+insert into class 
+values (class_seq.nextval, 'Script 강의입니다','juwon', 2, 'html','19/07/01','19/07/10',0,5);
+insert into class 
+values (class_seq.nextval, 'Spring 강의입니다','gildong', 3, 'html','19/07/01','19/07/10',0,10);
+insert into class 
+values (class_seq.nextval, 'XML 강의입니다','gildong', 3, 'html','19/07/01','19/07/10',0,10);
 
 select * from class;
 

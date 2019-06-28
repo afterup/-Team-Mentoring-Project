@@ -34,6 +34,36 @@ public class ClassDAO {
 			e.printStackTrace();
 		}
 	}// 생성자
+	
+	
+	public boolean delete(int id) {
+
+		connect();
+
+		try {
+			String sql = "delete from class " + "where classid=?";
+
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, id);
+
+			int t = stmt.executeUpdate();
+
+			if (t == 1)
+				return true;
+
+			System.out.println("삭제성공");
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+
+			disconnect();
+		}
+		return false;
+
+	}	
+	
 
 	public ArrayList<ClassVO> search(String category) { // 검색
 		connect();	
