@@ -1,11 +1,14 @@
 package com.firstjava.control;
 
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+
+import javax.swing.JTable;
 
 import com.firstjava.model.dao.ClassDAO;
 import com.firstjava.model.dao.MemberDAO;
@@ -24,6 +27,7 @@ import com.firstjava.view.PassChangeForm;
 
 public class Controller implements ActionListener {
 	ClassForm classForm;
+	ClassForm postForm;
 	LoginForm loginForm;
 	JoinForm joinForm;
 	PassChangeForm pChangeForm;
@@ -51,6 +55,9 @@ public class Controller implements ActionListener {
 		request = new MentorRequest();
 		managerForm = new ManagerForm();
 
+		postForm = new ClassForm();//게시글창
+
+		
 		eventUp();
 	}// 생성자
 
@@ -108,6 +115,16 @@ public class Controller implements ActionListener {
 		mainForm.bt_class_delete.addActionListener(this);
 		mainForm.bt_class_data.addActionListener(this);
 		mainForm.cb_category.addActionListener(this);
+		mainForm.table.addMouseListener(new MouseAdapter() { // ====JTable 클릭시 게시글창뷰 오픈
+			public void mouseClicked(MouseEvent me) {
+				JTable table = (JTable)me.getSource();
+				Point p = me.getPoint();
+				int row = table.rowAtPoint(p);
+				if(me.getClickCount()==1) {
+					postForm.controlsetEnabled();
+				}
+			}
+		});
 
 		// classForm
 
