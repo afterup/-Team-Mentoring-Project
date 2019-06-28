@@ -24,7 +24,7 @@ import javax.swing.table.DefaultTableModel;
 
 import com.firstjava.model.vo.MemberVO;
 
-public class ManagerForm extends JFrame  implements ActionListener{ 
+public class ManagerForm extends JFrame{ 
 	public JTextField tf_user_id, tf_admin;
     public JPasswordField tf_pass;
     public JButton bt_homepage, bt_user_photo, bt_member, bt_post;
@@ -98,6 +98,11 @@ public class ManagerForm extends JFrame  implements ActionListener{
           };
       
       table.setRowHeight(30);
+	  table.getColumn("ID").setPreferredWidth(20);
+	  table.getColumn("Name").setPreferredWidth(20);
+	  table.getColumn("Email").setPreferredWidth(200);
+	  table.getColumn("Phone").setPreferredWidth(50);
+	  
       scroll_table = new JScrollPane(table);
       scroll_table.setBounds(50, 55, 675, 287);
       panel_member.setLayout(null);
@@ -222,24 +227,9 @@ public class ManagerForm extends JFrame  implements ActionListener{
       //setResizable(false);
       setDefaultCloseOperation(EXIT_ON_CLOSE);
       
-      bt_member.addActionListener(this);
-      bt_post.addActionListener(this);
-      
+
    }
    
-   
-   @Override
-   public void actionPerformed(ActionEvent e) {
-     Object ob = e.getSource();
-     
-     if(ob==bt_member) {
-        card.show(panel_lecture, "1");
-     }else if(ob== bt_post ) {
-        card.show(panel_lecture, "2");
-        
-     }
-      
-   }
    
    public void memberDisplayTable(ArrayList<MemberVO> list) {
 

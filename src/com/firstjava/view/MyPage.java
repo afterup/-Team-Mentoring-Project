@@ -13,6 +13,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 
 public class MyPage extends JFrame {
@@ -20,14 +22,45 @@ public class MyPage extends JFrame {
 	public JTextField tf_id, tf_name, tf_phone1, tf_phone2, tf_phone3, tf_addr;
 	public JComboBox<String> cb_job;
 	JLabel[] label;
+	JPanel panel_mento,panel_menti,panel_info;
+	
+	//MentorRequest Form
+	public JButton bt_search, bt_select, bt_request_cancel, bt_renew;
+	public JComboBox<String> cb_category;
+	JLabel la_category;
+	JTable table;
+	JScrollPane scroll_table;
+	
+	
+	//MentiRequest Form
 
 	public MyPage() {
 		setTitle("마이 페이지");
 		bt_my = new JButton("내 정보");
 
+		panel_info = new JPanel();
+		panel_info.setLayout(new CardLayout());
+		
+		//--------MENTOR REQUEST ---------------
+		panel_mento = new JPanel();
+		
+		
+		
+		
+		
+		
+		
+		
+		//--------MENTI REQUEST ---------------
+		panel_menti = new JPanel();
+		
+		
+		//---------MAIN창----------
+		
 		bt_mentor_request = new JButton("멘토 신청 현황");
-
 		bt_menti_request = new JButton("멘티 신청 현황");
+		
+		
 
 		bt_mypage = new JButton("MyPage");
 		bt_mypage.setFont(new Font("맑은 고딕", Font.BOLD, 17));

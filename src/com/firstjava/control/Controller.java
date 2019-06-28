@@ -107,8 +107,9 @@ public class Controller implements ActionListener {
 		mainForm.bt_mento_demand.addActionListener(this);
 		mainForm.bt_user_photo.addActionListener(this);
 		mainForm.bt_main.addActionListener(this);
-		mainForm.bt_mento_class.addActionListener(this);
 		mainForm.bt_manager.addActionListener(this);
+		mainForm.bt_main.addActionListener(this);
+		mainForm.bt_mento_class.addActionListener(this);
 
 		// main-mentorForm
 		mainForm.bt_search.addActionListener(this);
@@ -185,13 +186,15 @@ public class Controller implements ActionListener {
 		managerForm.bt_p_id_search.addActionListener(this);
 		managerForm.bt_p_info.addActionListener(this);
 		managerForm.bt_p_search.addActionListener(this);
+		managerForm.bt_member.addActionListener(this);
+		managerForm.bt_post.addActionListener(this);
 
 		// bt_home ,
 
 		findForm.bt_idView.addActionListener(this);
 		findForm.bt_passView.addActionListener(this);
 		findForm.bt_findID.addActionListener(this);
-		findForm.bt_p_findID.addActionListener(this);
+		findForm.bt_p_findPass.addActionListener(this);
 		findForm.bt_cancel.addActionListener(this);
 		findForm.bt_p_cancel.addActionListener(this);
 
@@ -218,13 +221,8 @@ public class Controller implements ActionListener {
 
 			// } else if (ob == mainForm.bt_main) {// 메인
 
-		} else if (ob == mainForm.bt_mento_class) {// 멘토강의
-
-		    ClassDAO dao = new ClassDAO();
-		    mainForm.displayTable(dao.findAll());
-
 		} else if (ob == mainForm.bt_user_photo) {// 이미지수정
-
+			
 		} else if (ob == mainForm.bt_mento_demand) { // 멘토신청
 
 			mentorRegForm.setVisible(true);
@@ -290,7 +288,16 @@ public class Controller implements ActionListener {
 
 		} else if (ob == mainForm.cb_category) { // 멘토신청
 			System.out.println("검색");
-			// ------------------ManagerForm(매니저창)----------------
+			
+			
+		} else if (ob == mainForm.bt_main) {
+			mainForm.card.show(mainForm.panel_lecture,"1");
+			System.out.println("3");
+		} else if (ob == mainForm.bt_mento_class) {
+		    ClassDAO dao = new ClassDAO();
+		    mainForm.displayTable(dao.findAll());
+		    mainForm.card.show(mainForm.panel_lecture,"2");
+// ------------------ManagerForm(매니저창)----------------
 
 		} else if (ob == managerForm.bt_homepage) { // 홈페이지로
 			managerForm.setVisible(false);
@@ -307,8 +314,12 @@ public class Controller implements ActionListener {
 				managerForm.showMsg(dao.memberDelete(name));
 				managerForm.memberDisplayTable(dao.MemberTable());
 			}
-
-			/*-------------LoginForm(로그인창)--------------------*/
+		}else if (ob == managerForm.bt_member) {
+			managerForm.card.show(managerForm.panel_lecture, "1");
+		}else if (ob == managerForm.bt_post) {
+			managerForm.card.show(managerForm.panel_lecture, "2");
+			
+/*------------------LoginForm(로그인창)--------------------*/
 		} else if (ob == loginForm.bt_login) { // 로그인 버튼 클릭
 
 			MemberDAO dao = new MemberDAO();
@@ -336,7 +347,7 @@ public class Controller implements ActionListener {
 
 			findForm.setVisible(true);
 
-			/*-------------JoinForm(회원가입창)--------------------*/
+/*-------------------JoinForm(회원가입창)--------------------*/
 		} else if (ob == joinForm.bt_submit) { // 가입 등록
 			MemberDAO dao = new MemberDAO();
 
@@ -401,12 +412,12 @@ public class Controller implements ActionListener {
 		} else if (ob == joinForm.bt_checkid) {// 중복확인
 			checkId();
 
-			/*-------------PassChangeForm(비번변경창)--------------------*/
+/*--------------------PassChangeForm(비번변경창)--------------------*/
 		} else if (ob == pChangeForm.bt_submit) {
 
 		} else if (ob == pChangeForm.bt_cancel) {
 
-//-----------------아이디 찾기 --------------------
+//--------------------FIND FORM(아이디 비밀번호찾기창) --------------------
 
 		} else if (ob == findForm.bt_findID) {
 			String name = findForm.tf_name.getText();
@@ -415,18 +426,39 @@ public class Controller implements ActionListener {
 			String id = dao.findId(name, email);
 
 			if (id.equals("")) {
-				findForm.showMsg("아이디를 찾을 수 없습니다. " );
+				findForm.showMsg("일치하는 정보가 없습니다. " );
 
 			} else {
 
 				findForm.showMsg("당신의 아이디는 " + id + "입니다!!");
 			}
 
-		} else if (ob == findForm.bt_cancel) {
 
-//-----------------비밀번호 찾기 ----------------------
-		} else if (ob == findForm.bt_p_findID) {
 
+		} else if (ob == findForm.bt_p_findPass) {
+			String id = findForm.tf_p_id.getText();
+			String name = findForm.tf_p_name.getText();
+			String email = findForm.tf_p_email.getText();
+			
+			MemberDAO dao = new MemberDAO();
+			String pass = dao.findPass(id, name, email);
+			
+			if(pass.equals("")) {
+				findForm.showMsg("일치하는 정보가 없습니다.");
+			}else {
+				findForm.showMsg("당신의 비밀번호는 "+pass+"입니다");
+			}
+			
+
+		}else if (ob == findForm.bt_idView) {
+			findForm.card.show(findForm.panel_main,"1");
+		}else if (ob == findForm.bt_passView) {
+			findForm.card.show(findForm.panel_main,"2");
+		}
+		
+		
+		else if (ob == findForm.bt_cancel) {
+		
 		} else if (ob == findForm.bt_p_cancel) {
 
 		}

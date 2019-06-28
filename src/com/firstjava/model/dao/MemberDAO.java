@@ -143,7 +143,6 @@ public class MemberDAO {
 
 			if (rs.next()) {
 				id = rs.getString("userid");
-				System.out.println(id);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -151,6 +150,30 @@ public class MemberDAO {
 			disconnect();
 		}
 		return id;
+
+	}
+	
+	public String findPass(String id, String name, String email) {
+		connect();
+		String pass="";
+		try {
+			String sql = "select password  FROM member " + "where userid = ? and uname= ? and email = ?";
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, id);
+			stmt.setString(2, name);
+			stmt.setString(3, email);
+
+			rs = stmt.executeQuery();
+
+			if (rs.next()) {
+				pass = rs.getString("password");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+		return pass;
 
 	}
 
