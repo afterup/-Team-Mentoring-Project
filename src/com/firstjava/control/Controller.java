@@ -24,9 +24,9 @@ import com.firstjava.view.ManagerForm;
 import com.firstjava.view.MentorRegForm;
 import com.firstjava.view.MentorRequest;
 import com.firstjava.view.MentorReviewForm;
-import com.firstjava.view.MyPage;
-import com.firstjava.view.PassChangeForm;
+import com.firstjava.view.MyPageForm;
 import com.firstjava.view.NewclassForm;
+import com.firstjava.view.PassChangeForm;
 
 public class Controller implements ActionListener {
 	ClassForm classForm;
@@ -37,7 +37,7 @@ public class Controller implements ActionListener {
 	FindForm findForm;
 	MainForm mainForm;
 	MentorRegForm mentorRegForm;
-	MyPage myPage;
+	MyPageForm myPageFosrm;
 	MentorReviewForm review;
 	MentorRequest request;
 	ManagerForm managerForm;
@@ -54,7 +54,7 @@ public class Controller implements ActionListener {
 		mainForm = new MainForm();
 		findForm = new FindForm();
 		mentorRegForm = new MentorRegForm();
-		myPage = new MyPage();
+		myPageForm = new MyPageForm();
 		review = new MentorReviewForm();
 		request = new MentorRequest();
 		managerForm = new ManagerForm();
@@ -160,13 +160,13 @@ public class Controller implements ActionListener {
 		pChangeForm.bt_cancel.addActionListener(this);
 
 		// myPage
-		myPage.bt_drop_id.addActionListener(this);
-		myPage.bt_menti_request.addActionListener(this);
-		myPage.bt_mentor_request.addActionListener(this);
-		myPage.bt_my.addActionListener(this);
-		myPage.bt_mypage.addActionListener(this);
-		myPage.bt_reset.addActionListener(this);
-		myPage.bt_submit.addActionListener(this);
+		myPageForm.bt_drop_id.addActionListener(this);
+		myPageForm.bt_menti_request.addActionListener(this);
+		myPageForm.bt_mentor_request.addActionListener(this);
+		myPageForm.bt_my.addActionListener(this);
+		myPageForm.bt_mypage.addActionListener(this);
+		myPageForm.bt_reset.addActionListener(this);
+		myPageForm.bt_submit.addActionListener(this);
 
 		// request
 		request.bt_renew.addActionListener(this);
@@ -226,11 +226,11 @@ public class Controller implements ActionListener {
 			}else {
 			
 			MemberDAO dao = new MemberDAO();
-			myPage.showInfo(dao.mypageMember(id));
+			myPageForm.showInfo(dao.mypageMember(id));
 			System.out.println("dd");
 			
 			mainForm.setVisible(false);
-			myPage.setVisible(true);
+			myPageForm.setVisible(true);
 			}
 //			if(mainForm.bt_login == "")
 
