@@ -11,6 +11,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -23,7 +24,7 @@ public class FindForm extends JFrame implements ActionListener
 	CardLayout card;
 
 	//---ID 컴포넌트
-	private JTextField tf_name, tf_phoneNum, tf_email;
+	public JTextField tf_name, tf_email;
 	private JLabel la_name, la_phoneNum, la_email;
 	public JButton bt_findID, bt_cancel;
 	
@@ -64,9 +65,7 @@ public class FindForm extends JFrame implements ActionListener
 		tf_name.setBounds(136, 48, 149, 24);
 		tf_name.setColumns(10);
 
-		tf_phoneNum = new JTextField();
-		tf_phoneNum.setColumns(10);
-		tf_phoneNum.setBounds(136, 98, 149, 24);
+
 
 		tf_email = new JTextField();
 		tf_email.setColumns(10);
@@ -90,7 +89,6 @@ public class FindForm extends JFrame implements ActionListener
 		panel_id.add(la_phoneNum);
 		panel_id.add(la_email);
 		panel_id.add(tf_name);
-		panel_id.add(tf_phoneNum);
 		panel_id.add(tf_email);
 		panel_id.add(bt_findID);
 		panel_id.add(bt_cancel);
@@ -205,6 +203,12 @@ public class FindForm extends JFrame implements ActionListener
 
 		}
 	}
+	
+	 public void showMsg(String msg) {
+	      JOptionPane.showMessageDialog(this, msg);
+	   }//showMsg
+
+
 
 //	public static void main(String[] args)
 //	{

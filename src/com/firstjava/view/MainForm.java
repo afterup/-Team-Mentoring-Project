@@ -36,9 +36,9 @@ public class MainForm extends JFrame  implements ActionListener{
     //MentorForm Component
     public JButton bt_search, bt_select, bt_create_class, bt_class_delete, bt_class_update, bt_manager;
     public JComboBox<String> cb_category;
-    JLabel la_category;
-    JTable table;
+    public JTable table;
     JScrollPane scroll_table;   
+    JLabel la_category;
     
     DefaultTableModel dtm;
     
