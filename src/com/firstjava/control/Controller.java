@@ -34,7 +34,7 @@ public class Controller implements ActionListener {
 	MentorReviewForm review;
 	MentorRequest request;
 	ManagerForm managerForm;
-	
+
 	String loginId;
 
 	public Controller() {
@@ -50,7 +50,7 @@ public class Controller implements ActionListener {
 		review = new MentorReviewForm();
 		request = new MentorRequest();
 		managerForm = new ManagerForm();
-		
+
 		eventUp();
 	}// 생성자
 
@@ -137,8 +137,8 @@ public class Controller implements ActionListener {
 		// pchangeForm
 		pChangeForm.bt_submit.addActionListener(this);
 		pChangeForm.bt_cancel.addActionListener(this);
-		
-		//myPage
+
+		// myPage
 		myPage.bt_drop_id.addActionListener(this);
 		myPage.bt_menti_request.addActionListener(this);
 		myPage.bt_mentor_request.addActionListener(this);
@@ -146,29 +146,36 @@ public class Controller implements ActionListener {
 		myPage.bt_mypage.addActionListener(this);
 		myPage.bt_reset.addActionListener(this);
 		myPage.bt_submit.addActionListener(this);
-		
-		//request
+
+		// request
 		request.bt_renew.addActionListener(this);
 		request.bt_request_cancel.addActionListener(this);
 		request.bt_search.addActionListener(this);
 		request.bt_select.addActionListener(this);
-		
-		//ManagerForm
+
+		// ManagerForm
 		managerForm.bt_search.addActionListener(this);
 		managerForm.bt_homepage.addActionListener(this);
 		managerForm.bt_all_select.addActionListener(this);
 		managerForm.bt_id_search.addActionListener(this);
 		managerForm.bt_id_delete.addActionListener(this);
 		managerForm.bt_info.addActionListener(this);
-		//ManagerForm-post
+		// ManagerForm-post
 		managerForm.bt_p_all_select.addActionListener(this);
 		managerForm.bt_p_id_delete.addActionListener(this);
 		managerForm.bt_p_id_search.addActionListener(this);
 		managerForm.bt_p_info.addActionListener(this);
 		managerForm.bt_p_search.addActionListener(this);
-		
-		// bt_home , 
-		
+
+		// bt_home ,
+
+		findForm.bt_idView.addActionListener(this);
+		findForm.bt_passView.addActionListener(this);
+		findForm.bt_findID.addActionListener(this);
+		findForm.bt_p_findID.addActionListener(this);
+		findForm.bt_cancel.addActionListener(this);
+		findForm.bt_p_cancel.addActionListener(this);
+
 	}// eventUp
 
 	@Override
@@ -186,20 +193,18 @@ public class Controller implements ActionListener {
 				mainForm.la_user_id.setText("Welcome");
 				mainForm.bt_login.setText("Login");
 			}
-		
-		} else if(ob == mainForm.bt_mypage) {
+
+		} else if (ob == mainForm.bt_mypage) {
 //			if(mainForm.bt_login == "")
-			
-			
-			
+
 			// } else if (ob == mainForm.bt_main) {// 메인
 
 		} else if (ob == mainForm.bt_mento_class) {// 멘토강의
 
-		    ClassDAO dao = new ClassDAO();
-		    mainForm.displayTable(dao.findAll());
-		    mainForm.setVisible(true);
-			
+			ClassDAO dao = new ClassDAO();
+			mainForm.displayTable(dao.findAll());
+			mainForm.setVisible(true);
+
 		} else if (ob == mainForm.bt_user_photo) {// 이미지수정
 
 		} else if (ob == mainForm.bt_mento_demand) { // 멘토신청
@@ -207,16 +212,16 @@ public class Controller implements ActionListener {
 			mentorRegForm.setVisible(true);
 
 			// mentorForm.bt_search
-		
-		}else if(ob == mainForm.bt_manager) {// 임시 관리자페이지 이동버튼
-			
+
+		} else if (ob == mainForm.bt_manager) {// 임시 관리자페이지 이동버튼
+
 			mainForm.setVisible(false);
-			
+
 			MemberDAO dao = new MemberDAO();
 			managerForm.memberDisplayTable(dao.MemberTable());
 			managerForm.setVisible(true);
-			
-		/*-------------main_mentorForm--------------------*/
+
+			/*-------------main_mentorForm--------------------*/
 		} else if (ob == mainForm.bt_search) { // 검색
 
 			System.out.println("검색");
@@ -238,26 +243,25 @@ public class Controller implements ActionListener {
 
 		} else if (ob == mainForm.cb_category) { // 멘토신청
 			System.out.println("검색");
-		//------------------ManagerForm(매니저창)----------------
-		
-		} else if(ob == managerForm.bt_homepage) { //홈페이지로
+			// ------------------ManagerForm(매니저창)----------------
+
+		} else if (ob == managerForm.bt_homepage) { // 홈페이지로
 			managerForm.setVisible(false);
 			mainForm.setVisible(true);
-		} else if(ob == managerForm.bt_all_select) {//전체조회
+		} else if (ob == managerForm.bt_all_select) {// 전체조회
 			MemberDAO dao = new MemberDAO();
 			managerForm.memberDisplayTable(dao.MemberTable());
-		} else if(ob== managerForm.bt_id_delete) {//강퇴
+		} else if (ob == managerForm.bt_id_delete) {// 강퇴
 			MemberDAO dao = new MemberDAO();
 			int row = managerForm.table.getSelectedRow();
 			String name = (managerForm.table.getValueAt(row, 0)).toString();
-			
-			if(managerForm.confirmMsg("강퇴하시겠습니까?")) {
+
+			if (managerForm.confirmMsg("강퇴하시겠습니까?")) {
 				managerForm.showMsg(dao.memberDelete(name));
 				managerForm.memberDisplayTable(dao.MemberTable());
 			}
-			
-	
-	    /*-------------LoginForm(로그인창)--------------------*/
+
+			/*-------------LoginForm(로그인창)--------------------*/
 		} else if (ob == loginForm.bt_login) { // 로그인 버튼 클릭
 
 			MemberDAO dao = new MemberDAO();
@@ -285,7 +289,7 @@ public class Controller implements ActionListener {
 
 			findForm.setVisible(true);
 
-		/*-------------JoinForm(회원가입창)--------------------*/
+			/*-------------JoinForm(회원가입창)--------------------*/
 		} else if (ob == joinForm.bt_submit) { // 가입 등록
 			MemberDAO dao = new MemberDAO();
 
@@ -350,15 +354,37 @@ public class Controller implements ActionListener {
 		} else if (ob == joinForm.bt_checkid) {// 중복확인
 			checkId();
 
-		/*-------------PassChangeForm(비번변경창)--------------------*/
+			/*-------------PassChangeForm(비번변경창)--------------------*/
 		} else if (ob == pChangeForm.bt_submit) {
 
 		} else if (ob == pChangeForm.bt_cancel) {
 
+//-----------------아이디 찾기 --------------------
+
+		} else if (ob == findForm.bt_findID) {
+			String name = findForm.tf_name.getText();
+			String email = findForm.tf_email.getText();
+			MemberDAO dao = new MemberDAO();
+			String id = dao.findId(name, email);
+
+			if (id.equals("")) {
+				findForm.showMsg("아이디를 찾을 수 없습니다. " );
+
+			} else {
+
+				findForm.showMsg("당신의 아이디는 " + id + "입니다!!");
+			}
+
+		} else if (ob == findForm.bt_cancel) {
+
+//-----------------비밀번호 찾기 ----------------------
+		} else if (ob == findForm.bt_p_findID) {
+
+		} else if (ob == findForm.bt_p_cancel) {
+
 		}
 
 	}
-	
 
 	public void checkId() {
 		System.out.println("checkId()");
