@@ -13,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
@@ -31,6 +32,7 @@ public class MainForm extends JFrame {
     public JPanel panel_lecture;//카드레이아웃  기준             
     public JPanel panel_main, panel_mentor; //카드  
     public JTextArea ta_desc;
+    public boolean authState;
     public CardLayout card;
     
     //MentorForm Component
@@ -203,6 +205,25 @@ public class MainForm extends JFrame {
 		}
 
 	}// displayTable   
+	
+	
+	// MSGBOX
+	
+	public void showMsg(String msg) {
+		JOptionPane.showMessageDialog(this, msg);
+	}// showMsg
+
+
+	public String showInput(String msg) {
+		return JOptionPane.showInputDialog(this, msg);
+	}// showInput	
+	
+	
+	public int showConfirm(String msg) {
+		return JOptionPane.showConfirmDialog(this, msg);
+	}// showConfirm
+	
+	
    
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
