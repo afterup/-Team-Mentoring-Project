@@ -108,7 +108,6 @@ public class Controller implements ActionListener {
 		mainForm.bt_login.addActionListener(this);
 		mainForm.bt_mypage.addActionListener(this);
 		mainForm.bt_mento_demand.addActionListener(this);
-		mainForm.bt_user_photo.addActionListener(this);
 		mainForm.bt_main.addActionListener(this);
 		mainForm.bt_manager.addActionListener(this);
 		mainForm.bt_main.addActionListener(this);
@@ -236,8 +235,6 @@ public class Controller implements ActionListener {
 
 			// } else if (ob == mainForm.bt_main) {// 메인
 
-		} else if (ob == mainForm.bt_user_photo) {// 이미지수정
-			
 		} else if (ob == mainForm.bt_mento_demand) { // 멘토신청
 
 			mentorRegForm.setVisible(true);
