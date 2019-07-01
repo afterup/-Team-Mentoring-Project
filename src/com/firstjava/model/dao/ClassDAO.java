@@ -46,8 +46,8 @@ public class ClassDAO {
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1, c.getClassinfo());
 			stmt.setString(2, c.getUserid());
-			stmt.setString(3, c.getCname());
-			stmt.setInt(4, c.getCateno());
+			stmt.setInt(3, c.getCateno());
+			stmt.setString(4, c.getCname());
 			stmt.setString(5, c.getOpenDate());
 			stmt.setString(6, c.getCloseDate());
 			stmt.setInt(7, c.getLimit());

@@ -278,6 +278,7 @@ public class Controller implements ActionListener {
 		} else if (ob == mainForm.bt_create_class) {// 강의개설
 
 			newclassForm.setVisible(true);
+			System.out.println(loginId);
 		/*
 		} else if (ob == mainForm.bt_class_delete) {// 강의삭제
 			
@@ -498,7 +499,30 @@ public class Controller implements ActionListener {
 	
 //-------------------NewclassForm FORM(마이페이지)-----------------
 		else if(ob == newclassForm.bt_new) {
+			ClassDAO dao = new ClassDAO();
 			
+			String cname = newclassForm.tf_name.getText();
+			int max = Integer.parseInt(newclassForm.tf_student.getText());
+			String open = newclassForm.tf_open.getText();
+			String close = newclassForm.tf_close.getText();
+			String classinfo = newclassForm.ta_desc.getText();
+			String category = newclassForm.jb_category.getSelectedItem().toString();
+			
+			Map<String, Integer> map = new HashMap<>();
+			map.put("IT", 1);
+			map.put("디자인", 2);
+			map.put("뷰티", 3);
+			map.put("외국어", 4);
+			map.put("음악", 5);
+			map.put("라이프", 6);
+			
+			ClassVO vo = new ClassVO(0, loginId, classinfo, map.get(category), cname, open, close, 0, max);
+			
+			if(dao.createClass(vo)) {
+				newclassForm.showMsg("강의개설");
+			}else {
+				newclassForm.showMsg("생성실패");
+			}
 		}
 			
 	}//actionPerformed
