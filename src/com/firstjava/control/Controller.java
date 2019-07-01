@@ -118,6 +118,7 @@ public class Controller implements ActionListener {
 		mainForm.bt_select.addActionListener(this);
 		mainForm.bt_create_class.addActionListener(this);
 		
+		
 		mainForm.table.addMouseListener(new MouseAdapter() { // ====JTable 클릭시 게시글창뷰 오픈
 			public void mouseClicked(MouseEvent me) {
 				JTable table = (JTable)me.getSource();
@@ -220,11 +221,11 @@ public class Controller implements ActionListener {
 			
 			String id = mainForm.la_user_id.getText();
 			
-			if(id.equals("Welcome")) {
+			if(id.equals("Welcome!")) {
 				mainForm.showMsg("로그인해주세요.");
 			}else {
 			
-			MemberDAO dao = new MemberDAO();
+			MemberDAO dao = new MemberDAO();	
 			myPageForm.showInfo(dao.mypageMember(id));
 			System.out.println("dd");
 			
@@ -304,6 +305,7 @@ public class Controller implements ActionListener {
 			mainForm.card.show(mainForm.panel_lecture,"1");
 			System.out.println("3");
 		} else if (ob == mainForm.bt_mento_class) {
+			System.out.println("ddd");
 		    ClassDAO dao = new ClassDAO();
 		    mainForm.displayTable(dao.findAll());
 		    mainForm.card.show(mainForm.panel_lecture,"2");
