@@ -346,7 +346,6 @@ public class Controller implements ActionListener {
 			managerForm.card.show(managerForm.panel_lecture, "1");
 
 		
-		
 		}else if (ob == managerForm.bt_post) {
 			
 		    ClassDAO dao = new ClassDAO();
@@ -354,8 +353,13 @@ public class Controller implements ActionListener {
 		    //mainForm.card.show(mainForm.panel_lecture,"2");
 			managerForm.card.show(managerForm.panel_lecture, "2");
 		//	bt_p_search, bt_p_all_select, bt_p_info, bt_p_id_search, bt_p_id_delete;
+		}else if(ob==managerForm.bt_mento) {
+			managerForm.card.show(managerForm.panel_lecture, "3");			
+		}
 		
-		}else if (ob == managerForm.bt_p_search) {
+		
+		
+		else if (ob == managerForm.bt_p_search) {
 			
 			String category = (String) managerForm.cb_p_category.getSelectedItem();
 			
