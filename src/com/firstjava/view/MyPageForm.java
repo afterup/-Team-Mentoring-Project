@@ -36,11 +36,12 @@ public class MyPageForm extends JFrame{
 	public JComboBox<String> cb_mentor_category;
 
 	//Class Component
-	public JButton bt_menti_request_cancel,bt_classupdate,bt_classdelete,bt_info;
+	public JButton bt_menti_request_cancel,bt_classupdate,bt_classdelete,bt_info,bt_review;
 	public JComboBox<String> cb_menti_category;
 	JLabel la_menticlass,la_mentoclass;
 	JTable table_menti,table_mentor;
 	JScrollPane scroll_table_menti,scroll_table_mento;
+
 
 	public MyPageForm() {
 		setTitle("마이 페이지");
@@ -141,7 +142,7 @@ public class MyPageForm extends JFrame{
 		la_menticlass.setBounds(31, 117, 150, 40);
 
 		bt_menti_request_cancel = new JButton("신청 취소");
-		bt_menti_request_cancel.setBounds(268, 513, 100, 40);
+		bt_menti_request_cancel.setBounds(259, 513, 100, 40);
 
 		String[] columnTitle_menti = { "No.", "Name", "ID" };
 		Object[][] rowData_menti = new Object[0][3];
@@ -160,13 +161,13 @@ public class MyPageForm extends JFrame{
 		//개설한 강의
 		la_mentoclass = new JLabel("개설한 강의");
 		la_mentoclass.setFont(new Font("맑은 고딕", Font.BOLD, 17));
-		la_mentoclass.setBounds(415, 117, 150, 40);
+		la_mentoclass.setBounds(426, 117, 150, 40);
 		
 		bt_classupdate = new JButton("강의수정");
-		bt_classupdate.setBounds(542, 513, 100, 40);
+		bt_classupdate.setBounds(553, 513, 100, 40);
 		
 		bt_classdelete = new JButton("강의삭제");
-		bt_classdelete.setBounds(652, 513, 100, 40);
+		bt_classdelete.setBounds(663, 513, 100, 40);
 		
 		String[] columnTitle_mentor = { "No.", "Name", "ID" };
 		Object[][] rowData_mentor = new Object[0][3];
@@ -180,10 +181,10 @@ public class MyPageForm extends JFrame{
 		};
 		
 		scroll_table_mento = new JScrollPane(table_mentor);
-		scroll_table_mento.setBounds(415, 169, 337, 332);
+		scroll_table_mento.setBounds(426, 169, 337, 332);
 		
 		bt_info = new JButton("정보 조회");
-		bt_info.setBounds(154, 513, 100, 40);
+		bt_info.setBounds(145, 513, 100, 40);
 		
 
 
@@ -206,6 +207,10 @@ public class MyPageForm extends JFrame{
 		panel_my_page.setLayout(card);// 카드레이아웃
 		panel_my_page.add(panel_my_data, "my"); // 카드붙이기
 		panel_my_page.add(panel_class, "menti"); // 카드붙이기
+		
+		bt_review = new JButton("리뷰 작성");
+		bt_review.setBounds(31, 513, 100, 40);
+		panel_class.add(bt_review);
 		
 		getContentPane().add(panel_my_page);
 

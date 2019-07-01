@@ -105,7 +105,7 @@ public class NewclassForm extends JFrame {
 		bt_cancel = new JButton("취소");
 		bt_cancel.setBounds(450, 580, 105, 30);
 		contentPane.add(bt_cancel);
-		setVisible(true);
+		setVisible(false);
 			
 	}
 	

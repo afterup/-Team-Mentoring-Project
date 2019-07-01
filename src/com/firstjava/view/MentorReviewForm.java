@@ -9,19 +9,21 @@ import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
+import java.awt.Font;
 
 public class MentorReviewForm extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField tf_class, textField_4, textField_4_2;
-	private JTextField tf_category;
+	private JTextField tf_class;
 		
 	/**
 	 * Create the frame.
 	 */
 	public MentorReviewForm() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(550, 200, 800, 700);
+		setBounds(550, 200, 600, 600);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -34,61 +36,48 @@ public class MentorReviewForm extends JFrame {
 		//라벨
 		
 		JLabel la_class = new JLabel("강의");
-		la_class.setBounds(50, 40, 80, 18);
+		la_class.setBounds(51, 169, 80, 18);
 		contentPane.add(la_class);
 		
-		JLabel la_category = new JLabel("카테고리");
-		la_category.setBounds(50, 80, 80, 18);
-		contentPane.add(la_category);
-		
-		JLabel label_4 = new JLabel("개강일자");
-		label_4.setBounds(50, 114, 80, 18);
-		contentPane.add(label_4);
-		
-		JLabel label_4_2 = new JLabel("종강일자");
-		label_4_2.setBounds(300, 114, 80, 18);
-		contentPane.add(label_4_2);
+		JLabel la_score = new JLabel("평점");
+		la_score.setBounds(51, 210, 80, 18);
+		contentPane.add(la_score);
 		
 		JLabel la_post = new JLabel("리뷰작성");
-		la_post.setBounds(50, 163, 80, 18);
+		la_post.setBounds(51, 245, 80, 18);
 		contentPane.add(la_post);
 		
 
 		//필드
 		tf_class = new JTextField();
-		tf_class.setBounds(150, 40, 580, 24);
+		tf_class.setBounds(151, 166, 395, 24);
 		contentPane.add(tf_class);
 		tf_class.setColumns(10);
 		
 		String category[] = {"프로그래밍", "영어", "뷰티"};
 		
-		textField_4 = new JTextField();
-		textField_4.setBounds(150, 114, 130, 24);
-		contentPane.add(textField_4);
-		textField_4.setColumns(10);
-		
-		textField_4_2 = new JTextField();
-		textField_4_2.setBounds(380, 114, 130, 24);
-		contentPane.add(textField_4_2);
-		textField_4_2.setColumns(10);
-		
 		
 		JTextArea ta_post = new JTextArea();
-		ta_post.setBounds(150, 163, 580, 364);
+		ta_post.setBounds(151, 243, 395, 246);
 		contentPane.add(ta_post);
 		
 		JButton bt_submit = new JButton("등록");
-		bt_submit.setBounds(280, 580, 105, 30);
+		bt_submit.setBounds(151, 511, 105, 30);
 		contentPane.add(bt_submit);
 		
 		JButton bt_cancel = new JButton("취소");                                            
-		bt_cancel.setBounds(440, 580, 105, 30);
+		bt_cancel.setBounds(311, 511, 105, 30);
 		contentPane.add(bt_cancel);
 		
-		tf_category = new JTextField();
-		tf_category.setColumns(10);
-		tf_category.setBounds(150, 77, 130, 24);
-		contentPane.add(tf_category);
+		JComboBox comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"5", "4", "3", "2", "1"}));
+		comboBox.setBounds(149, 207, 71, 24);
+		contentPane.add(comboBox);
+		
+		JLabel la_review = new JLabel("리뷰 작성");
+		la_review.setFont(new Font("나눔바른고딕 Light", Font.BOLD, 18));
+		la_review.setBounds(250, 52, 99, 61);
+		contentPane.add(la_review);
 		
 	}
 	

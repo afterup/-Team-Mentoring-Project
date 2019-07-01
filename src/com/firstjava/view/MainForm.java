@@ -26,7 +26,6 @@ import com.firstjava.model.vo.ClassVO;
 import java.awt.SystemColor;
 
 public class MainForm extends JFrame {
-	public JTextField tf_admin;
 	public JLabel la_user_id;
 	public JPasswordField tf_pass;
 	public JButton bt_login, bt_mypage, bt_mento_demand, bt_main, bt_mento_class;
@@ -83,6 +82,7 @@ public class MainForm extends JFrame {
 
 		bt_manager = new JButton("관리자(임시)");
 		bt_manager.setBounds(604, 520, 120, 34);
+		bt_manager.setVisible(true);//추후 false 수정
 		panel_main.add(bt_manager);
 
 		// panel_lecture.setBackground(Color.green); //메인에서의 영역확인
@@ -134,9 +134,6 @@ public class MainForm extends JFrame {
 		la_user_id.setForeground(Color.WHITE);
 		la_user_id.setBounds(40, 44, 200, 28);
 
-		tf_admin = new JTextField("관리자");
-		tf_admin.setBounds(192, 42, 74, 28);
-
 		getContentPane().setLayout(null);
 		getContentPane().add(bt_main);
 		getContentPane().add(bt_mento_class);
@@ -144,7 +141,6 @@ public class MainForm extends JFrame {
 		getContentPane().add(bt_mypage);
 		getContentPane().add(bt_mento_demand);
 		getContentPane().add(la_user_id);
-		getContentPane().add(tf_admin);
 		getContentPane().add(panel_lecture);
 		panel_mentor = new JPanel();
 		panel_lecture.add(panel_mentor, "2");

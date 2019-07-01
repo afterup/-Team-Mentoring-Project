@@ -44,12 +44,12 @@ public class FindForm extends JFrame
 		panel_id = new JPanel();
 
 		la_name = new JLabel("이름: ");
-		la_name.setForeground(Color.WHITE);
+		la_name.setForeground(Color.BLACK);
 		la_name.setFont(new Font("맑은 고딕", Font.BOLD, 15));
 		la_name.setBounds(49, 66, 39, 21);
 
 		la_email = new JLabel("이메일: ");
-		la_email.setForeground(Color.WHITE);
+		la_email.setForeground(Color.BLACK);
 		la_email.setFont(new Font("맑은 고딕", Font.BOLD, 15));
 		la_email.setBounds(49, 128, 54, 21);
 
@@ -87,17 +87,17 @@ public class FindForm extends JFrame
 		panel_pass = new JPanel();
 
 		la_p_id = new JLabel("아이디:");
-		la_p_id.setForeground(Color.WHITE);
+		la_p_id.setForeground(Color.BLACK);
 		la_p_id.setFont(new Font("맑은 고딕", Font.BOLD, 15));
 		la_p_id.setBounds(49, 48, 69, 21);
 
 		la_p_name = new JLabel("이름:");
-		la_p_name.setForeground(Color.WHITE);
+		la_p_name.setForeground(Color.BLACK);
 		la_p_name.setFont(new Font("맑은 고딕", Font.BOLD, 15));
 		la_p_name.setBounds(49, 98, 69, 21);
 
 		la_p_email = new JLabel("이메일: ");
-		la_p_email.setForeground(Color.WHITE);
+		la_p_email.setForeground(Color.BLACK);
 		la_p_email.setFont(new Font("맑은 고딕", Font.BOLD, 15));
 		la_p_email.setBounds(49, 151, 54, 21);
 

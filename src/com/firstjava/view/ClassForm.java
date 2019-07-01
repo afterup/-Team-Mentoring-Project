@@ -114,6 +114,7 @@ public class ClassForm extends JFrame {
 		bt_cancel.setBounds(600, 580, 105, 30);
 		contentPane.add(bt_cancel);
 		
+		setVisible(false);
 	}
 	
 	public void controlsetEnabled() {

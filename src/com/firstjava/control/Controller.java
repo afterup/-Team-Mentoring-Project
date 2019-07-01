@@ -168,6 +168,7 @@ public class Controller implements ActionListener {
 		myPageForm.bt_pwChange.addActionListener(this);
 		myPageForm.bt_infoUpdate.addActionListener(this);
 		myPageForm.bt_homepage.addActionListener(this);
+		myPageForm.bt_review.addActionListener(this);
 
 		// request
 		request.bt_renew.addActionListener(this);
@@ -221,7 +222,7 @@ public class Controller implements ActionListener {
 				loginForm.setVisible(true);
 			} else {
 				System.out.println("로그아웃");
-				mainForm.la_user_id.setText("Welcome");
+				mainForm.la_user_id.setText("Welcome!");
 				mainForm.bt_login.setText("Login");
 			}
 
@@ -249,7 +250,7 @@ public class Controller implements ActionListener {
 
 			// mentorForm.bt_search
 
-		} else if (ob == mainForm.bt_manager) {// 임시 관리자페이지 이동버튼
+		} else if (ob == mainForm.bt_manager) {// 관리자페이지 이동버튼
 
 			mainForm.setVisible(false);
 
@@ -311,9 +312,7 @@ public class Controller implements ActionListener {
 			
 		} else if (ob == mainForm.bt_main) {
 			mainForm.card.show(mainForm.panel_lecture,"1");
-			System.out.println("3");
 		} else if (ob == mainForm.bt_mento_class) {
-			System.out.println("ddd");
 		    ClassDAO dao = new ClassDAO();
 		    mainForm.displayTable(dao.findAll());
 		    mainForm.card.show(mainForm.panel_lecture,"2");
@@ -352,12 +351,21 @@ public class Controller implements ActionListener {
 			String pass = new String(loginForm.tf_pass.getPassword());
 
 			if (dao.findLogin(id, pass)) {
-				loginId = id;
-				loginForm.showMsg("로그인 성공!");
-				loginForm.setVisible(false);
-				loginForm.initText();
-				mainForm.bt_login.setText("Logout");
-				mainForm.la_user_id.setText(id);
+//				if(!id.equals("admin")) { //관리자로 로그인시 관리자버튼 온. 일단 작업 편리성을 위해 꺼둡니다
+//					loginId = id;
+//					loginForm.setVisible(false);
+//					loginForm.initText();
+//					mainForm.bt_login.setText("Logout");
+//					mainForm.la_user_id.setText(id);
+//				}else {
+					loginId = id;
+					loginForm.setVisible(false);
+					loginForm.initText();
+					mainForm.bt_manager.setVisible(true);
+					mainForm.bt_login.setText("Logout");
+					mainForm.la_user_id.setText(id);
+//				}
+
 			} else {
 				loginForm.showMsg("아이디와 비밀번호를 확인해주세요!!");
 			}
@@ -494,6 +502,8 @@ public class Controller implements ActionListener {
 		}else if(ob==myPageForm.bt_homepage) {
 			myPageForm.setVisible(false);
 			mainForm.setVisible(true);
+		}else if(ob==myPageForm.bt_review) {
+			review.setVisible(true);
 		}
 
 	
