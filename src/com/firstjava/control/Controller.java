@@ -162,8 +162,10 @@ public class Controller implements ActionListener {
 		// myPage
 		myPageForm.bt_drop_id.addActionListener(this);
 		myPageForm.bt_my.addActionListener(this);
-		myPageForm.bt_reset.addActionListener(this);
-		myPageForm.bt_submit.addActionListener(this);
+		myPageForm.bt_class_request.addActionListener(this);
+		myPageForm.bt_pwChange.addActionListener(this);
+		myPageForm.bt_infoUpdate.addActionListener(this);
+		myPageForm.bt_homepage.addActionListener(this);
 
 		// request
 		request.bt_renew.addActionListener(this);
@@ -472,6 +474,13 @@ public class Controller implements ActionListener {
 			
 			
 //-------------------MYPAGE FORM(마이페이지)-----------------
+		}else if(ob==myPageForm.bt_my) {
+			myPageForm.card.show(myPageForm.panel_my_page, "my");
+		}else if(ob==myPageForm.bt_class_request) {	
+			myPageForm.card.show(myPageForm.panel_my_page, "menti");		
+		}else if(ob==myPageForm.bt_homepage) {
+			myPageForm.setVisible(false);
+			mainForm.setVisible(true);
 		}
 
 	}

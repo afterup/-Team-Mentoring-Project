@@ -21,15 +21,15 @@ import javax.swing.table.DefaultTableModel;
 
 import com.firstjava.model.vo.MemberVO;
 
-public class MyPageForm extends JFrame implements ActionListener {
+public class MyPageForm extends JFrame{
 	public JButton bt_my, bt_class_request, bt_homepage, bt_drop_id;
 
 	public JPanel panel_my_page;// 레이아웃 기준
 	public JPanel panel_my_data, panel_class;// 카드
-	CardLayout card;
+	public CardLayout card;
 
 	//MyDATA Component
-	public JButton bt_submit, bt_reset;
+	public JButton bt_infoUpdate, bt_pwChange;
 	public JTextField tf_id, tf_name, tf_phone1, tf_phone2, tf_phone3, tf_email;
 	public JComboBox<String> cb_job;
 	public JLabel la_my_data ,la_id, la_name, la_phone, la_addr, la_mento, la_mentoYN;
@@ -68,10 +68,10 @@ public class MyPageForm extends JFrame implements ActionListener {
 		// ==================================MYDATA FRAME========================================
 		panel_my_data = new JPanel(); // new
 		panel_my_data.setBounds(0, 162, 782, 500);
-		bt_reset = new JButton("비밀번호 변경");
-		bt_reset.setBounds(212, 513, 130, 40);
-		bt_submit = new JButton("정보 수정");
-		bt_submit.setBounds(72, 513, 120, 40);
+		bt_pwChange = new JButton("비밀번호 변경");
+		bt_pwChange.setBounds(212, 513, 130, 40);
+		bt_infoUpdate = new JButton("정보 수정");
+		bt_infoUpdate.setBounds(72, 513, 120, 40);
 
 		tf_id = new JTextField();
 		tf_id.setBounds(112, 237, 100, 25);
@@ -113,9 +113,9 @@ public class MyPageForm extends JFrame implements ActionListener {
 		bt_drop_id.setBorderPainted(false);
 		
 		panel_my_data.setLayout(null);
-		panel_my_data.add(bt_reset);
+		panel_my_data.add(bt_pwChange);
 		panel_my_data.add(bt_drop_id);
-		panel_my_data.add(bt_submit);
+		panel_my_data.add(bt_infoUpdate);
 		panel_my_data.add(tf_id);
 		panel_my_data.add(tf_name);
 		panel_my_data.add(tf_phone1);
@@ -213,8 +213,6 @@ public class MyPageForm extends JFrame implements ActionListener {
 		setVisible(false);
 		setResizable(false);
 
-		bt_my.addActionListener(this);
-		bt_class_request.addActionListener(this);
 	}
 	
 	public void showInfo(ArrayList<MemberVO> list)
@@ -233,16 +231,6 @@ public class MyPageForm extends JFrame implements ActionListener {
 		}
 	}// displayTable
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		Object ob = e.getSource();
-		if (ob == bt_my) {
-			card.show(panel_my_page, "my");
-		} else if (ob == bt_class_request) {
-			card.show(panel_my_page, "menti");
-		}
-
-	}// actionperformed
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
