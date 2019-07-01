@@ -188,6 +188,7 @@ public class Controller implements ActionListener {
 		managerForm.bt_p_search.addActionListener(this);
 		managerForm.bt_member.addActionListener(this);
 		managerForm.bt_post.addActionListener(this);
+		managerForm.bt_mento.addActionListener(this);
 
 		// bt_home ,
 
@@ -324,11 +325,14 @@ public class Controller implements ActionListener {
 				managerForm.showMsg(dao.memberDelete(name));
 				managerForm.memberDisplayTable(dao.MemberTable());
 			}
-		}else if (ob == managerForm.bt_member) {
+		}else if (ob == managerForm.bt_member) {//회원관리
 			managerForm.card.show(managerForm.panel_lecture, "1");
-		}else if (ob == managerForm.bt_post) {
+		}else if (ob == managerForm.bt_post) {//게시글관리
 			managerForm.card.show(managerForm.panel_lecture, "2");
+		}else if(ob==managerForm.bt_mento) {
+			managerForm.card.show(managerForm.panel_lecture, "3");
 			
+		
 /*------------------LoginForm(로그인창)--------------------*/
 		} else if (ob == loginForm.bt_login) { // 로그인 버튼 클릭
 
