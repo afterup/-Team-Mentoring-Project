@@ -48,7 +48,7 @@ public class ManagerForm extends JFrame{
 	private JLabel label_1;
     
    public ManagerForm() {
-      setTitle("Login Form");
+      setTitle("Manager Form");
       card = new CardLayout();
       panel_lecture = new JPanel();
       panel_lecture.setLayout(card);
@@ -234,7 +234,7 @@ public class ManagerForm extends JFrame{
       
       
       setBounds(450,170,800,700);
-      setVisible(true);
+      setVisible(false);
       //setResizable(false);
       setDefaultCloseOperation(EXIT_ON_CLOSE);
       
