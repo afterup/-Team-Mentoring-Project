@@ -211,7 +211,7 @@ public class MainForm extends JFrame {
 
 	}// 생성자
 
-	public void displayTable(ArrayList<ClassVO> list) {
+	public void classDisplayTable(ArrayList<ClassVO> list) {
 
 		dtm.setRowCount(0);
 

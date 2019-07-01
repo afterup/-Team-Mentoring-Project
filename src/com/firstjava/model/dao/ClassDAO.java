@@ -35,7 +35,14 @@ public class ClassDAO {
 		}
 	}// 생성자
 	
+	//강의 테이블 추가
+	public void add() {}
 	
+	//강의 테이블 수정
+	public void update() {}
+	
+	
+	//강의 테이블 삭제 
 	public boolean delete(int id) {
 
 		connect();

@@ -129,6 +129,16 @@ public class Controller implements ActionListener {
 				}
 			}
 		});
+		managerForm.p_table.addMouseListener(new MouseAdapter() { // ====JTable 클릭시 게시글창뷰 오픈
+			public void mouseClicked(MouseEvent me) {
+				JTable table = (JTable)me.getSource();
+				Point p = me.getPoint();
+				int row = table.rowAtPoint(p);
+				if(me.getClickCount()==1) {
+					classForm.controlsetEnabled();
+				}
+			}
+		});
 
 		// classForm
 
@@ -253,20 +263,18 @@ public class Controller implements ActionListener {
 		} else if (ob == mainForm.bt_search) { // 검색
 			
 			
-			System.out.println("검색");
-			
 			String category = (String) mainForm.cb_category.getSelectedItem();
 			
 		    ClassDAO dao = new ClassDAO();
 		    
 		    ArrayList<ClassVO> list = dao.search(category);
-		    mainForm.displayTable(list);
+		    mainForm.classDisplayTable(list);
 			
 			
 		} else if (ob == mainForm.bt_select) { // 전체조회
 
 		    ClassDAO dao = new ClassDAO();
-		    mainForm.displayTable(dao.findAll());
+		    mainForm.classDisplayTable(dao.findAll());
 			
 		} else if (ob == mainForm.bt_create_class) {// 강의개설
 
@@ -285,7 +293,7 @@ public class Controller implements ActionListener {
 				if (dao.delete(no)) {
 	
 					mainForm.showMsg("삭제성공!!");
-					mainForm.displayTable(dao.findAll());
+					mainForm.classDisplayTable(dao.findAll());
 	
 				} else {
 	
@@ -305,9 +313,9 @@ public class Controller implements ActionListener {
 			mainForm.card.show(mainForm.panel_lecture,"1");
 			System.out.println("3");
 		} else if (ob == mainForm.bt_mento_class) {
-			System.out.println("ddd");
+			
 		    ClassDAO dao = new ClassDAO();
-		    mainForm.displayTable(dao.findAll());
+		    mainForm.classDisplayTable(dao.findAll());
 		    mainForm.card.show(mainForm.panel_lecture,"2");
 // ------------------ManagerForm(매니저창)----------------
 
@@ -328,8 +336,61 @@ public class Controller implements ActionListener {
 			}
 		}else if (ob == managerForm.bt_member) {
 			managerForm.card.show(managerForm.panel_lecture, "1");
+		
+		
 		}else if (ob == managerForm.bt_post) {
+			
+		    ClassDAO dao = new ClassDAO();
+		    managerForm.classDisplayTable(dao.findAll());
+		    //mainForm.card.show(mainForm.panel_lecture,"2");
 			managerForm.card.show(managerForm.panel_lecture, "2");
+		//	bt_p_search, bt_p_all_select, bt_p_info, bt_p_id_search, bt_p_id_delete;
+		
+		}else if (ob == managerForm.bt_p_search) {
+			
+			String category = (String) managerForm.cb_p_category.getSelectedItem();
+			
+		    ClassDAO dao = new ClassDAO();
+		    
+		    ArrayList<ClassVO> list = dao.search(category);
+		    
+		    managerForm.classDisplayTable(list);
+			
+			
+		}else if (ob == managerForm.bt_p_all_select) {
+			
+		    ClassDAO dao = new ClassDAO();
+		    managerForm.classDisplayTable(dao.findAll());
+			
+//		}else if (ob == managerForm.bt_p_info) {
+//			
+//			classForm.setVisible(true);
+			
+		}else if (ob == managerForm.bt_p_id_search) {
+			
+		}else if (ob == managerForm.bt_p_id_delete) {
+			
+			String str = mainForm.showInput("삭제할 강의 NO는? ");
+
+			int no = Integer.parseInt(str);
+			
+			ClassDAO dao = new ClassDAO();
+			
+			if(mainForm.showConfirm("정말 삭제하시겠습니까?")==0) {
+
+				if (dao.delete(no)) {
+	
+					mainForm.showMsg("삭제성공!!");
+					managerForm.classDisplayTable(dao.findAll());
+	
+				} else {
+	
+					mainForm.showMsg("삭제실패!!");
+	
+				}
+			}
+
+			
 			
 /*------------------LoginForm(로그인창)--------------------*/
 		} else if (ob == loginForm.bt_login) { // 로그인 버튼 클릭
