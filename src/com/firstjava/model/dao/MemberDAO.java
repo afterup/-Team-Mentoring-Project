@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Properties;
 
 import com.firstjava.model.vo.MemberVO;
@@ -129,11 +130,10 @@ public class MemberDAO {
 		}
 		return false;
 	}// insert
-	
 
 	public String findId(String name, String email) {
 		connect();
-		String id="";
+		String id = "";
 		try {
 			String sql = "select userid  FROM member " + "where uname= ? and email = ?";
 			stmt = conn.prepareStatement(sql);
@@ -153,9 +153,8 @@ public class MemberDAO {
 		return id;
 
 	}
-	
-	
-	public ArrayList<MemberVO> mypageMember(String id) //회원정보 조회
+
+	public ArrayList<MemberVO> mypageMember(String id) // 회원정보 조회
 	{
 		connect();
 		ArrayList<MemberVO> list = new ArrayList<MemberVO>();
@@ -166,7 +165,8 @@ public class MemberDAO {
 			stmt.setString(1, id);
 			rs = stmt.executeQuery();
 			if (rs.next()) {
-				list.add(new MemberVO(rs.getString("userid"),"",rs.getString("uname"),rs.getString("email"),rs.getString("phone")));
+				list.add(new MemberVO(rs.getString("userid"), "", rs.getString("uname"),
+						rs.getString("email"), rs.getString("phone")));
 				return list;
 			}
 		} catch (SQLException e) {
@@ -175,11 +175,11 @@ public class MemberDAO {
 			disconnect();
 		}
 		return null;
-	}//find
-	
+	}// find
+
 	public String findPass(String id, String name, String email) {
 		connect();
-		String pass="";
+		String pass = "";
 		try {
 			String sql = "select password  FROM member " + "where userid = ? and uname= ? and email = ?";
 			stmt = conn.prepareStatement(sql);
@@ -218,6 +218,52 @@ public class MemberDAO {
 		return "강퇴에 실패하였습니다.";
 
 	}
+
+	public ArrayList<MemberVO> findSearch(Map<String, String> map) {
+		connect();
+		ArrayList<MemberVO> list = new ArrayList<MemberVO>();
+		
+		String title = map.get("title");
+		String keyword = map.get("keyword");
+
+		try {
+
+			String sql = "select userid, uname, email, phone from member ";
+
+			if (title.equals("아이디"))
+				sql += "where userid like ?";
+			else if (title.equals("이름"))
+				sql += "where uname like ?";
+			else if (title.equals("이메일"))
+				sql += "where email like ?";
+			else if (title.equals("전화번호"))
+				sql += "where phone like ?";
+
+			stmt = conn.prepareStatement(sql);// sql문 전송
+			stmt.setString(1, "%" + keyword + "%");// '%홍%'
+			rs = stmt.executeQuery();// sql문 실행요청(실행시점!!)
+			// 덩어리
+
+
+			while (rs.next()) {// 행얻기
+				// 열데이터 얻기
+				MemberVO vo = new MemberVO();
+				// 7개의 관련있는 속성데이터를 묶어주기 위해 사용.
+				vo.setUserId(rs.getString("userid"));
+				vo.setUname(rs.getString("uname"));
+				vo.setEmail(rs.getString("email"));
+				vo.setPhone(rs.getString("phone"));
+
+				list.add(vo);
+			} // while
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+
+		return list;
+	}// findAll
 
 	public ArrayList<MemberVO> MemberTable() { // 회원정보 전체조회
 		connect();

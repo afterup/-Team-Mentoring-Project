@@ -12,27 +12,25 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class FindForm extends JFrame
-{
+public class FindForm extends JFrame {
 
 	JLabel la_background, la_logoimage;
 	public JButton bt_idView, bt_passView;
 	public JPanel panel_main, panel_id, panel_pass;
 	public CardLayout card;
 
-	//---ID 컴포넌트
+	// ---ID 컴포넌트
 	public JTextField tf_name, tf_email;
 	private JLabel la_name, la_email;
 	public JButton bt_findID, bt_cancel;
-	
-	//---Pass 컴포넌트
+
+	// ---Pass 컴포넌트
 	public JTextField tf_p_id, tf_p_name, tf_p_email;
 	public JButton bt_p_findPass, bt_p_cancel;
 	private JLabel la_p_id, la_p_name, la_p_email;
 	private JLabel label;
 
-	public FindForm()
-	{
+	public FindForm() {
 		setTitle("find form");
 		card = new CardLayout();
 		panel_main = new JPanel();
@@ -40,7 +38,7 @@ public class FindForm extends JFrame
 		panel_main.setLocation(0, 240);
 		panel_main.setLayout(card);
 
-		//----ID Form --------------
+		// ----ID Form --------------
 		panel_id = new JPanel();
 
 		la_name = new JLabel("이름: ");
@@ -56,8 +54,6 @@ public class FindForm extends JFrame
 		tf_name = new JTextField();
 		tf_name.setBounds(136, 66, 149, 24);
 		tf_name.setColumns(10);
-
-
 
 		tf_email = new JTextField();
 		tf_email.setColumns(10);
@@ -83,7 +79,7 @@ public class FindForm extends JFrame
 		panel_id.add(bt_findID);
 		panel_id.add(bt_cancel);
 
-		//-----Pass Form ------------
+		// -----Pass Form ------------
 		panel_pass = new JPanel();
 
 		la_p_id = new JLabel("아이디:");
@@ -124,9 +120,9 @@ public class FindForm extends JFrame
 		bt_p_cancel.setBackground(new Color(140, 143, 143));
 		bt_p_cancel.setFont(new Font("맑은 고딕", Font.BOLD, 13));
 		bt_p_cancel.setBounds(185, 242, 100, 40);
-		
+
 		panel_pass.setLayout(null);
-		
+
 		panel_pass.add(la_p_id);
 		panel_pass.add(la_p_name);
 		panel_pass.add(la_p_email);
@@ -135,21 +131,18 @@ public class FindForm extends JFrame
 		panel_pass.add(tf_p_email);
 		panel_pass.add(bt_p_findPass);
 		panel_pass.add(bt_p_cancel);
-		
-		
-		
-		
-		//---------------------------
+
+		// ---------------------------
 
 		panel_main.add(panel_id, "1");
-		
+
 		JLabel la_check = new JLabel("유효성 검사");
 		la_check.setForeground(new Color(128, 0, 0));
 		la_check.setBounds(122, 204, 100, 18);
 		panel_id.add(la_check);
 		panel_main.add(panel_pass, "2");
 		panel_pass.setLayout(null);
-		
+
 		label = new JLabel("유효성 검사");
 		label.setBounds(117, 212, 100, 18);
 		panel_pass.add(label);
@@ -161,7 +154,7 @@ public class FindForm extends JFrame
 
 		bt_passView = new JButton("PW 찾기");
 		bt_passView.setBounds(105, 214, 105, 27);
-		
+
 		la_logoimage = new JLabel("");
 		la_logoimage.setIcon(new ImageIcon("image/logo_42.png"));
 		la_logoimage.setBounds(85, 30, 170, 180);
@@ -179,16 +172,7 @@ public class FindForm extends JFrame
 
 		setVisible(false);
 
-
 	}
-
-	 public void showMsg(String msg) {
-	      JOptionPane.showMessageDialog(this, msg);
-	   }//showMsg
-	 
-
-
-
 
 //	public static void main(String[] args)
 //	{

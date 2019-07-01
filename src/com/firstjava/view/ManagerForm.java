@@ -81,7 +81,7 @@ public class ManagerForm extends JFrame{
       bt_info = new JButton("정보조회");
       bt_info.setBounds(613,162,90,30);
    
-      bt_id_search = new JButton("아이디검색");
+      bt_id_search = new JButton("상세검색");
       bt_id_search.setBounds(282,524,103,30);
       
       bt_id_delete = new JButton("회원삭제");
@@ -147,7 +147,7 @@ public class ManagerForm extends JFrame{
       bt_p_info = new JButton("정보 조회");
       bt_p_info.setBounds(613,162,90,30);
    
-      bt_p_id_search = new JButton("아이디검색");
+      bt_p_id_search = new JButton("상세검색");
       bt_p_id_search.setBounds(282,524,103,30);
       
       bt_p_id_delete = new JButton("삭제");
@@ -319,11 +319,7 @@ public class ManagerForm extends JFrame{
    
    
    
-   
-   public void showMsg(String msg) {
-	   JOptionPane.showMessageDialog(this, msg);
-   }
-   
+
    public boolean confirmMsg(String msg) {// yes =0 , no = 1
 	   
 	   if(JOptionPane.showConfirmDialog(this, msg)==0) {

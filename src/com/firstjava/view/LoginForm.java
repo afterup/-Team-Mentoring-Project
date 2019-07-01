@@ -84,10 +84,6 @@ public class LoginForm extends JFrame {
 
 	}
 	
-	public void showMsg(String msg) {
-		JOptionPane.showMessageDialog(this, msg);
-	}//showMsg
-	
 	public void initText() {
 		tf_id.setText("");
 		tf_pass.setText("");

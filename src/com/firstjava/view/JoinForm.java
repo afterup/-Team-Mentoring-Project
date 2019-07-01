@@ -103,55 +103,38 @@ public class JoinForm extends JFrame {
 		la_validCheck.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		la_validCheck.setBounds(128, 449, 100, 15);
 		getContentPane().add(la_validCheck);
-		
+
 		JLabel la_join = new JLabel("회 원 가 입");
 		la_join.setFont(new Font("맑은 고딕", Font.PLAIN, 20));
 		la_join.setBounds(117, 62, 108, 41);
 		getContentPane().add(la_join);
-		
+
 		lblNewLabel = new JLabel("-");
 		lblNewLabel.setBounds(157, 342, 8, 18);
 		getContentPane().add(lblNewLabel);
-		
+
 		label = new JLabel("-");
 		label.setBounds(207, 341, 8, 18);
 		getContentPane().add(label);
 
 		setVisible(false);
 		setBounds(1280, 170, 360, 600);
-		
-		
 
 	}
-	
-	//tf_id, tf_name, tf_ssn1, tf_phone1, tf_phone2, tf_phone3, tf_email
-	 public void initText() {
-	       tf_id.setText("");
-	       tf_pass.setText("");
-	       tf_pass2.setText("");
-	       tf_name.setText("");
-	       tf_phone1.setText(""); 
-	       tf_phone2.setText(""); 
-	       tf_phone3.setText("");
-	       tf_email.setText("");
-	       tf_id.requestFocus();
 
-	      
-	   }
-	   
+	// tf_id, tf_name, tf_ssn1, tf_phone1, tf_phone2, tf_phone3, tf_email
+	public void initText() {
+		tf_id.setText("");
+		tf_pass.setText("");
+		tf_pass2.setText("");
+		tf_name.setText("");
+		tf_phone1.setText("");
+		tf_phone2.setText("");
+		tf_phone3.setText("");
+		tf_email.setText("");
+		tf_id.requestFocus();
 
-	   public void showMsg(String msg) {
-	      JOptionPane.showMessageDialog(this, msg);
-	   }//showMsg
-
-	
-	   public String showInput(String msg) {
-	      return JOptionPane.showInputDialog(this, msg);
-	   }// showInput
-
-	   public int showConfirm(String msg) {
-	      return JOptionPane.showConfirmDialog(this, msg);
-	   }// showConfirm
+	}
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {

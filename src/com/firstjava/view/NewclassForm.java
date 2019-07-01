@@ -109,9 +109,6 @@ public class NewclassForm extends JFrame {
 			
 	}
 	
-	public void showMsg(String msg) {
-		JOptionPane.showMessageDialog(this, msg);
-	}//showMsg
 	
 	public void controlsetEnabled() {
 		tf_name.setEnabled(true);

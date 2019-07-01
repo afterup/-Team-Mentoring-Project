@@ -29,6 +29,7 @@ import com.firstjava.view.MentorReviewForm;
 import com.firstjava.view.MyPageForm;
 import com.firstjava.view.NewclassForm;
 import com.firstjava.view.PassChangeForm;
+import com.firstjava.view.ShowBoxForm;
 
 public class Controller implements ActionListener {
 	ClassForm classForm;
@@ -44,6 +45,7 @@ public class Controller implements ActionListener {
 	MentorRequest request;
 	ManagerForm managerForm;
 	NewclassForm newclassForm;
+	ShowBoxForm showBox;
 
 	String loginId;
 
@@ -63,6 +65,7 @@ public class Controller implements ActionListener {
 
 		postForm = new ClassForm();//게시글창
 		newclassForm = new NewclassForm();
+		showBox = new ShowBoxForm();
 
 		
 		eventUp();
@@ -241,7 +244,7 @@ public class Controller implements ActionListener {
 			String id = mainForm.la_user_id.getText();
 			
 			if(id.equals("Welcome!")) {
-				mainForm.showMsg("로그인해주세요.");
+				showBox.showMsg("로그인해주세요.");
 			}else {
 			
 			MemberDAO dao = new MemberDAO();	
@@ -320,6 +323,7 @@ public class Controller implements ActionListener {
 			
 		} else if (ob == mainForm.bt_main) {
 			mainForm.card.show(mainForm.panel_lecture,"1");
+			
 		} else if (ob == mainForm.bt_mento_class) {
 		    ClassDAO dao = new ClassDAO();
 		    mainForm.classDisplayTable(dao.findAll());
@@ -329,18 +333,38 @@ public class Controller implements ActionListener {
 		} else if (ob == managerForm.bt_homepage) { // 홈페이지로
 			managerForm.setVisible(false);
 			mainForm.setVisible(true);
+			
 		} else if (ob == managerForm.bt_all_select) {// 전체조회
 			MemberDAO dao = new MemberDAO();
 			managerForm.memberDisplayTable(dao.MemberTable());
+			
 		} else if (ob == managerForm.bt_id_delete) {// 강퇴
 			MemberDAO dao = new MemberDAO();
 			int row = managerForm.table.getSelectedRow();
 			String name = (managerForm.table.getValueAt(row, 0)).toString();
 
 			if (managerForm.confirmMsg("강퇴하시겠습니까?")) {
-				managerForm.showMsg(dao.memberDelete(name));
+				showBox.showMsg(dao.memberDelete(name));
 				managerForm.memberDisplayTable(dao.MemberTable());
 			}
+			
+			
+			
+		} else if (ob == managerForm.bt_search) {		
+			
+			
+			
+			
+		} else if (ob == managerForm.bt_id_search) {
+			
+			System.out.println("클릭");
+			Map<String,String> map = showBox.showOption();
+			MemberDAO dao = new MemberDAO();
+			ArrayList<MemberVO> list = dao.findSearch(map);
+			managerForm.memberDisplayTable(list); 
+			showBox.showOption();	
+			
+			
 		}else if (ob == managerForm.bt_member) {//회원관리
 			managerForm.card.show(managerForm.panel_lecture, "1");
 
@@ -360,7 +384,7 @@ public class Controller implements ActionListener {
 		
 		else if (ob == managerForm.bt_p_search) {
 			
-			String category = (String) managerForm.cb_p_category.getSelectedItem();
+		String category = (String) managerForm.cb_p_category.getSelectedItem();
 			
 		    ClassDAO dao = new ClassDAO();
 		    
@@ -380,24 +404,37 @@ public class Controller implements ActionListener {
 			
 		}else if (ob == managerForm.bt_p_id_search) {
 			
+			System.out.println("클릭");
+			
+			Map<String,String> map = showBox.showOption();
+			   
+			  MemberDAO dao = new MemberDAO();
+			   // ArrayList<MembershipVO> list = dao.findByName(name);
+			   ArrayList<MemberVO> list = dao.findSearch(map);
+			   //조회된 결과를 뷰(JTable)에 반영
+			   managerForm.memberDisplayTable(list); 
+			   
+			   showBox.showOption();
+			
+			
 		}else if (ob == managerForm.bt_p_id_delete) {
 			
-			String str = mainForm.showInput("삭제할 강의 NO는? ");
+			String str = showBox.showInput("삭제할 강의 NO는? ");
 
 			int no = Integer.parseInt(str);
 			
 			ClassDAO dao = new ClassDAO();
 			
-			if(mainForm.showConfirm("정말 삭제하시겠습니까?")==0) {
+			if(showBox.showConfirm("정말 삭제하시겠습니까?")==0) {
 
 				if (dao.delete(no)) {
 	
-					mainForm.showMsg("삭제성공!!");
+					showBox.showMsg("삭제성공!!");
 					managerForm.classDisplayTable(dao.findAll());
 	
 				} else {
 	
-					mainForm.showMsg("삭제실패!!");
+					showBox.showMsg("삭제실패!!");
 	
 				}
 			}
@@ -429,7 +466,7 @@ public class Controller implements ActionListener {
 //				}
 
 			} else {
-				loginForm.showMsg("아이디와 비밀번호를 확인해주세요!!");
+				showBox.showMsg("아이디와 비밀번호를 확인해주세요!!");
 			}
 
 		} else if (ob == loginForm.la_join) { // 회원가입
@@ -456,30 +493,30 @@ public class Controller implements ActionListener {
 			String email = joinForm.tf_email.getText();
 
 			if (!id.matches("^[a-zA-Z]{5,12}+$")) {
-				joinForm.showMsg("아이디 확인");
+				showBox.showMsg("아이디 확인");
 				joinForm.tf_id.setText("");
 				joinForm.tf_id.requestFocus();
 				return;
 			} else if (!pwd.matches("[\\d]+")) {
-				joinForm.showMsg("비밀번호 확인");
+				showBox.showMsg("비밀번호 확인");
 				joinForm.tf_pass.setText("");
 				joinForm.tf_pass.requestFocus();
 				return;
 
 			} else if (!pwd.equals(new String(joinForm.tf_pass2.getPassword()))) {
-				joinForm.showMsg("비밀번호가 일치하지 않습니다");
+				showBox.showMsg("비밀번호가 일치하지 않습니다");
 				joinForm.tf_pass.setText("");
 				joinForm.tf_pass2.setText("");
 				joinForm.tf_pass.requestFocus();
 				return;
 			} else if (!name.matches("[ㄱ-힣a-zA-Z]+")) {
-				joinForm.showMsg("이름확인");
+				showBox.showMsg("이름확인");
 				joinForm.tf_name.setText("");
 				joinForm.tf_name.requestFocus();
 				return;
 			} else if (((!phone1.matches("^[0-9]{2,3}$")) || (!phone2.matches("^[0-9]{2,4}$"))
 					|| (!phone3.matches("^[0-9]{2,4}$")))) {
-				joinForm.showMsg("전화번호 확인");
+				showBox.showMsg("전화번호 확인");
 				return;
 			}
 
@@ -487,7 +524,7 @@ public class Controller implements ActionListener {
 
 			if (dao.memberJoin(vo)) {
 
-				joinForm.showMsg("가입 성공");
+				showBox.showMsg("가입 성공");
 
 				joinForm.initText();
 
@@ -495,7 +532,7 @@ public class Controller implements ActionListener {
 				loginForm.setVisible(true);
 
 			} else {
-				joinForm.showMsg("다시 확인해주세요.");
+				showBox.showMsg("다시 확인해주세요.");
 			}
 
 		} else if (ob == joinForm.bt_cancel) { // 취소
@@ -519,11 +556,11 @@ public class Controller implements ActionListener {
 			String id = dao.findId(name, email);
 
 			if (id.equals("")) {
-				findForm.showMsg("일치하는 정보가 없습니다. " );
+				showBox.showMsg("일치하는 정보가 없습니다. " );
 
 			} else {
 
-				findForm.showMsg("당신의 아이디는 " + id + "입니다!!");
+				showBox.showMsg("당신의 아이디는 " + id + "입니다!!");
 			}
 
 
@@ -537,9 +574,9 @@ public class Controller implements ActionListener {
 			String pass = dao.findPass(id, name, email);
 			
 			if(pass.equals("")) {
-				findForm.showMsg("일치하는 정보가 없습니다.");
+				showBox.showMsg("일치하는 정보가 없습니다.");
 			}else {
-				findForm.showMsg("당신의 비밀번호는 "+pass+"입니다");
+				showBox.showMsg("당신의 비밀번호는 "+pass+"입니다");
 			}
 			
 
@@ -591,9 +628,9 @@ public class Controller implements ActionListener {
 			ClassVO vo = new ClassVO(0, loginId, classinfo, map.get(category), cname, open, close, 0, max);
 			
 			if(dao.createClass(vo)) {
-				newclassForm.showMsg("강의개설");
+				showBox.showMsg("강의개설");
 			}else {
-				newclassForm.showMsg("생성실패");
+				showBox.showMsg("생성실패");
 			}
 		}
 			
@@ -605,10 +642,10 @@ public class Controller implements ActionListener {
 		MemberDAO dao = new MemberDAO();
 		String id = joinForm.tf_id.getText();
 		if (dao.findExistId(id) == 1) {
-			joinForm.showMsg("이미 사용중인 아이디입니다!!");
+			showBox.showMsg("이미 사용중인 아이디입니다!!");
 		} else {
-			joinForm.showMsg("사용가능한 아이디입니다!!");
-			if (joinForm.showConfirm("이 아이디를 사용하시겠습니까?") == 0) {
+			showBox.showMsg("사용가능한 아이디입니다!!");
+			if (showBox.showConfirm("이 아이디를 사용하시겠습니까?") == 0) {
 				joinForm.tf_id.setText(id);
 			}
 		}
