@@ -19,6 +19,7 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.table.DefaultTableModel;
 
+import com.firstjava.model.vo.ClassVO;
 import com.firstjava.model.vo.MemberVO;
 import java.awt.Component;
 
@@ -36,15 +37,18 @@ public class ManagerForm extends JFrame{
 	public JTable table;
 	JLabel la_category;
 	JScrollPane scroll_table;	
-	DefaultTableModel dtm;
+	DefaultTableModel dtm; //멤버
+	DefaultTableModel p_dtm; // 클래스
 	 
 	
 	//PostForm 컴포넌트 
     public JButton bt_p_search, bt_p_all_select, bt_p_info, bt_p_id_search, bt_p_id_delete,bt_agree,bt_disagree;
 	public JComboBox<String> cb_p_category;
+
 	public JPanel panel_mento;
 	JLabel la_p_category,la_mento;
-	JTable p_table;
+	public JTable p_table;
+
 	JScrollPane p_scroll_table;
 	private JLabel la_logo2,la_post;
 	private JScrollPane m_scroll_table;
@@ -154,14 +158,14 @@ public class ManagerForm extends JFrame{
       la_p_category.setFont(new Font("나눔바른고딕 UltraLight", Font.BOLD, 15));
       la_p_category.setBounds(50,528,61,24);
       
-      String []p_categoryTitle= {"회원","멘티","멘토"};
-      cb_p_category = new JComboBox<String>(p_categoryTitle);
+      String[] c_categoryTitle = { "JAVA", "HTML", "뷰티", "외국어", "음악", "라이프" };
+      cb_p_category = new JComboBox<String>(c_categoryTitle);
       cb_p_category.setBounds(110, 525, 80, 30);
 
       
-      String [] p_columnTitle = {"No.", "test", "value"};
-      Object[][] p_rowData = new Object[0][3];
-      DefaultTableModel p_dtm = new DefaultTableModel(p_rowData,p_columnTitle);
+      String [] p_columnTitle = { "NO", "분류", "강의명", "개강일", "종강일", "멘토명", "수강생", "정원" };
+      Object[][] p_rowData = new Object[0][9];
+      p_dtm = new DefaultTableModel(p_rowData,p_columnTitle);
       
       p_table = new JTable(p_dtm) {
              @Override
@@ -297,6 +301,24 @@ public class ManagerForm extends JFrame{
     //bar.setValue(bar.getMaximum());
     
    }//displayTable
+   
+	public void classDisplayTable(ArrayList<ClassVO> list) {
+
+		p_dtm.setRowCount(0);
+
+		for (int i = 0; i < list.size(); i++) {
+
+			ClassVO vo = list.get(i);
+			Object[] rowData = { vo.getClassno(), vo.getCname(), vo.getClassinfo(), vo.getOpenDate(),
+					vo.getCloseDate(), vo.getUserid(), vo.getStudent(), vo.getLimit() };
+			p_dtm.addRow(rowData);
+
+		}
+
+	}// displayTable
+   
+   
+   
    
    public void showMsg(String msg) {
 	   JOptionPane.showMessageDialog(this, msg);

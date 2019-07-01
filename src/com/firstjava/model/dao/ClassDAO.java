@@ -37,6 +37,7 @@ public class ClassDAO {
 		}
 	}// 생성자
 	
+
 	public boolean createClass(ClassVO c) {
 
 		connect();
@@ -63,6 +64,11 @@ public class ClassDAO {
 		return false;
 	}//createClass
 	
+	//강의 테이블 수정
+	public void update() {}
+	
+	
+	//강의 테이블 삭제 
 	public boolean delete(int id) {
 
 		connect();
