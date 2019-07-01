@@ -84,25 +84,47 @@ values (class_seq.nextval, 'XML 강의입니다','gildong', 3, 'html','19/07/01'
 select * from class;
 
 
---강의 승인여부, 수강신청 테이블
+--수강신청 테이블
+drop table register;
+create table register(
+	classid 	number,
+	userid 		varchar2(20),
+	rate 		number,
+	constraint r_userid_fk foreign key(userid) references member(userid),
+	constraint class_fk foreign key(classid) references class(classid)
+	);
+	
+	
+	insert into register values (2, 'solbi94', 4);
+	delete from register where userid ='solbi94';
+	
+	select r.userid 멘티아이디 , cname 수강강의명 , c.userid 멘토아이디  , rate 점수
+	from register r, class c
+	where r.classid = c.classid;
 	
 
 
 
 
 
+--멘토테이블
 
+drop table mentor;
+create table mentor(
+	userid		varchar2(20),
+	job			varchar2(20),
+	major		varchar2(20),
+	license		varchar2(20),
+	constraint m_userid_fk foreign key(userid) references member(userid)
+);
 
+select * from mentor;
+	
 
+insert into mentor values('solbi94', '소속','컴퓨터공학','자격증');
 
-
-
-
-
-
-
-
-
+select userid, job, major, license,phone
+from MEMBER natural join mentor;
 
 
 
