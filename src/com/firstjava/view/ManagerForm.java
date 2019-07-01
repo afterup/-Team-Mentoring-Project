@@ -20,6 +20,7 @@ import javax.swing.JTextArea;
 import javax.swing.table.DefaultTableModel;
 
 import com.firstjava.model.vo.MemberVO;
+import java.awt.Component;
 
 public class ManagerForm extends JFrame{
     public JPasswordField tf_pass;
@@ -46,6 +47,7 @@ public class ManagerForm extends JFrame{
 	JScrollPane p_scroll_table;
 	private JLabel label;
 	private JLabel label_1;
+	private JPanel panel_mento;
     
    public ManagerForm() {
       setTitle("Manager Form");
@@ -204,14 +206,14 @@ public class ManagerForm extends JFrame{
       bt_member.setBackground(Color.white);
       bt_member.setOpaque(false);
       bt_member.setBorderPainted ( false );
-      bt_member.setBounds(435,30,111,40);
+      bt_member.setBounds(291,30,111,40);
       
       bt_post = new JButton("게시글관리");
       bt_post.setFont(font16);
       bt_post.setBackground(Color.white);
       bt_post.setOpaque(false);
       bt_post.setBorderPainted ( false );
-      bt_post.setBounds(530,30,120,40);
+      bt_post.setBounds(386,30,120,40);
       
 
       bt_homepage = new JButton("홈페이지");
@@ -224,8 +226,50 @@ public class ManagerForm extends JFrame{
       getContentPane().setLayout(null);
       getContentPane().add(bt_member);
       getContentPane().add(bt_post);
+      
+      JButton button = new JButton("멘토 대기");
+      button.setOpaque(false);
+      button.setFont(new Font("나눔바른고딕 UltraLight", Font.BOLD, 16));
+      button.setBorderPainted(false);
+      button.setBackground(Color.WHITE);
+      button.setBounds(507, 30, 120, 40);
+      getContentPane().add(button);
       getContentPane().add(bt_homepage);
       getContentPane().add(panel_lecture);
+      
+      panel_mento = new JPanel();
+      panel_lecture.add(panel_mento, "name_716234966914600");
+      panel_mento.setLayout(null);
+      
+      JLabel label_2 = new JLabel("멘토 현황");
+      label_2.setFont(new Font("맑은 고딕", Font.BOLD, 17));
+      label_2.setBounds(33, 137, 150, 40);
+      panel_mento.add(label_2);
+      
+      JLabel label_3 = new JLabel("카테고리");
+      label_3.setFont(new Font("맑은 고딕", Font.BOLD, 17));
+      label_3.setBounds(288, 137, 150, 40);
+      panel_mento.add(label_3);
+      
+      JButton button_1 = new JButton("검색");
+      button_1.setBounds(538, 137, 60, 40);
+      panel_mento.add(button_1);
+      
+      JButton button_2 = new JButton("전체 조회");
+      button_2.setBounds(608, 137, 95, 40);
+      panel_mento.add(button_2);
+      
+      JButton button_3 = new JButton("신청 취소");
+      button_3.setBounds(493, 512, 100, 40);
+      panel_mento.add(button_3);
+      
+      JButton button_4 = new JButton("갱신");
+      button_4.setBounds(603, 512, 100, 40);
+      panel_mento.add(button_4);
+      
+      JScrollPane scrollPane = new JScrollPane((Component) null);
+      scrollPane.setBounds(28, 197, 675, 287);
+      panel_mento.add(scrollPane);
       
       JLabel lblNewLabel = new JLabel("");
       lblNewLabel.setIcon(new ImageIcon("image\\background_800.jpg"));
