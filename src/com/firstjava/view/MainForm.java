@@ -105,11 +105,11 @@ public class MainForm extends JFrame {
 		bt_mento_class.setBorderPainted(false);
 		bt_mento_class.setBounds(386, 30, 100, 40);
 
-		bt_login = new JButton("로그인");
+		bt_login = new JButton("Login");
 		bt_login.setFont(font16);
 		bt_login.setForeground(new Color(65, 105, 225));
 		bt_login.getBackground();
-		bt_login.setBounds(672, 30, 89, 40);
+		bt_login.setBounds(672, 30, 97, 40);
 		bt_login.setBackground(Color.white);
 		bt_login.setOpaque(false);
 		bt_login.setBorderPainted(false);
@@ -132,7 +132,7 @@ public class MainForm extends JFrame {
 
 		la_user_id = new JLabel("Welcome!");
 		la_user_id.setForeground(Color.WHITE);
-		la_user_id.setBounds(40, 44, 105, 28);
+		la_user_id.setBounds(40, 44, 200, 28);
 
 		tf_admin = new JTextField("관리자");
 		tf_admin.setBounds(192, 42, 74, 28);
@@ -147,7 +147,7 @@ public class MainForm extends JFrame {
 		getContentPane().add(tf_admin);
 		getContentPane().add(panel_lecture);
 		panel_mentor = new JPanel();
-		panel_lecture.add(panel_mentor, "name_64479852722351");
+		panel_lecture.add(panel_mentor, "2");
 
 		// ----------------MENTOR FRAME------------
 

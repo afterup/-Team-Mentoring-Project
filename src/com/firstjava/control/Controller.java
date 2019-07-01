@@ -120,6 +120,7 @@ public class Controller implements ActionListener {
 		mainForm.bt_select.addActionListener(this);
 		mainForm.bt_create_class.addActionListener(this);
 		
+		
 		mainForm.table.addMouseListener(new MouseAdapter() { // ====JTable 클릭시 게시글창뷰 오픈
 			public void mouseClicked(MouseEvent me) {
 				JTable table = (JTable)me.getSource();
@@ -162,12 +163,11 @@ public class Controller implements ActionListener {
 
 		// myPage
 		myPageForm.bt_drop_id.addActionListener(this);
-		myPageForm.bt_menti_request.addActionListener(this);
-		myPageForm.bt_mentor_request.addActionListener(this);
 		myPageForm.bt_my.addActionListener(this);
-		myPageForm.bt_mypage.addActionListener(this);
-		myPageForm.bt_reset.addActionListener(this);
-		myPageForm.bt_submit.addActionListener(this);
+		myPageForm.bt_class_request.addActionListener(this);
+		myPageForm.bt_pwChange.addActionListener(this);
+		myPageForm.bt_infoUpdate.addActionListener(this);
+		myPageForm.bt_homepage.addActionListener(this);
 
 		// request
 		request.bt_renew.addActionListener(this);
@@ -190,6 +190,7 @@ public class Controller implements ActionListener {
 		managerForm.bt_p_search.addActionListener(this);
 		managerForm.bt_member.addActionListener(this);
 		managerForm.bt_post.addActionListener(this);
+		managerForm.bt_mento.addActionListener(this);
 
 		// bt_home ,
 
@@ -228,13 +229,12 @@ public class Controller implements ActionListener {
 			
 			String id = mainForm.la_user_id.getText();
 			
-			if(id.equals("Welcome")) {
+			if(id.equals("Welcome!")) {
 				mainForm.showMsg("로그인해주세요.");
 			}else {
 			
-			MemberDAO dao = new MemberDAO();
+			MemberDAO dao = new MemberDAO();	
 			myPageForm.showInfo(dao.mypageMember(id));
-			System.out.println("dd");
 			
 			mainForm.setVisible(false);
 			myPageForm.setVisible(true);
@@ -312,6 +312,7 @@ public class Controller implements ActionListener {
 			mainForm.card.show(mainForm.panel_lecture,"1");
 			System.out.println("3");
 		} else if (ob == mainForm.bt_mento_class) {
+			System.out.println("ddd");
 		    ClassDAO dao = new ClassDAO();
 		    mainForm.displayTable(dao.findAll());
 		    mainForm.card.show(mainForm.panel_lecture,"2");
@@ -332,11 +333,14 @@ public class Controller implements ActionListener {
 				managerForm.showMsg(dao.memberDelete(name));
 				managerForm.memberDisplayTable(dao.MemberTable());
 			}
-		}else if (ob == managerForm.bt_member) {
+		}else if (ob == managerForm.bt_member) {//회원관리
 			managerForm.card.show(managerForm.panel_lecture, "1");
-		}else if (ob == managerForm.bt_post) {
+		}else if (ob == managerForm.bt_post) {//게시글관리
 			managerForm.card.show(managerForm.panel_lecture, "2");
+		}else if(ob==managerForm.bt_mento) {
+			managerForm.card.show(managerForm.panel_lecture, "3");
 			
+		
 /*------------------LoginForm(로그인창)--------------------*/
 		} else if (ob == loginForm.bt_login) { // 로그인 버튼 클릭
 
@@ -482,6 +486,13 @@ public class Controller implements ActionListener {
 			
 			
 //-------------------MYPAGE FORM(마이페이지)-----------------
+		}else if(ob==myPageForm.bt_my) {
+			myPageForm.card.show(myPageForm.panel_my_page, "my");
+		}else if(ob==myPageForm.bt_class_request) {	
+			myPageForm.card.show(myPageForm.panel_my_page, "menti");		
+		}else if(ob==myPageForm.bt_homepage) {
+			myPageForm.setVisible(false);
+			mainForm.setVisible(true);
 		}
 
 	
