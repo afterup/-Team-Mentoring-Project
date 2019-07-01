@@ -221,16 +221,16 @@ public class Controller implements ActionListener {
 			
 			String id = mainForm.la_user_id.getText();
 			
-//			if(id.equals("Welcome!")) {
-//				mainForm.showMsg("로그인해주세요.");
-//			}else {
-//			
-//			MemberDAO dao = new MemberDAO();	
-//			myPageForm.showInfo(dao.mypageMember(id));
-//			
+			if(id.equals("Welcome!")) {
+				mainForm.showMsg("로그인해주세요.");
+			}else {
+			
+			MemberDAO dao = new MemberDAO();	
+			myPageForm.showInfo(dao.mypageMember(id));
+			
 			mainForm.setVisible(false);
 			myPageForm.setVisible(true);
-//			}
+			}
 //			if(mainForm.bt_login == "")
 
 			// } else if (ob == mainForm.bt_main) {// 메인

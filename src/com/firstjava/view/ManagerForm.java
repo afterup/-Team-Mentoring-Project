@@ -40,18 +40,14 @@ public class ManagerForm extends JFrame{
 	 
 	
 	//PostForm 컴포넌트 
-    public JButton bt_p_search, bt_p_all_select, bt_p_info, bt_p_id_search, bt_p_id_delete;
+    public JButton bt_p_search, bt_p_all_select, bt_p_info, bt_p_id_search, bt_p_id_delete,bt_agree,bt_disagree;
 	public JComboBox<String> cb_p_category;
-	JLabel la_p_category;
+	public JPanel panel_mento;
+	JLabel la_p_category,la_mento;
 	JTable p_table;
 	JScrollPane p_scroll_table;
-	private JLabel label;
-	private JLabel label_1;
-	private JPanel panel_mento;
-	private JButton bt_agree;
-	private JScrollPane scrollPane;
-	private JLabel la_mento;
-	private JButton bt_disagree;
+	private JLabel la_logo2,la_post;
+	private JScrollPane m_scroll_table;
 	
 	//멘토대기 컴포넌트
 	public JButton bt_mento;
@@ -127,10 +123,10 @@ public class ManagerForm extends JFrame{
       panel_member.add(cb_category);
       panel_member.add(scroll_table);
       
-      JLabel la_logo2 = new JLabel("");
-      la_logo2.setIcon(new ImageIcon("image/logo_blacksmall.png"));
-      la_logo2.setBounds(50, 10, 144, 150);
-      panel_member.add(la_logo2);
+      JLabel la_logo1 = new JLabel("");
+      la_logo1.setIcon(new ImageIcon("image/logo_blacksmall.png"));
+      la_logo1.setBounds(50, 10, 144, 150);
+      panel_member.add(la_logo1);
       
       
       //----------------Post Form---------------------
@@ -199,8 +195,8 @@ public class ManagerForm extends JFrame{
       bt_agree = new JButton("승인");
       bt_agree.setBounds(510, 158, 90, 30);
       
-      scrollPane = new JScrollPane((Component) null);
-      scrollPane.setBounds(48, 200, 653, 312);
+      m_scroll_table = new JScrollPane((Component) null);
+      m_scroll_table.setBounds(48, 200, 653, 312);
       
       la_mento = new JLabel("멘토 대기");
       la_mento.setFont(new Font("나눔바른고딕 UltraLight", Font.PLAIN, 18));
@@ -214,7 +210,7 @@ public class ManagerForm extends JFrame{
       panel_mento.setLayout(null);
       
       panel_mento.add(bt_agree);
-      panel_mento.add(scrollPane);
+      panel_mento.add(m_scroll_table);
       panel_mento.add(la_mento);
       panel_mento.add(bt_disagree);
       
@@ -225,14 +221,14 @@ public class ManagerForm extends JFrame{
       la_memberpost.setBounds(193, 73, 144, 47);
       panel_member.add(la_memberpost);
       
-      label = new JLabel("");
-      label.setBounds(50, 10, 144, 150);
-      panel_post.add(label);
+      la_logo2 = new JLabel("");
+      la_logo2.setBounds(50, 10, 144, 150);
+      panel_post.add(la_logo2);
       
-      label_1 = new JLabel("게시글 관리");
-      label_1.setFont(new Font("나눔바른고딕 UltraLight", Font.PLAIN, 18));
-      label_1.setBounds(193, 73, 144, 47);
-      panel_post.add(label_1);
+      la_post = new JLabel("게시글 관리");
+      la_post.setFont(new Font("나눔바른고딕 UltraLight", Font.PLAIN, 18));
+      la_post.setBounds(193, 73, 144, 47);
+      panel_post.add(la_post);
       
       panel_lecture.add(panel_member,"1");
       panel_lecture.add(panel_post,"2");
