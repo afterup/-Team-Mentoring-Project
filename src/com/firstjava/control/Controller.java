@@ -8,6 +8,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.JTable;
 
@@ -197,6 +199,12 @@ public class Controller implements ActionListener {
 		findForm.bt_p_findPass.addActionListener(this);
 		findForm.bt_cancel.addActionListener(this);
 		findForm.bt_p_cancel.addActionListener(this);
+		
+		
+		//NewclassForm
+		newclassForm.bt_new.addActionListener(this);
+		newclassForm.jb_category.addActionListener(this);
+	
 
 	}// eventUp
 
@@ -476,8 +484,15 @@ public class Controller implements ActionListener {
 //-------------------MYPAGE FORM(마이페이지)-----------------
 		}
 
-	}
-
+	
+//-------------------NewclassForm FORM(마이페이지)-----------------
+		else if(ob == newclassForm.bt_new) {
+			
+		}
+			
+	}//actionPerformed
+		
+		
 	public void checkId() {
 		System.out.println("checkId()");
 		MemberDAO dao = new MemberDAO();
