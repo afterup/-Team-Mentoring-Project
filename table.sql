@@ -35,7 +35,7 @@ create table class
 (
 	classid 	number constraint class_pk primary key,
 	classinfo 	varchar2(800),
-	userid 		varchar2(10),
+	userid 		varchar2(20),
 	cateno	    number 			not null,
 	cname 	    varchar2(15)  	not null,
 	opendate 	date 			not null,
