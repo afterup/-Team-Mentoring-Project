@@ -1,9 +1,13 @@
 package com.firstjava.view;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -64,7 +68,8 @@ public class NewclassForm extends JFrame {
 		contentPane.add(tf_name);
 		tf_name.setColumns(10);
 		
-		String category[] = {"프로그래밍", "영어", "뷰티"};
+		String category[] = {"IT", "디자인", "뷰티", "외국어", "음악", "라이프"};
+		
 		
 		jb_category = new JComboBox(category);
 		jb_category.setBounds(150, 80, 130, 24);
@@ -100,8 +105,13 @@ public class NewclassForm extends JFrame {
 		bt_cancel = new JButton("취소");
 		bt_cancel.setBounds(450, 580, 105, 30);
 		contentPane.add(bt_cancel);
-		
+	
+			
 	}
+	
+	public void showMsg(String msg) {
+		JOptionPane.showMessageDialog(this, msg);
+	}//showMsg
 	
 	public void controlsetEnabled() {
 		tf_name.setEnabled(true);
@@ -111,6 +121,10 @@ public class NewclassForm extends JFrame {
 		ta_desc.setEnabled(true);
 		
 		setVisible(true);
+	}
+	public static void main(String[] args) {
+		new NewclassForm();
+			
 	}
 	
 }

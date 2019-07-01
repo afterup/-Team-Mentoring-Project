@@ -8,6 +8,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.JTable;
 
@@ -171,12 +173,11 @@ public class Controller implements ActionListener {
 
 		// myPage
 		myPageForm.bt_drop_id.addActionListener(this);
-		myPageForm.bt_menti_request.addActionListener(this);
-		myPageForm.bt_mentor_request.addActionListener(this);
 		myPageForm.bt_my.addActionListener(this);
-		myPageForm.bt_mypage.addActionListener(this);
-		myPageForm.bt_reset.addActionListener(this);
-		myPageForm.bt_submit.addActionListener(this);
+		myPageForm.bt_class_request.addActionListener(this);
+		myPageForm.bt_pwChange.addActionListener(this);
+		myPageForm.bt_infoUpdate.addActionListener(this);
+		myPageForm.bt_homepage.addActionListener(this);
 
 		// request
 		request.bt_renew.addActionListener(this);
@@ -199,6 +200,7 @@ public class Controller implements ActionListener {
 		managerForm.bt_p_search.addActionListener(this);
 		managerForm.bt_member.addActionListener(this);
 		managerForm.bt_post.addActionListener(this);
+		managerForm.bt_mento.addActionListener(this);
 
 		// bt_home ,
 
@@ -208,6 +210,12 @@ public class Controller implements ActionListener {
 		findForm.bt_p_findPass.addActionListener(this);
 		findForm.bt_cancel.addActionListener(this);
 		findForm.bt_p_cancel.addActionListener(this);
+		
+		
+		//NewclassForm
+		newclassForm.bt_new.addActionListener(this);
+		newclassForm.jb_category.addActionListener(this);
+	
 
 	}// eventUp
 
@@ -237,7 +245,6 @@ public class Controller implements ActionListener {
 			
 			MemberDAO dao = new MemberDAO();	
 			myPageForm.showInfo(dao.mypageMember(id));
-			System.out.println("dd");
 			
 			mainForm.setVisible(false);
 			myPageForm.setVisible(true);
@@ -279,6 +286,7 @@ public class Controller implements ActionListener {
 		} else if (ob == mainForm.bt_create_class) {// 강의개설
 
 			newclassForm.setVisible(true);
+			System.out.println(loginId);
 		/*
 		} else if (ob == mainForm.bt_class_delete) {// 강의삭제
 			
@@ -334,8 +342,9 @@ public class Controller implements ActionListener {
 				managerForm.showMsg(dao.memberDelete(name));
 				managerForm.memberDisplayTable(dao.MemberTable());
 			}
-		}else if (ob == managerForm.bt_member) {
+		}else if (ob == managerForm.bt_member) {//회원관리
 			managerForm.card.show(managerForm.panel_lecture, "1");
+
 		
 		
 		}else if (ob == managerForm.bt_post) {
@@ -389,9 +398,8 @@ public class Controller implements ActionListener {
 	
 				}
 			}
-
 			
-			
+		
 /*------------------LoginForm(로그인창)--------------------*/
 		} else if (ob == loginForm.bt_login) { // 로그인 버튼 클릭
 
@@ -537,10 +545,47 @@ public class Controller implements ActionListener {
 			
 			
 //-------------------MYPAGE FORM(마이페이지)-----------------
+		}else if(ob==myPageForm.bt_my) {
+			myPageForm.card.show(myPageForm.panel_my_page, "my");
+		}else if(ob==myPageForm.bt_class_request) {	
+			myPageForm.card.show(myPageForm.panel_my_page, "menti");		
+		}else if(ob==myPageForm.bt_homepage) {
+			myPageForm.setVisible(false);
+			mainForm.setVisible(true);
 		}
 
-	}
-
+	
+//-------------------NewclassForm FORM(마이페이지)-----------------
+		else if(ob == newclassForm.bt_new) {
+			ClassDAO dao = new ClassDAO();
+			
+			String cname = newclassForm.tf_name.getText();
+			int max = Integer.parseInt(newclassForm.tf_student.getText());
+			String open = newclassForm.tf_open.getText();
+			String close = newclassForm.tf_close.getText();
+			String classinfo = newclassForm.ta_desc.getText();
+			String category = newclassForm.jb_category.getSelectedItem().toString();
+			
+			Map<String, Integer> map = new HashMap<>();
+			map.put("IT", 1);
+			map.put("디자인", 2);
+			map.put("뷰티", 3);
+			map.put("외국어", 4);
+			map.put("음악", 5);
+			map.put("라이프", 6);
+			
+			ClassVO vo = new ClassVO(0, loginId, classinfo, map.get(category), cname, open, close, 0, max);
+			
+			if(dao.createClass(vo)) {
+				newclassForm.showMsg("강의개설");
+			}else {
+				newclassForm.showMsg("생성실패");
+			}
+		}
+			
+	}//actionPerformed
+		
+		
 	public void checkId() {
 		System.out.println("checkId()");
 		MemberDAO dao = new MemberDAO();

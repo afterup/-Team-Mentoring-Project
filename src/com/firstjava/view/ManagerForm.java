@@ -21,6 +21,7 @@ import javax.swing.table.DefaultTableModel;
 
 import com.firstjava.model.vo.ClassVO;
 import com.firstjava.model.vo.MemberVO;
+import java.awt.Component;
 
 public class ManagerForm extends JFrame{
     public JPasswordField tf_pass;
@@ -41,13 +42,21 @@ public class ManagerForm extends JFrame{
 	 
 	
 	//PostForm 컴포넌트 
-    public JButton bt_p_search, bt_p_all_select, bt_p_info, bt_p_id_search, bt_p_id_delete;
+    public JButton bt_p_search, bt_p_all_select, bt_p_info, bt_p_id_search, bt_p_id_delete,bt_agree,bt_disagree;
 	public JComboBox<String> cb_p_category;
-	JLabel la_p_category;
+
+	public JPanel panel_mento;
+	JLabel la_p_category,la_mento;
 	public JTable p_table;
+
 	JScrollPane p_scroll_table;
-	private JLabel label;
-	private JLabel label_1;
+	private JLabel la_logo2,la_post;
+	private JScrollPane m_scroll_table;
+	
+	//멘토대기 컴포넌트
+	public JButton bt_mento;
+	JLabel la_memberpost;
+	private JLabel la_background;
     
    public ManagerForm() {
       setTitle("Manager Form");
@@ -118,10 +127,10 @@ public class ManagerForm extends JFrame{
       panel_member.add(cb_category);
       panel_member.add(scroll_table);
       
-      JLabel la_logo2 = new JLabel("");
-      la_logo2.setIcon(new ImageIcon("image/logo_blacksmall.png"));
-      la_logo2.setBounds(50, 10, 144, 150);
-      panel_member.add(la_logo2);
+      JLabel la_logo1 = new JLabel("");
+      la_logo1.setIcon(new ImageIcon("image/logo_blacksmall.png"));
+      la_logo1.setBounds(50, 10, 144, 150);
+      panel_member.add(la_logo1);
       
       
       //----------------Post Form---------------------
@@ -178,25 +187,57 @@ public class ManagerForm extends JFrame{
       panel_post.add(la_p_category);
       panel_post.add(cb_p_category);
       panel_post.add(p_scroll_table);
-      //---------------------------------------------
-      //카드 붙이기
-      panel_lecture.add(panel_member,"1");
+      //----------멘토 대기-------------------------------
       
-      JLabel la_memberpost = new JLabel("회원 조회");
+      bt_mento = new JButton("멘토 대기");
+      bt_mento.setOpaque(false);
+      bt_mento.setFont(new Font("나눔바른고딕 UltraLight", Font.BOLD, 16));
+      bt_mento.setBorderPainted(false);
+      bt_mento.setBackground(Color.WHITE);
+      bt_mento.setBounds(507, 30, 120, 40);
+      
+      bt_agree = new JButton("승인");
+      bt_agree.setBounds(510, 158, 90, 30);
+      
+      m_scroll_table = new JScrollPane((Component) null);
+      m_scroll_table.setBounds(48, 200, 653, 312);
+      
+      la_mento = new JLabel("멘토 대기");
+      la_mento.setFont(new Font("나눔바른고딕 UltraLight", Font.PLAIN, 18));
+      la_mento.setBounds(191, 71, 144, 47);
+      
+      bt_disagree = new JButton("거부");
+      bt_disagree.setBounds(614, 158, 90, 30);
+
+      
+      panel_mento = new JPanel();
+      panel_mento.setLayout(null);
+      
+      panel_mento.add(bt_agree);
+      panel_mento.add(m_scroll_table);
+      panel_mento.add(la_mento);
+      panel_mento.add(bt_disagree);
+      
+      //카드 붙이기
+      
+      la_memberpost = new JLabel("회원 조회");
       la_memberpost.setFont(new Font("나눔바른고딕 UltraLight", Font.PLAIN, 18));
       la_memberpost.setBounds(193, 73, 144, 47);
       panel_member.add(la_memberpost);
+      
+      la_logo2 = new JLabel("");
+      la_logo2.setBounds(50, 10, 144, 150);
+      panel_post.add(la_logo2);
+      
+      la_post = new JLabel("게시글 관리");
+      la_post.setFont(new Font("나눔바른고딕 UltraLight", Font.PLAIN, 18));
+      la_post.setBounds(193, 73, 144, 47);
+      panel_post.add(la_post);
+      
+      panel_lecture.add(panel_member,"1");
       panel_lecture.add(panel_post,"2");
-      
-      label = new JLabel("");
-      label.setBounds(50, 10, 144, 150);
-      panel_post.add(label);
-      
-      label_1 = new JLabel("게시글 관리");
-      label_1.setFont(new Font("나눔바른고딕 UltraLight", Font.PLAIN, 18));
-      label_1.setBounds(193, 73, 144, 47);
-      panel_post.add(label_1);
-      
+      panel_lecture.add(panel_mento, "3");
+
       
       panel_lecture.setBounds(25, 80, 736, 564);
       
@@ -206,14 +247,14 @@ public class ManagerForm extends JFrame{
       bt_member.setBackground(Color.white);
       bt_member.setOpaque(false);
       bt_member.setBorderPainted ( false );
-      bt_member.setBounds(435,30,111,40);
+      bt_member.setBounds(291,30,111,40);
       
       bt_post = new JButton("게시글관리");
       bt_post.setFont(font16);
       bt_post.setBackground(Color.white);
       bt_post.setOpaque(false);
       bt_post.setBorderPainted ( false );
-      bt_post.setBounds(530,30,120,40);
+      bt_post.setBounds(386,30,120,40);
       
 
       bt_homepage = new JButton("홈페이지");
@@ -225,16 +266,18 @@ public class ManagerForm extends JFrame{
 
       getContentPane().setLayout(null);
       getContentPane().add(bt_member);
+      getContentPane().add(bt_mento);
       getContentPane().add(bt_post);
       getContentPane().add(bt_homepage);
       getContentPane().add(panel_lecture);
       
-      JLabel lblNewLabel = new JLabel("");
-      lblNewLabel.setIcon(new ImageIcon("image\\background_800.jpg"));
-      lblNewLabel.setBounds(0, 0, 784, 661);
-      getContentPane().add(lblNewLabel);
+      la_background = new JLabel("");
+      la_background.setIcon(new ImageIcon("image/background_800.jpg"));
+      la_background.setBounds(0, 0, 782, 653);
+      getContentPane().add(la_background);
+
       
-      
+
       setBounds(450,170,800,700);
       setVisible(false);
       //setResizable(false);

@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
+
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.firstjava.model.vo.ClassVO;
+
 
 public class ClassDAO {
 
@@ -35,8 +37,32 @@ public class ClassDAO {
 		}
 	}// 생성자
 	
-	//강의 테이블 추가
-	public void add() {}
+
+	public boolean createClass(ClassVO c) {
+
+		connect();
+		try {
+			//(class_seq.nextval, '자바 강의입니다','solbi94', 1, 'JAVA','19/07/01','19/07/08',0,10)
+			String sql = "insert into class values (class_seq.nextval,?,?,?,?,?,?,0,?)";
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, c.getClassinfo());
+			stmt.setString(2, c.getUserid());
+			stmt.setInt(3, c.getCateno());
+			stmt.setString(4, c.getCname());
+			stmt.setString(5, c.getOpenDate());
+			stmt.setString(6, c.getCloseDate());
+			stmt.setInt(7, c.getLimit());
+			
+			stmt.executeUpdate();
+			return true;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+		return false;
+	}//createClass
 	
 	//강의 테이블 수정
 	public void update() {}
