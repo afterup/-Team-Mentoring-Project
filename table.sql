@@ -10,7 +10,7 @@
 		phone varchar2(17) not null
 	);
 
-
+	select * from member;
 	
 
 -- classID (sequence)	

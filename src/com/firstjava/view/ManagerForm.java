@@ -92,7 +92,7 @@ public class ManagerForm extends JFrame{
       la_category.setFont(new Font("나눔바른고딕 UltraLight", Font.BOLD, 15));
       la_category.setBounds(50,528,61,24);
       
-      String []categoryTitle= {"회원","멘티","멘토"};
+      String []categoryTitle= {"회원","멘토"};
       cb_category = new JComboBox<String>(categoryTitle);
       cb_category.setBounds(110, 525, 80, 30);
 

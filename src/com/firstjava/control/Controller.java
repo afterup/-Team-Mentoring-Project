@@ -135,7 +135,8 @@ public class Controller implements ActionListener {
 					classForm.tf_open.setText(vo.getOpenDate());
 					classForm.tf_student.setText("" +vo.getLimit());
 					classForm.ta_desc.setText(vo.getClassinfo());
-					classForm.jb_category.setSelectedIndex(vo.getCateno());					
+					classForm.jb_category.setSelectedIndex(vo.getCateno()-1);	
+					
 				}
 			}
 		});
@@ -343,6 +344,15 @@ public class Controller implements ActionListener {
 				displayMember(dao.selectAll());
 
 			}
+			
+		} else if (ob == managerForm.bt_search) {
+			
+			String category = (String) managerForm.cb_category.getSelectedItem();
+			MemberDAO dao = new MemberDAO();
+			ArrayList<MemberVO> list = dao.searchMentor(category);
+			displayMember(list);
+			
+			
 
 		} else if (ob == managerForm.bt_id_search) {
 
@@ -386,6 +396,7 @@ public class Controller implements ActionListener {
 			//
 			// classForm.setVisible(true);
 
+
 		} else if (ob == managerForm.bt_p_id_search) {
 
 			System.out.println("클릭");
@@ -399,6 +410,7 @@ public class Controller implements ActionListener {
 			displayMember(list);
 
 			showBox.showOption();
+
 
 		} else if (ob == managerForm.bt_p_id_delete) {
 
