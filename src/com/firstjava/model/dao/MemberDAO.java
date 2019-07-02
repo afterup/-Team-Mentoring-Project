@@ -11,6 +11,7 @@ import java.util.Map;
 import java.util.Properties;
 
 import com.firstjava.model.vo.MemberVO;
+import com.firstjava.model.vo.RegisterVO;
 
 public class MemberDAO {
 
@@ -30,22 +31,19 @@ public class MemberDAO {
 			e.printStackTrace();
 		}
 	}// 생성자
-	
-	
+
 	public boolean updateMember(MemberVO m) {
 
 		connect();
 		try {
 
-			String sql = "update member set email = ?, phone = ? "
-					+ "where userid = ?";
+			String sql = "update member set email = ?, phone = ? " + "where userid = ?";
 
 			stmt = conn.prepareStatement(sql);
-			
+
 			stmt.setString(1, m.getEmail());
 			stmt.setString(2, m.getPhone());
 			stmt.setString(3, m.getUserId());
-		
 
 			stmt.executeUpdate();
 			return true;
@@ -57,21 +55,19 @@ public class MemberDAO {
 		}
 		return false;
 	}
-	
-	public boolean updatePass(String newPass,MemberVO m) {
+
+	public boolean updatePass(String newPass, MemberVO m) {
 
 		connect();
 		try {
 
-			String sql = "update member set password = ? "
-					+ "where userid = ? and password = ? ";
+			String sql = "update member set password = ? " + "where userid = ? and password = ? ";
 
 			stmt = conn.prepareStatement(sql);
 
 			stmt.setString(1, newPass);
 			stmt.setString(2, m.getUserId());
 			stmt.setString(3, m.getPassword());
-		
 
 			stmt.executeUpdate();
 			return true;
@@ -83,8 +79,6 @@ public class MemberDAO {
 		}
 		return false;
 	}// insert
-	
-
 
 	public boolean joinMember(MemberVO m) {
 
@@ -110,10 +104,6 @@ public class MemberDAO {
 		return false;
 	}// insert
 
-
-
-
-	
 	public int findExistId(String id) {
 		connect();
 		int count = 0;
@@ -136,7 +126,7 @@ public class MemberDAO {
 
 		return count;
 	}// findExistId
-	
+
 	public boolean findLogin(String id, String pass) {
 
 		connect();
@@ -161,7 +151,7 @@ public class MemberDAO {
 		}
 		return false;
 	}// findLogin
-	
+
 	public String findId(String name, String email) {
 		connect();
 		String id = "";
@@ -184,7 +174,7 @@ public class MemberDAO {
 		return id;
 
 	}
-	
+
 	public ArrayList<MemberVO> selectMember(String id) // 회원정보 조회
 	{
 		connect();
@@ -196,8 +186,8 @@ public class MemberDAO {
 			stmt.setString(1, id);
 			rs = stmt.executeQuery();
 			if (rs.next()) {
-				list.add(new MemberVO(rs.getString("userid"), "", rs.getString("uname"),
-						rs.getString("email"), rs.getString("phone")));
+				list.add(new MemberVO(rs.getString("userid"), "", rs.getString("uname"), rs.getString("email"),
+						rs.getString("phone")));
 				return list;
 			}
 		} catch (SQLException e) {
@@ -207,7 +197,7 @@ public class MemberDAO {
 		}
 		return null;
 	}// find
-	
+
 	public String findPass(String id, String name, String email) {
 		connect();
 		String pass = "";
@@ -231,7 +221,6 @@ public class MemberDAO {
 		return pass;
 
 	}
-	
 
 	public String deleteMember(String id) {
 		connect();
@@ -254,7 +243,7 @@ public class MemberDAO {
 	public ArrayList<MemberVO> searchMember(Map<String, String> map) {
 		connect();
 		ArrayList<MemberVO> list = new ArrayList<MemberVO>();
-		
+
 		String title = map.get("title");
 		String keyword = map.get("keyword");
 
@@ -276,7 +265,6 @@ public class MemberDAO {
 			rs = stmt.executeQuery();// sql문 실행요청(실행시점!!)
 			// 덩어리
 
-
 			while (rs.next()) {// 행얻기
 				// 열데이터 얻기
 				MemberVO vo = new MemberVO();
@@ -296,6 +284,39 @@ public class MemberDAO {
 
 		return list;
 	}// findAll
+
+	public ArrayList<RegisterVO> selectRclass(String userid) { // 신청한 강의 정보 조회
+		connect();
+		ArrayList<RegisterVO> list = new ArrayList<RegisterVO>();
+		try {
+
+			String sql = "select r.classid, c.cname, c.userid, r.rate "
+					+ "from register r, class c "
+					+ "where r.classid = c.classid and r.userid = ? ";
+
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, userid);
+
+			rs = stmt.executeQuery();
+
+			System.out.println(userid);
+
+			while (rs.next()) {
+				
+				RegisterVO vo = new RegisterVO();
+				vo.setClassno(rs.getInt("classid"));
+				vo.setCname(rs.getString("cname"));
+				vo.setMentor(rs.getString("userid"));
+				vo.setRate(rs.getInt("rate"));
+				list.add(vo);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+		return list;
+	}// MemberTable
 
 	public ArrayList<MemberVO> selectAll() { // 회원정보 전체조회
 		connect();

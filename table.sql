@@ -89,15 +89,19 @@ select * from class;
 --수강신청 테이블
 drop table register;
 create table register(
-	classid 	number not null,
-	userid 		varchar2(20) not null,
+	classid 	number		 not null,
+	userid 		varchar2(20)  not null,
 	rate 		number,
 	constraint r_userid_fk foreign key(userid) references member(userid),
-	constraint class_fk foreign key(classid) references class(classid)
+	constraint class_id_fk foreign key(classid) references class(classid)
 	);
-insert into register values (8, 'solbi94', 4);
-select * from register;
+insert into register values (10,'solbi94', 4);
+insert into register values (10,'lime', 5);
 
+select * from register;
+select r.classid, c.cname, c.userid, r.rate
+from register r, class c
+where r.classid = c.classid and r.userid = 'lime';
 
 
 --멘토테이블
@@ -107,9 +111,10 @@ create table mentor(
 	job			varchar2(20) not null,
 	major		varchar2(20) not null,
 	license		varchar2(20),
+	plan		varchar2(100),
 	constraint m_userid_fk foreign key(userid) references member(userid)
 );
-insert into mentor values('solbi94', '소속','컴퓨터공학','자격증');
+insert into mentor values('solbi94', '소속','컴퓨터공학','자격증','강의 계획입니다');
 select * from mentor;
 	
 
@@ -122,16 +127,13 @@ where userid = 'solbi94';
 update member set password = '1111'
 where userid = 'solbi94' and password = '1234';
 
-select * from member;
-select userid, job, major, license,phone
-from MEMBER natural join mentor;
 
-select r.userid 멘티아이디 , cname 수강강의명 , c.userid 멘토아이디  , rate 점수
+select r.userid , c.cname , c.userid, rate
 from register r, class c
 where r.classid = c.classid;
 
-
-
+select c.classid, c.cname, c.userid, r.rate from register r, class c 
+where r.classid = c.classid and r.userid = 'solbi94';
 
 
 --제약조건 수정할 때 사용하세요!!

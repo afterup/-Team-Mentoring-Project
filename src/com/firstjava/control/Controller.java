@@ -17,6 +17,7 @@ import com.firstjava.model.dao.ClassDAO;
 import com.firstjava.model.dao.MemberDAO;
 import com.firstjava.model.vo.ClassVO;
 import com.firstjava.model.vo.MemberVO;
+import com.firstjava.model.vo.RegisterVO;
 import com.firstjava.view.ClassForm;
 import com.firstjava.view.FindForm;
 import com.firstjava.view.JoinForm;
@@ -51,7 +52,7 @@ public class Controller implements ActionListener {
 		loginForm = new LoginForm();
 		joinForm = new JoinForm();
 		pChangeForm = new PassChangeForm();
-		classForm = new ClassForm();//게시글창
+		classForm = new ClassForm();// 게시글창
 		mainForm = new MainForm();
 		findForm = new FindForm();
 		mentorRegForm = new MentorRegForm();
@@ -120,22 +121,22 @@ public class Controller implements ActionListener {
 				JTable table = (JTable) me.getSource();
 				Point p = me.getPoint();
 				int row = table.rowAtPoint(p);
-				
+
 				ClassDAO dao = new ClassDAO();
 				int r = mainForm.table.getSelectedRow();
-				
+
 				if (me.getClickCount() == 1) {
 					classForm.controlsetEnabled();
-					
-					ClassVO vo = dao.searchByNo(Integer.parseInt(mainForm.table.getValueAt(r,0).toString()));
-					
+
+					ClassVO vo = dao.searchByNo(Integer.parseInt(mainForm.table.getValueAt(r, 0).toString()));
+
 					classForm.tf_name.setText(vo.getCname());
 					classForm.tf_close.setText(vo.getCloseDate());
 					classForm.tf_open.setText(vo.getOpenDate());
-					classForm.tf_student.setText("" +vo.getLimit());
+					classForm.tf_student.setText("" + vo.getLimit());
 					classForm.ta_desc.setText(vo.getClassinfo());
-					classForm.jb_category.setSelectedIndex(vo.getCateno()-1);	
-					
+					classForm.jb_category.setSelectedIndex(vo.getCateno() - 1);
+
 				}
 			}
 		});
@@ -170,7 +171,6 @@ public class Controller implements ActionListener {
 		myPageForm.bt_infoUpdate.addActionListener(this);
 		myPageForm.bt_homepage.addActionListener(this);
 		myPageForm.bt_review.addActionListener(this);
-
 
 		// ManagerForm
 		managerForm.bt_search.addActionListener(this);
@@ -334,7 +334,7 @@ public class Controller implements ActionListener {
 			String id = (managerForm.table.getValueAt(row, 0)).toString();
 			System.out.println(id);
 
-			if (showBox.showConfirm("강퇴하시겠습니까?")==0) {
+			if (showBox.showConfirm("강퇴하시겠습니까?") == 0) {
 				showBox.showMsg(dao.deleteMember(id));
 				displayMember(dao.selectAll());
 
@@ -585,9 +585,6 @@ public class Controller implements ActionListener {
 		} else if (ob == myPageForm.bt_my) {// 카드레이아웃_내정보
 			myPageForm.card.show(myPageForm.panel_my_page, "my");
 
-		} else if (ob == myPageForm.bt_class_request) {// 카드레이아웃_내강의
-			myPageForm.card.show(myPageForm.panel_my_page, "menti");
-
 		} else if (ob == myPageForm.bt_homepage) {
 			myPageForm.setVisible(false);
 			mainForm.setVisible(true);
@@ -625,6 +622,23 @@ public class Controller implements ActionListener {
 				mainForm.setVisible(true);
 			}
 
+		} else if (ob == myPageForm.bt_class_request) {// 카드레이아웃_내강의
+			myPageForm.card.show(myPageForm.panel_my_page, "menti");
+			
+			MemberDAO dao = new MemberDAO();
+			myPageForm.dtm_menti.setRowCount(0);
+			ArrayList<RegisterVO> list = dao.selectRclass(loginId);
+			
+			for (int i = 0; i < list.size(); i++) {
+				RegisterVO vo = list.get(i);
+				Object[] rowData = { vo.getClassno(), vo.getCname(), 
+						vo.getMentor(), vo.getRate()};
+				myPageForm.dtm_menti.addRow(rowData);
+
+			}
+			
+			
+			
 		}
 
 //------------------------NewclassForm FORM(강의개설페이지)-----------------
@@ -659,8 +673,6 @@ public class Controller implements ActionListener {
 			}
 //=============mentoRequest(멘토신청 폼)=========================
 		}
-		
-
 
 	}// actionPerformed
 
@@ -691,24 +703,22 @@ public class Controller implements ActionListener {
 
 		}
 	}// Displayclass
-	
-	
+
 	public void displayMember(ArrayList<MemberVO> list) {
 
-	    managerForm.dtm.setRowCount(0);
-	    
-	    for(int i=0; i<list.size(); i++) {
-	    	MemberVO vo = list.get(i);
-	    	Object []rowData= {vo.getUserId(),vo.getUname(),vo.getEmail(),vo.getPhone()};
-	    	managerForm.dtm.addRow(rowData);
-	    }
-	    
-    //JScrollBar bar= scroll_table.getVerticalScrollBar();
-    //bar.setValue(bar.getMaximum());
-    
-   }//displayMember
-	
-	
+		managerForm.dtm.setRowCount(0);
+
+		for (int i = 0; i < list.size(); i++) {
+			MemberVO vo = list.get(i);
+			Object[] rowData = { vo.getUserId(), vo.getUname(), vo.getEmail(), vo.getPhone() };
+			managerForm.dtm.addRow(rowData);
+		}
+
+		// JScrollBar bar= scroll_table.getVerticalScrollBar();
+		// bar.setValue(bar.getMaximum());
+
+	}// displayMember
+
 	public void DisplayclassManager(ArrayList<ClassVO> list) {
 
 		managerForm.p_dtm.setRowCount(0);
@@ -716,8 +726,8 @@ public class Controller implements ActionListener {
 		for (int i = 0; i < list.size(); i++) {
 
 			ClassVO vo = list.get(i);
-			Object[] rowData = { vo.getClassno(), vo.getCname(), vo.getClassinfo(), vo.getOpenDate(),
-					vo.getCloseDate(), vo.getUserid(), vo.getStudent(), vo.getLimit() };
+			Object[] rowData = { vo.getClassno(), vo.getCname(), vo.getClassinfo(), vo.getOpenDate(), vo.getCloseDate(),
+					vo.getUserid(), vo.getStudent(), vo.getLimit() };
 			managerForm.p_dtm.addRow(rowData);
 
 		}
