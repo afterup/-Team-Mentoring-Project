@@ -12,6 +12,7 @@ import java.util.Properties;
 
 import com.firstjava.model.vo.MemberVO;
 import com.firstjava.model.vo.RegisterVO;
+import com.firstjava.model.vo.MentorVO;
 
 public class MemberDAO {
 
@@ -239,6 +240,42 @@ public class MemberDAO {
 		return "탈퇴에 실패하였습니다.";
 
 	}
+	
+	public ArrayList<MemberVO> searchMentor(String category) { // 검색
+		connect();	
+		ArrayList<MemberVO> list = new ArrayList<MemberVO>();
+		
+		try {
+			String sql = "select  userid, uname, email, phone from member " ;
+			
+			if (category.equals("멘토")) {
+				sql += "natural join mentor";
+			}
+			
+			stmt = conn.prepareStatement(sql);
+
+			rs = stmt.executeQuery();
+
+			while (rs.next()) {
+
+				MemberVO vo = new MemberVO();
+				vo.setUserId(rs.getString("userid"));
+				vo.setUname(rs.getString("uname"));
+				vo.setEmail(rs.getString("email"));
+				vo.setPhone(rs.getString("phone"));
+				list.add(vo);
+
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+
+		return list;
+	}//searchMentor
+	
 
 	public ArrayList<MemberVO> searchMember(Map<String, String> map) {
 		connect();
@@ -342,6 +379,65 @@ public class MemberDAO {
 		return list;
 	}// MemberTable
 
+	
+//========멘토대기 메소드 ===================
+	
+	public boolean mentorRequest(MentorVO m) {
+
+		connect();
+		try {
+
+			String sql = "insert into mentor values (?,?,?,?,?)";
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, m.getUserid());
+			stmt.setString(2, m.getJob());
+			stmt.setString(3, m.getMajor());
+			stmt.setString(4, m.getLicense());
+			stmt.setString(5, m.getPlan());
+
+			stmt.executeUpdate();
+			return true;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+		return false;
+	}// insert
+	
+	public ArrayList<MentorVO> viewMentor() { // 멘토대기중인 사람들 뷰
+		connect();
+		ArrayList<MentorVO> list = new ArrayList<MentorVO>();
+		try {
+			String sql = "SELECT * FROM mentor";
+			stmt = conn.prepareStatement(sql);
+			rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				MentorVO vo = new MentorVO();
+				vo.setUserid(rs.getString("userid"));
+				vo.setJob(rs.getString("job"));
+				vo.setMajor(rs.getString("major"));
+				vo.setLicense(rs.getString("license"));
+				vo.setPlan(rs.getString("plan"));
+				vo.setConfirm(rs.getString("confirm"));
+				//멘토여부는 default로 '대기'
+				
+				list.add(vo);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+		return list;
+	}// MemberTable
+	
+	
+	
+	
+	
 	private void connect() {
 		try {
 			conn = DriverManager.getConnection(pro.getProperty("url"), pro);

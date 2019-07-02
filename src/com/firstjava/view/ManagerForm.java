@@ -32,13 +32,12 @@ public class ManagerForm extends JFrame{
     public CardLayout card;
     
     //MemberForm 컴포넌트
-    public JButton bt_search, bt_all_select,bt_info, bt_id_search, bt_id_delete;
+    public JButton bt_search, bt_all_select, bt_id_search, bt_id_delete;
 	public JComboBox<String> cb_category;
 	public JTable table;
 	JLabel la_category;
 	JScrollPane scroll_table;	
 	public DefaultTableModel dtm; //멤버
-	public DefaultTableModel p_dtm; // 클래스
 	 
 	
 	//PostForm 컴포넌트 
@@ -51,12 +50,15 @@ public class ManagerForm extends JFrame{
 
 	JScrollPane p_scroll_table;
 	private JLabel la_logo2,la_post;
-	private JScrollPane m_scroll_table;
+	public DefaultTableModel p_dtm; // 클래스
 	
 	//멘토대기 컴포넌트
 	public JButton bt_mento;
 	JLabel la_memberpost;
 	private JLabel la_background;
+	public JTable m_table;
+	private JScrollPane m_scroll_table;
+	public DefaultTableModel m_dtm; // 클래스
     
    public ManagerForm() {
       setTitle("Manager Form");
@@ -78,21 +80,18 @@ public class ManagerForm extends JFrame{
       bt_all_select.setBounds(397,524,93,30);
       
 
-      bt_info = new JButton("정보조회");
-      bt_info.setBounds(613,162,90,30);
-   
       bt_id_search = new JButton("상세검색");
       bt_id_search.setBounds(282,524,103,30);
       
       bt_id_delete = new JButton("회원삭제");
-      bt_id_delete.setBounds(511,162,90,30);
+      bt_id_delete.setBounds(503,524,90,30);
   
       
       la_category = new JLabel("카테고리");
       la_category.setFont(new Font("나눔바른고딕 UltraLight", Font.BOLD, 15));
       la_category.setBounds(50,528,61,24);
       
-      String []categoryTitle= {"회원","멘티","멘토"};
+      String []categoryTitle= {"회원","멘토"};
       cb_category = new JComboBox<String>(categoryTitle);
       cb_category.setBounds(110, 525, 80, 30);
 
@@ -120,7 +119,6 @@ public class ManagerForm extends JFrame{
       
       panel_member.add(bt_search);
       panel_member.add(bt_all_select);
-      panel_member.add(bt_info);
       panel_member.add(bt_id_search);
       panel_member.add(bt_id_delete);
       panel_member.add(la_category);
@@ -141,17 +139,17 @@ public class ManagerForm extends JFrame{
       bt_p_search.setBounds(207,524,61,30);
       
       bt_p_all_select = new JButton("전체 조회");
-      bt_p_all_select.setBounds(397,524,93,30);
+      bt_p_all_select.setBounds(400,524,93,30);
       
 
       bt_p_info = new JButton("정보 조회");
-      bt_p_info.setBounds(613,162,90,30);
+      bt_p_info.setBounds(613,524,90,30);
    
       bt_p_id_search = new JButton("상세검색");
-      bt_p_id_search.setBounds(282,524,103,30);
+      bt_p_id_search.setBounds(284,524,103,30);
       
       bt_p_id_delete = new JButton("삭제");
-      bt_p_id_delete.setBounds(511,162,90,30);
+      bt_p_id_delete.setBounds(508,524,90,30);
   
       
       la_p_category = new JLabel("카테고리");
@@ -208,7 +206,20 @@ public class ManagerForm extends JFrame{
       
       bt_disagree = new JButton("거부");
       bt_disagree.setBounds(614, 158, 90, 30);
-
+      
+      String [] m_columnTitle = {"ID", "job", "major","license","plan","confirm"};
+      Object[][] m_rowData = new Object[0][6];
+      m_dtm = new DefaultTableModel(m_rowData,m_columnTitle);
+      
+      m_table = new JTable(m_dtm) {
+             @Override
+           public boolean isCellEditable(int row, int column) {
+             return false;
+           }
+          };
+      
+      m_scroll_table = new JScrollPane(m_table);
+      m_scroll_table.setBounds(50, 202, 653, 312);
       
       panel_mento = new JPanel();
       panel_mento.setLayout(null);
@@ -217,6 +228,7 @@ public class ManagerForm extends JFrame{
       panel_mento.add(m_scroll_table);
       panel_mento.add(la_mento);
       panel_mento.add(bt_disagree);
+      panel_mento.add(m_scroll_table);
       
       //카드 붙이기
       
@@ -281,7 +293,7 @@ public class ManagerForm extends JFrame{
       setBounds(450,170,800,700);
       setVisible(false);
       //setResizable(false);
-      setDefaultCloseOperation(EXIT_ON_CLOSE);
+//      setDefaultCloseOperation(EXIT_ON_CLOSE);
       
 
    }

@@ -111,10 +111,11 @@ create table mentor(
 	job			varchar2(20) not null,
 	major		varchar2(20) not null,
 	license		varchar2(20),
-	plan		varchar2(100),
+	plan		varchar2(100) not null,
+	confirm	varchar2(20) DEFAULT '대기',
 	constraint m_userid_fk foreign key(userid) references member(userid)
 );
-insert into mentor values('solbi94', '소속','컴퓨터공학','자격증','강의 계획입니다');
+insert into mentor (userid,job,major,license,plan)values('solbi94', '소속','컴퓨터공학','자격증','강의 계획입니다');
 select * from mentor;
 	
 

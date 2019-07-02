@@ -10,6 +10,7 @@ import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.StringTokenizer;
 
 import javax.swing.JTable;
 
@@ -18,6 +19,7 @@ import com.firstjava.model.dao.MemberDAO;
 import com.firstjava.model.vo.ClassVO;
 import com.firstjava.model.vo.MemberVO;
 import com.firstjava.model.vo.RegisterVO;
+import com.firstjava.model.vo.MentorVO;
 import com.firstjava.view.ClassForm;
 import com.firstjava.view.FindForm;
 import com.firstjava.view.JoinForm;
@@ -178,7 +180,6 @@ public class Controller implements ActionListener {
 		managerForm.bt_all_select.addActionListener(this);
 		managerForm.bt_id_search.addActionListener(this);
 		managerForm.bt_id_delete.addActionListener(this);
-		managerForm.bt_info.addActionListener(this);
 		managerForm.p_table.addMouseListener(new MouseAdapter() { // ====JTable 클릭시 게시글창뷰 오픈
 			public void mouseClicked(MouseEvent me) {
 				JTable table = (JTable) me.getSource();
@@ -222,6 +223,12 @@ public class Controller implements ActionListener {
 				newclassForm.ta_desc.setText("");
 			}
 		});
+		
+		//MentorRegForm
+		mentorRegForm.bt_submit.addActionListener(this);
+		mentorRegForm.bt_cancel.addActionListener(this);
+		
+
 	}// eventUp
 
 	@Override
@@ -253,9 +260,11 @@ public class Controller implements ActionListener {
 					myPageForm.tf_id.setText(mVO.getUserId());
 					myPageForm.tf_name.setText(mVO.getUname());
 					myPageForm.tf_email.setText(mVO.getEmail());
-					myPageForm.tf_phone1.setText(mVO.getPhone().substring(0, 3));
-					myPageForm.tf_phone2.setText(mVO.getPhone().substring(4, 8));
-					myPageForm.tf_phone3.setText(mVO.getPhone().substring(9, 13));
+					
+					StringTokenizer st = new StringTokenizer(mVO.getPhone(), "-");
+					myPageForm.tf_phone1.setText(st.nextToken());
+					myPageForm.tf_phone2.setText(st.nextToken());
+					myPageForm.tf_phone3.setText(st.nextToken());
 				}
 
 				myPageForm.tf_id.setEnabled(false);
@@ -267,7 +276,6 @@ public class Controller implements ActionListener {
 
 		} else if (ob == mainForm.bt_mento_demand) { // 멘토신청
 
-			mentorRegForm.setVisible(true);
 			if (loginId == null) {
 				showBox.showMsg("로그인이 필요합니다!!");
 			} else {
@@ -289,12 +297,12 @@ public class Controller implements ActionListener {
 
 			ClassDAO dao = new ClassDAO();
 			ArrayList<ClassVO> list = dao.search(category);
-			Displayclass(list);
+			displayclass(list);
 
 		} else if (ob == mainForm.bt_select) { // 전체조회
 
 			ClassDAO dao = new ClassDAO();
-			Displayclass(dao.findAll());
+			displayclass(dao.findAll());
 
 		} else if (ob == mainForm.bt_create_class) {// 강의개설
 
@@ -316,7 +324,7 @@ public class Controller implements ActionListener {
 
 		} else if (ob == mainForm.bt_mento_class) {// 카드레이아웃_ 멘토게시글
 			ClassDAO dao = new ClassDAO();
-			Displayclass(dao.findAll());
+			displayclass(dao.findAll());
 			mainForm.card.show(mainForm.panel_lecture, "2");
 
 // -------------------ManagerForm(매니저페이지)----------------
@@ -339,6 +347,15 @@ public class Controller implements ActionListener {
 				displayMember(dao.selectAll());
 
 			}
+			
+		} else if (ob == managerForm.bt_search) {
+			
+			String category = (String) managerForm.cb_category.getSelectedItem();
+			MemberDAO dao = new MemberDAO();
+			ArrayList<MemberVO> list = dao.searchMentor(category);
+			displayMember(list);
+			
+			
 
 		} else if (ob == managerForm.bt_id_search) {
 
@@ -355,12 +372,19 @@ public class Controller implements ActionListener {
 		} else if (ob == managerForm.bt_post) { // 카드레이아웃_게시글관리
 
 			ClassDAO dao = new ClassDAO();
-			DisplayclassManager(dao.findAll());
+			displayclassManager(dao.findAll());
 			managerForm.card.show(managerForm.panel_lecture, "2");
 			// bt_p_search, bt_p_all_select, bt_p_info, bt_p_id_search, bt_p_id_delete;
 
-		} else if (ob == managerForm.bt_mento) {// 카드레이아웃_멘토관리
+		} else if (ob == managerForm.bt_mento) {// 카드레이아웃_멘토대기
+			
+			MemberDAO dao = new MemberDAO();
+			displayMentor(dao.viewMentor());			
+			
 			managerForm.card.show(managerForm.panel_lecture, "3");
+			
+			
+			
 		}
 
 		else if (ob == managerForm.bt_p_search) {
@@ -371,16 +395,12 @@ public class Controller implements ActionListener {
 
 			ArrayList<ClassVO> list = dao.search(category);
 
-			DisplayclassManager(list);
+			displayclassManager(list);
 
 		} else if (ob == managerForm.bt_p_all_select) {
 
 			ClassDAO dao = new ClassDAO();
-			DisplayclassManager(dao.findAll());
-
-			// }else if (ob == managerForm.bt_p_info) {
-			//
-			// classForm.setVisible(true);
+			displayclassManager(dao.findAll());
 
 		} else if (ob == managerForm.bt_p_id_search) {
 
@@ -396,6 +416,7 @@ public class Controller implements ActionListener {
 
 			showBox.showOption();
 
+
 		} else if (ob == managerForm.bt_p_id_delete) {
 
 			String str = showBox.showInput("삭제할 강의 NO는? ");
@@ -409,7 +430,7 @@ public class Controller implements ActionListener {
 				if (dao.delete(no)) {
 
 					showBox.showMsg("삭제성공!!");
-					DisplayclassManager(dao.findAll());
+					displayclassManager(dao.findAll());
 
 				} else {
 
@@ -665,13 +686,29 @@ public class Controller implements ActionListener {
 			if (dao.createClass(vo)) {
 				showBox.showMsg("강의개설");
 				newclassForm.initText();
-				Displayclass(dao.findAll());
+				displayclass(dao.findAll());
 				newclassForm.setVisible(false);
 				mainForm.setVisible(true);
 			} else {
 				showBox.showMsg("생성실패");
 			}
-//=============mentoRequest(멘토신청 폼)=========================
+//=============mentorRegForm(멘토신청 폼)=========================
+		}else if (ob==mentorRegForm.bt_submit) {
+			
+			if(showBox.showConfirm("신청하시겠습니까?")==0){
+				MentorVO m = new MentorVO(loginId,mentorRegForm.tf_job.getText(),mentorRegForm.tf_license.getText(),
+						mentorRegForm.tf_major.getText(),mentorRegForm.ta_plan.getText());
+				MemberDAO dao = new MemberDAO();
+				dao.mentorRequest(m);
+				showBox.showMsg("신청되셨습니다.");
+				mentorRegForm.initText();
+				mentorRegForm.setVisible(false);
+			}
+			
+			
+			
+		}else if(ob==mentorRegForm.bt_cancel) {
+			
 		}
 
 	}// actionPerformed
@@ -690,14 +727,22 @@ public class Controller implements ActionListener {
 		}
 	}// checkId
 
-	public void Displayclass(ArrayList<ClassVO> list) {
+	public void displayclass(ArrayList<ClassVO> list) {
 
 		mainForm.dtm.setRowCount(0);
-
+		
+		Map<String, String> map = new HashMap<>();
+		map.put("1", "IT");
+		map.put("2", "디자인");
+		map.put("3", "뷰티");
+		map.put("4", "외국어");
+		map.put("5", "음악");
+		map.put("6", "라이프");
+		
 		for (int i = 0; i < list.size(); i++) {
 
 			ClassVO vo = list.get(i);
-			Object[] rowData = { vo.getClassno(), vo.getCname(), vo.getClassinfo(), vo.getOpenDate(),
+			Object[] rowData = { vo.getClassno(), map.get(String.valueOf(vo.getCateno())), vo.getCname(), vo.getOpenDate(),
 					vo.getCloseDate() };
 			mainForm.dtm.addRow(rowData);
 
@@ -720,6 +765,21 @@ public class Controller implements ActionListener {
 	}// displayMember
 
 	public void DisplayclassManager(ArrayList<ClassVO> list) {
+	    managerForm.dtm.setRowCount(0);
+	    
+	    for(int i=0; i<list.size(); i++) {
+	    	MemberVO vo = list.get(i);
+	    	Object []rowData= {vo.getUserId(),vo.getUname(),vo.getEmail(),vo.getPhone()};
+	    	managerForm.dtm.addRow(rowData);
+	    }
+	    
+    //JScrollBar bar= scroll_table.getVerticalScrollBar();
+    //bar.setValue(bar.getMaximum());
+    
+   }//displayMember
+	
+	
+	public void displayclassManager(ArrayList<ClassVO> list) {
 
 		managerForm.p_dtm.setRowCount(0);
 
@@ -729,6 +789,20 @@ public class Controller implements ActionListener {
 			Object[] rowData = { vo.getClassno(), vo.getCname(), vo.getClassinfo(), vo.getOpenDate(), vo.getCloseDate(),
 					vo.getUserid(), vo.getStudent(), vo.getLimit() };
 			managerForm.p_dtm.addRow(rowData);
+
+		}
+
+	}// displayTable
+	
+	public void displayMentor(ArrayList<MentorVO> list) {
+
+		managerForm.m_dtm.setRowCount(0);
+
+		for (int i = 0; i < list.size(); i++) {
+
+			MentorVO vo = list.get(i);
+			Object[] rowData = {vo.getUserid(),vo.getJob(),vo.getMajor(),vo.getLicense(),vo.getPlan(),vo.getConfirm()};
+			managerForm.m_dtm.addRow(rowData);
 
 		}
 
