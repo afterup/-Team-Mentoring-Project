@@ -257,8 +257,8 @@ public class Controller implements ActionListener
 					myPageForm.tf_name.setText(mVO.getUname());
 					myPageForm.tf_email.setText(mVO.getEmail());
 					myPageForm.tf_phone1.setText(mVO.getPhone().substring(0, 3));
-					myPageForm.tf_phone2.setText(mVO.getPhone().substring(3, 7));
-					myPageForm.tf_phone3.setText(mVO.getPhone().substring(6, 10));
+					myPageForm.tf_phone2.setText(mVO.getPhone().substring(4, 8));
+					myPageForm.tf_phone3.setText(mVO.getPhone().substring(9, 13));
 				}
 				
 				myPageForm.tf_id.setEnabled(false);
@@ -630,6 +630,10 @@ public class Controller implements ActionListener
 			showBox.showMsg(dao.deleteMember(loginId));
 			loginId = null;
 			pChangeForm.setVisible(false);
+			myPageForm.setVisible(false);
+			mainForm.la_user_id.setText("Welcome!");
+			mainForm.bt_login.setText("Login");
+			mainForm.setVisible(true);
 			}
 			
 			
