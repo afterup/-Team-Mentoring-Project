@@ -764,21 +764,6 @@ public class Controller implements ActionListener {
 
 	}// displayMember
 
-	public void DisplayclassManager(ArrayList<ClassVO> list) {
-	    managerForm.dtm.setRowCount(0);
-	    
-	    for(int i=0; i<list.size(); i++) {
-	    	MemberVO vo = list.get(i);
-	    	Object []rowData= {vo.getUserId(),vo.getUname(),vo.getEmail(),vo.getPhone()};
-	    	managerForm.dtm.addRow(rowData);
-	    }
-	    
-    //JScrollBar bar= scroll_table.getVerticalScrollBar();
-    //bar.setValue(bar.getMaximum());
-    
-   }//displayMember
-	
-	
 	public void displayclassManager(ArrayList<ClassVO> list) {
 
 		managerForm.p_dtm.setRowCount(0);
