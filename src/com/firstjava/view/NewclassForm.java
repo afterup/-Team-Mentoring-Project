@@ -107,7 +107,7 @@ public class NewclassForm extends JFrame {
 		bt_cancel.setBounds(450, 580, 105, 30);
 		contentPane.add(bt_cancel);
 		setVisible(false);
-			
+	
 	}
 	
 	public void initText() {

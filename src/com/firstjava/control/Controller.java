@@ -24,7 +24,6 @@ import com.firstjava.view.LoginForm;
 import com.firstjava.view.MainForm;
 import com.firstjava.view.ManagerForm;
 import com.firstjava.view.MentorRegForm;
-import com.firstjava.view.MentorRequest;
 import com.firstjava.view.MentorReviewForm;
 import com.firstjava.view.MyPageForm;
 import com.firstjava.view.NewclassForm;
@@ -33,7 +32,6 @@ import com.firstjava.view.ShowBoxForm;
 
 public class Controller implements ActionListener {
 	ClassForm classForm;
-	ClassForm postForm;
 	LoginForm loginForm;
 	JoinForm joinForm;
 	PassChangeForm pChangeForm;
@@ -42,7 +40,6 @@ public class Controller implements ActionListener {
 	MentorRegForm mentorRegForm;
 	MyPageForm myPageForm;
 	MentorReviewForm review;
-	MentorRequest request;
 	ManagerForm managerForm;
 	NewclassForm newclassForm;
 	ShowBoxForm showBox;
@@ -54,13 +51,12 @@ public class Controller implements ActionListener {
 		loginForm = new LoginForm();
 		joinForm = new JoinForm();
 		pChangeForm = new PassChangeForm();
-		classForm = new ClassForm();
+		classForm = new ClassForm();//게시글창
 		mainForm = new MainForm();
 		findForm = new FindForm();
 		mentorRegForm = new MentorRegForm();
 		myPageForm = new MyPageForm();
 		review = new MentorReviewForm();
-		request = new MentorRequest();
 		managerForm = new ManagerForm();
 
 		postForm = new ClassForm();// 게시글창
@@ -125,8 +121,21 @@ public class Controller implements ActionListener {
 				JTable table = (JTable) me.getSource();
 				Point p = me.getPoint();
 				int row = table.rowAtPoint(p);
+				
+				ClassDAO dao = new ClassDAO();
+				int r = mainForm.table.getSelectedRow();
+				
 				if (me.getClickCount() == 1) {
-					postForm.controlsetEnabled();
+					classForm.controlsetEnabled();
+					
+					ClassVO vo = dao.searchByNo(Integer.parseInt(mainForm.table.getValueAt(r,0).toString()));
+					
+					classForm.tf_name.setText(vo.getCname());
+					classForm.tf_close.setText(vo.getCloseDate());
+					classForm.tf_open.setText(vo.getOpenDate());
+					classForm.tf_student.setText("" +vo.getLimit());
+					classForm.ta_desc.setText(vo.getClassinfo());
+					classForm.jb_category.setSelectedIndex(vo.getCateno());					
 				}
 			}
 		});
@@ -162,11 +171,6 @@ public class Controller implements ActionListener {
 		myPageForm.bt_homepage.addActionListener(this);
 		myPageForm.bt_review.addActionListener(this);
 
-		// request
-		request.bt_renew.addActionListener(this);
-		request.bt_request_cancel.addActionListener(this);
-		request.bt_search.addActionListener(this);
-		request.bt_select.addActionListener(this);
 
 		// ManagerForm
 		managerForm.bt_search.addActionListener(this);
@@ -206,6 +210,18 @@ public class Controller implements ActionListener {
 		// NewclassForm
 		newclassForm.bt_new.addActionListener(this);
 		newclassForm.jb_category.addActionListener(this);
+		newclassForm.tf_name.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				newclassForm.tf_name.setText("");
+			}
+		});
+		newclassForm.ta_desc.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				newclassForm.ta_desc.setText("");
+			}
+		});
 	}// eventUp
 
 	@Override
@@ -318,7 +334,7 @@ public class Controller implements ActionListener {
 			String id = (managerForm.table.getValueAt(row, 0)).toString();
 			System.out.println(id);
 
-			if (managerForm.confirmMsg("강퇴하시겠습니까?")) {
+			if (showBox.showConfirm("강퇴하시겠습니까?")==0) {
 				showBox.showMsg(dao.deleteMember(id));
 				displayMember(dao.selectAll());
 
@@ -641,7 +657,10 @@ public class Controller implements ActionListener {
 			} else {
 				showBox.showMsg("생성실패");
 			}
+//=============mentoRequest(멘토신청 폼)=========================
 		}
+		
+
 
 	}// actionPerformed
 

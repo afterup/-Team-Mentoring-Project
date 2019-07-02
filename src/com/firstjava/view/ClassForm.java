@@ -2,10 +2,15 @@ package com.firstjava.view;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import com.firstjava.model.vo.ClassVO;
+import com.firstjava.model.vo.MemberVO;
+
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -68,7 +73,7 @@ public class ClassForm extends JFrame {
 		contentPane.add(tf_name);
 		tf_name.setColumns(10);
 		
-		String category[] = {"프로그래밍", "영어", "뷰티"};
+		String category[] = {"IT", "디자인", "뷰티", "외국어", "음악", "라이프"};
 		
 		jb_category = new JComboBox(category);
 		jb_category.setBounds(150, 80, 130, 24);

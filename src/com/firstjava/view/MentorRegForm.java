@@ -112,7 +112,7 @@ public class MentorRegForm extends JFrame {
 			public void run() {
 				try {
 					MentorRegForm frame = new MentorRegForm();
-					frame.setVisible(true);
+					frame.setVisible(false);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
