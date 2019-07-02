@@ -14,13 +14,10 @@ import javax.swing.JTextArea;
 
 public class MentorRegForm extends JFrame {
 
-	private JTextField tf_academy, tf_major, tf_certification ; 
-	JLabel la_passImage, la_background, la_idImage;
-	public JLabel la_academy, la_major, la_certification;
-	public JButton bt_findID, bt_cancel;
-	public JLabel la_idPassSearch;
-	private JLabel la_mento;
-	private JLabel lblNewLabel;
+	private JLabel la_passImage, la_background, la_idImage,la_mento,la_plan,la_idPassSearch, la_academy, la_major, la_certification;
+	public JTextField tf_academy, tf_major, tf_certification ; 
+	public JTextArea ta_plan;
+	public JButton bt_submit, bt_cancel;
 
 	public MentorRegForm() {
 		
@@ -57,11 +54,11 @@ public class MentorRegForm extends JFrame {
 		tf_certification.setBounds(120, 256, 180, 41);
 		
 
-		bt_findID = new JButton("신청");
-		bt_findID.setForeground(Color.white);
-		bt_findID.setBackground(new Color(140, 143, 143));
-		bt_findID.setFont(new Font("맑은 고딕", Font.BOLD,13));
-		bt_findID.setBounds(189, 501, 100, 40);
+		bt_submit = new JButton("신청");
+		bt_submit.setForeground(Color.white);
+		bt_submit.setBackground(new Color(140, 143, 143));
+		bt_submit.setFont(new Font("맑은 고딕", Font.BOLD,13));
+		bt_submit.setBounds(189, 501, 100, 40);
 
 		bt_cancel = new JButton("취소");
 		bt_cancel.setForeground(Color.WHITE);
@@ -77,7 +74,7 @@ public class MentorRegForm extends JFrame {
 		getContentPane().add(tf_major);
 		getContentPane().add(tf_certification);
 		
-		getContentPane().add(bt_findID);
+		getContentPane().add(bt_submit);
 		getContentPane().add(bt_cancel);
 		
 		la_mento = new JLabel("멘토 신청");
@@ -86,26 +83,34 @@ public class MentorRegForm extends JFrame {
 		la_mento.setBounds(242, 56, 148, 40);
 		getContentPane().add(la_mento);
 		
-		lblNewLabel = new JLabel("강의계획:");
-		lblNewLabel.setForeground(Color.WHITE);
-		lblNewLabel.setFont(new Font("나눔바른고딕 UltraLight", Font.PLAIN, 15));
-		lblNewLabel.setBounds(25, 310, 62, 18);
-		getContentPane().add(lblNewLabel);
+		la_plan = new JLabel("강의계획:");
+		la_plan.setForeground(Color.WHITE);
+		la_plan.setFont(new Font("나눔바른고딕 UltraLight", Font.PLAIN, 15));
+		la_plan.setBounds(25, 310, 62, 18);
+		getContentPane().add(la_plan);
 		
 		setBounds(1280, 170, 600, 600);
 		getContentPane().setLayout(null);
 		
-		JTextArea textArea = new JTextArea();
-		textArea.setBounds(120, 308, 430, 180);
-		getContentPane().add(textArea);
+		ta_plan = new JTextArea();
+		ta_plan.setBounds(120, 308, 430, 180);
+		getContentPane().add(ta_plan);
 		
-				la_background = new JLabel("");
-				la_background.setIcon(new ImageIcon("image/background_800.jpg"));
-				la_background.setBounds(0, 0, 582, 561);
-				getContentPane().add(la_background);
+		la_background = new JLabel("");
+		la_background.setIcon(new ImageIcon("image/background_800.jpg"));
+		la_background.setBounds(0, 0, 582, 561);
+		getContentPane().add(la_background);
 		setVisible(false);
 
 	}
+	
+	public void initText() {
+		tf_academy.setText("");
+		tf_major.setText("");
+		tf_certification.setText("");
+		ta_plan.setText("");
+	}
+	
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {

@@ -18,6 +18,7 @@ import com.firstjava.model.dao.ClassDAO;
 import com.firstjava.model.dao.MemberDAO;
 import com.firstjava.model.vo.ClassVO;
 import com.firstjava.model.vo.MemberVO;
+import com.firstjava.model.vo.MentorVO;
 import com.firstjava.view.ClassForm;
 import com.firstjava.view.FindForm;
 import com.firstjava.view.JoinForm;
@@ -224,6 +225,10 @@ public class Controller implements ActionListener {
 			}
 		});
 		
+		//MentorRegForm
+		mentorRegForm.bt_submit.addActionListener(this);
+		mentorRegForm.bt_cancel.addActionListener(this);
+		
 
 	}// eventUp
 
@@ -272,7 +277,6 @@ public class Controller implements ActionListener {
 
 		} else if (ob == mainForm.bt_mento_demand) { // 멘토신청
 
-			mentorRegForm.setVisible(true);
 			if (loginId == null) {
 				showBox.showMsg("로그인이 필요합니다!!");
 			} else {
@@ -673,7 +677,23 @@ public class Controller implements ActionListener {
 			} else {
 				showBox.showMsg("생성실패");
 			}
-//=============mentoRegForm(멘토신청 폼)=========================
+//=============mentorRegForm(멘토신청 폼)=========================
+		}else if (ob==mentorRegForm.bt_submit) {
+			
+			if(showBox.showConfirm("신청하시겠습니까?")==0){
+				MentorVO m = new MentorVO(loginId,mentorRegForm.tf_academy.getText(),mentorRegForm.tf_certification.getText(),
+						mentorRegForm.tf_major.getText(),mentorRegForm.ta_plan.getText());
+				MemberDAO dao = new MemberDAO();
+				dao.mentorRequest(m);
+				showBox.showMsg("신청되셨습니다.");
+				mentorRegForm.initText();
+				mentorRegForm.setVisible(false);
+			}
+			
+			
+			
+		}else if(ob==mentorRegForm.bt_cancel) {
+			
 		}
 		
 

@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.Properties;
 
-import com.firstjava.model.vo.ClassVO;
 import com.firstjava.model.vo.MemberVO;
+import com.firstjava.model.vo.MentorVO;
 
 public class MemberDAO {
 
@@ -358,6 +358,30 @@ public class MemberDAO {
 		return list;
 	}// MemberTable
 
+	
+	public boolean mentorRequest(MentorVO m) {
+
+		connect();
+		try {
+
+			String sql = "insert into mentor values (?,?,?,?,?)";
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, m.getUserid());
+			stmt.setString(2, m.getAcademy());
+			stmt.setString(3, m.getMajor());
+			stmt.setString(4, m.getCertification());
+			stmt.setString(5, m.getPlan());
+
+			stmt.executeUpdate();
+			return true;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+		return false;
+	}// insert
 	
 	
 	
