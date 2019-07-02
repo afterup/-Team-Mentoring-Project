@@ -359,6 +359,8 @@ public class MemberDAO {
 	}// MemberTable
 
 	
+//========멘토대기 메소드 ===================
+	
 	public boolean mentorRequest(MentorVO m) {
 
 		connect();
@@ -367,9 +369,9 @@ public class MemberDAO {
 			String sql = "insert into mentor values (?,?,?,?,?)";
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1, m.getUserid());
-			stmt.setString(2, m.getAcademy());
+			stmt.setString(2, m.getJob());
 			stmt.setString(3, m.getMajor());
-			stmt.setString(4, m.getCertification());
+			stmt.setString(4, m.getLicense());
 			stmt.setString(5, m.getPlan());
 
 			stmt.executeUpdate();
@@ -382,6 +384,34 @@ public class MemberDAO {
 		}
 		return false;
 	}// insert
+	
+	public ArrayList<MentorVO> viewMentor() { // 멘토대기중인 사람들 뷰
+		connect();
+		ArrayList<MentorVO> list = new ArrayList<MentorVO>();
+		try {
+			String sql = "SELECT * FROM mentor";
+			stmt = conn.prepareStatement(sql);
+			rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				MentorVO vo = new MentorVO();
+				vo.setUserid(rs.getString("userid"));
+				vo.setJob(rs.getString("job"));
+				vo.setMajor(rs.getString("major"));
+				vo.setLicense(rs.getString("license"));
+				vo.setPlan(rs.getString("plan"));
+				vo.setConfirm(rs.getString("confirm"));
+				//멘토여부는 default로 '대기'
+				
+				list.add(vo);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+		return list;
+	}// MemberTable
 	
 	
 	

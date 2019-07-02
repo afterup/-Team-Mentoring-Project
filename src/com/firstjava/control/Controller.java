@@ -297,12 +297,12 @@ public class Controller implements ActionListener {
 
 			ClassDAO dao = new ClassDAO();
 			ArrayList<ClassVO> list = dao.search(category);
-			Displayclass(list);
+			displayclass(list);
 
 		} else if (ob == mainForm.bt_select) { // 전체조회
 
 			ClassDAO dao = new ClassDAO();
-			Displayclass(dao.findAll());
+			displayclass(dao.findAll());
 
 		} else if (ob == mainForm.bt_create_class) {// 강의개설
 
@@ -324,7 +324,7 @@ public class Controller implements ActionListener {
 
 		} else if (ob == mainForm.bt_mento_class) {// 카드레이아웃_ 멘토게시글
 			ClassDAO dao = new ClassDAO();
-			Displayclass(dao.findAll());
+			displayclass(dao.findAll());
 			mainForm.card.show(mainForm.panel_lecture, "2");
 
 // -------------------ManagerForm(매니저페이지)----------------
@@ -372,12 +372,19 @@ public class Controller implements ActionListener {
 		} else if (ob == managerForm.bt_post) { // 카드레이아웃_게시글관리
 
 			ClassDAO dao = new ClassDAO();
-			DisplayclassManager(dao.findAll());
+			displayclassManager(dao.findAll());
 			managerForm.card.show(managerForm.panel_lecture, "2");
 			// bt_p_search, bt_p_all_select, bt_p_info, bt_p_id_search, bt_p_id_delete;
 
-		} else if (ob == managerForm.bt_mento) {// 카드레이아웃_멘토관리
+		} else if (ob == managerForm.bt_mento) {// 카드레이아웃_멘토대기
+			
+			MemberDAO dao = new MemberDAO();
+			displayMentor(dao.viewMentor());			
+			
 			managerForm.card.show(managerForm.panel_lecture, "3");
+			
+			
+			
 		}
 
 		else if (ob == managerForm.bt_p_search) {
@@ -388,12 +395,12 @@ public class Controller implements ActionListener {
 
 			ArrayList<ClassVO> list = dao.search(category);
 
-			DisplayclassManager(list);
+			displayclassManager(list);
 
 		} else if (ob == managerForm.bt_p_all_select) {
 
 			ClassDAO dao = new ClassDAO();
-			DisplayclassManager(dao.findAll());
+			displayclassManager(dao.findAll());
 
 		} else if (ob == managerForm.bt_p_id_search) {
 
@@ -423,7 +430,7 @@ public class Controller implements ActionListener {
 				if (dao.delete(no)) {
 
 					showBox.showMsg("삭제성공!!");
-					DisplayclassManager(dao.findAll());
+					displayclassManager(dao.findAll());
 
 				} else {
 
@@ -665,7 +672,7 @@ public class Controller implements ActionListener {
 			if (dao.createClass(vo)) {
 				showBox.showMsg("강의개설");
 				newclassForm.initText();
-				Displayclass(dao.findAll());
+				displayclass(dao.findAll());
 				newclassForm.setVisible(false);
 				mainForm.setVisible(true);
 			} else {
@@ -675,7 +682,7 @@ public class Controller implements ActionListener {
 		}else if (ob==mentorRegForm.bt_submit) {
 			
 			if(showBox.showConfirm("신청하시겠습니까?")==0){
-				MentorVO m = new MentorVO(loginId,mentorRegForm.tf_academy.getText(),mentorRegForm.tf_certification.getText(),
+				MentorVO m = new MentorVO(loginId,mentorRegForm.tf_job.getText(),mentorRegForm.tf_license.getText(),
 						mentorRegForm.tf_major.getText(),mentorRegForm.ta_plan.getText());
 				MemberDAO dao = new MemberDAO();
 				dao.mentorRequest(m);
@@ -708,7 +715,7 @@ public class Controller implements ActionListener {
 		}
 	}// checkId
 
-	public void Displayclass(ArrayList<ClassVO> list) {
+	public void displayclass(ArrayList<ClassVO> list) {
 
 		mainForm.dtm.setRowCount(0);
 		
@@ -747,7 +754,7 @@ public class Controller implements ActionListener {
    }//displayMember
 	
 	
-	public void DisplayclassManager(ArrayList<ClassVO> list) {
+	public void displayclassManager(ArrayList<ClassVO> list) {
 
 		managerForm.p_dtm.setRowCount(0);
 
@@ -757,6 +764,20 @@ public class Controller implements ActionListener {
 			Object[] rowData = { vo.getClassno(), vo.getCname(), vo.getClassinfo(), vo.getOpenDate(),
 					vo.getCloseDate(), vo.getUserid(), vo.getStudent(), vo.getLimit() };
 			managerForm.p_dtm.addRow(rowData);
+
+		}
+
+	}// displayTable
+	
+	public void displayMentor(ArrayList<MentorVO> list) {
+
+		managerForm.m_dtm.setRowCount(0);
+
+		for (int i = 0; i < list.size(); i++) {
+
+			MentorVO vo = list.get(i);
+			Object[] rowData = {vo.getUserid(),vo.getJob(),vo.getMajor(),vo.getLicense(),vo.getPlan(),vo.getConfirm()};
+			managerForm.m_dtm.addRow(rowData);
 
 		}
 
