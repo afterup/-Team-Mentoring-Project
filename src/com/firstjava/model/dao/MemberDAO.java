@@ -30,13 +30,40 @@ public class MemberDAO {
 			e.printStackTrace();
 		}
 	}// 생성자
+	
+	
+	public boolean updateMember(MemberVO m) {
+
+		connect();
+		try {
+
+			String sql = "update member set email = ?, phone = ? where userid = ?";
+
+			stmt = conn.prepareStatement(sql);
+			
+			stmt.setString(1, m.getEmail());
+			stmt.setString(2, m.getPhone());
+			stmt.setString(3, m.getUserId());
+		
+
+			stmt.executeUpdate();
+			return true;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+		return false;
+	}// insert
+	
 
 	public MemberVO findById(String id) {// 회원정보 수정(폼)에 필요한 데이터 조회(검색)
 
 		connect();
 		MemberVO vo = null;// 조회된 결과행이 없음을 표현
 		try {
-			String sql = "select userid,uname,email,phone from member where id = ?";
+			String sql = "select userid,uname,email,phone from member where userid = ?";
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1, id);
 			rs = stmt.executeQuery();
