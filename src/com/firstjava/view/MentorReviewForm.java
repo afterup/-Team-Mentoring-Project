@@ -22,7 +22,6 @@ public class MentorReviewForm extends JFrame {
 	 * Create the frame.
 	 */
 	public MentorReviewForm() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(550, 200, 600, 600);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

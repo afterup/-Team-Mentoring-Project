@@ -162,6 +162,14 @@ public class Controller implements ActionListener
 		pChangeForm.bt_cancel.addActionListener(this);
 
 		// myPage
+		myPageForm.addWindowListener(new WindowAdapter()
+		{
+			public void windowClosing(WindowEvent e)
+			{
+				myPageForm.setVisible(false);
+				mainForm.setVisible(true);
+			}
+		});
 		myPageForm.bt_drop_id.addActionListener(this);
 		myPageForm.bt_my.addActionListener(this);
 		myPageForm.bt_class_request.addActionListener(this);

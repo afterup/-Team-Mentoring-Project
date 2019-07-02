@@ -66,7 +66,6 @@ public class PassChangeForm extends JFrame {
 		bt_submit.setBounds(55, 463, 111, 46);
 		getContentPane().add(bt_submit);
 		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 360, 600);
 		setVisible(false);
 	}
