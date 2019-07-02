@@ -249,8 +249,8 @@ public class Controller implements ActionListener {
 			
 			MemberDAO dao = new MemberDAO();	
 			myPageForm.showInfo(dao.mypageMember(id));
-			myPageForm.tf_id.disable();
-			myPageForm.tf_name.disable();
+			myPageForm.tf_id.setEnabled(false);
+			myPageForm.tf_name.setEnabled(false);
 			
 			mainForm.setVisible(false);
 			myPageForm.setVisible(true);
