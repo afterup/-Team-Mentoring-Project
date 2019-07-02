@@ -241,14 +241,12 @@ public class Controller implements ActionListener {
 
 		} else if (ob == mainForm.bt_mypage) {
 			
-			String id = mainForm.la_user_id.getText();
-			
-			if(id.equals("Welcome!")) {
+			if(loginId==null) {
 				showBox.showMsg("로그인해주세요.");
 			}else {
 			
 			MemberDAO dao = new MemberDAO();	
-			myPageForm.showInfo(dao.mypageMember(id));
+			myPageForm.showInfo(dao.mypageMember(loginId));
 			myPageForm.tf_id.setEnabled(false);
 			myPageForm.tf_name.setEnabled(false);
 			
@@ -448,7 +446,6 @@ public class Controller implements ActionListener {
 			MemberDAO dao = new MemberDAO();
 
 			String id = loginForm.tf_id.getText();
-			loginId = id;
 			String pass = new String(loginForm.tf_pass.getPassword());
 
 			if (dao.findLogin(id, pass)) {
