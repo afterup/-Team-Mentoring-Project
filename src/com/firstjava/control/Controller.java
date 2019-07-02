@@ -248,7 +248,7 @@ public class Controller implements ActionListener {
 			}else {
 			
 			MemberDAO dao = new MemberDAO();	
-			myPageForm.showInfo(dao.mypageMember(id));
+			myPageForm.showInfo(dao.mypageMember(loginId));
 			myPageForm.tf_id.setEnabled(false);
 			myPageForm.tf_name.setEnabled(false);
 			
@@ -450,7 +450,6 @@ public class Controller implements ActionListener {
 			MemberDAO dao = new MemberDAO();
 
 			String id = loginForm.tf_id.getText();
-			loginId = id;
 			String pass = new String(loginForm.tf_pass.getPassword());
 
 			if (dao.findLogin(id, pass)) {
