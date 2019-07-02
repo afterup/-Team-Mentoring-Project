@@ -50,15 +50,16 @@ create table class
 	
 
 --insert
-insert into member values ('solbi94', '1234', '고솔비', 'gosolb0904@gmail.com', 01040109537);
-insert into member values ('gildong', '1111', '홍길동', 'gildong@gmail.com', 01012345678);
-insert into member values ('lime', '2222', '길라임', 'lime@gmail.com', 01011112222);
-insert into member values ('juwon', '3333', '김주원', 'juwon@gmail.com', 01012457890);
+insert into member values ('solbi94', '1234', '고솔비', 'gosolb0904@gmail.com', '010-4010-9537');
+insert into member values ('gildong', '1111', '홍길동', 'gildong@gmail.com', '010-1234-5678');
+insert into member values ('lime', '2222', '길라임', 'lime@gmail.com', '010-1111-2222');
+insert into member values ('juwon', '3333', '김주원', 'juwon@gmail.com', '010-1245-7890');
 select * from member;
 
 
+
 --admin insert
-insert into member values ('admin','1234','관리자','admin@encore.com',01012345678);
+insert into member values ('admin','1234','관리자','admin@encore.com','010-1234-5678');
 
 insert into category values (1, 'IT');
 insert into category values (2, '디자인');
@@ -94,8 +95,7 @@ create table register(
 	constraint r_userid_fk foreign key(userid) references member(userid),
 	constraint class_fk foreign key(classid) references class(classid)
 	);
-insert into register values (2, 'solbi94', 4);
-delete from register where userid ='solbi94';
+insert into register values (8, 'solbi94', 4);
 select * from register;
 
 
@@ -122,6 +122,7 @@ where userid = 'solbi94';
 update member set password = '1111'
 where userid = 'solbi94' and password = '1234';
 
+select * from member;
 select userid, job, major, license,phone
 from MEMBER natural join mentor;
 
