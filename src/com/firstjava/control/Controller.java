@@ -248,26 +248,22 @@ public class Controller implements ActionListener
 			if (loginId == null) {
 				showBox.showMsg("로그인해주세요.");
 			} else {
+				
+				ArrayList<MemberVO> list = dao.selectMember(loginId);
 
-				myPageForm.showInfo(dao.selectMember(loginId));
+				for (int i = 0; i < list.size(); i++) {
+					MemberVO mVO = list.get(i);
+					myPageForm.tf_id.setText(mVO.getUserId());
+					myPageForm.tf_name.setText(mVO.getUname());
+					myPageForm.tf_email.setText(mVO.getEmail());
+					myPageForm.tf_phone1.setText(mVO.getPhone().substring(0, 3));
+					myPageForm.tf_phone2.setText(mVO.getPhone().substring(3, 7));
+					myPageForm.tf_phone3.setText(mVO.getPhone().substring(6, 10));
+				}
+				
 				myPageForm.tf_id.setEnabled(false);
 				myPageForm.tf_name.setEnabled(false);
 			
-			String id = mainForm.la_user_id.getText();
-			
-			if(id.equals("Welcome!")) {
-				showBox.showMsg("로그인이 필요합니다!!");
-			}else {
-			
-			myPageForm.showInfo(dao.selectMember(loginId));
-			myPageForm.tf_id.setEnabled(false);
-			myPageForm.tf_name.setEnabled(false);
-			
-			mainForm.setVisible(false);
-			myPageForm.setVisible(true);
-			}
-//			if(mainForm.bt_login == "")
-
 				mainForm.setVisible(false);
 				myPageForm.setVisible(true);
 			}
