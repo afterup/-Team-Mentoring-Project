@@ -650,6 +650,9 @@ public class Controller implements ActionListener {
 			
 			if(dao.createClass(vo)) {
 				showBox.showMsg("강의개설");
+				newclassForm.initText();
+				newclassForm.setVisible(false);
+				mainForm.setVisible(true);
 			}else {
 				showBox.showMsg("생성실패");
 			}

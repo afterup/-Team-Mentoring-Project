@@ -110,6 +110,14 @@ public class NewclassForm extends JFrame {
 			
 	}
 	
+	public void initText() {
+		tf_name.setText("강의 이름");
+		tf_close.setText("");
+		tf_open.setText("");
+		tf_student.setText("");
+		ta_desc.setText("260자 이내의 강의 내용을 작성해주세요.");
+		jb_category.setSelectedIndex(0);
+	}//initText
 	
 	public void controlsetEnabled() {
 		tf_name.setEnabled(true);
