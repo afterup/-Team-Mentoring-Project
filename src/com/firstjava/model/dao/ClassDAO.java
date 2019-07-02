@@ -4,7 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
-
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,6 +20,7 @@ public class ClassDAO {
 	Connection conn;
 	PreparedStatement stmt;
 	ResultSet rs;
+	
 
 	Properties pro;// DB접속관련 정보 저장 객체
 
@@ -118,8 +119,8 @@ public class ClassDAO {
 				vo.setUserid(rs.getString("userid"));
 				vo.setCateno(rs.getInt("cateno"));
 				vo.setCname(rs.getString("cname"));
-				vo.setOpenDate(rs.getString("opendate"));
-				vo.setCloseDate(rs.getString("closedate"));
+				vo.setOpenDate(rs.getDate("opendate").toString());
+				vo.setCloseDate(rs.getDate("closedate").toString());
 				vo.setStudent(rs.getInt("student"));
 				vo.setLimit(rs.getInt("limit"));
 
@@ -155,8 +156,8 @@ public class ClassDAO {
 				vo.setUserid(rs.getString("userid"));
 				vo.setCateno(rs.getInt("cateno"));
 				vo.setCname(rs.getString("cname"));
-				vo.setOpenDate(rs.getString("opendate"));
-				vo.setCloseDate(rs.getString("closedate"));
+				vo.setOpenDate(rs.getDate("opendate").toString());
+				vo.setCloseDate(rs.getDate("closedate").toString());
 				vo.setStudent(rs.getInt("student"));
 				vo.setLimit(rs.getInt("limit"));
 
