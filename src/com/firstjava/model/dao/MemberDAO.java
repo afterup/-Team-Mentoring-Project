@@ -37,7 +37,8 @@ public class MemberDAO {
 		connect();
 		try {
 
-			String sql = "update member set email = ?, phone = ? where userid = ?";
+			String sql = "update member set email = ?, phone = ? "
+					+ "where userid = ?";
 
 			stmt = conn.prepareStatement(sql);
 			
@@ -62,11 +63,11 @@ public class MemberDAO {
 		connect();
 		try {
 
-			String sql = "update member set pass = ?, "
-					+ "where userid = ? and pass = ";
+			String sql = "update member set password = ? "
+					+ "where userid = ? and password = ? ";
 
 			stmt = conn.prepareStatement(sql);
-			
+
 			stmt.setString(1, newPass);
 			stmt.setString(2, m.getUserId());
 			stmt.setString(3, m.getPassword());
@@ -256,21 +257,21 @@ public class MemberDAO {
 
 	}
 
-	public String deleteMember(String name) {
+	public String deleteMember(String id) {
 		connect();
 
 		try {
-
-			String sql = "DELETE FROM member WHERE userid=?";
+			System.out.println(id);
+			String sql = "DELETE FROM member WHERE userid=? ";
 			stmt = conn.prepareStatement(sql);
-			stmt.setString(1, name);
+			stmt.setString(1, id);
 
 			stmt.executeUpdate();
-			return "강퇴되었습니다.";
+			return "탈퇴되었습니다.";
 		} catch (SQLException e) {
 			disconnect();
 		}
-		return "강퇴에 실패하였습니다.";
+		return "탈퇴에 실패하였습니다.";
 
 	}
 

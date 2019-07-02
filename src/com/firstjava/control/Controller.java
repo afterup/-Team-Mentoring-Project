@@ -343,10 +343,10 @@ public class Controller implements ActionListener
 		} else if (ob == managerForm.bt_id_delete) {// 강퇴
 			MemberDAO dao = new MemberDAO();
 			int row = managerForm.table.getSelectedRow();
-			String name = (managerForm.table.getValueAt(row, 0)).toString();
+			String id = (managerForm.table.getValueAt(row, 0)).toString();
 
 			if (managerForm.confirmMsg("강퇴하시겠습니까?")) {
-				showBox.showMsg(dao.deleteMember(name));
+				showBox.showMsg(dao.deleteMember(id));
 				managerForm.memberDisplayTable(dao.MemberTable());
 			}
 
@@ -530,6 +530,27 @@ public class Controller implements ActionListener
 
 /*-----------------------PassChangeForm(비번변경창)--------------------*/
 		} else if (ob == pChangeForm.bt_submit) {
+			MemberDAO dao = new MemberDAO();
+			String oldPass = pChangeForm.tf_oldPass.getText();
+			String newPass = pChangeForm.tf_newPass.getText();
+			String passCk = pChangeForm.tf_newPassCheck.getText();	
+
+			if(newPass.equals(passCk)) {
+				MemberVO vo = new MemberVO(loginId,oldPass, null,null,null);
+				if(dao.updatePass(newPass, vo)) {
+					showBox.showMsg("비밀번호 변경 성공 ");
+				}else {
+					showBox.showMsg("비밀번호 변경 실패 ");
+				}
+				 pChangeForm.tf_oldPass.setText("");
+				 pChangeForm.tf_newPass.setText("");
+				 pChangeForm.tf_newPassCheck.setText("");
+					
+			}else {
+				showBox.showMsg("비밀번호를 확인해주세요. ");
+			}
+		
+			
 
 		} else if (ob == pChangeForm.bt_cancel) {
 
@@ -590,13 +611,31 @@ public class Controller implements ActionListener
 			//이름, 아이디 변경 불가
 			//전화번호, 이메일만 변경 가능 
 
-			String phone = myPageForm.tf_phone1.getText() + "-" + myPageForm.tf_phone2.getText() + "-" + myPageForm.tf_phone3.getText();
+			String phone = myPageForm.tf_phone1.getText()  
+					+ "-" + myPageForm.tf_phone2.getText() 
+					+ "-" + myPageForm.tf_phone3.getText();
 			String email = myPageForm.tf_email.getText();
 			MemberVO vo = new MemberVO(loginId, null, null, email, phone);
-			dao.updateMember(vo);
+			if(dao.updateMember(vo)) {
+				showBox.showMsg("정보 변경 완료");
+			}else {
+				showBox.showMsg("정보 변경 실패");
+			}
+				
 
 		} else if (ob == myPageForm.bt_pwChange) {
 			pChangeForm.setVisible(true);
+		
+		}else if( ob == myPageForm.bt_drop_id) {
+			
+			MemberDAO dao = new MemberDAO();
+			if(showBox.showConfirm("정말 탈퇴하시겠습니까?") ==0) {
+			showBox.showMsg(dao.deleteMember(loginId));
+			loginId = null;
+			pChangeForm.setVisible(false);
+			}
+			
+			
 		}
 
 //------------------------NewclassForm FORM(마이페이지)-----------------
