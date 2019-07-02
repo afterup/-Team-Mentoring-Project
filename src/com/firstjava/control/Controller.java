@@ -146,7 +146,8 @@ public class Controller implements ActionListener
 					classForm.tf_open.setText(vo.getOpenDate());
 					classForm.tf_student.setText("" +vo.getLimit());
 					classForm.ta_desc.setText(vo.getClassinfo());
-					classForm.jb_category.setSelectedIndex(vo.getCateno());					
+					classForm.jb_category.setSelectedIndex(vo.getCateno()-1);	
+					
 				}
 			}
 		});
