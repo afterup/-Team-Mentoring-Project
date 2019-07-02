@@ -249,7 +249,7 @@ public class Controller implements ActionListener
 				showBox.showMsg("로그인해주세요.");
 			} else {
 
-				myPageForm.showInfo(dao.mypageMember(loginId));
+				myPageForm.showInfo(dao.selectMember(loginId));
 				myPageForm.tf_id.setEnabled(false);
 				myPageForm.tf_name.setEnabled(false);
 			
@@ -259,7 +259,7 @@ public class Controller implements ActionListener
 				showBox.showMsg("로그인이 필요합니다!!");
 			}else {
 			
-			myPageForm.showInfo(dao.mypageMember(loginId));
+			myPageForm.showInfo(dao.selectMember(loginId));
 			myPageForm.tf_id.setEnabled(false);
 			myPageForm.tf_name.setEnabled(false);
 			
@@ -346,7 +346,7 @@ public class Controller implements ActionListener
 			String name = (managerForm.table.getValueAt(row, 0)).toString();
 
 			if (managerForm.confirmMsg("강퇴하시겠습니까?")) {
-				showBox.showMsg(dao.memberDelete(name));
+				showBox.showMsg(dao.deleteMember(name));
 				managerForm.memberDisplayTable(dao.MemberTable());
 			}
 
@@ -355,7 +355,7 @@ public class Controller implements ActionListener
 			System.out.println("클릭");
 			Map<String, String> map = showBox.showOption();
 			MemberDAO dao = new MemberDAO();
-			ArrayList<MemberVO> list = dao.findSearch(map);
+			ArrayList<MemberVO> list = dao.searchMember(map);
 			managerForm.memberDisplayTable(list);
 			showBox.showOption();
 
@@ -400,7 +400,7 @@ public class Controller implements ActionListener
 
 			MemberDAO dao = new MemberDAO();
 			// ArrayList<MembershipVO> list = dao.findByName(name);
-			ArrayList<MemberVO> list = dao.findSearch(map);
+			ArrayList<MemberVO> list = dao.searchMember(map);
 			//조회된 결과를 뷰(JTable)에 반영
 			managerForm.memberDisplayTable(list);
 
@@ -508,7 +508,7 @@ public class Controller implements ActionListener
 
 			MemberVO vo = new MemberVO(id, pwd, name, email, phone);
 
-			if (dao.memberJoin(vo)) {
+			if (dao.joinMember(vo)) {
 
 				showBox.showMsg("가입 성공");
 

@@ -55,7 +55,35 @@ public class MemberDAO {
 			disconnect();
 		}
 		return false;
+	}
+	
+	public boolean updatePass(String newPass,MemberVO m) {
+
+		connect();
+		try {
+
+			String sql = "update member set pass = ?, "
+					+ "where userid = ? and pass = ";
+
+			stmt = conn.prepareStatement(sql);
+			
+			stmt.setString(1, newPass);
+			stmt.setString(2, m.getUserId());
+			stmt.setString(3, m.getPassword());
+		
+
+			stmt.executeUpdate();
+			return true;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+		return false;
 	}// insert
+	
+	
 	
 
 	public MemberVO findById(String id) {// 회원정보 수정(폼)에 필요한 데이터 조회(검색)
@@ -134,7 +162,7 @@ public class MemberDAO {
 		return false;
 	}// findLogin
 
-	public boolean memberJoin(MemberVO m) {
+	public boolean joinMember(MemberVO m) {
 
 		connect();
 		try {
@@ -181,7 +209,7 @@ public class MemberDAO {
 
 	}
 
-	public ArrayList<MemberVO> mypageMember(String id) // 회원정보 조회
+	public ArrayList<MemberVO> selectMember(String id) // 회원정보 조회
 	{
 		connect();
 		ArrayList<MemberVO> list = new ArrayList<MemberVO>();
@@ -228,7 +256,7 @@ public class MemberDAO {
 
 	}
 
-	public String memberDelete(String name) {
+	public String deleteMember(String name) {
 		connect();
 
 		try {
@@ -246,7 +274,7 @@ public class MemberDAO {
 
 	}
 
-	public ArrayList<MemberVO> findSearch(Map<String, String> map) {
+	public ArrayList<MemberVO> searchMember(Map<String, String> map) {
 		connect();
 		ArrayList<MemberVO> list = new ArrayList<MemberVO>();
 		
