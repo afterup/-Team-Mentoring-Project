@@ -30,6 +30,7 @@ import com.firstjava.view.MyPageForm;
 import com.firstjava.view.NewclassForm;
 import com.firstjava.view.PassChangeForm;
 import com.firstjava.view.ShowBoxForm;
+import com.firstjava.view.SearchForm;
 
 public class Controller implements ActionListener {
 	ClassForm classForm;
@@ -44,6 +45,7 @@ public class Controller implements ActionListener {
 	ManagerForm managerForm;
 	NewclassForm newclassForm;
 	ShowBoxForm showBox;
+	SearchForm showBox2;
 
 	String loginId;
 
@@ -62,6 +64,7 @@ public class Controller implements ActionListener {
 
 		newclassForm = new NewclassForm();
 		showBox = new ShowBoxForm();
+		showBox2 = new SearchForm();
 
 		eventUp();
 	}// 생성자
@@ -293,12 +296,12 @@ public class Controller implements ActionListener {
 
 			ClassDAO dao = new ClassDAO();
 			ArrayList<ClassVO> list = dao.search(category);
-			Displayclass(list);
+			displayclass(list);
 
 		} else if (ob == mainForm.bt_select) { // 전체조회
 
 			ClassDAO dao = new ClassDAO();
-			Displayclass(dao.findAll());
+			displayclass(dao.findAll());
 
 		} else if (ob == mainForm.bt_create_class) {// 강의개설
 
@@ -320,7 +323,7 @@ public class Controller implements ActionListener {
 
 		} else if (ob == mainForm.bt_mento_class) {// 카드레이아웃_ 멘토게시글
 			ClassDAO dao = new ClassDAO();
-			Displayclass(dao.findAll());
+			displayclass(dao.findAll());
 			mainForm.card.show(mainForm.panel_lecture, "2");
 
 // -------------------ManagerForm(매니저페이지)----------------
@@ -360,15 +363,14 @@ public class Controller implements ActionListener {
 			MemberDAO dao = new MemberDAO();
 			ArrayList<MemberVO> list = dao.searchMember(map);
 			displayMember(list);
-			showBox.showOption();
-
+			
 		} else if (ob == managerForm.bt_member) {// 카드레이아웃_회원관리
 			managerForm.card.show(managerForm.panel_lecture, "1");
 
 		} else if (ob == managerForm.bt_post) { // 카드레이아웃_게시글관리
 
 			ClassDAO dao = new ClassDAO();
-			DisplayclassManager(dao.findAll());
+			displayclassManager(dao.findAll());
 			managerForm.card.show(managerForm.panel_lecture, "2");
 			// bt_p_search, bt_p_all_select, bt_p_info, bt_p_id_search, bt_p_id_delete;
 
@@ -384,27 +386,25 @@ public class Controller implements ActionListener {
 
 			ArrayList<ClassVO> list = dao.search(category);
 
-			DisplayclassManager(list);
+			displayclassManager(list);
 
 		} else if (ob == managerForm.bt_p_all_select) {
 
 			ClassDAO dao = new ClassDAO();
-			DisplayclassManager(dao.findAll());
+			displayclassManager(dao.findAll());
 
 		} else if (ob == managerForm.bt_p_id_search) {
 
 			System.out.println("클릭");
+			
+			Map<String, Object> map = showBox2.showOption();
 
-			Map<String, String> map = showBox.showOption();
-
-			MemberDAO dao = new MemberDAO();
+			ClassDAO dao = new ClassDAO();
 			// ArrayList<MembershipVO> list = dao.findByName(name);
-			ArrayList<MemberVO> list = dao.searchMember(map);
+			ArrayList<ClassVO> list = dao.searchClass(map);
 			// 조회된 결과를 뷰(JTable)에 반영
-			displayMember(list);
-
-			showBox.showOption();
-
+			displayclassManager(list);
+			
 
 		} else if (ob == managerForm.bt_p_id_delete) {
 
@@ -419,7 +419,7 @@ public class Controller implements ActionListener {
 				if (dao.delete(no)) {
 
 					showBox.showMsg("삭제성공!!");
-					DisplayclassManager(dao.findAll());
+					displayclassManager(dao.findAll());
 
 				} else {
 
@@ -427,6 +427,11 @@ public class Controller implements ActionListener {
 
 				}
 			}
+			
+		} else if (ob == managerForm.bt_p_info) {
+			
+			
+			
 
 			/*----------------------LoginForm(로그인창)--------------------*/
 		} else if (ob == loginForm.bt_login) { // 로그인 버튼 클릭
@@ -661,7 +666,7 @@ public class Controller implements ActionListener {
 			if (dao.createClass(vo)) {
 				showBox.showMsg("강의개설");
 				newclassForm.initText();
-				Displayclass(dao.findAll());
+				displayclass(dao.findAll());
 				newclassForm.setVisible(false);
 				mainForm.setVisible(true);
 			} else {
@@ -688,7 +693,7 @@ public class Controller implements ActionListener {
 		}
 	}// checkId
 
-	public void Displayclass(ArrayList<ClassVO> list) {
+	public void displayclass(ArrayList<ClassVO> list) {
 
 		mainForm.dtm.setRowCount(0);
 
@@ -700,7 +705,7 @@ public class Controller implements ActionListener {
 			mainForm.dtm.addRow(rowData);
 
 		}
-	}// Displayclass
+	}// displayclass
 	
 	
 	public void displayMember(ArrayList<MemberVO> list) {
@@ -719,7 +724,7 @@ public class Controller implements ActionListener {
    }//displayMember
 	
 	
-	public void DisplayclassManager(ArrayList<ClassVO> list) {
+	public void displayclassManager(ArrayList<ClassVO> list) {
 
 		managerForm.p_dtm.setRowCount(0);
 

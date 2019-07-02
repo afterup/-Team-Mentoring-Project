@@ -309,8 +309,10 @@ public class MemberDAO {
 				sql += "where phone like ?";
 
 			stmt = conn.prepareStatement(sql);// sql문 전송
+			System.out.println("stmt: " + sql);
 			stmt.setString(1, "%" + keyword + "%");// '%홍%'
 			rs = stmt.executeQuery();// sql문 실행요청(실행시점!!)
+			System.out.println("keyword: " + sql);
 			// 덩어리
 
 
