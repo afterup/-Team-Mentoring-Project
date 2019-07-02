@@ -1,6 +1,7 @@
 package com.firstjava.view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.util.ArrayList;
 
@@ -128,6 +129,13 @@ public class ClassForm extends JFrame {
 		tf_open.setEnabled(false);
 		tf_close.setEnabled(false);
 		ta_desc.setEnabled(false);
+		jb_category.setEnabled(false);
+		
+		tf_name.setDisabledTextColor(Color.BLACK); 
+		tf_student.setDisabledTextColor(Color.BLACK); 
+		tf_open.setDisabledTextColor(Color.BLACK); 
+		tf_close.setDisabledTextColor(Color.BLACK); 
+		ta_desc.setDisabledTextColor(Color.BLACK); 
 		
 		setVisible(true);
 	}
