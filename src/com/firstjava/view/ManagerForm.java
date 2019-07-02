@@ -32,7 +32,7 @@ public class ManagerForm extends JFrame{
     public CardLayout card;
     
     //MemberForm 컴포넌트
-    public JButton bt_search, bt_all_select,bt_info, bt_id_search, bt_id_delete;
+    public JButton bt_search, bt_all_select, bt_id_search, bt_id_delete;
 	public JComboBox<String> cb_category;
 	public JTable table;
 	JLabel la_category;
@@ -78,14 +78,11 @@ public class ManagerForm extends JFrame{
       bt_all_select.setBounds(397,524,93,30);
       
 
-      bt_info = new JButton("정보조회");
-      bt_info.setBounds(613,162,90,30);
-   
       bt_id_search = new JButton("상세검색");
       bt_id_search.setBounds(282,524,103,30);
       
       bt_id_delete = new JButton("회원삭제");
-      bt_id_delete.setBounds(511,162,90,30);
+      bt_id_delete.setBounds(503,524,90,30);
   
       
       la_category = new JLabel("카테고리");
@@ -120,7 +117,6 @@ public class ManagerForm extends JFrame{
       
       panel_member.add(bt_search);
       panel_member.add(bt_all_select);
-      panel_member.add(bt_info);
       panel_member.add(bt_id_search);
       panel_member.add(bt_id_delete);
       panel_member.add(la_category);
@@ -141,17 +137,17 @@ public class ManagerForm extends JFrame{
       bt_p_search.setBounds(207,524,61,30);
       
       bt_p_all_select = new JButton("전체 조회");
-      bt_p_all_select.setBounds(397,524,93,30);
+      bt_p_all_select.setBounds(400,524,93,30);
       
 
       bt_p_info = new JButton("정보 조회");
-      bt_p_info.setBounds(613,162,90,30);
+      bt_p_info.setBounds(613,524,90,30);
    
       bt_p_id_search = new JButton("상세검색");
-      bt_p_id_search.setBounds(282,524,103,30);
+      bt_p_id_search.setBounds(284,524,103,30);
       
       bt_p_id_delete = new JButton("삭제");
-      bt_p_id_delete.setBounds(511,162,90,30);
+      bt_p_id_delete.setBounds(508,524,90,30);
   
       
       la_p_category = new JLabel("카테고리");

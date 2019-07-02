@@ -178,7 +178,6 @@ public class Controller implements ActionListener {
 		managerForm.bt_all_select.addActionListener(this);
 		managerForm.bt_id_search.addActionListener(this);
 		managerForm.bt_id_delete.addActionListener(this);
-		managerForm.bt_info.addActionListener(this);
 		managerForm.p_table.addMouseListener(new MouseAdapter() { // ====JTable 클릭시 게시글창뷰 오픈
 			public void mouseClicked(MouseEvent me) {
 				JTable table = (JTable) me.getSource();
@@ -386,11 +385,6 @@ public class Controller implements ActionListener {
 
 			ClassDAO dao = new ClassDAO();
 			DisplayclassManager(dao.findAll());
-
-			// }else if (ob == managerForm.bt_p_info) {
-			//
-			// classForm.setVisible(true);
-
 
 		} else if (ob == managerForm.bt_p_id_search) {
 
