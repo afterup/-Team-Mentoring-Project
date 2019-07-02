@@ -180,7 +180,6 @@ public class Controller implements ActionListener {
 		managerForm.bt_all_select.addActionListener(this);
 		managerForm.bt_id_search.addActionListener(this);
 		managerForm.bt_id_delete.addActionListener(this);
-		managerForm.bt_info.addActionListener(this);
 		managerForm.p_table.addMouseListener(new MouseAdapter() { // ====JTable 클릭시 게시글창뷰 오픈
 			public void mouseClicked(MouseEvent me) {
 				JTable table = (JTable) me.getSource();
@@ -395,11 +394,6 @@ public class Controller implements ActionListener {
 
 			ClassDAO dao = new ClassDAO();
 			DisplayclassManager(dao.findAll());
-
-			// }else if (ob == managerForm.bt_p_info) {
-			//
-			// classForm.setVisible(true);
-
 
 		} else if (ob == managerForm.bt_p_id_search) {
 
@@ -717,11 +711,19 @@ public class Controller implements ActionListener {
 	public void Displayclass(ArrayList<ClassVO> list) {
 
 		mainForm.dtm.setRowCount(0);
-
+		
+		Map<String, String> map = new HashMap<>();
+		map.put("1", "IT");
+		map.put("2", "디자인");
+		map.put("3", "뷰티");
+		map.put("4", "외국어");
+		map.put("5", "음악");
+		map.put("6", "라이프");
+		
 		for (int i = 0; i < list.size(); i++) {
 
 			ClassVO vo = list.get(i);
-			Object[] rowData = { vo.getClassno(), vo.getCname(), vo.getClassinfo(), vo.getOpenDate(),
+			Object[] rowData = { vo.getClassno(), map.get(String.valueOf(vo.getCateno())), vo.getCname(), vo.getOpenDate(),
 					vo.getCloseDate() };
 			mainForm.dtm.addRow(rowData);
 

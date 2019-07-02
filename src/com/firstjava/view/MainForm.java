@@ -54,7 +54,7 @@ public class MainForm extends JFrame {
 		panel_lecture = new JPanel();
 		panel_lecture.setLayout(card);
 		
-		String[] categoryTitle = { "JAVA", "HTML", "뷰티", "외국어", "음악", "라이프" };
+		String[] categoryTitle = { "IT", "디자인", "뷰티", "외국어", "음악", "라이프" };
 		cb_category = new JComboBox<String>(categoryTitle);
 		cb_category.setBounds(125, 523, 80, 30);
 
