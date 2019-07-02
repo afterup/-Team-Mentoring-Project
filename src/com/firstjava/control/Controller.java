@@ -24,7 +24,6 @@ import com.firstjava.view.LoginForm;
 import com.firstjava.view.MainForm;
 import com.firstjava.view.ManagerForm;
 import com.firstjava.view.MentorRegForm;
-import com.firstjava.view.MentorRequest;
 import com.firstjava.view.MentorReviewForm;
 import com.firstjava.view.MyPageForm;
 import com.firstjava.view.NewclassForm;
@@ -42,7 +41,6 @@ public class Controller implements ActionListener
 	MentorRegForm mentorRegForm;
 	MyPageForm myPageForm;
 	MentorReviewForm review;
-	MentorRequest request;
 	ManagerForm managerForm;
 	NewclassForm newclassForm;
 	ShowBoxForm showBox;
@@ -61,7 +59,6 @@ public class Controller implements ActionListener
 		mentorRegForm = new MentorRegForm();
 		myPageForm = new MyPageForm();
 		review = new MentorReviewForm();
-		request = new MentorRequest();
 		managerForm = new ManagerForm();
 
 		newclassForm = new NewclassForm();
@@ -173,6 +170,14 @@ public class Controller implements ActionListener
 		pChangeForm.bt_cancel.addActionListener(this);
 
 		// myPage
+		myPageForm.addWindowListener(new WindowAdapter()
+		{
+			public void windowClosing(WindowEvent e)
+			{
+				myPageForm.setVisible(false);
+				mainForm.setVisible(true);
+			}
+		});
 		myPageForm.bt_drop_id.addActionListener(this);
 		myPageForm.bt_my.addActionListener(this);
 		myPageForm.bt_class_request.addActionListener(this);
@@ -181,11 +186,6 @@ public class Controller implements ActionListener
 		myPageForm.bt_homepage.addActionListener(this);
 		myPageForm.bt_review.addActionListener(this);
 
-		// request
-		request.bt_renew.addActionListener(this);
-		request.bt_request_cancel.addActionListener(this);
-		request.bt_search.addActionListener(this);
-		request.bt_select.addActionListener(this);
 
 		// ManagerForm
 		managerForm.bt_search.addActionListener(this);
@@ -263,26 +263,22 @@ public class Controller implements ActionListener
 			if (loginId == null) {
 				showBox.showMsg("로그인해주세요.");
 			} else {
+				
+				ArrayList<MemberVO> list = dao.selectMember(loginId);
 
-				myPageForm.showInfo(dao.mypageMember(loginId));
+				for (int i = 0; i < list.size(); i++) {
+					MemberVO mVO = list.get(i);
+					myPageForm.tf_id.setText(mVO.getUserId());
+					myPageForm.tf_name.setText(mVO.getUname());
+					myPageForm.tf_email.setText(mVO.getEmail());
+					myPageForm.tf_phone1.setText(mVO.getPhone().substring(0, 3));
+					myPageForm.tf_phone2.setText(mVO.getPhone().substring(4, 8));
+					myPageForm.tf_phone3.setText(mVO.getPhone().substring(9, 13));
+				}
+				
 				myPageForm.tf_id.setEnabled(false);
 				myPageForm.tf_name.setEnabled(false);
 			
-			String id = mainForm.la_user_id.getText();
-			
-			if(id.equals("Welcome!")) {
-				showBox.showMsg("로그인이 필요합니다!!");
-			}else {
-			
-			myPageForm.showInfo(dao.mypageMember(loginId));
-			myPageForm.tf_id.setEnabled(false);
-			myPageForm.tf_name.setEnabled(false);
-			
-			mainForm.setVisible(false);
-			myPageForm.setVisible(true);
-			}
-//			if(mainForm.bt_login == "")
-
 				mainForm.setVisible(false);
 				myPageForm.setVisible(true);
 			}
@@ -302,7 +298,7 @@ public class Controller implements ActionListener
 			mainForm.setVisible(false);
 
 			MemberDAO dao = new MemberDAO();
-			managerForm.memberDisplayTable(dao.MemberTable());
+			managerForm.memberDisplayTable(dao.selectAll());
 			managerForm.setVisible(true);
 
 		} else if (ob == mainForm.bt_search) { // 검색
@@ -334,7 +330,7 @@ public class Controller implements ActionListener
 			  } }  
 			 */
 
-		} else if (ob == mainForm.cb_category) { // 멘토신청
+		} else if (ob == mainForm.cb_category) { 
 			System.out.println("검색");
 
 		} else if (ob == mainForm.bt_main) { //카드레이아웃_ 메인
@@ -352,16 +348,18 @@ public class Controller implements ActionListener
 
 		} else if (ob == managerForm.bt_all_select) {// 전체조회
 			MemberDAO dao = new MemberDAO();
-			managerForm.memberDisplayTable(dao.MemberTable());
+			managerForm.memberDisplayTable(dao.selectAll());
 
 		} else if (ob == managerForm.bt_id_delete) {// 강퇴
 			MemberDAO dao = new MemberDAO();
 			int row = managerForm.table.getSelectedRow();
-			String name = (managerForm.table.getValueAt(row, 0)).toString();
+			String id = (managerForm.table.getValueAt(row, 0)).toString();
+			System.out.println(id);
 
-			if (managerForm.confirmMsg("강퇴하시겠습니까?")) {
-				showBox.showMsg(dao.memberDelete(name));
-				managerForm.memberDisplayTable(dao.MemberTable());
+			if (showBox.showConfirm("강퇴하시겠습니까?")==0) {
+				showBox.showMsg(dao.deleteMember(id));
+				managerForm.memberDisplayTable(dao.selectAll());
+
 			}
 
 		} else if (ob == managerForm.bt_id_search) {
@@ -369,7 +367,7 @@ public class Controller implements ActionListener
 			System.out.println("클릭");
 			Map<String, String> map = showBox.showOption();
 			MemberDAO dao = new MemberDAO();
-			ArrayList<MemberVO> list = dao.findSearch(map);
+			ArrayList<MemberVO> list = dao.searchMember(map);
 			managerForm.memberDisplayTable(list);
 			showBox.showOption();
 
@@ -414,7 +412,7 @@ public class Controller implements ActionListener
 
 			MemberDAO dao = new MemberDAO();
 			// ArrayList<MembershipVO> list = dao.findByName(name);
-			ArrayList<MemberVO> list = dao.findSearch(map);
+			ArrayList<MemberVO> list = dao.searchMember(map);
 			//조회된 결과를 뷰(JTable)에 반영
 			managerForm.memberDisplayTable(list);
 
@@ -522,7 +520,7 @@ public class Controller implements ActionListener
 
 			MemberVO vo = new MemberVO(id, pwd, name, email, phone);
 
-			if (dao.memberJoin(vo)) {
+			if (dao.joinMember(vo)) {
 
 				showBox.showMsg("가입 성공");
 
@@ -544,6 +542,27 @@ public class Controller implements ActionListener
 
 /*-----------------------PassChangeForm(비번변경창)--------------------*/
 		} else if (ob == pChangeForm.bt_submit) {
+			MemberDAO dao = new MemberDAO();
+			String oldPass = pChangeForm.tf_oldPass.getText();
+			String newPass = pChangeForm.tf_newPass.getText();
+			String passCk = pChangeForm.tf_newPassCheck.getText();	
+
+			if(newPass.equals(passCk)) {
+				MemberVO vo = new MemberVO(loginId,oldPass, null,null,null);
+				if(dao.updatePass(newPass, vo)) {
+					showBox.showMsg("비밀번호 변경 성공 ");
+				}else {
+					showBox.showMsg("비밀번호 변경 실패 ");
+				}
+				 pChangeForm.tf_oldPass.setText("");
+				 pChangeForm.tf_newPass.setText("");
+				 pChangeForm.tf_newPassCheck.setText("");
+					
+			}else {
+				showBox.showMsg("비밀번호를 확인해주세요. ");
+			}
+		
+			
 
 		} else if (ob == pChangeForm.bt_cancel) {
 
@@ -604,16 +623,38 @@ public class Controller implements ActionListener
 			//이름, 아이디 변경 불가
 			//전화번호, 이메일만 변경 가능 
 
-			String phone = myPageForm.tf_phone1.getText() + "-" + myPageForm.tf_phone2.getText() + "-" + myPageForm.tf_phone3.getText();
+			String phone = myPageForm.tf_phone1.getText()  
+					+ "-" + myPageForm.tf_phone2.getText() 
+					+ "-" + myPageForm.tf_phone3.getText();
 			String email = myPageForm.tf_email.getText();
 			MemberVO vo = new MemberVO(loginId, null, null, email, phone);
-			dao.updateMember(vo);
+			if(dao.updateMember(vo)) {
+				showBox.showMsg("정보 변경 완료");
+			}else {
+				showBox.showMsg("정보 변경 실패");
+			}
+				
 
 		} else if (ob == myPageForm.bt_pwChange) {
 			pChangeForm.setVisible(true);
+		
+		}else if( ob == myPageForm.bt_drop_id) {
+			
+			MemberDAO dao = new MemberDAO();
+			if(showBox.showConfirm("정말 탈퇴하시겠습니까?") ==0) {
+			showBox.showMsg(dao.deleteMember(loginId));
+			loginId = null;
+			pChangeForm.setVisible(false);
+			myPageForm.setVisible(false);
+			mainForm.la_user_id.setText("Welcome!");
+			mainForm.bt_login.setText("Login");
+			mainForm.setVisible(true);
+			}
+			
+			
 		}
 
-//------------------------NewclassForm FORM(마이페이지)-----------------
+//------------------------NewclassForm FORM(강의개설페이지)-----------------
 		else if (ob == newclassForm.bt_new) {
 			ClassDAO dao = new ClassDAO();
 
@@ -637,12 +678,16 @@ public class Controller implements ActionListener
 			if (dao.createClass(vo)) {
 				showBox.showMsg("강의개설");
 				newclassForm.initText();
+				mainForm.classDisplayTable(dao.findAll());
 				newclassForm.setVisible(false);
 				mainForm.setVisible(true);
 			}else {
 				showBox.showMsg("생성실패");
 			}
+//=============mentoRequest(멘토신청 폼)=========================
 		}
+		
+
 
 	}//actionPerformed
 
