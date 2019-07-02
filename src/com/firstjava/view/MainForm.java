@@ -7,6 +7,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -207,24 +208,6 @@ public class MainForm extends JFrame {
 
 	}// 생성자
 
-	public void classDisplayTable(ArrayList<ClassVO> list) {
-
-		dtm.setRowCount(0);
-
-		for (int i = 0; i < list.size(); i++) {
-
-			ClassVO vo = list.get(i);
-			Object[] rowData = { vo.getClassno(), vo.getCname(), vo.getClassinfo(), vo.getOpenDate(),
-					vo.getCloseDate() };
-			dtm.addRow(rowData);
-
-		}
-
-	}// displayTable
-
-	// MSGBOX
-
-	
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
