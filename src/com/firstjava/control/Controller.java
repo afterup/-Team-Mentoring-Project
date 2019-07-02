@@ -10,6 +10,7 @@ import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.StringTokenizer;
 
 import javax.swing.JTable;
 
@@ -221,6 +222,8 @@ public class Controller implements ActionListener {
 				newclassForm.ta_desc.setText("");
 			}
 		});
+		
+
 	}// eventUp
 
 	@Override
@@ -252,9 +255,11 @@ public class Controller implements ActionListener {
 					myPageForm.tf_id.setText(mVO.getUserId());
 					myPageForm.tf_name.setText(mVO.getUname());
 					myPageForm.tf_email.setText(mVO.getEmail());
-					myPageForm.tf_phone1.setText(mVO.getPhone().substring(0, 3));
-					myPageForm.tf_phone2.setText(mVO.getPhone().substring(4, 8));
-					myPageForm.tf_phone3.setText(mVO.getPhone().substring(9, 13));
+					
+					StringTokenizer st = new StringTokenizer(mVO.getPhone(), "-");
+					myPageForm.tf_phone1.setText(st.nextToken());
+					myPageForm.tf_phone2.setText(st.nextToken());
+					myPageForm.tf_phone3.setText(st.nextToken());
 				}
 
 				myPageForm.tf_id.setEnabled(false);
@@ -656,7 +661,7 @@ public class Controller implements ActionListener {
 			} else {
 				showBox.showMsg("생성실패");
 			}
-//=============mentoRequest(멘토신청 폼)=========================
+//=============mentoRegForm(멘토신청 폼)=========================
 		}
 		
 
