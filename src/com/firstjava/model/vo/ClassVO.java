@@ -6,7 +6,7 @@ public class ClassVO {
 	private String userid; // 멘토 ID
 	private String classinfo; //강의설명
 	private int cateno; // 카테고리 번호
-	private String cname; //카테고리 이름
+	private String cname; //강의 이름
 	private String openDate; // 개강일
 	private String closeDate; // 종강일
 	private int student; // 현재 수강 인원수

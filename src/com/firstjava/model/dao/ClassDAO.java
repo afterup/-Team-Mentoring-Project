@@ -37,7 +37,35 @@ public class ClassDAO {
 		}
 	}// 생성자
 	
-
+	
+	public ClassVO searchByNo(int no) {//강의의 no값으로 테이블에서 선택된 강의 선택
+		connect();
+		ClassVO vo = null;
+		try {
+			String sql = "select cname, cateno, limit, opendate, closedate, classinfo from class where classid = ?";
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, no);
+			rs = stmt.executeQuery();
+			
+			if(rs.next()) {
+				String cname = rs.getString("cname");
+				int cateno = rs.getInt("cateno");
+				int limit = rs.getInt("limit");
+				String opendate = rs.getString("opendate");
+				String closedate = rs.getString("closedate");
+				String classinfo = rs.getString("classinfo");	
+				
+				vo = new ClassVO(no, null, classinfo, cateno, cname, opendate, closedate, 0, limit);
+				return vo;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+		return null;
+	}//searchById
+	
 	public boolean createClass(ClassVO c) {
 
 		connect();

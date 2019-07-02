@@ -34,7 +34,6 @@ import com.firstjava.view.ShowBoxForm;
 public class Controller implements ActionListener
 {
 	ClassForm classForm;
-	ClassForm postForm;
 	LoginForm loginForm;
 	JoinForm joinForm;
 	PassChangeForm pChangeForm;
@@ -56,7 +55,7 @@ public class Controller implements ActionListener
 		loginForm = new LoginForm();
 		joinForm = new JoinForm();
 		pChangeForm = new PassChangeForm();
-		classForm = new ClassForm();
+		classForm = new ClassForm();//게시글창
 		mainForm = new MainForm();
 		findForm = new FindForm();
 		mentorRegForm = new MentorRegForm();
@@ -65,7 +64,6 @@ public class Controller implements ActionListener
 		request = new MentorRequest();
 		managerForm = new ManagerForm();
 
-		postForm = new ClassForm();//게시글창
 		newclassForm = new NewclassForm();
 		showBox = new ShowBoxForm();
 
@@ -137,8 +135,21 @@ public class Controller implements ActionListener
 				JTable table = (JTable) me.getSource();
 				Point p = me.getPoint();
 				int row = table.rowAtPoint(p);
+				
+				ClassDAO dao = new ClassDAO();
+				int r = mainForm.table.getSelectedRow();
+				
 				if (me.getClickCount() == 1) {
-					postForm.controlsetEnabled();
+					classForm.controlsetEnabled();
+					
+					ClassVO vo = dao.searchByNo(Integer.parseInt(mainForm.table.getValueAt(r,0).toString()));
+					
+					classForm.tf_name.setText(vo.getCname());
+					classForm.tf_close.setText(vo.getCloseDate());
+					classForm.tf_open.setText(vo.getOpenDate());
+					classForm.tf_student.setText("" +vo.getLimit());
+					classForm.ta_desc.setText(vo.getClassinfo());
+					classForm.jb_category.setSelectedIndex(vo.getCateno());					
 				}
 			}
 		});
@@ -216,6 +227,18 @@ public class Controller implements ActionListener
 		//NewclassForm
 		newclassForm.bt_new.addActionListener(this);
 		newclassForm.jb_category.addActionListener(this);
+		newclassForm.tf_name.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				newclassForm.tf_name.setText("");
+			}
+		});
+		newclassForm.ta_desc.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				newclassForm.ta_desc.setText("");
+			}
+		});
 	}// eventUp
 
 	@Override
@@ -298,7 +321,6 @@ public class Controller implements ActionListener
 		} else if (ob == mainForm.bt_create_class) {// 강의개설
 
 			newclassForm.setVisible(true);
-			System.out.println(loginId);
 			/*
 			 } else if (ob == mainForm.bt_class_delete) {// 강의삭제
 				  String str = mainForm.showInput("삭제할 강의 NO는? ");
