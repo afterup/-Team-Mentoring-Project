@@ -249,6 +249,8 @@ public class Controller implements ActionListener {
 			
 			MemberDAO dao = new MemberDAO();	
 			myPageForm.showInfo(dao.mypageMember(id));
+			myPageForm.tf_id.disable();
+			myPageForm.tf_name.disable();
 			
 			mainForm.setVisible(false);
 			myPageForm.setVisible(true);
@@ -603,8 +605,26 @@ public class Controller implements ActionListener {
 			mainForm.setVisible(true);
 		}else if(ob==myPageForm.bt_review) {
 			review.setVisible(true);
+		}else if(ob==myPageForm.bt_infoUpdate) {
+			
+			MemberDAO dao = new MemberDAO();
+			//이름, 아이디 변경 불가
+			//전화번호, 이메일만 변경 가능 
+			
+			String phone = myPageForm.tf_phone1.getText() +"-"
+					+ myPageForm.tf_phone2.getText() + "-"
+					+ myPageForm.tf_phone3.getText();
+			
+			String email = myPageForm.tf_email.getText();
+			
+			MemberVO vo = new MemberVO(loginId,null,null,email,phone);
+			
+			dao.updateMember(vo);
+			
+			
+		}else if(ob == myPageForm.bt_pwChange) {
+			 pChangeForm.setVisible(true);
 		}
-
 	
 //-------------------NewclassForm FORM(마이페이지)-----------------
 		else if(ob == newclassForm.bt_new) {

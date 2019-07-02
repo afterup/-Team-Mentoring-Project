@@ -56,6 +56,13 @@ insert into member values ('lime', '2222', '길라임', 'lime@gmail.com', 010111
 insert into member values ('juwon', '3333', '김주원', 'juwon@gmail.com', 01012457890);
 select * from member;
 
+
+
+
+	update member set uname = '솔비',email = 'gosolbi@gmail.com'
+			where userid = 'solbi94';
+
+
 --admin insert
 insert into member values ('admin','1234','관리자','admin@encore.com',01012345678);
 
