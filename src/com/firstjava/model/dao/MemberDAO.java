@@ -83,84 +83,7 @@ public class MemberDAO {
 		return false;
 	}// insert
 	
-	
-	
 
-	public MemberVO findById(String id) {// 회원정보 수정(폼)에 필요한 데이터 조회(검색)
-
-		connect();
-		MemberVO vo = null;// 조회된 결과행이 없음을 표현
-		try {
-			String sql = "select userid,uname,email,phone from member where userid = ?";
-			stmt = conn.prepareStatement(sql);
-			stmt.setString(1, id);
-			rs = stmt.executeQuery();
-
-			if (rs.next()) {
-
-				String name = rs.getString("name");
-				String phone = rs.getString("phone");
-				String email = rs.getString("email");
-
-				vo = new MemberVO(id, null, name, email, phone);
-				return vo;
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			disconnect();
-		}
-		return null;
-
-	}// findById
-
-	public int findExistId(String id) {
-		connect();
-		int count = 0;
-		try {
-			String sql = "select count(*) as count from member where userid= ?";
-
-			stmt = conn.prepareStatement(sql);// sql문 DB에 전송
-			// stmt.set자료형(물음표인덱스1~, 설정데이터);//?(바인드변수)에 대한 데이터 설정
-			stmt.setString(1, id);
-			rs = stmt.executeQuery();// 전송한 sql문 실행요청
-			if (rs.next()) {
-				count = rs.getInt("count");// rs.getInt(인덱스1,2,3..또는 "컬럼명" 또는 "별명")
-				System.out.println(count);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			disconnect();
-		}
-
-		return count;
-	}// findExistId
-
-	public boolean findLogin(String id, String pass) {
-
-		connect();
-		try {
-			String sql = "select count(*) cnt from member where userid = ? and password = ?";
-
-			stmt = conn.prepareStatement(sql);
-			stmt.setString(1, id);
-			stmt.setString(2, pass);
-
-			rs = stmt.executeQuery();
-
-			if (rs.next()) {
-				if (rs.getInt("cnt") == 1) {
-					return true;
-				}
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			disconnect();
-		}
-		return false;
-	}// findLogin
 
 	public boolean joinMember(MemberVO m) {
 
@@ -186,6 +109,74 @@ public class MemberDAO {
 		return false;
 	}// insert
 
+
+
+	public String deleteMember(String name) {
+		connect();
+
+		try {
+
+			String sql = "DELETE FROM member WHERE userid=?";
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, name);
+
+			stmt.executeUpdate();
+			return "강퇴되었습니다.";
+		} catch (SQLException e) {
+			disconnect();
+		}
+		return "강퇴에 실패하였습니다.";
+
+	}
+	
+	public int findExistId(String id) {
+		connect();
+		int count = 0;
+		try {
+			String sql = "select count(*) as count from member where userid= ?";
+
+			stmt = conn.prepareStatement(sql);// sql문 DB에 전송
+			// stmt.set자료형(물음표인덱스1~, 설정데이터);//?(바인드변수)에 대한 데이터 설정
+			stmt.setString(1, id);
+			rs = stmt.executeQuery();// 전송한 sql문 실행요청
+			if (rs.next()) {
+				count = rs.getInt("count");// rs.getInt(인덱스1,2,3..또는 "컬럼명" 또는 "별명")
+				System.out.println(count);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+
+		return count;
+	}// findExistId
+	
+	public boolean findLogin(String id, String pass) {
+
+		connect();
+		try {
+			String sql = "select count(*) cnt from member where userid = ? and password = ?";
+
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, id);
+			stmt.setString(2, pass);
+
+			rs = stmt.executeQuery();
+
+			if (rs.next()) {
+				if (rs.getInt("cnt") == 1) {
+					return true;
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+		return false;
+	}// findLogin
+	
 	public String findId(String name, String email) {
 		connect();
 		String id = "";
@@ -208,7 +199,7 @@ public class MemberDAO {
 		return id;
 
 	}
-
+	
 	public ArrayList<MemberVO> selectMember(String id) // 회원정보 조회
 	{
 		connect();
@@ -231,7 +222,7 @@ public class MemberDAO {
 		}
 		return null;
 	}// find
-
+	
 	public String findPass(String id, String name, String email) {
 		connect();
 		String pass = "";
@@ -253,24 +244,6 @@ public class MemberDAO {
 			disconnect();
 		}
 		return pass;
-
-	}
-
-	public String deleteMember(String name) {
-		connect();
-
-		try {
-
-			String sql = "DELETE FROM member WHERE userid=?";
-			stmt = conn.prepareStatement(sql);
-			stmt.setString(1, name);
-
-			stmt.executeUpdate();
-			return "강퇴되었습니다.";
-		} catch (SQLException e) {
-			disconnect();
-		}
-		return "강퇴에 실패하였습니다.";
 
 	}
 
@@ -320,7 +293,7 @@ public class MemberDAO {
 		return list;
 	}// findAll
 
-	public ArrayList<MemberVO> MemberTable() { // 회원정보 전체조회
+	public ArrayList<MemberVO> selectAll() { // 회원정보 전체조회
 		connect();
 		ArrayList<MemberVO> list = new ArrayList<MemberVO>();
 		try {

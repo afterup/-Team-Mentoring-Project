@@ -287,7 +287,7 @@ public class Controller implements ActionListener
 			mainForm.setVisible(false);
 
 			MemberDAO dao = new MemberDAO();
-			managerForm.memberDisplayTable(dao.MemberTable());
+			managerForm.memberDisplayTable(dao.selectAll());
 			managerForm.setVisible(true);
 
 		} else if (ob == mainForm.bt_search) { // 검색
@@ -338,16 +338,17 @@ public class Controller implements ActionListener
 
 		} else if (ob == managerForm.bt_all_select) {// 전체조회
 			MemberDAO dao = new MemberDAO();
-			managerForm.memberDisplayTable(dao.MemberTable());
+			managerForm.memberDisplayTable(dao.selectAll());
 
 		} else if (ob == managerForm.bt_id_delete) {// 강퇴
 			MemberDAO dao = new MemberDAO();
 			int row = managerForm.table.getSelectedRow();
 			String name = (managerForm.table.getValueAt(row, 0)).toString();
+			System.out.println(name);
 
 			if (managerForm.confirmMsg("강퇴하시겠습니까?")) {
 				showBox.showMsg(dao.deleteMember(name));
-				managerForm.memberDisplayTable(dao.MemberTable());
+				managerForm.memberDisplayTable(dao.selectAll());
 			}
 
 		} else if (ob == managerForm.bt_id_search) {
