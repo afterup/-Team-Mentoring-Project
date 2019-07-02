@@ -11,6 +11,8 @@
 	);
 
 
+	
+
 -- classID (sequence)	
 	drop sequence class_seq;
 	create sequence class_seq
@@ -29,7 +31,6 @@ create table category(
 	
 	
 -- classTable
-	                
 drop table class;
 create table class
 (
@@ -49,18 +50,11 @@ create table class
 	
 
 --insert
-
 insert into member values ('solbi94', '1234', '고솔비', 'gosolb0904@gmail.com', 01040109537);
 insert into member values ('gildong', '1111', '홍길동', 'gildong@gmail.com', 01012345678);
 insert into member values ('lime', '2222', '길라임', 'lime@gmail.com', 01011112222);
 insert into member values ('juwon', '3333', '김주원', 'juwon@gmail.com', 01012457890);
 select * from member;
-
-
-
-
-	update member set uname = '솔비',email = 'gosolbi@gmail.com'
-			where userid = 'solbi94';
 
 
 --admin insert
@@ -100,22 +94,13 @@ create table register(
 	constraint r_userid_fk foreign key(userid) references member(userid),
 	constraint class_fk foreign key(classid) references class(classid)
 	);
-	
-	
-	insert into register values (2, 'solbi94', 4);
-	delete from register where userid ='solbi94';
-	
-	select r.userid 멘티아이디 , cname 수강강의명 , c.userid 멘토아이디  , rate 점수
-	from register r, class c
-	where r.classid = c.classid;
-	
-
-
+insert into register values (2, 'solbi94', 4);
+delete from register where userid ='solbi94';
+select * from register;
 
 
 
 --멘토테이블
-
 drop table mentor;
 create table mentor(
 	userid		varchar2(20),
@@ -124,14 +109,25 @@ create table mentor(
 	license		varchar2(20),
 	constraint m_userid_fk foreign key(userid) references member(userid)
 );
-
+insert into mentor values('solbi94', '소속','컴퓨터공학','자격증');
 select * from mentor;
 	
 
-insert into mentor values('solbi94', '소속','컴퓨터공학','자격증');
+
+--update, join select
+
+update member set uname = '솔비',email = 'gosolbi@gmail.com'
+where userid = 'solbi94';
+	
+update member set password = '1111'
+where userid = 'solbi94' and password = '1234';
 
 select userid, job, major, license,phone
 from MEMBER natural join mentor;
+
+select r.userid 멘티아이디 , cname 수강강의명 , c.userid 멘토아이디  , rate 점수
+from register r, class c
+where r.classid = c.classid;
 
 
 
@@ -163,3 +159,6 @@ add constraint userid_fk foreign key(userid) references member(userid);
 
 alter table class
 add constraint cateno_fk foreign key(cateno) references category(cateno);
+
+
+
