@@ -24,7 +24,6 @@ import com.firstjava.view.LoginForm;
 import com.firstjava.view.MainForm;
 import com.firstjava.view.ManagerForm;
 import com.firstjava.view.MentorRegForm;
-import com.firstjava.view.MentorRequest;
 import com.firstjava.view.MentorReviewForm;
 import com.firstjava.view.MyPageForm;
 import com.firstjava.view.NewclassForm;
@@ -43,7 +42,6 @@ public class Controller implements ActionListener
 	MentorRegForm mentorRegForm;
 	MyPageForm myPageForm;
 	MentorReviewForm review;
-	MentorRequest request;
 	ManagerForm managerForm;
 	NewclassForm newclassForm;
 	ShowBoxForm showBox;
@@ -62,7 +60,6 @@ public class Controller implements ActionListener
 		mentorRegForm = new MentorRegForm();
 		myPageForm = new MyPageForm();
 		review = new MentorReviewForm();
-		request = new MentorRequest();
 		managerForm = new ManagerForm();
 
 		postForm = new ClassForm();//게시글창
@@ -178,11 +175,6 @@ public class Controller implements ActionListener
 		myPageForm.bt_homepage.addActionListener(this);
 		myPageForm.bt_review.addActionListener(this);
 
-		// request
-		request.bt_renew.addActionListener(this);
-		request.bt_request_cancel.addActionListener(this);
-		request.bt_search.addActionListener(this);
-		request.bt_select.addActionListener(this);
 
 		// ManagerForm
 		managerForm.bt_search.addActionListener(this);
@@ -341,7 +333,7 @@ public class Controller implements ActionListener
 			String id = (managerForm.table.getValueAt(row, 0)).toString();
 			System.out.println(id);
 
-			if (managerForm.confirmMsg("강퇴하시겠습니까?")) {
+			if (showBox.showConfirm("강퇴하시겠습니까?")==0) {
 				showBox.showMsg(dao.deleteMember(id));
 				managerForm.memberDisplayTable(dao.selectAll());
 
@@ -669,7 +661,10 @@ public class Controller implements ActionListener
 			}else {
 				showBox.showMsg("생성실패");
 			}
+//=============mentoRequest(멘토신청 폼)=========================
 		}
+		
+
 
 	}//actionPerformed
 

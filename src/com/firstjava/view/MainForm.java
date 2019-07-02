@@ -42,7 +42,7 @@ public class MainForm extends JFrame {
 	JScrollPane scroll_table;
 	JLabel la_category;
 
-	DefaultTableModel dtm;
+	public DefaultTableModel dtm;
 	private JLabel lblNewLabel;
 	private JLabel la_logo2;
 	private JLabel la_pagemento;
