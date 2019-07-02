@@ -302,7 +302,6 @@ public class Controller implements ActionListener
 		} else if (ob == mainForm.bt_create_class) {// 강의개설
 
 			newclassForm.setVisible(true);
-			System.out.println(loginId);
 			/*
 			 } else if (ob == mainForm.bt_class_delete) {// 강의삭제
 				  String str = mainForm.showInput("삭제할 강의 NO는? ");
@@ -316,7 +315,7 @@ public class Controller implements ActionListener
 			  } }  
 			 */
 
-		} else if (ob == mainForm.cb_category) { // 멘토신청
+		} else if (ob == mainForm.cb_category) { 
 			System.out.println("검색");
 
 		} else if (ob == mainForm.bt_main) { //카드레이아웃_ 메인
@@ -636,7 +635,7 @@ public class Controller implements ActionListener
 			
 		}
 
-//------------------------NewclassForm FORM(마이페이지)-----------------
+//------------------------NewclassForm FORM(강의개설페이지)-----------------
 		else if (ob == newclassForm.bt_new) {
 			ClassDAO dao = new ClassDAO();
 
@@ -660,6 +659,7 @@ public class Controller implements ActionListener
 			if (dao.createClass(vo)) {
 				showBox.showMsg("강의개설");
 				newclassForm.initText();
+				mainForm.classDisplayTable(dao.findAll());
 				newclassForm.setVisible(false);
 				mainForm.setVisible(true);
 			}else {
