@@ -88,8 +88,8 @@ select * from class;
 --수강신청 테이블
 drop table register;
 create table register(
-	classid 	number,
-	userid 		varchar2(20),
+	classid 	number not null,
+	userid 		varchar2(20) not null,
 	rate 		number,
 	constraint r_userid_fk foreign key(userid) references member(userid),
 	constraint class_fk foreign key(classid) references class(classid)
@@ -103,9 +103,9 @@ select * from register;
 --멘토테이블
 drop table mentor;
 create table mentor(
-	userid		varchar2(20),
-	job			varchar2(20),
-	major		varchar2(20),
+	userid		varchar2(20) not null,
+	job			varchar2(20) not null,
+	major		varchar2(20) not null,
 	license		varchar2(20),
 	constraint m_userid_fk foreign key(userid) references member(userid)
 );
