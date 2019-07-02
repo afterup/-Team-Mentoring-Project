@@ -236,11 +236,11 @@ public class Controller implements ActionListener
 
 		} else if (ob == mainForm.bt_mypage) {
 
+			MemberDAO dao = new MemberDAO();
 			if (loginId == null) {
 				showBox.showMsg("로그인해주세요.");
 			} else {
 
-				MemberDAO dao = new MemberDAO();
 				myPageForm.showInfo(dao.mypageMember(loginId));
 				myPageForm.tf_id.setEnabled(false);
 				myPageForm.tf_name.setEnabled(false);
@@ -251,7 +251,6 @@ public class Controller implements ActionListener
 				showBox.showMsg("로그인이 필요합니다!!");
 			}else {
 			
-			MemberDAO dao = new MemberDAO();	
 			myPageForm.showInfo(dao.mypageMember(loginId));
 			myPageForm.tf_id.setEnabled(false);
 			myPageForm.tf_name.setEnabled(false);
