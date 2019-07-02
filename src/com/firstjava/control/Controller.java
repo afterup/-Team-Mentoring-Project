@@ -59,7 +59,6 @@ public class Controller implements ActionListener {
 		review = new MentorReviewForm();
 		managerForm = new ManagerForm();
 
-		postForm = new ClassForm();// 게시글창
 		newclassForm = new NewclassForm();
 		showBox = new ShowBoxForm();
 
