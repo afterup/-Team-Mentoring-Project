@@ -229,9 +229,9 @@ public class Controller implements ActionListener
 			if (mainForm.bt_login.getText() == "Login") {
 				loginForm.setVisible(true);
 			} else {
-				System.out.println("로그아웃");
 				mainForm.la_user_id.setText("Welcome!");
 				mainForm.bt_login.setText("Login");
+				loginId = null;
 			}
 
 		} else if (ob == mainForm.bt_mypage) {
@@ -244,6 +244,22 @@ public class Controller implements ActionListener
 				myPageForm.showInfo(dao.mypageMember(loginId));
 				myPageForm.tf_id.setEnabled(false);
 				myPageForm.tf_name.setEnabled(false);
+			
+			String id = mainForm.la_user_id.getText();
+			
+			if(id.equals("Welcome!")) {
+				showBox.showMsg("로그인이 필요합니다!!");
+			}else {
+			
+			MemberDAO dao = new MemberDAO();	
+			myPageForm.showInfo(dao.mypageMember(loginId));
+			myPageForm.tf_id.setEnabled(false);
+			myPageForm.tf_name.setEnabled(false);
+			
+			mainForm.setVisible(false);
+			myPageForm.setVisible(true);
+			}
+//			if(mainForm.bt_login == "")
 
 				mainForm.setVisible(false);
 				myPageForm.setVisible(true);
@@ -252,6 +268,12 @@ public class Controller implements ActionListener
 		} else if (ob == mainForm.bt_mento_demand) { // 멘토신청
 
 			mentorRegForm.setVisible(true);
+			if(loginId == null) {
+				showBox.showMsg("로그인이 필요합니다!!");
+			}else {
+				mentorRegForm.setVisible(true);
+			}
+			// mentorForm.bt_search
 
 		} else if (ob == mainForm.bt_manager) {// 관리자페이지 이동버튼
 
