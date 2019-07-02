@@ -54,7 +54,7 @@ public class MainForm extends JFrame {
 		panel_lecture = new JPanel();
 		panel_lecture.setLayout(card);
 		
-		String[] categoryTitle = { "JAVA", "HTML", "뷰티", "외국어", "음악", "라이프" };
+		String[] categoryTitle = { "IT", "디자인", "뷰티", "외국어", "음악", "라이프" };
 		cb_category = new JComboBox<String>(categoryTitle);
 		cb_category.setBounds(125, 523, 80, 30);
 
@@ -81,10 +81,15 @@ public class MainForm extends JFrame {
 		lblNewLabel_1.setBounds(266, 25, 199, 170);
 		panel_main.add(lblNewLabel_1);
 
-		bt_manager = new JButton("관리자(임시)");
-		bt_manager.setBounds(604, 520, 120, 34);
+		bt_manager = new JButton("관리자");
+		bt_manager.setBounds(12, 520, 120, 34);
 		bt_manager.setVisible(true);//추후 false 수정
 		panel_main.add(bt_manager);
+		
+		JLabel lblNewLabel_2 = new JLabel("");
+		lblNewLabel_2.setIcon(new ImageIcon("image/team.png"));
+		lblNewLabel_2.setBounds(0, 0, 736, 564);
+		panel_main.add(lblNewLabel_2);
 
 		// panel_lecture.setBackground(Color.green); //메인에서의 영역확인
 		panel_lecture.setBounds(25, 80, 736, 564);
@@ -132,6 +137,7 @@ public class MainForm extends JFrame {
 		bt_mento_demand.setBorderPainted(false);
 
 		la_user_id = new JLabel("Welcome!");
+		la_user_id.setFont(new Font("나눔바른고딕", Font.PLAIN, 15));
 		la_user_id.setForeground(Color.WHITE);
 		la_user_id.setBounds(40, 44, 200, 28);
 

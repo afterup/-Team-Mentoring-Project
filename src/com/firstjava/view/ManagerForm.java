@@ -38,7 +38,6 @@ public class ManagerForm extends JFrame{
 	JLabel la_category;
 	JScrollPane scroll_table;	
 	public DefaultTableModel dtm; //멤버
-	public DefaultTableModel p_dtm; // 클래스
 	 
 	
 	//PostForm 컴포넌트 
@@ -51,12 +50,15 @@ public class ManagerForm extends JFrame{
 
 	JScrollPane p_scroll_table;
 	private JLabel la_logo2,la_post;
-	private JScrollPane m_scroll_table;
+	public DefaultTableModel p_dtm; // 클래스
 	
 	//멘토대기 컴포넌트
 	public JButton bt_mento;
 	JLabel la_memberpost;
 	private JLabel la_background;
+	public JTable m_table;
+	private JScrollPane m_scroll_table;
+	public DefaultTableModel m_dtm; // 클래스
     
    public ManagerForm() {
       setTitle("Manager Form");
@@ -204,7 +206,20 @@ public class ManagerForm extends JFrame{
       
       bt_disagree = new JButton("거부");
       bt_disagree.setBounds(614, 158, 90, 30);
-
+      
+      String [] m_columnTitle = {"ID", "job", "major","license","plan","confirm"};
+      Object[][] m_rowData = new Object[0][6];
+      m_dtm = new DefaultTableModel(m_rowData,m_columnTitle);
+      
+      m_table = new JTable(m_dtm) {
+             @Override
+           public boolean isCellEditable(int row, int column) {
+             return false;
+           }
+          };
+      
+      m_scroll_table = new JScrollPane(m_table);
+      m_scroll_table.setBounds(50, 202, 653, 312);
       
       panel_mento = new JPanel();
       panel_mento.setLayout(null);
@@ -213,6 +228,7 @@ public class ManagerForm extends JFrame{
       panel_mento.add(m_scroll_table);
       panel_mento.add(la_mento);
       panel_mento.add(bt_disagree);
+      panel_mento.add(m_scroll_table);
       
       //카드 붙이기
       
@@ -277,7 +293,7 @@ public class ManagerForm extends JFrame{
       setBounds(450,170,800,700);
       setVisible(false);
       //setResizable(false);
-      setDefaultCloseOperation(EXIT_ON_CLOSE);
+//      setDefaultCloseOperation(EXIT_ON_CLOSE);
       
 
    }
