@@ -4,7 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
-
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,6 +20,7 @@ public class ClassDAO {
 	Connection conn;
 	PreparedStatement stmt;
 	ResultSet rs;
+	
 
 	Properties pro;// DB접속관련 정보 저장 객체
 
@@ -37,7 +38,35 @@ public class ClassDAO {
 		}
 	}// 생성자
 	
-
+	
+	public ClassVO searchByNo(int no) {//강의의 no값으로 테이블에서 선택된 강의 선택
+		connect();
+		ClassVO vo = null;
+		try {
+			String sql = "select cname, cateno, limit, opendate, closedate, classinfo from class where classid = ?";
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, no);
+			rs = stmt.executeQuery();
+			
+			if(rs.next()) {
+				String cname = rs.getString("cname");
+				int cateno = rs.getInt("cateno");
+				int limit = rs.getInt("limit");
+				String opendate = rs.getString("opendate");
+				String closedate = rs.getString("closedate");
+				String classinfo = rs.getString("classinfo");	
+				
+				vo = new ClassVO(no, null, classinfo, cateno, cname, opendate, closedate, 0, limit);
+				return vo;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+		return null;
+	}//searchById
+	
 	public boolean createClass(ClassVO c) {
 
 		connect();
@@ -118,8 +147,8 @@ public class ClassDAO {
 				vo.setUserid(rs.getString("userid"));
 				vo.setCateno(rs.getInt("cateno"));
 				vo.setCname(rs.getString("cname"));
-				vo.setOpenDate(rs.getString("opendate"));
-				vo.setCloseDate(rs.getString("closedate"));
+				vo.setOpenDate(rs.getDate("opendate").toString());
+				vo.setCloseDate(rs.getDate("closedate").toString());
 				vo.setStudent(rs.getInt("student"));
 				vo.setLimit(rs.getInt("limit"));
 
@@ -155,8 +184,8 @@ public class ClassDAO {
 				vo.setUserid(rs.getString("userid"));
 				vo.setCateno(rs.getInt("cateno"));
 				vo.setCname(rs.getString("cname"));
-				vo.setOpenDate(rs.getString("opendate"));
-				vo.setCloseDate(rs.getString("closedate"));
+				vo.setOpenDate(rs.getDate("opendate").toString());
+				vo.setCloseDate(rs.getDate("closedate").toString());
 				vo.setStudent(rs.getInt("student"));
 				vo.setLimit(rs.getInt("limit"));
 

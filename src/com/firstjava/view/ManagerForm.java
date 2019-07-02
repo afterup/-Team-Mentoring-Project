@@ -37,8 +37,8 @@ public class ManagerForm extends JFrame{
 	public JTable table;
 	JLabel la_category;
 	JScrollPane scroll_table;	
-	DefaultTableModel dtm; //멤버
-	DefaultTableModel p_dtm; // 클래스
+	public DefaultTableModel dtm; //멤버
+	public DefaultTableModel p_dtm; // 클래스
 	 
 	
 	//PostForm 컴포넌트 
@@ -287,35 +287,8 @@ public class ManagerForm extends JFrame{
    }
    
    
-   public void memberDisplayTable(ArrayList<MemberVO> list) {
-
-	    dtm.setRowCount(0);
-	    
-	    for(int i=0; i<list.size(); i++) {
-	    	MemberVO vo = list.get(i);
-	    	Object []rowData= {vo.getUserId(),vo.getUname(),vo.getEmail(),vo.getPhone()};
-	    	dtm.addRow(rowData);
-	    }
-	    
-    //JScrollBar bar= scroll_table.getVerticalScrollBar();
-    //bar.setValue(bar.getMaximum());
-    
-   }//displayTable
    
-	public void classDisplayTable(ArrayList<ClassVO> list) {
 
-		p_dtm.setRowCount(0);
-
-		for (int i = 0; i < list.size(); i++) {
-
-			ClassVO vo = list.get(i);
-			Object[] rowData = { vo.getClassno(), vo.getCname(), vo.getClassinfo(), vo.getOpenDate(),
-					vo.getCloseDate(), vo.getUserid(), vo.getStudent(), vo.getLimit() };
-			p_dtm.addRow(rowData);
-
-		}
-
-	}// displayTable
    
    
    

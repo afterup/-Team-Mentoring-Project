@@ -2,12 +2,8 @@ package com.firstjava.view;
 
 import java.awt.CardLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -18,8 +14,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
-
-import com.firstjava.model.vo.MemberVO;
 
 public class MyPageForm extends JFrame{
 	public JButton bt_my, bt_class_request, bt_homepage, bt_drop_id;
@@ -208,7 +202,7 @@ public class MyPageForm extends JFrame{
 		panel_my_page.add(panel_my_data, "my"); // 카드붙이기
 		panel_my_page.add(panel_class, "menti"); // 카드붙이기
 		
-		bt_review = new JButton("리뷰 작성");
+		bt_review = new JButton("평점 작성");
 		bt_review.setBounds(31, 513, 100, 40);
 		panel_class.add(bt_review);
 		
@@ -220,22 +214,6 @@ public class MyPageForm extends JFrame{
 
 	}
 	
-	public void showInfo(ArrayList<MemberVO> list)
-	{
-		
-		for (int i = 0; i < list.size(); i++) {
-			MemberVO mVO = list.get(i);
-			tf_id.setText(mVO.getUserId());
-			tf_name.setText(mVO.getUname());
-			tf_email.setText(mVO.getEmail());
-			tf_phone1.setText(mVO.getPhone().substring(0, 3));
-			tf_phone2.setText(mVO.getPhone().substring(3, 7));
-			tf_phone3.setText(mVO.getPhone().substring(6, 10));
-			
-
-		}
-	}// displayTable
-
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
