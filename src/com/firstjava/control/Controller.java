@@ -351,6 +351,15 @@ public class Controller implements ActionListener
 				managerForm.memberDisplayTable(dao.selectAll());
 
 			}
+			
+		} else if (ob == managerForm.bt_search) {
+			
+			String category = (String) managerForm.cb_category.getSelectedItem();
+			MemberDAO dao = new MemberDAO();
+			ArrayList<MemberVO> list = dao.searchMentor(category);
+			managerForm.memberDisplayTable(list);
+			
+			
 
 		} else if (ob == managerForm.bt_id_search) {
 
@@ -394,19 +403,19 @@ public class Controller implements ActionListener
 			//			
 			//			classForm.setVisible(true);
 
-		} else if (ob == managerForm.bt_p_id_search) {
+		} else if (ob == managerForm.bt_p_id_search) { //상세 검색
 
-			System.out.println("클릭");
-
-			Map<String, String> map = showBox.showOption();
-
-			MemberDAO dao = new MemberDAO();
-			// ArrayList<MembershipVO> list = dao.findByName(name);
-			ArrayList<MemberVO> list = dao.searchMember(map);
-			//조회된 결과를 뷰(JTable)에 반영
-			managerForm.memberDisplayTable(list);
-
-			showBox.showOption();
+//			System.out.println("클릭");
+//
+//			Map<String, String> map = showBox.showOption();
+//
+//			ClassDAO dao = new ClassDAO();
+//			// ArrayList<MembershipVO> list = dao.findByName(name);
+//			ArrayList<MemberVO> list = dao.searchClass(map);
+//			//조회된 결과를 뷰(JTable)에 반영
+//			managerForm.memberDisplayTable(list);
+//
+//			showBox.showOption();
 
 		} else if (ob == managerForm.bt_p_id_delete) {
 

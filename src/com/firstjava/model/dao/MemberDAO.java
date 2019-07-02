@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.Properties;
 
+import com.firstjava.model.vo.ClassVO;
 import com.firstjava.model.vo.MemberVO;
 
 public class MemberDAO {
@@ -250,6 +251,42 @@ public class MemberDAO {
 		return "탈퇴에 실패하였습니다.";
 
 	}
+	
+	public ArrayList<MemberVO> searchMentor(String category) { // 검색
+		connect();	
+		ArrayList<MemberVO> list = new ArrayList<MemberVO>();
+		
+		try {
+			String sql = "select  userid, uname, email, phone from member " ;
+			
+			if (category.equals("멘토")) {
+				sql += "natural join mentor";
+			}
+			
+			stmt = conn.prepareStatement(sql);
+
+			rs = stmt.executeQuery();
+
+			while (rs.next()) {
+
+				MemberVO vo = new MemberVO();
+				vo.setUserId(rs.getString("userid"));
+				vo.setUname(rs.getString("uname"));
+				vo.setEmail(rs.getString("email"));
+				vo.setPhone(rs.getString("phone"));
+				list.add(vo);
+
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+
+		return list;
+	}//searchMentor
+	
 
 	public ArrayList<MemberVO> searchMember(Map<String, String> map) {
 		connect();
@@ -321,6 +358,11 @@ public class MemberDAO {
 		return list;
 	}// MemberTable
 
+	
+	
+	
+	
+	
 	private void connect() {
 		try {
 			conn = DriverManager.getConnection(pro.getProperty("url"), pro);
