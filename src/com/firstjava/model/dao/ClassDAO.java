@@ -297,7 +297,7 @@ public class ClassDAO {
 		
 		System.out.println(columnTitle_idx);
 		
-		String[] column = {"classid", "cname", "classinfo", "opendate", "closedate",  "userid", "student", "limit"};
+		String[] column = {"목록", "classid", "cname", "classinfo", "opendate", "closedate",  "userid", "student", "limit"};
 
 		try {
 			
@@ -305,6 +305,8 @@ public class ClassDAO {
 			
 			switch(column[columnTitle_idx]) {
 			
+			
+			case "목록" : break;
 			case "classid" : sql += "where classid=?"; break;
 			case "cname" :  sql += "where upper(cname) like upper(?)"; break;
 			case "classinfo" :  sql += "where classinfo like ?"; break;
@@ -323,13 +325,17 @@ public class ClassDAO {
 			
 			System.out.println("sql: "+sql);
 			
-			stmt = conn.prepareStatement(sql);// sql문 전송
+			stmt = conn.prepareStatement(sql);// sql문 
 			
 			System.out.println("key: "+sql);
 			System.out.println("columnTitle_idx: "+column[columnTitle_idx]);
 			System.out.println("columnSort_idx: "+column[columnSort_idx]);
 			
-			if(column[columnTitle_idx] == "classinfo" ||
+			
+			if(column[columnTitle_idx] == "목록") {
+					
+			
+			}else if(column[columnTitle_idx] == "classinfo" ||
 			   column[columnTitle_idx] == "cname" ||
 			   column[columnTitle_idx] == "userid" 	) {
 				
