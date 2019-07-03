@@ -11,6 +11,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.ImageIcon;
+import java.awt.Color;
 
 public class MentorReviewForm extends JFrame {
 
@@ -18,6 +20,7 @@ public class MentorReviewForm extends JFrame {
 	public JTextField tf_class;
 	public JButton bt_submit,bt_cancel;
 	public JComboBox cb_score;
+	private JLabel lblNewLabel;
 		
 	/**
 	 * Create the frame.
@@ -35,16 +38,21 @@ public class MentorReviewForm extends JFrame {
 		
 		//라벨
 		
-		JLabel la_class = new JLabel("강의");
+		JLabel la_class = new JLabel("강의명:");
+		la_class.setForeground(Color.WHITE);
+		la_class.setFont(new Font("나눔바른고딕", Font.PLAIN, 17));
 		la_class.setBounds(51, 169, 80, 18);
 		contentPane.add(la_class);
 		
-		JLabel la_score = new JLabel("평점");
+		JLabel la_score = new JLabel("평점    :");
+		la_score.setForeground(Color.WHITE);
+		la_score.setFont(new Font("나눔바른고딕", Font.PLAIN, 17));
 		la_score.setBounds(51, 210, 80, 18);
 		contentPane.add(la_score);
 		
 		JLabel la_review = new JLabel("평점 작성");
-		la_review.setFont(new Font("나눔바른고딕 Light", Font.BOLD, 18));
+		la_review.setForeground(Color.WHITE);
+		la_review.setFont(new Font("나눔바른고딕 Light", Font.BOLD, 20));
 		la_review.setBounds(250, 52, 99, 61);
 		contentPane.add(la_review);
 		
@@ -57,10 +65,12 @@ public class MentorReviewForm extends JFrame {
 		tf_class.setEnabled(false);
 		
 		bt_submit = new JButton("등록");
+		bt_submit.setFont(new Font("나눔바른고딕", Font.PLAIN, 17));
 		bt_submit.setBounds(151, 259, 105, 30);
 		contentPane.add(bt_submit);
 		
 		bt_cancel = new JButton("취소");                                            
+		bt_cancel.setFont(new Font("나눔바른고딕", Font.PLAIN, 17));
 		bt_cancel.setBounds(311, 259, 105, 30);
 		contentPane.add(bt_cancel);
 		
@@ -68,6 +78,11 @@ public class MentorReviewForm extends JFrame {
 		cb_score.setModel(new DefaultComboBoxModel(new String[] {"5", "4", "3", "2", "1"}));
 		cb_score.setBounds(149, 207, 71, 24);
 		contentPane.add(cb_score);
+		
+		lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Playdata\\Desktop\\[TORING]\\image\\background_800.jpg"));
+		lblNewLabel.setBounds(0, 0, 582, 343);
+		contentPane.add(lblNewLabel);
 		
 
 		

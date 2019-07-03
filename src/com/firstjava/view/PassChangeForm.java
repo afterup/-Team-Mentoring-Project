@@ -14,7 +14,7 @@ public class PassChangeForm extends JFrame {
 
 	 public JTextField tf_newPass, tf_newPassCheck, tf_oldPass;
 	 public JButton bt_cancel, bt_submit;
-	 JLabel la_validCheck, lb_oldPass, lb_newPass, la_passCheck;
+	 JLabel lb_oldPass, lb_newPass, la_passCheck;
 
 
 
@@ -34,10 +34,6 @@ public class PassChangeForm extends JFrame {
 		tf_newPassCheck.setColumns(10);
 		tf_newPassCheck.setBounds(55, 362, 234, 39);
 		
-		la_validCheck = new JLabel("유효성 검사");
-		la_validCheck.setFont(new Font("나눔바른고딕", Font.PLAIN, 17));
-		la_validCheck.setBounds(118, 421, 111, 32);
-		
 		bt_cancel = new JButton("취소");
 		bt_cancel.setFont(new Font("나눔바른고딕", Font.PLAIN, 18));
 		bt_cancel.setBounds(178, 463, 111, 46);
@@ -55,7 +51,6 @@ public class PassChangeForm extends JFrame {
 		getContentPane().add(tf_oldPass);
 		getContentPane().add(tf_newPass);
 		getContentPane().add(tf_newPassCheck);
-		getContentPane().add(la_validCheck);
 		getContentPane().add(bt_cancel);
 		getContentPane().add(lb_oldPass);
 		getContentPane().add(lb_newPass);

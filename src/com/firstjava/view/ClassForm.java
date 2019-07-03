@@ -12,6 +12,8 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.ImageIcon;
+import java.awt.Font;
 
 
 public class ClassForm extends JFrame {
@@ -21,6 +23,7 @@ public class ClassForm extends JFrame {
 	public JComboBox jb_category;
 	public JTextArea ta_desc;
 	public JButton bt_new, bt_cancel; 
+	private JLabel lblNewLabel;
 		
 	/**
 	 * Create the frame.
@@ -39,26 +42,38 @@ public class ClassForm extends JFrame {
 		//라벨
 		
 		JLabel label_1 = new JLabel("강의");
+		label_1.setFont(new Font("나눔바른고딕", Font.PLAIN, 18));
+		label_1.setForeground(Color.WHITE);
 		label_1.setBounds(50, 40, 80, 18);
 		contentPane.add(label_1);
 		
 		JLabel label_2 = new JLabel("카테고리");
+		label_2.setFont(new Font("나눔바른고딕", Font.PLAIN, 18));
+		label_2.setForeground(Color.WHITE);
 		label_2.setBounds(50, 80, 80, 18);
 		contentPane.add(label_2);
 		
 		JLabel label_3 = new JLabel("최대인원수");
+		label_3.setFont(new Font("나눔바른고딕", Font.PLAIN, 18));
+		label_3.setForeground(Color.WHITE);
 		label_3.setBounds(50, 120, 80, 18);
 		contentPane.add(label_3);
 		
 		JLabel label_4 = new JLabel("개강일자");
+		label_4.setFont(new Font("나눔바른고딕", Font.PLAIN, 18));
+		label_4.setForeground(Color.WHITE);
 		label_4.setBounds(50, 160, 80, 18);
 		contentPane.add(label_4);
 		
 		JLabel label_4_2 = new JLabel("종강일자");
+		label_4_2.setFont(new Font("나눔바른고딕", Font.PLAIN, 18));
+		label_4_2.setForeground(Color.WHITE);
 		label_4_2.setBounds(50, 200, 80, 18);
 		contentPane.add(label_4_2);
 		
 		JLabel label_7 = new JLabel("강의설명");
+		label_7.setFont(new Font("나눔바른고딕", Font.PLAIN, 18));
+		label_7.setForeground(Color.WHITE);
 		label_7.setBounds(50, 240, 80, 18);
 		contentPane.add(label_7);
 		
@@ -100,12 +115,19 @@ public class ClassForm extends JFrame {
 		//버튼
 		
 		bt_new = new JButton("강의신청");
+		bt_new.setFont(new Font("나눔바른고딕", Font.PLAIN, 18));
 		bt_new.setBounds(490, 580, 105, 30);
 		contentPane.add(bt_new);
 		
 		bt_cancel = new JButton("취소");
+		bt_cancel.setFont(new Font("나눔바른고딕", Font.PLAIN, 18));
 		bt_cancel.setBounds(600, 580, 105, 30);
 		contentPane.add(bt_cancel);
+		
+		lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon("image/background_800.jpg"));
+		lblNewLabel.setBounds(0, 0, 782, 653);
+		contentPane.add(lblNewLabel);
 		
 		setVisible(false);
 	}

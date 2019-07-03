@@ -10,15 +10,18 @@ import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import java.awt.Font;
+import javax.swing.ImageIcon;
+import java.awt.Color;
 
 public class JoinForm extends JFrame {
 
 	public JTextField tf_id, tf_name, tf_phone1, tf_phone2, tf_phone3, tf_email;
 	public JPasswordField tf_pass, tf_pass2;
 	public JButton bt_submit, bt_cancel, bt_checkid;
-	JLabel la_ID, la_pass, la_passCheck, la_name, la_phone, la_email, la_validCheck;
+	JLabel la_ID, la_pass, la_passCheck, la_name, la_phone, la_email;
 	private JLabel lblNewLabel;
 	private JLabel label;
+	private JLabel lblNewLabel_1;
 
 	public JoinForm() {
 
@@ -35,24 +38,27 @@ public class JoinForm extends JFrame {
 		tf_pass2 = new JPasswordField();
 
 		bt_submit = new JButton("등록");
+		bt_submit.setFont(new Font("나눔바른고딕", Font.PLAIN, 17));
 		bt_cancel = new JButton("취소");
+		bt_cancel.setFont(new Font("나눔바른고딕", Font.PLAIN, 17));
 		bt_checkid = new JButton("중복확인");
+		bt_checkid.setFont(new Font("나눔바른고딕", Font.PLAIN, 15));
 
 		// ---------------------컴포넌트 바운즈--------------------------
-		tf_id.setBounds(117, 181, 100, 25);
-		tf_pass.setBounds(117, 221, 100, 25);
-		tf_pass2.setBounds(117, 261, 100, 25);
-		tf_name.setBounds(117, 301, 100, 25);
+		tf_id.setBounds(117, 223, 100, 25);
+		tf_pass.setBounds(117, 263, 100, 25);
+		tf_pass2.setBounds(117, 303, 100, 25);
+		tf_name.setBounds(117, 343, 100, 25);
 
-		tf_phone1.setBounds(117, 338, 40, 25);
-		tf_phone2.setBounds(167, 338, 40, 25);
-		tf_phone3.setBounds(217, 338, 40, 25);
+		tf_phone1.setBounds(117, 380, 40, 25);
+		tf_phone2.setBounds(167, 380, 40, 25);
+		tf_phone3.setBounds(217, 380, 40, 25);
 
-		tf_email.setBounds(117, 378, 200, 25);
+		tf_email.setBounds(117, 420, 200, 25);
 
 		bt_submit.setBounds(74, 499, 90, 34);
 		bt_cancel.setBounds(174, 499, 90, 34);
-		bt_checkid.setBounds(227, 181, 90, 25);
+		bt_checkid.setBounds(227, 223, 90, 25);
 		// -----------------------------------------------------------
 		getContentPane().setLayout(null);
 
@@ -70,52 +76,59 @@ public class JoinForm extends JFrame {
 		getContentPane().add(bt_checkid);
 
 		la_ID = new JLabel("아이디 :");
-		la_ID.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
-		la_ID.setBounds(30, 181, 90, 15);
+		la_ID.setForeground(Color.WHITE);
+		la_ID.setFont(new Font("나눔바른고딕", Font.PLAIN, 17));
+		la_ID.setBounds(30, 223, 90, 15);
 		getContentPane().add(la_ID);
 
 		la_pass = new JLabel("비밀번호 :");
-		la_pass.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
-		la_pass.setBounds(30, 223, 90, 15);
+		la_pass.setForeground(Color.WHITE);
+		la_pass.setFont(new Font("나눔바른고딕", Font.PLAIN, 17));
+		la_pass.setBounds(30, 265, 90, 15);
 		getContentPane().add(la_pass);
 
 		la_passCheck = new JLabel("비번확인 :");
-		la_passCheck.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
-		la_passCheck.setBounds(30, 263, 90, 15);
+		la_passCheck.setForeground(Color.WHITE);
+		la_passCheck.setFont(new Font("나눔바른고딕", Font.PLAIN, 17));
+		la_passCheck.setBounds(30, 305, 90, 15);
 		getContentPane().add(la_passCheck);
 
 		la_name = new JLabel("이 름 :");
-		la_name.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
-		la_name.setBounds(30, 303, 90, 15);
+		la_name.setForeground(Color.WHITE);
+		la_name.setFont(new Font("나눔바른고딕", Font.PLAIN, 17));
+		la_name.setBounds(30, 345, 90, 15);
 		getContentPane().add(la_name);
 
 		la_phone = new JLabel("휴대번호 :");
-		la_phone.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
-		la_phone.setBounds(30, 340, 90, 15);
+		la_phone.setForeground(Color.WHITE);
+		la_phone.setFont(new Font("나눔바른고딕", Font.PLAIN, 17));
+		la_phone.setBounds(30, 382, 90, 15);
 		getContentPane().add(la_phone);
 
 		la_email = new JLabel("이메일주소 :");
-		la_email.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
-		la_email.setBounds(30, 380, 90, 15);
+		la_email.setForeground(Color.WHITE);
+		la_email.setFont(new Font("나눔바른고딕", Font.PLAIN, 17));
+		la_email.setBounds(30, 422, 90, 15);
 		getContentPane().add(la_email);
 
-		la_validCheck = new JLabel("유효성 검사");
-		la_validCheck.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
-		la_validCheck.setBounds(128, 449, 100, 15);
-		getContentPane().add(la_validCheck);
-
 		JLabel la_join = new JLabel("회 원 가 입");
-		la_join.setFont(new Font("맑은 고딕", Font.PLAIN, 20));
-		la_join.setBounds(117, 62, 108, 41);
+		la_join.setForeground(Color.WHITE);
+		la_join.setFont(new Font("나눔바른고딕 UltraLight", Font.BOLD, 20));
+		la_join.setBounds(117, 96, 108, 41);
 		getContentPane().add(la_join);
 
 		lblNewLabel = new JLabel("-");
-		lblNewLabel.setBounds(157, 342, 8, 18);
+		lblNewLabel.setBounds(157, 384, 8, 18);
 		getContentPane().add(lblNewLabel);
 
 		label = new JLabel("-");
-		label.setBounds(207, 341, 8, 18);
+		label.setBounds(207, 383, 8, 18);
 		getContentPane().add(label);
+		
+		lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setIcon(new ImageIcon("image/background_800.jpg"));
+		lblNewLabel_1.setBounds(0, 0, 342, 553);
+		getContentPane().add(lblNewLabel_1);
 
 		setVisible(false);
 		setBounds(1280, 170, 360, 600);

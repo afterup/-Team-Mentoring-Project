@@ -1004,9 +1004,6 @@ public class Controller implements ActionListener {
 			showBox.showMsg("이미 사용중인 아이디입니다.");
 		} else {
 			showBox.showMsg("사용가능한 아이디입니다.");
-			if (showBox.showConfirm("이 아이디를 사용하시겠습니까?") == 0) {
-				joinForm.tf_id.setText(id);
-			}
 		}
 	}// checkId
 
