@@ -1,6 +1,5 @@
 package com.firstjava.control;
 
-import java.awt.Color;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -272,9 +271,6 @@ public class Controller implements ActionListener {
 					myPageForm.tf_phone2.setText(st.nextToken());
 					myPageForm.tf_phone3.setText(st.nextToken());
 				}
-
-				myPageForm.tf_id.setEnabled(false);
-				myPageForm.tf_name.setEnabled(false);
 
 				mainForm.setVisible(false);
 				myPageForm.setVisible(true);
@@ -672,6 +668,7 @@ public class Controller implements ActionListener {
 			review.setVisible(true);
 
 		} else if (ob == myPageForm.bt_class_request) {// 카드레이아웃_내강의
+			myPageForm.menuColor("class");
 			myPageForm.card.show(myPageForm.panel_my_page, "menti");
 			
 			MemberDAO dao = new MemberDAO();
@@ -686,6 +683,7 @@ public class Controller implements ActionListener {
 
 			}
 		} else if (ob == myPageForm.bt_my) {// 카드레이아웃_내정보
+			myPageForm.menuColor("mydata");
 			myPageForm.card.show(myPageForm.panel_my_page, "my");
 
 //------------------------NewclassForm FORM(강의개설페이지)-----------------
