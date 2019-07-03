@@ -13,6 +13,7 @@ import java.util.Map;
 import java.util.Properties;
 
 import com.firstjava.model.vo.ClassVO;
+import com.firstjava.view.SearchForm;
 
 
 public class ClassDAO {
@@ -20,6 +21,7 @@ public class ClassDAO {
 	Connection conn;
 	PreparedStatement stmt;
 	ResultSet rs;
+	SearchForm searchForm;
 	
 
 	Properties pro;// DB접속관련 정보 저장 객체
@@ -64,18 +66,19 @@ public class ClassDAO {
 	}
 	
 	
-	public boolean cancleClass(String userid, int classid) {
+
+	public boolean cancelClass(String userid, int classid) {
 
 		connect();
 		try {
 
-			String sql = "update register set rate = ? "
+			String sql = "delete from register "
 					+ "where classid = ? and userid = ?";
 
 			stmt = conn.prepareStatement(sql);
 		
-			stmt.setInt(2, classid);
-			stmt.setString(3, userid);
+			stmt.setInt(1, classid);
+			stmt.setString(2, userid);
 
 			stmt.executeUpdate();
 			return true;
@@ -104,6 +107,25 @@ public class ClassDAO {
 		}
 			
 	}//updateStudent
+	
+	public String checkMy(int no) {//자신의 강의 수강 금지
+		connect();
+		try {
+			String sql = "select userid from class where classid = ?";
+			stmt = conn.prepareStatement(sql);
+				stmt.setInt(1, no);
+			rs = stmt.executeQuery();
+			if(rs.next()) {
+				String id = rs.getString("userid");
+				return id;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+		return null;	
+	}//checkMy
 	
 	public int registerCheck(int classid, String userid) {//같은 id로 동일 강의 수강 금지
 		connect();
@@ -172,7 +194,7 @@ public class ClassDAO {
 	}//searchByNo
 	
 	
-	public ArrayList<ClassVO> searchById(String id) {//강의의 no값으로 테이블에서 선택된 강의 선택
+	public ArrayList<ClassVO> searchById(String id) {//강의의 id값으로 테이블에서 선택된 강의 선택
 		connect();
 		ArrayList<ClassVO> list = new ArrayList<ClassVO>();
 
@@ -189,8 +211,8 @@ public class ClassDAO {
 				vo.setClassno(rs.getInt("classid"));
 				vo.setCname(rs.getString("cname"));
 				list.add(vo);
-				return list;
 			}
+			return list;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -370,6 +392,7 @@ public class ClassDAO {
 		System.out.println(columnTitle_idx);
 		
 		String[] column = {"목록", "classid", "cname", "classinfo", "opendate", "closedate",  "userid", "student", "limit"};
+		
 
 		try {
 			
@@ -377,8 +400,6 @@ public class ClassDAO {
 			
 			switch(column[columnTitle_idx]) {
 			
-			
-			case "목록" : break;
 			case "classid" : sql += "where classid=?"; break;
 			case "cname" :  sql += "where upper(cname) like upper(?)"; break;
 			case "classinfo" :  sql += "where classinfo like ?"; break;
@@ -389,24 +410,15 @@ public class ClassDAO {
 			case "limit" : sql += "where limit=?"; break;
 			}
 			
-
 			if (sort.equals("오름차순"))
-				sql +=" order by " + column[columnSort_idx];
+				sql +=" order by " + column[columnSort_idx+1];
 			else if (sort.equals("내림차순"))
-				sql += " order by " + column[columnSort_idx] + " desc";
-			
-			System.out.println("sql: "+sql);
+				sql += " order by " + column[columnSort_idx+1] + " desc";
 			
 			stmt = conn.prepareStatement(sql);// sql문 
 			
-			System.out.println("key: "+sql);
-			System.out.println("columnTitle_idx: "+column[columnTitle_idx]);
-			System.out.println("columnSort_idx: "+column[columnSort_idx]);
-			
-			
 			if(column[columnTitle_idx] == "목록") {
 					
-			
 			}else if(column[columnTitle_idx] == "classinfo" ||
 			   column[columnTitle_idx] == "cname" ||
 			   column[columnTitle_idx] == "userid" 	) {
@@ -416,9 +428,7 @@ public class ClassDAO {
 			}else {
 				stmt.setObject(1,  keyword );// '%홍%'
 				
-				
 			}
-			          
 			
 			rs = stmt.executeQuery();// sql문 실행요청(실행시점!!)
 			

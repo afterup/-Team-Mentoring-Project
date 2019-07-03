@@ -42,8 +42,8 @@ create table class
 	closedate 	date 			not null,
 	student 	number		    not null,
 	limit       number	        not null check (limit between 1 and 5),
-	constraint userid_fk foreign key(userid) references member(userid),
-	constraint cateno_fk foreign key(cateno) references category(cateno)
+	constraint userid_fk foreign key(userid) references member(userid) on delete cascade,
+	constraint cateno_fk foreign key(cateno) references category(cateno) on delete cascade
 );
 
 	
@@ -54,8 +54,8 @@ create table register(
 	classid 	number		 not null,
 	userid 		varchar2(20)  not null,
 	rate 		number,
-	constraint r_userid_fk foreign key(userid) references member(userid),
-	constraint class_id_fk foreign key(classid) references class(classid)
+	constraint r_userid_fk foreign key(userid) references member(userid)  ON DELETE CASCADE,
+	constraint class_id_fk foreign key(classid) references class(classid)  ON DELETE CASCADE
 );
 
 -- 제약 추가
@@ -72,7 +72,7 @@ create table mentor(
 	license		varchar2(20),
 	plan		varchar2(100) not null,
 	confirm	varchar2(20) DEFAULT '대기',
-	constraint m_userid_fk foreign key(userid) references member(userid)
+	constraint m_userid_fk foreign key(userid) references member(userid) on delete cascade
 );
 
 
@@ -119,12 +119,13 @@ values (class_seq.nextval, '명상강의 입니다. (3명)','juwon', 6, 'Meditat
 
 
 -- registerTable insert 	★ insert할때 classid와 userid가 일치하는지 확인!!
-insert into register values (1,'solbi94', 4);
-insert into register values (3,'lime', 5);
+insert into register values (3,'solbi94', 4);
+insert into register values (4,'lime', 5);
 
 
 -- mentorTable insert
 insert into mentor (userid,job,major,license,plan)values('solbi94', '소속','컴퓨터공학','자격증','강의 계획입니다');
+insert into mentor (userid,job,major,license,plan)values('lime', '소속','전공','자격증','강의 계획입니다');
 
 
 ----------------------------------------------------------------------------------------------------------------------------
@@ -140,7 +141,6 @@ select * from class;
 select * from register;
 
 select * from mentor;
-
 
 
 
