@@ -591,12 +591,14 @@ public class Controller implements ActionListener {
 			String email = joinForm.tf_email.getText();
 
 			if (!id.matches("^[a-zA-Z]{5,12}+$")) {
-				showBox.showMsg("아이디 확인");
+				showBox.showMsg("아이디를 영문자 5~12자로 설정해주세요. ");
 				joinForm.tf_id.setText("");
 				joinForm.tf_id.requestFocus();
 				return;
-			} else if (!pwd.matches("[\\d]+")) {
-				showBox.showMsg("비밀번호 확인");
+				
+				
+			} else if (!pwd.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).{8,12}$")) {
+				showBox.showMsg("비밀번호를 영문자, 숫자, 특수문자의 조합 8~12자로 설정해주세요. ");
 				joinForm.tf_pass.setText("");
 				joinForm.tf_pass.requestFocus();
 				return;
@@ -607,7 +609,8 @@ public class Controller implements ActionListener {
 				joinForm.tf_pass2.setText("");
 				joinForm.tf_pass.requestFocus();
 				return;
-			} else if (!name.matches("[ㄱ-힣a-zA-Z]+")) {
+			
+			}else if (!name.matches("[ㄱ-힣a-zA-Z]+")) {
 				showBox.showMsg("이름확인");
 				joinForm.tf_name.setText("");
 				joinForm.tf_name.requestFocus();
@@ -649,7 +652,11 @@ public class Controller implements ActionListener {
 			String newPass = pChangeForm.tf_newPass.getText();
 			String passCk = pChangeForm.tf_newPassCheck.getText();
 
-			if (!newPass.matches("[\\d]+")) {
+			if(oldPass.equals(newPass)) {
+				showBox.showMsg("비밀번호가 같습니다. ");
+			}
+			
+			if (!newPass.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).{8,12}$")) {
 				showBox.showMsg("비밀번호 확인");
 				pChangeForm.tf_newPass.setText("");
 				pChangeForm.tf_newPassCheck.setText("");
