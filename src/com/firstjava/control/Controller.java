@@ -190,6 +190,7 @@ public class Controller implements ActionListener {
 				int row = table.rowAtPoint(p);
 				if (me.getClickCount() == 1) {
 					classForm.controlsetEnabled();
+					classForm.bt_new.setVisible(false);
 				}
 			}
 		});
@@ -198,7 +199,6 @@ public class Controller implements ActionListener {
 		managerForm.bt_p_id_delete.addActionListener(this);
 		managerForm.bt_p_id_search.addActionListener(this);
 		managerForm.bt_p_info.addActionListener(this);
-		managerForm.bt_p_search.addActionListener(this);
 		managerForm.bt_member.addActionListener(this);
 		managerForm.bt_post.addActionListener(this);
 		managerForm.bt_mento.addActionListener(this);
@@ -249,11 +249,11 @@ public class Controller implements ActionListener {
 				loginId = null;
 			}
 
-		} else if (ob == mainForm.bt_mypage) {
+		} else if (ob == mainForm.bt_mypage) { //마이페이지버튼. 내정보 뿌리기
 
 			MemberDAO dao = new MemberDAO();
 			if (loginId == null) {
-				showBox.showMsg("로그인해주세요.");
+				showBox.showMsg("로그인 해 주세요");
 			} else {
 
 				ArrayList<MemberVO> list = dao.selectMember(loginId);
@@ -280,7 +280,7 @@ public class Controller implements ActionListener {
 		} else if (ob == mainForm.bt_mento_demand) { // 멘토신청
 
 			if (loginId == null) {
-				showBox.showMsg("로그인이 필요합니다!!");
+				showBox.showMsg("로그인 해 주세요");
 			} else {
 				mentorRegForm.setVisible(true);
 			}
@@ -300,7 +300,6 @@ public class Controller implements ActionListener {
 			System.out.println(category);
 			ClassDAO dao = new ClassDAO();
 			ArrayList<ClassVO> list = dao.search(category);
-
 			displayclass(list);
 
 		} else if (ob == mainForm.bt_select) { // 전체조회
@@ -320,7 +319,7 @@ public class Controller implements ActionListener {
 			 * mainForm.showMsg("삭제실패!!"); } }
 			 */
 
-		} else if (ob == mainForm.cb_category) {
+		} else if (ob == mainForm.cb_category) {//카테고리 검색
 			System.out.println("검색");
 
 		} else if (ob == mainForm.bt_main) { // 카드레이아웃_ 메인
@@ -336,11 +335,11 @@ public class Controller implements ActionListener {
 			managerForm.setVisible(false);
 			mainForm.setVisible(true);
 
-		} else if (ob == managerForm.bt_all_select) {// 전체조회
+		} else if (ob == managerForm.bt_all_select) {// 회원관리 전체조회
 			MemberDAO dao = new MemberDAO();
 			displayMember(dao.selectAll());
 
-		} else if (ob == managerForm.bt_id_delete) {// 강퇴
+		} else if (ob == managerForm.bt_id_delete) {// 회원관리 강퇴
 			MemberDAO dao = new MemberDAO();
 			int row = managerForm.table.getSelectedRow();
 			String id = (managerForm.table.getValueAt(row, 0)).toString();
@@ -349,64 +348,31 @@ public class Controller implements ActionListener {
 			if (showBox.showConfirm("강퇴하시겠습니까?") == 0) {
 				showBox.showMsg(dao.deleteMember(id));
 				displayMember(dao.selectAll());
-
 			}
 			
-		} else if (ob == managerForm.bt_search) {
+		} else if (ob == managerForm.bt_search) {//회원관리 검색
 			
 			String category = (String) managerForm.cb_category.getSelectedItem();
 			MemberDAO dao = new MemberDAO();
 			ArrayList<MemberVO> list = dao.searchMentor(category);
 			displayMember(list);
 			
-			
 
-		} else if (ob == managerForm.bt_id_search) {
+		} else if (ob == managerForm.bt_id_search) {//회원관리 상세검색
 
 			System.out.println("클릭");
 			Map<String, String> map = showBox.showOption();
 			MemberDAO dao = new MemberDAO();
 			ArrayList<MemberVO> list = dao.searchMember(map);
 			displayMember(list);
-			
-		} else if (ob == managerForm.bt_member) {// 카드레이아웃_회원관리
-			managerForm.card.show(managerForm.panel_lecture, "1");
-
-		} else if (ob == managerForm.bt_post) { // 카드레이아웃_게시글관리
-
-			ClassDAO dao = new ClassDAO();
-			displayclassManager(dao.findAll());
-			managerForm.card.show(managerForm.panel_lecture, "2");
-			// bt_p_search, bt_p_all_select, bt_p_info, bt_p_id_search, bt_p_id_delete;
-
-		} else if (ob == managerForm.bt_mento) {// 카드레이아웃_멘토대기
-			
-			MemberDAO dao = new MemberDAO();
-			displayMentor(dao.viewMentor());			
-			
-			managerForm.card.show(managerForm.panel_lecture, "3");
-			
-			
-			
-		}
-
-		else if (ob == managerForm.bt_p_search) {
-
-			String category = (String) managerForm.cb_p_category.getSelectedItem();
-
-			ClassDAO dao = new ClassDAO();
-
-//			ArrayList<ClassVO> list = dao.search(category);
-
-//			displayclassManager(list);
 
 
-		} else if (ob == managerForm.bt_p_all_select) {
+		} else if (ob == managerForm.bt_p_all_select) {//게시글관리 전체조회
 
 			ClassDAO dao = new ClassDAO();
 			displayclassManager(dao.findAll());
 
-		} else if (ob == managerForm.bt_p_id_search) {
+		} else if (ob == managerForm.bt_p_id_search) {//게시글관리 상세검색
 
 			System.out.println("클릭");
 			
@@ -419,7 +385,7 @@ public class Controller implements ActionListener {
 			displayclassManager(list);
 			
 
-		} else if (ob == managerForm.bt_p_id_delete) {
+		} else if (ob == managerForm.bt_p_id_delete) {//게시글관리 삭제
 
 			String str = showBox.showInput("삭제할 강의 NO는? ");
 
@@ -441,12 +407,34 @@ public class Controller implements ActionListener {
 				}
 			}
 			
-		} else if (ob == managerForm.bt_p_info) {
+		} else if (ob == managerForm.bt_p_info) {//게시글관리 정보조회
+			
+			
+		
+			
+		} else if (ob == managerForm.bt_member) {// 카드레이아웃_회원관리
+			managerForm.card.show(managerForm.panel_lecture, "1");
+
+
+		} else if (ob == managerForm.bt_post) { // 카드레이아웃_게시글관리
+
+			ClassDAO dao = new ClassDAO();
+			displayclassManager(dao.findAll());
+			managerForm.card.show(managerForm.panel_lecture, "2");
+			// bt_p_search, bt_p_all_select, bt_p_info, bt_p_id_search, bt_p_id_delete;
+
+		} else if (ob == managerForm.bt_mento) {// 카드레이아웃_멘토대기
+			
+			MemberDAO dao = new MemberDAO();
+			displayMentor(dao.viewMentor());			
+			
+			managerForm.card.show(managerForm.panel_lecture, "3");
+			
 			
 			
 			
 
-			/*----------------------LoginForm(로그인창)--------------------*/
+/*----------------------LoginForm(로그인창)--------------------*/
 		} else if (ob == loginForm.bt_login) { // 로그인 버튼 클릭
 
 			MemberDAO dao = new MemberDAO();
@@ -482,7 +470,7 @@ public class Controller implements ActionListener {
 
 			findForm.setVisible(true);
 
-			/*-------------------------JoinForm(회원가입창)--------------------*/
+/*-------------------------JoinForm(회원가입창)--------------------*/
 		} else if (ob == joinForm.bt_submit) { // 가입 등록
 			MemberDAO dao = new MemberDAO();
 
@@ -547,8 +535,8 @@ public class Controller implements ActionListener {
 		} else if (ob == joinForm.bt_checkid) {// 중복확인
 			checkId();
 
-			/*-----------------------PassChangeForm(비번변경창)--------------------*/
-		} else if (ob == pChangeForm.bt_submit) {
+/*-----------------------PassChangeForm(비번변경창)--------------------*/
+		} else if (ob == pChangeForm.bt_submit) {//확인버튼
 			MemberDAO dao = new MemberDAO();
 			String oldPass = pChangeForm.tf_oldPass.getText();
 			String newPass = pChangeForm.tf_newPass.getText();
@@ -569,11 +557,11 @@ public class Controller implements ActionListener {
 				showBox.showMsg("비밀번호를 확인해주세요. ");
 			}
 
-		} else if (ob == pChangeForm.bt_cancel) {
+		} else if (ob == pChangeForm.bt_cancel) {//취소
 
 //----------------------FIND FORM(아이디 비밀번호찾기창) --------------------
 
-		} else if (ob == findForm.bt_findID) {
+		} else if (ob == findForm.bt_findID) {//아이디찾기 버튼
 			String name = findForm.tf_name.getText();
 			String email = findForm.tf_email.getText();
 			MemberDAO dao = new MemberDAO();
@@ -585,7 +573,7 @@ public class Controller implements ActionListener {
 				showBox.showMsg("당신의 아이디는 " + id + "입니다!!");
 			}
 
-		} else if (ob == findForm.bt_p_findPass) {
+		} else if (ob == findForm.bt_p_findPass) {//비밀번호찾기 버튼
 			String id = findForm.tf_p_id.getText();
 			String name = findForm.tf_p_name.getText();
 			String email = findForm.tf_p_email.getText();
@@ -599,26 +587,22 @@ public class Controller implements ActionListener {
 				showBox.showMsg("당신의 비밀번호는 " + pass + "입니다");
 			}
 
-		} else if (ob == findForm.bt_idView) {
+		} else if (ob == findForm.bt_idView) {//카드레이아웃_아이디찾기
 			findForm.card.show(findForm.panel_main, "1");
-		} else if (ob == findForm.bt_passView) {
+		} else if (ob == findForm.bt_passView) {//카드레이아웃_비번찾기
 			findForm.card.show(findForm.panel_main, "2");
 		}
 
-		else if (ob == findForm.bt_cancel) {
+		else if (ob == findForm.bt_cancel) {//아이디찾기에서 취소
 
-		} else if (ob == findForm.bt_p_cancel) {
+		} else if (ob == findForm.bt_p_cancel) {//비번찾기에서 취소
 
 //-----------------------MYPAGE FORM(마이페이지)-----------------
-		} else if (ob == myPageForm.bt_my) {// 카드레이아웃_내정보
-			myPageForm.card.show(myPageForm.panel_my_page, "my");
 
-		} else if (ob == myPageForm.bt_homepage) {
+		} else if (ob == myPageForm.bt_homepage) {//홈페이지로
 			myPageForm.setVisible(false);
 			mainForm.setVisible(true);
-		} else if (ob == myPageForm.bt_review) {
-			review.setVisible(true);
-		} else if (ob == myPageForm.bt_infoUpdate) {
+		} else if (ob == myPageForm.bt_infoUpdate) {//내정보_정보변경
 
 			MemberDAO dao = new MemberDAO();
 			// 이름, 아이디 변경 불가
@@ -634,10 +618,10 @@ public class Controller implements ActionListener {
 				showBox.showMsg("정보 변경 실패");
 			}
 
-		} else if (ob == myPageForm.bt_pwChange) {
+		} else if (ob == myPageForm.bt_pwChange) {//내정보_비번변경
 			pChangeForm.setVisible(true);
 
-		} else if (ob == myPageForm.bt_drop_id) {
+		} else if (ob == myPageForm.bt_drop_id) {//내정보_탈퇴
 
 			MemberDAO dao = new MemberDAO();
 			if (showBox.showConfirm("정말 탈퇴하시겠습니까?") == 0) {
@@ -649,6 +633,8 @@ public class Controller implements ActionListener {
 				mainForm.bt_login.setText("Login");
 				mainForm.setVisible(true);
 			}
+		} else if (ob == myPageForm.bt_review) {//내강의_평점작성
+			review.setVisible(true);
 
 		} else if (ob == myPageForm.bt_class_request) {// 카드레이아웃_내강의
 			myPageForm.card.show(myPageForm.panel_my_page, "menti");
@@ -664,13 +650,11 @@ public class Controller implements ActionListener {
 				myPageForm.dtm_menti.addRow(rowData);
 
 			}
-			
-			
-			
-		}
+		} else if (ob == myPageForm.bt_my) {// 카드레이아웃_내정보
+			myPageForm.card.show(myPageForm.panel_my_page, "my");
 
 //------------------------NewclassForm FORM(강의개설페이지)-----------------
-		else if (ob == newclassForm.bt_new) {
+		} else if (ob == newclassForm.bt_new) {//강의개설
 			ClassDAO dao = new ClassDAO();
 
 			String cname = newclassForm.tf_name.getText();
@@ -700,7 +684,7 @@ public class Controller implements ActionListener {
 				showBox.showMsg("생성실패");
 			}
 //=============mentorRegForm(멘토신청 폼)=========================
-		}else if (ob==mentorRegForm.bt_submit) {
+		}else if (ob==mentorRegForm.bt_submit) {//신청
 			
 			if(showBox.showConfirm("신청하시겠습니까?")==0){
 				MentorVO m = new MentorVO(loginId,mentorRegForm.tf_job.getText(),mentorRegForm.tf_license.getText(),
@@ -712,9 +696,7 @@ public class Controller implements ActionListener {
 				mentorRegForm.setVisible(false);
 			}
 			
-			
-			
-		}else if(ob==mentorRegForm.bt_cancel) {
+		}else if(ob==mentorRegForm.bt_cancel) {//취소
 			
 		}
 
