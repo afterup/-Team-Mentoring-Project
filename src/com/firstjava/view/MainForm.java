@@ -97,7 +97,7 @@ public class MainForm extends JFrame {
 
 		bt_main = new JButton("메인");
 		bt_main.setForeground(Color.WHITE);
-		bt_main.setFont(new Font("나눔바른고딕", Font.BOLD, 16));
+		bt_main.setFont(font16);
 		bt_main.setBackground(Color.white);
 		bt_main.setOpaque(false);
 		bt_main.setBorderPainted(false);
@@ -137,7 +137,7 @@ public class MainForm extends JFrame {
 		bt_mento_demand.setBorderPainted(false);
 
 		la_user_id = new JLabel("Welcome!");
-		la_user_id.setFont(new Font("나눔바른고딕", Font.PLAIN, 15));
+		la_user_id.setFont(font16);
 		la_user_id.setForeground(Color.WHITE);
 		la_user_id.setBounds(40, 44, 200, 28);
 

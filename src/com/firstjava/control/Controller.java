@@ -1,6 +1,5 @@
 package com.firstjava.control;
 
-import java.awt.Color;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -51,6 +50,7 @@ public class Controller implements ActionListener {
 	SearchForm showBox2;
 
 	String loginId;
+	int classId;
 
 	public Controller() {
 
@@ -133,8 +133,10 @@ public class Controller implements ActionListener {
 
 				if (me.getClickCount() == 1) {
 					classForm.controlsetEnabled();
-
-					ClassVO vo = dao.searchByNo(Integer.parseInt(mainForm.table.getValueAt(r, 0).toString()));
+					classForm.bt_new.setVisible(true);
+					
+					classId = Integer.parseInt(mainForm.table.getValueAt(r, 0).toString());
+					ClassVO vo = dao.searchByNo(classId);
 
 					classForm.tf_name.setText(vo.getCname());
 					classForm.tf_close.setText(vo.getCloseDate());
@@ -231,6 +233,12 @@ public class Controller implements ActionListener {
 		});
 
 		// MentorRegForm
+		
+		//ClassForm
+		classForm.bt_cancel.addActionListener(this);
+		classForm.bt_new.addActionListener(this);
+		
+		//MentorRegForm
 		mentorRegForm.bt_submit.addActionListener(this);
 		mentorRegForm.bt_cancel.addActionListener(this);
 
@@ -271,9 +279,6 @@ public class Controller implements ActionListener {
 					myPageForm.tf_phone2.setText(st.nextToken());
 					myPageForm.tf_phone3.setText(st.nextToken());
 				}
-
-				myPageForm.tf_id.setEnabled(false);
-				myPageForm.tf_name.setEnabled(false);
 
 				mainForm.setVisible(false);
 				myPageForm.setVisible(true);
@@ -335,6 +340,25 @@ public class Controller implements ActionListener {
 			mainForm.menuColor("class");
 			mainForm.card.show(mainForm.panel_lecture, "2");
 
+//------------------------- ClassForm --------------------------------
+		} else if(ob == classForm.bt_cancel) {//classForm에서 취소버튼 클릭
+			classForm.setVisible(false);
+			
+		} else if(ob == classForm.bt_new) {//classForm에서 강의신청버튼 클릭
+			if(loginId == null) {
+				showBox.showMsg("로그인을 해주세요!!");
+			}else {
+				ClassDAO dao = new ClassDAO();
+				
+				if(dao.registerCheck(classId, loginId) > 0) {
+					showBox.showMsg("이미 신청한 강의입니다!!");
+				}else if(dao.registerClass(classId, loginId)) {
+					showBox.showMsg("강의 신청 완료!!");
+					dao.updateStudent(classId);
+				}
+			}
+
+			
 // -------------------ManagerForm(매니저페이지)----------------
 		} else if (ob == managerForm.bt_homepage) { // 홈페이지로
 			managerForm.setVisible(false);
@@ -658,6 +682,7 @@ public class Controller implements ActionListener {
 			review.setVisible(true);
 
 		} else if (ob == myPageForm.bt_class_request) {// 카드레이아웃_내강의
+			myPageForm.menuColor("class");
 			myPageForm.card.show(myPageForm.panel_my_page, "menti");
 
 			MemberDAO dao = new MemberDAO();
@@ -691,6 +716,8 @@ public class Controller implements ActionListener {
 		} else if (ob == myPageForm.bt_my)
 
 		{// 카드레이아웃_내정보
+		} else if (ob == myPageForm.bt_my) {// 카드레이아웃_내정보
+			myPageForm.menuColor("mydata");
 			myPageForm.card.show(myPageForm.panel_my_page, "my");
 
 //------------------------NewclassForm FORM(강의개설페이지)-----------------

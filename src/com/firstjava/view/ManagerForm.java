@@ -172,10 +172,10 @@ public class ManagerForm extends JFrame{
       
       bt_mento = new JButton("멘토 대기");
       bt_mento.setOpaque(false);
-      bt_mento.setFont(new Font("나눔바른고딕 UltraLight", Font.BOLD, 16));
+      bt_mento.setFont(font16);
       bt_mento.setBorderPainted(false);
       bt_mento.setBackground(Color.WHITE);
-      bt_mento.setBounds(507, 30, 120, 40);
+      bt_mento.setBounds(544, 30, 115, 40);
       
       bt_agree = new JButton("승인");
       bt_agree.setBounds(509, 522, 90, 30);
@@ -242,19 +242,19 @@ public class ManagerForm extends JFrame{
       bt_member.setBackground(Color.white);
       bt_member.setOpaque(false);
       bt_member.setBorderPainted ( false );
-      bt_member.setBounds(291,30,111,40);
+      bt_member.setBounds(335,30,111,40);
       
       bt_post = new JButton("게시글관리");
       bt_post.setFont(font16);
       bt_post.setBackground(Color.white);
       bt_post.setOpaque(false);
       bt_post.setBorderPainted ( false );
-      bt_post.setBounds(386,30,120,40);
+      bt_post.setBounds(440,30,115,40);
       
 
       bt_homepage = new JButton("홈페이지");
       bt_homepage.setFont(font16);
-      bt_homepage.setBounds(635,30,120,40);
+      bt_homepage.setBounds(658,30,97,40);
       bt_homepage.setBackground(Color.white);
       bt_homepage.setOpaque(false);
       bt_homepage.setBorderPainted ( false );
