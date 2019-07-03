@@ -137,6 +137,11 @@ public class Controller implements ActionListener {
 					
 					classId = Integer.parseInt(mainForm.table.getValueAt(r, 0).toString());
 					ClassVO vo = dao.searchByNo(classId);
+					if(dao.limitCheck(classId)) {
+						classForm.limitMember();
+					}else {
+						classForm.rightMember();
+					}
 
 					classForm.tf_name.setText(vo.getCname());
 					classForm.tf_close.setText(vo.getCloseDate());
@@ -259,6 +264,7 @@ public class Controller implements ActionListener {
 			} else {
 				mainForm.la_user_id.setText("Welcome!");
 				mainForm.bt_login.setText("Login");
+				mainForm.bt_manager.setVisible(false);
 				loginId = null;
 			}
 
@@ -505,24 +511,24 @@ public class Controller implements ActionListener {
 			String pass = new String(loginForm.tf_pass.getPassword());
 
 			if (dao.findLogin(id, pass)) {
-//				if(!id.equals("admin")) { //관리자로 로그인시 관리자버튼 온. 일단 작업 편리성을 위해 꺼둡니다
-//					loginId = id;
-//					loginForm.setVisible(false);
-//					loginForm.initText();
-//					mainForm.bt_login.setText("Logout");
-//					mainForm.la_user_id.setText(id);
-//				}else {
-				loginId = id;
-				loginForm.setVisible(false);
-				loginForm.initText();
-				mainForm.bt_manager.setVisible(true);
-				mainForm.bt_login.setText("Logout");
-				mainForm.la_user_id.setText(id);
-				// }
+				if(!id.equals("admin")) { 
+					loginId = id;
+					loginForm.setVisible(false);
+					loginForm.initText();
+					mainForm.bt_login.setText("Logout");
+					mainForm.la_user_id.setText(id);
+				}else {
+					loginId = id;
+					loginForm.setVisible(false);
+					loginForm.initText();
+					mainForm.bt_manager.setVisible(true);
+					mainForm.bt_login.setText("Logout");
+					mainForm.la_user_id.setText(id);
+				}
 
 			} else {
 				showBox.showMsg("아이디와 비밀번호를 확인해주세요!!");
-			}
+			  }
 
 		} else if (ob == loginForm.la_join) { // 회원가입
 

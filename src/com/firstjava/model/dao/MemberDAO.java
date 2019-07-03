@@ -382,7 +382,7 @@ public class MemberDAO {
 	}// MemberTable
 
 	
-//========멘토대기 메소드 ===================
+//========멘토 메소드 ===================
 	
 	public boolean mentorRequest(MentorVO m) {
 

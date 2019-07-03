@@ -110,6 +110,16 @@ public class ClassForm extends JFrame {
 		setVisible(false);
 	}
 	
+	public void limitMember() {
+		bt_new.setEnabled(false);
+		bt_new.setText("마감");
+	}
+	
+	public void rightMember() {
+		bt_new.setEnabled(true);
+		bt_new.setText("강의신청");
+	}
+	
 	public void controlsetEnabled() {
 		tf_name.setEnabled(false);
 		tf_student.setEnabled(false); 
