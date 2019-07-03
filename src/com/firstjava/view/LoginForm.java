@@ -20,7 +20,7 @@ public class LoginForm extends JFrame {
 	JLabel la_passImage, la_background, la_idImage, la_logoimage;
 	public JLabel la_join;
 	public JLabel la_idPassSearch;
-	public JButton bt_login;
+	public JButton bt_login,bt_cancel;
 
 	public LoginForm() {
 		
@@ -48,7 +48,7 @@ public class LoginForm extends JFrame {
 		bt_login.setBackground(new Color(140, 143, 143));
 		bt_login.setFont(new Font("맑은 고딕", Font.PLAIN, 18));
 
-		bt_login.setBounds(38, 407, 252, 35);
+		bt_login.setBounds(38, 407, 120, 35);
 
 		la_join = new JLabel("회원가입");
 		la_join.setForeground(SystemColor.activeCaption);
@@ -76,6 +76,13 @@ public class LoginForm extends JFrame {
 		getContentPane().add(la_idPassSearch);
 		getContentPane().add(la_passImage);
 		getContentPane().add(la_logoimage);
+		
+		bt_cancel = new JButton("취소");
+		bt_cancel.setForeground(new Color(211, 211, 211));
+		bt_cancel.setFont(new Font("맑은 고딕", Font.PLAIN, 18));
+		bt_cancel.setBackground(new Color(140, 143, 143));
+		bt_cancel.setBounds(170, 407, 120, 35);
+		getContentPane().add(bt_cancel);
 		getContentPane().add(la_background);
 		
 		setBounds(1280, 170, 360, 600);
