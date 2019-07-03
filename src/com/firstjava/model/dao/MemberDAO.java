@@ -431,10 +431,31 @@ public class MemberDAO {
 		return false;
 	}
 	
-	
-	
-	
-	
+	public int findMentor(String id) {
+
+		connect();
+		try {
+			String sql = "select confirm from mentor where userid = ?";
+
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, id);
+
+			rs = stmt.executeQuery();
+
+			if (rs.next()) {
+				if (rs.getString("confirm").equals("대기")||rs.getString("confirm").equals("승인")) {
+					return 0;//"불가";
+				}else {
+					return 1;//"가능";
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+		return 1;//"가능";
+	}// findMentor
 	
 	
 	public ArrayList<MentorVO> viewMentor() { // 멘토대기중인 사람들 뷰

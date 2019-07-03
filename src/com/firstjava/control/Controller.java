@@ -140,6 +140,7 @@ public class Controller implements ActionListener {
 
 					classForm.tf_name.setText(vo.getCname());
 					classForm.tf_close.setText(vo.getCloseDate());
+					classForm.tf_close.setText(vo.getCloseDate());
 					classForm.tf_open.setText(vo.getOpenDate());
 					classForm.tf_student.setText("" + vo.getLimit());
 					classForm.ta_desc.setText(vo.getClassinfo());
@@ -172,31 +173,32 @@ public class Controller implements ActionListener {
 				mainForm.setVisible(true);
 			}
 		});
-		myPageForm.bt_drop_id.addActionListener(this);
 		myPageForm.bt_my.addActionListener(this);
 		myPageForm.bt_class_request.addActionListener(this);
-		myPageForm.bt_pwChange.addActionListener(this);
-		myPageForm.bt_infoUpdate.addActionListener(this);
 		myPageForm.bt_homepage.addActionListener(this);
+		myPageForm.bt_drop_id.addActionListener(this);
+		myPageForm.bt_infoUpdate.addActionListener(this);
+		myPageForm.bt_pwChange.addActionListener(this);
+		myPageForm.bt_menti_request_cancel.addActionListener(this);
+		myPageForm.bt_classupdate.addActionListener(this);
+		myPageForm.bt_classdelete.addActionListener(this);
+		myPageForm.bt_info.addActionListener(this);
 		myPageForm.bt_review.addActionListener(this);
-
+		
+		
+		//MentorReviewForm
+		review.bt_submit.addActionListener(this);
+		review.bt_cancel.addActionListener(this);
+		
+		
+		
 		// ManagerForm
 		managerForm.bt_search.addActionListener(this);
 		managerForm.bt_homepage.addActionListener(this);
 		managerForm.bt_all_select.addActionListener(this);
 		managerForm.bt_id_search.addActionListener(this);
 		managerForm.bt_id_delete.addActionListener(this);
-		managerForm.p_table.addMouseListener(new MouseAdapter() { // ====JTable 클릭시 게시글창뷰 오픈
-			public void mouseClicked(MouseEvent me) {
-				JTable table = (JTable) me.getSource();
-				Point p = me.getPoint();
-				int row = table.rowAtPoint(p);
-				if (me.getClickCount() == 1) {
-					classForm.controlsetEnabled();
-					classForm.bt_new.setVisible(false);
-				}
-			}
-		});
+
 		// ManagerForm-post
 		managerForm.bt_p_all_select.addActionListener(this);
 		managerForm.bt_p_id_delete.addActionListener(this);
@@ -287,12 +289,16 @@ public class Controller implements ActionListener {
 
 		} else if (ob == mainForm.bt_mento_demand) { // 멘토신청
 
+			MemberDAO dao = new MemberDAO();
 			if (loginId == null) {
 				showBox.showMsg("로그인 해 주세요");
+			} else if (dao.findMentor(loginId)==0){
+				showBox.showMsg("이미 신청하셨습니다.");
 			} else {
 				mainForm.menuColor("mento");
-				mentorRegForm.setVisible(true);
+				mentorRegForm.setVisible(true);				
 			}
+			
 			// mentorForm.bt_search
 
 		} else if (ob == mainForm.bt_manager) {// 관리자페이지 이동버튼
@@ -410,27 +416,37 @@ public class Controller implements ActionListener {
 
 		} else if (ob == managerForm.bt_p_id_delete) {// 게시글관리 삭제
 
-			String str = showBox.showInput("삭제할 강의 NO는? ");
-
-			int no = Integer.parseInt(str);
-
+			int row = managerForm.p_table.getSelectedRow();
+	        int id = Integer.parseInt((managerForm.p_table.getValueAt(row, 0)).toString());
+			System.out.println(id);
 			ClassDAO dao = new ClassDAO();
-
 			if (showBox.showConfirm("정말 삭제하시겠습니까?") == 0) {
 
-				if (dao.delete(no)) {
-
-					showBox.showMsg("삭제성공!!");
+				if (dao.delete(id)) {
+					showBox.showMsg("삭제성공");
 					displayclassManager(dao.findAll());
-
 				} else {
 
-					showBox.showMsg("삭제실패!!");
+					showBox.showMsg("삭제실패");
 
 				}
 			}
 
 		} else if (ob == managerForm.bt_p_info) {// 게시글관리 정보조회
+			ClassDAO dao = new ClassDAO();
+			int row = managerForm.p_table.getSelectedRow();
+	        int id = Integer.parseInt(managerForm.p_table.getValueAt(row, 0).toString());
+			ClassVO vo = dao.searchByNo(id);
+
+			classForm.tf_name.setText(vo.getCname());
+			classForm.tf_close.setText(vo.getCloseDate());
+			classForm.tf_open.setText(vo.getOpenDate());
+			classForm.tf_student.setText("" + vo.getLimit());
+			classForm.ta_desc.setText(vo.getClassinfo());
+			classForm.jb_category.setSelectedIndex(vo.getCateno() - 1);
+	  
+			classForm.controlsetEnabled();
+			classForm.bt_new.setVisible(false);
 
 		} else if (ob == managerForm.bt_agree) {// 멘토 승인
 			// id랑 confirm
@@ -676,11 +692,52 @@ public class Controller implements ActionListener {
 				mainForm.setVisible(true);
 			}
 		} else if (ob == myPageForm.bt_review) {// 내강의_평점작성
+			int row = myPageForm.table_menti.getSelectedRow();
+			classId = (int) myPageForm.table_menti.getValueAt(row, 0);
+			String cname = (myPageForm.table_menti.getValueAt(row, 1))
+					.toString();
+			
+			
+			if(row==-1) {
+				showBox.showMsg("평점을 작성할 강의를 선택해 주세요. ");
+			}else {
+			review.tf_class.setText(cname);
+			review.tf_class.setEditable(false);
 			review.setVisible(true);
-
+			
+			
+			review.cb_score.setSelectedIndex(0);
+			}
+			
+			
+		}else if(ob ==review.bt_submit) {
+		
+			ClassDAO dao = new ClassDAO();
+			int classid = classId;
+			int rate = Integer.parseInt(
+					review.cb_score.getSelectedItem().toString());
+			
+			System.out.println(loginId);
+			System.out.println(classid);
+			System.out.println(rate);
+			if(dao.updateReview(loginId, classid, rate)){
+				showBox.showMsg("평점 작성 완료");
+			}
+			
+			
+			
+		}else if(ob == review.bt_cancel) {
+			
+			
+			
+		} else if (ob == myPageForm.bt_my) {// 카드레이아웃_내정보
+			myPageForm.menuColor("mydata");
+			myPageForm.card.show(myPageForm.panel_my_page, "1");
+	
+			
 		} else if (ob == myPageForm.bt_class_request) {// 카드레이아웃_내강의
 			myPageForm.menuColor("class");
-			myPageForm.card.show(myPageForm.panel_my_page, "menti");
+			myPageForm.card.show(myPageForm.panel_my_page, "2");
 
 			MemberDAO dao = new MemberDAO();
 			ClassDAO cdao = new ClassDAO();
@@ -689,30 +746,27 @@ public class Controller implements ActionListener {
 			// 신청한 강의
 			myPageForm.dtm_menti.setRowCount(0);
 			ArrayList<RegisterVO> list = dao.selectRclass(loginId);
-
+			
+	
 			for (int i = 0; i < list.size(); i++) {
 				RegisterVO vo = list.get(i);
 				Object[] rowData = { vo.getClassno(), vo.getCname(), vo.getMentor(), vo.getRate() };
 				myPageForm.dtm_menti.addRow(rowData);
 
 			}
+			
+			
 			// 개설한 강의
-
 			myPageForm.dtm_mentor.setRowCount(0);
 			ArrayList<ClassVO> clist = cdao.searchById(loginId);
-			System.out.println("s");
-			System.out.println( clist.size());
-			System.out.println("ss");
+			
+			
 			for (int i = 0; i < clist.size(); i++) {
-				System.out.println("ssss");
 				ClassVO cvo = clist.get(i);
 				Object[] rowData = { cvo.getClassno(), cvo.getCname() };
 				myPageForm.dtm_mentor.addRow(rowData);
 			}
 
-		} else if (ob == myPageForm.bt_my)
-
-		{// 카드레이아웃_내정보
 		} else if (ob == myPageForm.bt_my) {// 카드레이아웃_내정보
 			myPageForm.menuColor("mydata");
 			myPageForm.card.show(myPageForm.panel_my_page, "my");
