@@ -8,7 +8,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -173,6 +172,14 @@ public class FindForm extends JFrame {
 		setVisible(false);
 
 	}
+	
+	public void initText() {
+		tf_email.setText("");
+		tf_name.setText("");
+		tf_p_email.setText("");
+		tf_p_id.setText("");
+		tf_p_name.setText("");
+	}//initText
 
 //	public static void main(String[] args)
 //	{

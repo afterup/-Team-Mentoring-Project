@@ -235,13 +235,19 @@ public class Controller implements ActionListener {
 		newclassForm.tf_name.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				newclassForm.tf_name.setText("");
+				String tf = newclassForm.tf_name.getText();
+				if(tf.equals("강의 이름")) {
+					newclassForm.tf_name.setText("");
+				}
 			}
 		});
 		newclassForm.ta_desc.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				newclassForm.ta_desc.setText("");
+				String ta = newclassForm.ta_desc.getText();
+				if(ta.equals("400자 이내의 강의 내용을 작성해주세요.")) {
+					newclassForm.ta_desc.setText("");
+				}
 			}
 		});
 
@@ -255,14 +261,6 @@ public class Controller implements ActionListener {
 		mentorRegForm.bt_submit.addActionListener(this);
 		mentorRegForm.bt_cancel.addActionListener(this);
 		
-		
-		
-		newclassForm.tf_name.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				newclassForm.tf_name.setText("");
-			}
-		});
 		
 
 		//SearchFrom
@@ -700,6 +698,7 @@ public class Controller implements ActionListener {
 		} else if (ob == findForm.bt_findID) {// 아이디찾기 버튼
 			String name = findForm.tf_name.getText();
 			String email = findForm.tf_email.getText();
+
 			MemberDAO dao = new MemberDAO();
 			String id = dao.findId(name, email);
 
@@ -707,6 +706,9 @@ public class Controller implements ActionListener {
 				showBox.showMsg("일치하는 정보가 없습니다. ");
 			} else {
 				showBox.showMsg("당신의 아이디는 " + id + "입니다!!");
+				findForm.tf_p_id.setText(id);
+				findForm.tf_name.setText("");
+				findForm.tf_email.setText("");
 			}
 
 		} else if (ob == findForm.bt_p_findPass) {// 비밀번호찾기 버튼
@@ -721,6 +723,9 @@ public class Controller implements ActionListener {
 				showBox.showMsg("일치하는 정보가 없습니다.");
 			} else {
 				showBox.showMsg("당신의 비밀번호는 " + pass + "입니다");
+				findForm.initText();
+				findForm.setVisible(false);
+				loginForm.setVisible(true);
 			}
 
 		} else if (ob == findForm.bt_idView) {// 카드레이아웃_아이디찾기
@@ -730,10 +735,12 @@ public class Controller implements ActionListener {
 		}
 
 		else if (ob == findForm.bt_cancel) {// 아이디찾기에서 취소
+			findForm.initText();
 			findForm.setVisible(false);
 			loginForm.setVisible(true);
 
 		} else if (ob == findForm.bt_p_cancel) {// 비번찾기에서 취소
+			findForm.initText();
 			findForm.setVisible(false);
 			loginForm.setVisible(true);
 
