@@ -41,11 +41,10 @@ public class ManagerForm extends JFrame{
 	 
 	
 	//PostForm 컴포넌트 
-    public JButton bt_p_search, bt_p_all_select, bt_p_info, bt_p_id_search, bt_p_id_delete,bt_agree,bt_disagree;
-	public JComboBox<String> cb_p_category;
+    public JButton bt_p_all_select, bt_p_info, bt_p_id_search, bt_p_id_delete,bt_agree,bt_disagree;
 
 	public JPanel panel_mento;
-	JLabel la_p_category,la_mento;
+	JLabel la_mento;
 	public JTable p_table;
 
 	JScrollPane p_scroll_table;
@@ -134,32 +133,20 @@ public class ManagerForm extends JFrame{
       //----------------Post Form---------------------
       
       panel_post = new JPanel();
-       
-      bt_p_search = new JButton("검색");
-      bt_p_search.setBounds(207,524,61,30);
       
       bt_p_all_select = new JButton("전체 조회");
-      bt_p_all_select.setBounds(400,524,93,30);
+      bt_p_all_select.setBounds(166,524,93,30);
       
 
       bt_p_info = new JButton("정보 조회");
-      bt_p_info.setBounds(613,524,90,30);
+      bt_p_info.setBounds(509,524,90,30);
    
       bt_p_id_search = new JButton("상세검색");
-      bt_p_id_search.setBounds(284,524,103,30);
+      bt_p_id_search.setBounds(50,524,103,30);
       
       bt_p_id_delete = new JButton("삭제");
-      bt_p_id_delete.setBounds(508,524,90,30);
-  
+      bt_p_id_delete.setBounds(613,524,90,30);
       
-      la_p_category = new JLabel("카테고리");
-      la_p_category.setFont(new Font("나눔바른고딕 UltraLight", Font.BOLD, 15));
-      la_p_category.setBounds(50,528,61,24);
-      
-      String[] c_categoryTitle = { "JAVA", "HTML", "뷰티", "외국어", "음악", "라이프" };
-      cb_p_category = new JComboBox<String>(c_categoryTitle);
-      cb_p_category.setBounds(110, 525, 80, 30);
-
       
       String [] p_columnTitle = { "NO", "분류", "강의명", "개강일", "종강일", "멘토명", "수강생", "정원" };
       Object[][] p_rowData = new Object[0][9];
@@ -176,14 +163,10 @@ public class ManagerForm extends JFrame{
       p_scroll_table = new JScrollPane(p_table);
       p_scroll_table.setBounds(50, 202, 653, 312);
       panel_post.setLayout(null);
-      
-      panel_post.add(bt_p_search);
       panel_post.add(bt_p_all_select);
       panel_post.add(bt_p_info);
       panel_post.add(bt_p_id_search);
       panel_post.add(bt_p_id_delete);
-      panel_post.add(la_p_category);
-      panel_post.add(cb_p_category);
       panel_post.add(p_scroll_table);
       //----------멘토 대기-------------------------------
       
@@ -195,7 +178,7 @@ public class ManagerForm extends JFrame{
       bt_mento.setBounds(507, 30, 120, 40);
       
       bt_agree = new JButton("승인");
-      bt_agree.setBounds(510, 158, 90, 30);
+      bt_agree.setBounds(509, 522, 90, 30);
       
       m_scroll_table = new JScrollPane((Component) null);
       m_scroll_table.setBounds(48, 200, 653, 312);
@@ -205,7 +188,7 @@ public class ManagerForm extends JFrame{
       la_mento.setBounds(191, 71, 144, 47);
       
       bt_disagree = new JButton("거부");
-      bt_disagree.setBounds(614, 158, 90, 30);
+      bt_disagree.setBounds(613, 522, 90, 30);
       
       String [] m_columnTitle = {"ID", "job", "major","license","plan","confirm"};
       Object[][] m_rowData = new Object[0][6];

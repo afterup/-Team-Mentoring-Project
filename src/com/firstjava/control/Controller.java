@@ -198,7 +198,6 @@ public class Controller implements ActionListener {
 		managerForm.bt_p_id_delete.addActionListener(this);
 		managerForm.bt_p_id_search.addActionListener(this);
 		managerForm.bt_p_info.addActionListener(this);
-		managerForm.bt_p_search.addActionListener(this);
 		managerForm.bt_member.addActionListener(this);
 		managerForm.bt_post.addActionListener(this);
 		managerForm.bt_mento.addActionListener(this);
@@ -365,15 +364,6 @@ public class Controller implements ActionListener {
 			MemberDAO dao = new MemberDAO();
 			ArrayList<MemberVO> list = dao.searchMember(map);
 			displayMember(list);
-			
-
-		} else if (ob == managerForm.bt_p_search) {//게시글관리 검색
-
-			String category = (String) managerForm.cb_p_category.getSelectedItem();
-			ClassDAO dao = new ClassDAO();
-
-//			ArrayList<ClassVO> list = dao.search(category);
-//			displayclassManager(list);
 
 
 		} else if (ob == managerForm.bt_p_all_select) {//게시글관리 전체조회
@@ -423,6 +413,7 @@ public class Controller implements ActionListener {
 			
 		} else if (ob == managerForm.bt_member) {// 카드레이아웃_회원관리
 			managerForm.card.show(managerForm.panel_lecture, "1");
+
 
 		} else if (ob == managerForm.bt_post) { // 카드레이아웃_게시글관리
 
