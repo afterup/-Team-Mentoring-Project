@@ -211,8 +211,8 @@ public class ClassDAO {
 				vo.setClassno(rs.getInt("classid"));
 				vo.setCname(rs.getString("cname"));
 				list.add(vo);
-				return list;
 			}
+			return list;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
