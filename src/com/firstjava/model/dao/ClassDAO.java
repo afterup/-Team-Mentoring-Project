@@ -69,7 +69,40 @@ public class ClassDAO {
 			disconnect();
 		}
 		return null;
+	}//searchByNo
+	
+	
+	public ArrayList<ClassVO> searchById(String id) {//강의의 no값으로 테이블에서 선택된 강의 선택
+		connect();
+		ArrayList<ClassVO> list = new ArrayList<ClassVO>();
+
+		try {
+			String sql = "select classid, cname from class "
+					+ "where userid = ?";
+			
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, id);
+			rs = stmt.executeQuery();
+			
+			if(rs.next()) {
+				ClassVO vo = new ClassVO();
+				vo.setClassno(rs.getInt("classid"));
+				vo.setCname(rs.getString("cname"));
+				list.add(vo);
+				return list;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+		return null;
 	}//searchById
+	
+	
+	
+	
+	
 	
 	public boolean createClass(ClassVO c) {
 

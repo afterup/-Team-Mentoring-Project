@@ -166,8 +166,8 @@ public class MyPageForm extends JFrame{
 		bt_classdelete = new JButton("강의삭제");
 		bt_classdelete.setBounds(663, 513, 100, 40);
 		
-		String[] columnTitle_mentor = { "No.", "Name", "ID" };
-		Object[][] rowData_mentor = new Object[0][3];
+		String[] columnTitle_mentor = { "No.", "Name" };
+		Object[][] rowData_mentor = new Object[0][2];
 		dtm_mentor = new DefaultTableModel(rowData_mentor, columnTitle_mentor);
 		
 		table_mentor = new JTable(dtm_mentor) {

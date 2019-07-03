@@ -355,7 +355,7 @@ public class MemberDAO {
 			disconnect();
 		}
 		return list;
-	}// MemberTable
+	}// selectRclass
 
 	public ArrayList<MemberVO> selectAll() { // 회원정보 전체조회
 		connect();
