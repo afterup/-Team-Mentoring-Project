@@ -66,18 +66,19 @@ public class ClassDAO {
 	}
 	
 	
-	public boolean cancleClass(String userid, int classid) {
+
+	public boolean cancelClass(String userid, int classid) {
 
 		connect();
 		try {
 
-			String sql = "update register set rate = ? "
+			String sql = "delete from register "
 					+ "where classid = ? and userid = ?";
 
 			stmt = conn.prepareStatement(sql);
 		
-			stmt.setInt(2, classid);
-			stmt.setString(3, userid);
+			stmt.setInt(1, classid);
+			stmt.setString(2, userid);
 
 			stmt.executeUpdate();
 			return true;
@@ -106,6 +107,25 @@ public class ClassDAO {
 		}
 			
 	}//updateStudent
+	
+	public String checkMy(int no) {//자신의 강의 수강 금지
+		connect();
+		try {
+			String sql = "select userid from class where classid = ?";
+			stmt = conn.prepareStatement(sql);
+				stmt.setInt(1, no);
+			rs = stmt.executeQuery();
+			if(rs.next()) {
+				String id = rs.getString("userid");
+				return id;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+		return null;	
+	}//checkMy
 	
 	public int registerCheck(int classid, String userid) {//같은 id로 동일 강의 수강 금지
 		connect();
@@ -174,7 +194,7 @@ public class ClassDAO {
 	}//searchByNo
 	
 	
-	public ArrayList<ClassVO> searchById(String id) {//강의의 no값으로 테이블에서 선택된 강의 선택
+	public ArrayList<ClassVO> searchById(String id) {//강의의 id값으로 테이블에서 선택된 강의 선택
 		connect();
 		ArrayList<ClassVO> list = new ArrayList<ClassVO>();
 
@@ -411,6 +431,29 @@ public class ClassDAO {
 
 		return list;
 	}// findAll
+	
+	
+	public boolean limitCheck(int classId) {//같은 id로 동일 강의 수강 금지
+		connect();
+		try {
+			String sql = "select count(*) as cnt from class where classid = ? and student=limit";
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, classId);
+			
+			rs = stmt.executeQuery();
+			if(rs.next()) {
+				if(rs.getInt("cnt")>0){
+					return true;
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+		return false;
+	}//registerCheck
+	
 	
 	
 	private void connect() {// 연결객체생성

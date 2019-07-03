@@ -227,8 +227,7 @@ public class MemberDAO {
 		connect();
 
 		try {
-			System.out.println(id);
-			String sql = "DELETE FROM member WHERE userid=? ";
+			String sql = "DELETE FROM member WHERE userid= ? ";
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1, id);
 
@@ -382,20 +381,21 @@ public class MemberDAO {
 	}// MemberTable
 
 	
-//========멘토대기 메소드 ===================
+//========멘토 메소드 ===================
 	
 	public boolean mentorRequest(MentorVO m) {
 
 		connect();
 		try {
 
-			String sql = "insert into mentor (userid,job,major,license,plan) values (?,?,?,?,?)";
+			String sql = "insert into mentor values (?,?,?,?,?,?)";
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1, m.getUserid());
 			stmt.setString(2, m.getJob());
 			stmt.setString(3, m.getMajor());
 			stmt.setString(4, m.getLicense());
 			stmt.setString(5, m.getPlan());
+			stmt.setString(6, m.getConfirm());
 
 			stmt.executeUpdate();
 			return true;
@@ -443,10 +443,12 @@ public class MemberDAO {
 			rs = stmt.executeQuery();
 
 			if (rs.next()) {
-				if (rs.getString("confirm").equals("대기")||rs.getString("confirm").equals("승인")) {
-					return 0;//"불가";
+				if (rs.getString("confirm").equals("대기")) {
+					return 0;//"멘토게시글 작성불가";
+				}else if(rs.getString("confirm").equals("승인")) {
+					return 1;//"멘토게시글 작성가능"
 				}else {
-					return 1;//"가능";
+					return 2;//"멘토신청가능";
 				}
 			}
 		} catch (SQLException e) {
@@ -454,7 +456,7 @@ public class MemberDAO {
 		} finally {
 			disconnect();
 		}
-		return 1;//"가능";
+		return 2;//"멘토신청가능";
 	}// findMentor
 	
 	
