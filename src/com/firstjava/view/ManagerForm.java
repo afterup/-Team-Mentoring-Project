@@ -148,7 +148,7 @@ public class ManagerForm extends JFrame{
       bt_p_id_delete.setBounds(613,524,90,30);
       
       
-      String [] p_columnTitle = { "NO", "분류", "강의명", "개강일", "종강일", "멘토명", "수강생", "정원" };
+      String [] p_columnTitle = { "번호", "분류", "강의명", "개강일", "종강일", "멘토명", "수강생", "정원" };
       Object[][] p_rowData = new Object[0][9];
       p_dtm = new DefaultTableModel(p_rowData,p_columnTitle);
       

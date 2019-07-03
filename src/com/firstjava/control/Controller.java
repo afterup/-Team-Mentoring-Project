@@ -361,7 +361,7 @@ public class Controller implements ActionListener {
 		} else if (ob == mainForm.bt_create_class) {// 강의개설
 
 			if (loginId == null) {
-				showBox.showMsg("로그인을 해주세요!!");
+				showBox.showMsg("로그인을 해주세요.");
 			} else {
 
 				MemberDAO dao = new MemberDAO();
@@ -563,7 +563,7 @@ public class Controller implements ActionListener {
 				}
 
 			} else {
-				showBox.showMsg("아이디와 비밀번호를 확인해주세요!!");
+				showBox.showMsg("아이디와 비밀번호를 확인해주세요.");
 			}
 
 		} else if (ob == loginForm.la_join) { // 회원가입
@@ -688,7 +688,7 @@ public class Controller implements ActionListener {
 			if (id.equals("")) {
 				showBox.showMsg("일치하는 정보가 없습니다. ");
 			} else {
-				showBox.showMsg("당신의 아이디는 " + id + "입니다!!");
+				showBox.showMsg("당신의 아이디는 " + id + "입니다.");
 				findForm.tf_p_id.setText(id);
 				findForm.tf_name.setText("");
 				findForm.tf_email.setText("");
@@ -1001,9 +1001,9 @@ public class Controller implements ActionListener {
 		MemberDAO dao = new MemberDAO();
 		String id = joinForm.tf_id.getText();
 		if (dao.findExistId(id) == 1) {
-			showBox.showMsg("이미 사용중인 아이디입니다!!");
+			showBox.showMsg("이미 사용중인 아이디입니다.");
 		} else {
-			showBox.showMsg("사용가능한 아이디입니다!!");
+			showBox.showMsg("사용가능한 아이디입니다.");
 			if (showBox.showConfirm("이 아이디를 사용하시겠습니까?") == 0) {
 				joinForm.tf_id.setText(id);
 			}

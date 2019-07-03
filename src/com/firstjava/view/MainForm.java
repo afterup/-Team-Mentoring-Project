@@ -60,7 +60,7 @@ public class MainForm extends JFrame {
 
 		// 컬럼명 설정
 
-		String[] columnTitle = { "NO", "분류", "강의명", "개강일", "종강일" };
+		String[] columnTitle = { "번호", "분류", "강의명", "개강일", "종강일" };
 		Object[][] rowData = new Object[0][6];
 		dtm = new DefaultTableModel(rowData, columnTitle);
 		
@@ -175,7 +175,7 @@ public class MainForm extends JFrame {
 		};
 
 		// 컬럼 크기 설정
-		table.getColumn("NO").setPreferredWidth(20);
+		table.getColumn("번호").setPreferredWidth(20);
 		table.getColumn("분류").setPreferredWidth(50);
 		table.getColumn("강의명").setPreferredWidth(280);
 		table.getColumn("개강일").setPreferredWidth(25);
