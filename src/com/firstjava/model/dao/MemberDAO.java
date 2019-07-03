@@ -389,7 +389,7 @@ public class MemberDAO {
 		connect();
 		try {
 
-			String sql = "insert into mentor values (?,?,?,?,?)";
+			String sql = "insert into mentor (userid,job,major,license,plan) values (?,?,?,?,?)";
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1, m.getUserid());
 			stmt.setString(2, m.getJob());
@@ -407,6 +407,35 @@ public class MemberDAO {
 		}
 		return false;
 	}// insert
+	
+	
+	public boolean updateMentor(String confirm,String id) {
+
+		connect();
+		try {
+
+			String sql = "update mentor set confirm = ? where userid = ?";
+
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, confirm);
+			stmt.setString(2, id);
+
+			stmt.executeUpdate();
+			return true;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+		return false;
+	}
+	
+	
+	
+	
+	
+	
 	
 	public ArrayList<MentorVO> viewMentor() { // 멘토대기중인 사람들 뷰
 		connect();

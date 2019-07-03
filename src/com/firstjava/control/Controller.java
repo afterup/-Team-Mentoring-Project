@@ -1,5 +1,6 @@
 package com.firstjava.control;
 
+import java.awt.Color;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,8 +19,8 @@ import com.firstjava.model.dao.ClassDAO;
 import com.firstjava.model.dao.MemberDAO;
 import com.firstjava.model.vo.ClassVO;
 import com.firstjava.model.vo.MemberVO;
-import com.firstjava.model.vo.RegisterVO;
 import com.firstjava.model.vo.MentorVO;
+import com.firstjava.model.vo.RegisterVO;
 import com.firstjava.view.ClassForm;
 import com.firstjava.view.FindForm;
 import com.firstjava.view.JoinForm;
@@ -31,8 +32,8 @@ import com.firstjava.view.MentorReviewForm;
 import com.firstjava.view.MyPageForm;
 import com.firstjava.view.NewclassForm;
 import com.firstjava.view.PassChangeForm;
-import com.firstjava.view.ShowBoxForm;
 import com.firstjava.view.SearchForm;
+import com.firstjava.view.ShowBoxForm;
 
 public class Controller implements ActionListener {
 	ClassForm classForm;
@@ -205,6 +206,8 @@ public class Controller implements ActionListener {
 		managerForm.bt_member.addActionListener(this);
 		managerForm.bt_post.addActionListener(this);
 		managerForm.bt_mento.addActionListener(this);
+		managerForm.bt_agree.addActionListener(this);
+		managerForm.bt_disagree.addActionListener(this);
 
 		// findForm
 		findForm.bt_idView.addActionListener(this);
@@ -289,6 +292,7 @@ public class Controller implements ActionListener {
 			if (loginId == null) {
 				showBox.showMsg("로그인 해 주세요");
 			} else {
+				mainForm.menuColor("mento");
 				mentorRegForm.setVisible(true);
 			}
 			// mentorForm.bt_search
@@ -331,10 +335,13 @@ public class Controller implements ActionListener {
 
 		} else if (ob == mainForm.bt_main) { // 카드레이아웃_ 메인
 			mainForm.card.show(mainForm.panel_lecture, "1");
-
+			mainForm.menuColor("main");
+			
+			
 		} else if (ob == mainForm.bt_mento_class) {// 카드레이아웃_ 멘토게시글
 			ClassDAO dao = new ClassDAO();
 			displayclass(dao.findAll());
+			mainForm.menuColor("class");
 			mainForm.card.show(mainForm.panel_lecture, "2");
 
 //------------------------- ClassForm --------------------------------
@@ -438,19 +445,47 @@ public class Controller implements ActionListener {
 			
 		
 			
+		} else if (ob==managerForm.bt_agree) {//멘토 승인
+			//id랑 confirm
+			
+			MemberDAO dao = new MemberDAO();
+			int row = managerForm.m_table.getSelectedRow();
+			String id = (managerForm.m_table.getValueAt(row, 0)).toString();
+			System.out.println(id);
+			if(dao.updateMentor("승인",id)) {
+				showBox.showMsg("승인완료");
+				displayMentor(dao.viewMentor());
+			}else {
+				showBox.showMsg("승인실패");
+			}
+			
+		} else if(ob==managerForm.bt_disagree) {
+			MemberDAO dao = new MemberDAO();
+			int row = managerForm.m_table.getSelectedRow();
+			String id = (managerForm.m_table.getValueAt(row, 0)).toString();
+			System.out.println(id);
+			if(dao.updateMentor("거부",id)) {
+				showBox.showMsg("거부완료");
+				displayMentor(dao.viewMentor());
+			}else {
+				showBox.showMsg("거부실패");
+			}
+			
+			
 		} else if (ob == managerForm.bt_member) {// 카드레이아웃_회원관리
+			managerForm.menuColor("member");
 			managerForm.card.show(managerForm.panel_lecture, "1");
 
 
 		} else if (ob == managerForm.bt_post) { // 카드레이아웃_게시글관리
-
+			managerForm.menuColor("post");
 			ClassDAO dao = new ClassDAO();
 			displayclassManager(dao.findAll());
 			managerForm.card.show(managerForm.panel_lecture, "2");
 			// bt_p_search, bt_p_all_select, bt_p_info, bt_p_id_search, bt_p_id_delete;
 
 		} else if (ob == managerForm.bt_mento) {// 카드레이아웃_멘토대기
-			
+			managerForm.menuColor("mento");
 			MemberDAO dao = new MemberDAO();
 			displayMentor(dao.viewMentor());			
 			
@@ -719,17 +754,19 @@ public class Controller implements ActionListener {
 				dao.mentorRequest(m);
 				showBox.showMsg("신청되셨습니다.");
 				mentorRegForm.initText();
+				mainForm.menuColor("mentoOut");
 				mentorRegForm.setVisible(false);
 			}
 			
 		}else if(ob==mentorRegForm.bt_cancel) {//취소
-			
+			mainForm.menuColor("mentoOut");
+			mentorRegForm.initText();
+			mentorRegForm.setVisible(false);
 		}
 
 	}// actionPerformed
 
 	public void checkId() {
-		System.out.println("checkId()");
 		MemberDAO dao = new MemberDAO();
 		String id = joinForm.tf_id.getText();
 		if (dao.findExistId(id) == 1) {

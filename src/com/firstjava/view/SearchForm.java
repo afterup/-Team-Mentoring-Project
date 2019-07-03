@@ -15,7 +15,7 @@ import javax.swing.JTextField;
 
 public class SearchForm extends JFrame {
 
-	public JComboBox<String> cb_column;
+	public JComboBox<String> cb_columnTitle, cb_columnSort;
 	JRadioButton radio_asc, radio_desc;
 	ButtonGroup group;
 
@@ -34,21 +34,24 @@ public class SearchForm extends JFrame {
 		group.add(radio_desc);
 
 		String[] categoryTitle = { "NO", "분류", "강의명", "개강일", "종강일", "멘토명", "수강생", "정원" };
-		cb_column = new JComboBox<String>(categoryTitle);
-
+		cb_columnTitle = new JComboBox<String>(categoryTitle);
+		cb_columnSort = new JComboBox<String>(categoryTitle); 
+		
+		tf_search = new JTextField(15);
 		panel_first = new JPanel();
-		panel_first.add(new JLabel("목록:"));
-		panel_first.add(cb_column);
+		panel_first.add(cb_columnTitle);
+		panel_first.add(tf_search);
 		
 		panel_second = new JPanel();
-		panel_second.add(radio_asc);
-		panel_second.add(radio_desc);
-
-
-		tf_search = new JTextField(15);
+		panel_second.add(new JLabel("정렬:"));
+		panel_second.add(cb_columnSort);
+		panel_second.add(new JPanel());
+		
 		panel_third = new JPanel();
-		panel_third.add(new JLabel("검색어:"));
-		panel_third.add(tf_search);
+		panel_third.add(radio_asc);
+		panel_third.add(radio_desc);
+
+
 
 		panel_option = new JPanel();
 		panel_option.setLayout(new GridLayout(3, 1));
@@ -71,8 +74,10 @@ public class SearchForm extends JFrame {
 									JOptionPane.PLAIN_MESSAGE, // JOptionPane.ERROR_MESSAGE,
 									null, null, // options,
 									null);// options[1])
-
-		int column = cb_column.getSelectedIndex();
+		
+		int columnTitle = cb_columnTitle.getSelectedIndex();
+		
+		int columnSort = cb_columnSort.getSelectedIndex();
 		
 		String keyword = tf_search.getText();
 		
@@ -86,9 +91,11 @@ public class SearchForm extends JFrame {
 		}
 
 		Map<String, Object> map = new HashMap<>();
-		map.put("column", column);
-		map.put("keyword", keyword);
-		map.put("sort", sort);
+			
+			map.put("columnTitle", columnTitle);
+			map.put("keyword", keyword);
+			map.put("columnSort", columnSort);
+			map.put("sort", sort);
 
 		return map;
 	}// showOption

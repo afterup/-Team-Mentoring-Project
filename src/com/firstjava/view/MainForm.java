@@ -104,7 +104,7 @@ public class MainForm extends JFrame {
 		bt_main.setBounds(314, 30, 74, 40);
 
 		bt_mento_class = new JButton("멘토강의");
-		bt_mento_class.setForeground(Color.WHITE);
+		bt_mento_class.setForeground(Color.BLACK);
 		bt_mento_class.setFont(font16);
 		bt_mento_class.setBackground(Color.white);
 		bt_mento_class.setOpaque(false);
@@ -121,7 +121,7 @@ public class MainForm extends JFrame {
 		bt_login.setBorderPainted(false);
 
 		bt_mypage = new JButton("MyPage");
-		bt_mypage.setForeground(Color.WHITE);
+		bt_mypage.setForeground(Color.BLACK);
 		bt_mypage.setFont(font16);
 		bt_mypage.setBounds(580, 30, 100, 40);
 		bt_mypage.setBackground(Color.white);
@@ -129,7 +129,7 @@ public class MainForm extends JFrame {
 		bt_mypage.setBorderPainted(false);
 
 		bt_mento_demand = new JButton("멘토신청");
-		bt_mento_demand.setForeground(Color.WHITE);
+		bt_mento_demand.setForeground(Color.BLACK);
 		bt_mento_demand.setFont(font16);
 		bt_mento_demand.setBounds(484, 30, 100, 40);
 		bt_mento_demand.setBackground(Color.white);
@@ -213,6 +213,32 @@ public class MainForm extends JFrame {
 		// setResizable(false);
 
 	}// 생성자
+	
+	public void menuColor(String menu) {
+		if(menu.equals("main")) {
+			bt_main.setForeground(Color.WHITE);
+			bt_mento_class.setForeground(Color.BLACK);
+			bt_mypage.setForeground(Color.BLACK);
+			bt_mento_demand.setForeground(Color.BLACK);
+		}
+		
+		if(menu.equals("class")) {
+			bt_main.setForeground(Color.BLACK);
+			bt_mento_class.setForeground(Color.WHITE);
+			bt_mypage.setForeground(Color.BLACK);
+			bt_mento_demand.setForeground(Color.BLACK);
+		}
+
+		if(menu.equals("mento")) {
+			bt_mento_demand.setForeground(Color.WHITE);
+		}
+		
+		if(menu.equals("mentoOut")) {
+			bt_mento_demand.setForeground(Color.BLACK);
+		}
+		
+	}
+	
 
 
 	public static void main(String[] args) {

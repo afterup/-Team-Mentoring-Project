@@ -41,7 +41,7 @@ public class ManagerForm extends JFrame{
 	 
 	
 	//PostForm 컴포넌트 
-    public JButton bt_p_all_select, bt_p_info, bt_p_id_search, bt_p_id_delete,bt_agree,bt_disagree;
+    public JButton bt_p_all_select, bt_p_info, bt_p_id_search, bt_p_id_delete;
 
 	public JPanel panel_mento;
 	JLabel la_mento;
@@ -52,7 +52,7 @@ public class ManagerForm extends JFrame{
 	public DefaultTableModel p_dtm; // 클래스
 	
 	//멘토대기 컴포넌트
-	public JButton bt_mento;
+	public JButton bt_mento,bt_agree,bt_disagree;
 	JLabel la_memberpost;
 	private JLabel la_background;
 	public JTable m_table;
@@ -279,6 +279,27 @@ public class ManagerForm extends JFrame{
 //      setDefaultCloseOperation(EXIT_ON_CLOSE);
       
 
+   }
+   
+   public void menuColor(String menu) {
+	   
+	   if(menu.equals("member")) {
+		   bt_member.setForeground(Color.WHITE);
+		   bt_post.setForeground(Color.BLACK);
+		   bt_mento.setForeground(Color.BLACK);
+	   }
+	   if(menu.equals("post")) {
+		   bt_member.setForeground(Color.BLACK);
+		   bt_post.setForeground(Color.WHITE);
+		   bt_mento.setForeground(Color.BLACK);
+	   }
+
+	   if(menu.equals("mento")) {
+		   bt_member.setForeground(Color.BLACK);
+		   bt_post.setForeground(Color.BLACK);
+		   bt_mento.setForeground(Color.WHITE);
+	   }
+	   
    }
    
    
