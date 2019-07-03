@@ -58,13 +58,13 @@ public class NewclassForm extends JFrame {
 		label_7.setBounds(50, 240, 80, 18);
 		contentPane.add(label_7);
 		
-		JLabel la_3 = new JLabel("인원수는 최소5명, 최대 20명입니다.");
+		JLabel la_3 = new JLabel("인원수는 최소1명, 최대 5명입니다.");
 		la_3.setBounds(290, 120, 300, 18);
 		contentPane.add(la_3);
 		
 
 		//필드
-		tf_name = new JTextField("강의 이름");
+		tf_name = new JTextField();
 		tf_name.setBounds(150, 40, 580, 24);
 		contentPane.add(tf_name);
 		tf_name.setColumns(10);
@@ -92,7 +92,7 @@ public class NewclassForm extends JFrame {
 		tf_close.setColumns(10);
 		
 		
-		ta_desc = new JTextArea("260자 이내의 강의 내용을 작성해주세요.");
+		ta_desc = new JTextArea();
 		ta_desc.setBounds(150, 240, 580, 300);
 		contentPane.add(ta_desc);
 		
@@ -115,7 +115,7 @@ public class NewclassForm extends JFrame {
 		tf_close.setText("");
 		tf_open.setText("");
 		tf_student.setText("");
-		ta_desc.setText("260자 이내의 강의 내용을 작성해주세요.");
+		ta_desc.setText("400자 이내의 강의 내용을 작성해주세요.");
 		jb_category.setSelectedIndex(0);
 	}//initText
 	
