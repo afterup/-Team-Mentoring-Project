@@ -18,6 +18,7 @@ import com.firstjava.model.dao.ClassDAO;
 import com.firstjava.model.dao.MemberDAO;
 import com.firstjava.model.vo.ClassVO;
 import com.firstjava.model.vo.MemberVO;
+import com.firstjava.model.vo.RegisterVO;
 import com.firstjava.model.vo.MentorVO;
 import com.firstjava.view.ClassForm;
 import com.firstjava.view.FindForm;
@@ -31,6 +32,7 @@ import com.firstjava.view.MyPageForm;
 import com.firstjava.view.NewclassForm;
 import com.firstjava.view.PassChangeForm;
 import com.firstjava.view.ShowBoxForm;
+import com.firstjava.view.SearchForm;
 
 public class Controller implements ActionListener {
 	ClassForm classForm;
@@ -45,6 +47,7 @@ public class Controller implements ActionListener {
 	ManagerForm managerForm;
 	NewclassForm newclassForm;
 	ShowBoxForm showBox;
+	SearchForm showBox2;
 
 	String loginId;
 
@@ -53,7 +56,7 @@ public class Controller implements ActionListener {
 		loginForm = new LoginForm();
 		joinForm = new JoinForm();
 		pChangeForm = new PassChangeForm();
-		classForm = new ClassForm();//게시글창
+		classForm = new ClassForm();// 게시글창
 		mainForm = new MainForm();
 		findForm = new FindForm();
 		mentorRegForm = new MentorRegForm();
@@ -63,6 +66,7 @@ public class Controller implements ActionListener {
 
 		newclassForm = new NewclassForm();
 		showBox = new ShowBoxForm();
+		showBox2 = new SearchForm();
 
 		eventUp();
 	}// 생성자
@@ -122,22 +126,22 @@ public class Controller implements ActionListener {
 				JTable table = (JTable) me.getSource();
 				Point p = me.getPoint();
 				int row = table.rowAtPoint(p);
-				
+
 				ClassDAO dao = new ClassDAO();
 				int r = mainForm.table.getSelectedRow();
-				
+
 				if (me.getClickCount() == 1) {
 					classForm.controlsetEnabled();
-					
-					ClassVO vo = dao.searchByNo(Integer.parseInt(mainForm.table.getValueAt(r,0).toString()));
-					
+
+					ClassVO vo = dao.searchByNo(Integer.parseInt(mainForm.table.getValueAt(r, 0).toString()));
+
 					classForm.tf_name.setText(vo.getCname());
 					classForm.tf_close.setText(vo.getCloseDate());
 					classForm.tf_open.setText(vo.getOpenDate());
-					classForm.tf_student.setText("" +vo.getLimit());
+					classForm.tf_student.setText("" + vo.getLimit());
 					classForm.ta_desc.setText(vo.getClassinfo());
-					classForm.jb_category.setSelectedIndex(vo.getCateno()-1);	
-					
+					classForm.jb_category.setSelectedIndex(vo.getCateno() - 1);
+
 				}
 			}
 		});
@@ -172,7 +176,6 @@ public class Controller implements ActionListener {
 		myPageForm.bt_infoUpdate.addActionListener(this);
 		myPageForm.bt_homepage.addActionListener(this);
 		myPageForm.bt_review.addActionListener(this);
-
 
 		// ManagerForm
 		managerForm.bt_search.addActionListener(this);
@@ -297,13 +300,13 @@ public class Controller implements ActionListener {
 			System.out.println(category);
 			ClassDAO dao = new ClassDAO();
 			ArrayList<ClassVO> list = dao.search(category);
-			System.out.println(list);
-			Displayclass(list);
+
+			displayclass(list);
 
 		} else if (ob == mainForm.bt_select) { // 전체조회
 
 			ClassDAO dao = new ClassDAO();
-			Displayclass(dao.findAll());
+			displayclass(dao.findAll());
 
 		} else if (ob == mainForm.bt_create_class) {// 강의개설
 
@@ -325,7 +328,7 @@ public class Controller implements ActionListener {
 
 		} else if (ob == mainForm.bt_mento_class) {// 카드레이아웃_ 멘토게시글
 			ClassDAO dao = new ClassDAO();
-			Displayclass(dao.findAll());
+			displayclass(dao.findAll());
 			mainForm.card.show(mainForm.panel_lecture, "2");
 
 // -------------------ManagerForm(매니저페이지)----------------
@@ -343,7 +346,7 @@ public class Controller implements ActionListener {
 			String id = (managerForm.table.getValueAt(row, 0)).toString();
 			System.out.println(id);
 
-			if (showBox.showConfirm("강퇴하시겠습니까?")==0) {
+			if (showBox.showConfirm("강퇴하시겠습니까?") == 0) {
 				showBox.showMsg(dao.deleteMember(id));
 				displayMember(dao.selectAll());
 
@@ -365,20 +368,26 @@ public class Controller implements ActionListener {
 			MemberDAO dao = new MemberDAO();
 			ArrayList<MemberVO> list = dao.searchMember(map);
 			displayMember(list);
-			showBox.showOption();
-
+			
 		} else if (ob == managerForm.bt_member) {// 카드레이아웃_회원관리
 			managerForm.card.show(managerForm.panel_lecture, "1");
 
 		} else if (ob == managerForm.bt_post) { // 카드레이아웃_게시글관리
 
 			ClassDAO dao = new ClassDAO();
-			DisplayclassManager(dao.findAll());
+			displayclassManager(dao.findAll());
 			managerForm.card.show(managerForm.panel_lecture, "2");
 			// bt_p_search, bt_p_all_select, bt_p_info, bt_p_id_search, bt_p_id_delete;
 
-		} else if (ob == managerForm.bt_mento) {// 카드레이아웃_멘토관리
+		} else if (ob == managerForm.bt_mento) {// 카드레이아웃_멘토대기
+			
+			MemberDAO dao = new MemberDAO();
+			displayMentor(dao.viewMentor());			
+			
 			managerForm.card.show(managerForm.panel_lecture, "3");
+			
+			
+			
 		}
 
 		else if (ob == managerForm.bt_p_search) {
@@ -389,27 +398,26 @@ public class Controller implements ActionListener {
 
 //			ArrayList<ClassVO> list = dao.search(category);
 
-//			DisplayclassManager(list);
+//			displayclassManager(list);
+
 
 		} else if (ob == managerForm.bt_p_all_select) {
 
 			ClassDAO dao = new ClassDAO();
-			DisplayclassManager(dao.findAll());
+			displayclassManager(dao.findAll());
 
 		} else if (ob == managerForm.bt_p_id_search) {
 
 			System.out.println("클릭");
+			
+			Map<String, Object> map = showBox2.showOption();
 
-			Map<String, String> map = showBox.showOption();
-
-			MemberDAO dao = new MemberDAO();
+			ClassDAO dao = new ClassDAO();
 			// ArrayList<MembershipVO> list = dao.findByName(name);
-			ArrayList<MemberVO> list = dao.searchMember(map);
+			ArrayList<ClassVO> list = dao.searchClass(map);
 			// 조회된 결과를 뷰(JTable)에 반영
-			displayMember(list);
-
-			showBox.showOption();
-
+			displayclassManager(list);
+			
 
 		} else if (ob == managerForm.bt_p_id_delete) {
 
@@ -424,7 +432,7 @@ public class Controller implements ActionListener {
 				if (dao.delete(no)) {
 
 					showBox.showMsg("삭제성공!!");
-					DisplayclassManager(dao.findAll());
+					displayclassManager(dao.findAll());
 
 				} else {
 
@@ -432,6 +440,11 @@ public class Controller implements ActionListener {
 
 				}
 			}
+			
+		} else if (ob == managerForm.bt_p_info) {
+			
+			
+			
 
 			/*----------------------LoginForm(로그인창)--------------------*/
 		} else if (ob == loginForm.bt_login) { // 로그인 버튼 클릭
@@ -600,9 +613,6 @@ public class Controller implements ActionListener {
 		} else if (ob == myPageForm.bt_my) {// 카드레이아웃_내정보
 			myPageForm.card.show(myPageForm.panel_my_page, "my");
 
-		} else if (ob == myPageForm.bt_class_request) {// 카드레이아웃_내강의
-			myPageForm.card.show(myPageForm.panel_my_page, "menti");
-
 		} else if (ob == myPageForm.bt_homepage) {
 			myPageForm.setVisible(false);
 			mainForm.setVisible(true);
@@ -640,6 +650,23 @@ public class Controller implements ActionListener {
 				mainForm.setVisible(true);
 			}
 
+		} else if (ob == myPageForm.bt_class_request) {// 카드레이아웃_내강의
+			myPageForm.card.show(myPageForm.panel_my_page, "menti");
+			
+			MemberDAO dao = new MemberDAO();
+			myPageForm.dtm_menti.setRowCount(0);
+			ArrayList<RegisterVO> list = dao.selectRclass(loginId);
+			
+			for (int i = 0; i < list.size(); i++) {
+				RegisterVO vo = list.get(i);
+				Object[] rowData = { vo.getClassno(), vo.getCname(), 
+						vo.getMentor(), vo.getRate()};
+				myPageForm.dtm_menti.addRow(rowData);
+
+			}
+			
+			
+			
 		}
 
 //------------------------NewclassForm FORM(강의개설페이지)-----------------
@@ -666,7 +693,7 @@ public class Controller implements ActionListener {
 			if (dao.createClass(vo)) {
 				showBox.showMsg("강의개설");
 				newclassForm.initText();
-				Displayclass(dao.findAll());
+				displayclass(dao.findAll());
 				newclassForm.setVisible(false);
 				mainForm.setVisible(true);
 			} else {
@@ -676,7 +703,7 @@ public class Controller implements ActionListener {
 		}else if (ob==mentorRegForm.bt_submit) {
 			
 			if(showBox.showConfirm("신청하시겠습니까?")==0){
-				MentorVO m = new MentorVO(loginId,mentorRegForm.tf_academy.getText(),mentorRegForm.tf_certification.getText(),
+				MentorVO m = new MentorVO(loginId,mentorRegForm.tf_job.getText(),mentorRegForm.tf_license.getText(),
 						mentorRegForm.tf_major.getText(),mentorRegForm.ta_plan.getText());
 				MemberDAO dao = new MemberDAO();
 				dao.mentorRequest(m);
@@ -690,8 +717,6 @@ public class Controller implements ActionListener {
 		}else if(ob==mentorRegForm.bt_cancel) {
 			
 		}
-		
-
 
 	}// actionPerformed
 
@@ -709,7 +734,7 @@ public class Controller implements ActionListener {
 		}
 	}// checkId
 
-	public void Displayclass(ArrayList<ClassVO> list) {
+	public void displayclass(ArrayList<ClassVO> list) {
 
 		mainForm.dtm.setRowCount(0);
 		
@@ -729,35 +754,50 @@ public class Controller implements ActionListener {
 			mainForm.dtm.addRow(rowData);
 
 		}
+
+
 	}// Displayclass
-	
-	
+
 	public void displayMember(ArrayList<MemberVO> list) {
 
-	    managerForm.dtm.setRowCount(0);
-	    
-	    for(int i=0; i<list.size(); i++) {
-	    	MemberVO vo = list.get(i);
-	    	Object []rowData= {vo.getUserId(),vo.getUname(),vo.getEmail(),vo.getPhone()};
-	    	managerForm.dtm.addRow(rowData);
-	    }
-	    
-    //JScrollBar bar= scroll_table.getVerticalScrollBar();
-    //bar.setValue(bar.getMaximum());
-    
-   }//displayMember
-	
-	
-	public void DisplayclassManager(ArrayList<ClassVO> list) {
+		managerForm.dtm.setRowCount(0);
+
+		for (int i = 0; i < list.size(); i++) {
+			MemberVO vo = list.get(i);
+			Object[] rowData = { vo.getUserId(), vo.getUname(), vo.getEmail(), vo.getPhone() };
+			managerForm.dtm.addRow(rowData);
+		}
+
+		// JScrollBar bar= scroll_table.getVerticalScrollBar();
+		// bar.setValue(bar.getMaximum());
+
+	}// displayMember
+
+
+	public void displayclassManager(ArrayList<ClassVO> list) {
 
 		managerForm.p_dtm.setRowCount(0);
 
 		for (int i = 0; i < list.size(); i++) {
 
 			ClassVO vo = list.get(i);
-			Object[] rowData = { vo.getClassno(), vo.getCname(), vo.getClassinfo(), vo.getOpenDate(),
-					vo.getCloseDate(), vo.getUserid(), vo.getStudent(), vo.getLimit() };
+			Object[] rowData = { vo.getClassno(), vo.getCname(), vo.getClassinfo(), vo.getOpenDate(), vo.getCloseDate(),
+					vo.getUserid(), vo.getStudent(), vo.getLimit() };
 			managerForm.p_dtm.addRow(rowData);
+
+		}
+
+	}// displayTable
+	
+	public void displayMentor(ArrayList<MentorVO> list) {
+
+		managerForm.m_dtm.setRowCount(0);
+
+		for (int i = 0; i < list.size(); i++) {
+
+			MentorVO vo = list.get(i);
+			Object[] rowData = {vo.getUserid(),vo.getJob(),vo.getMajor(),vo.getLicense(),vo.getPlan(),vo.getConfirm()};
+			managerForm.m_dtm.addRow(rowData);
 
 		}
 
