@@ -1,10 +1,7 @@
 package com.firstjava.control;
 
-import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
@@ -15,7 +12,6 @@ import java.util.Map;
 import java.util.StringTokenizer;
 
 import javax.swing.JComboBox;
-import javax.swing.JTable;
 
 import com.firstjava.model.dao.ClassDAO;
 import com.firstjava.model.dao.MemberDAO;
@@ -260,12 +256,9 @@ public class Controller implements ActionListener {
 		mentorRegForm.bt_submit.addActionListener(this);
 		mentorRegForm.bt_cancel.addActionListener(this);
 		
-<<<<<<< HEAD
 		//updateclassForm
 		updateclassForm.bt_cancel.addActionListener(this);
 		updateclassForm.bt_new.addActionListener(this);
-		
-=======
 		
 
 		//SearchFrom
@@ -285,7 +278,6 @@ public class Controller implements ActionListener {
 		        }
 			}
 		});
->>>>>>> 3d778e87f80b8e265f79f6f3873f1634ce535ea7
 
 	}// eventUp
 
@@ -801,7 +793,6 @@ public class Controller implements ActionListener {
 
 				review.cb_score.setSelectedIndex(0);
 			}
-<<<<<<< HEAD
 		}else if(ob==myPageForm.bt_info) {//내강의 정보조회
 
 			ClassDAO dao = new ClassDAO();
@@ -848,13 +839,9 @@ public class Controller implements ActionListener {
 			updateclassForm.setVisible(true);
 			
 			
-		}else if(ob ==review.bt_submit) {
-		
-=======
 
 		} else if (ob == review.bt_submit) {
 
->>>>>>> 3d778e87f80b8e265f79f6f3873f1634ce535ea7
 			ClassDAO dao = new ClassDAO();
 			int classid = classId;
 			int rate = Integer.parseInt(review.cb_score.getSelectedItem().toString());
