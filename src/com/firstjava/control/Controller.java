@@ -395,25 +395,10 @@ public class Controller implements ActionListener {
 
 		} else if (ob == classForm.bt_new) {// classForm에서 강의신청버튼 클릭
 			if (loginId == null) {
-				showBox.showMsg("로그인을 해주세요!!");
-			} else {
-				ClassDAO dao = new ClassDAO();
-
-				if (dao.registerCheck(classId, loginId) > 0) {
-					showBox.showMsg("이미 신청한 강의입니다!!");
-				} else if (dao.registerClass(classId, loginId)) {
-					showBox.showMsg("강의 신청 완료!!");
-				}
-			}
-
-		} else if (ob == classForm.bt_new) {// classForm에서 강의신청버튼 클릭
-		} else if (ob == classForm.bt_new) {// classForm에서 강의신청버튼 클릭
-			if (loginId == null) {
 				showBox.showMsg("로그인을 해주세요");
 			} else {
 				ClassDAO dao = new ClassDAO();
 				if (dao.registerCheck(classId, loginId) > 0) {
-
 					showBox.showMsg("이미 신청한 강의입니다.");
 				} else if (dao.checkMy(classId).equals(loginId)) {
 					showBox.showMsg("자신의 강의는 수강할 수 없습니다.");
