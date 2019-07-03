@@ -206,19 +206,18 @@ public class ClassDAO {
 			stmt.setString(1, id);
 			rs = stmt.executeQuery();
 			
-			if(rs.next()) {
+			while(rs.next()) {
 				ClassVO vo = new ClassVO();
 				vo.setClassno(rs.getInt("classid"));
 				vo.setCname(rs.getString("cname"));
 				list.add(vo);
 			}
-			return list;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			disconnect();
 		}
-		return null;
+		return list;
 	}//searchById
 	
 	
