@@ -351,12 +351,13 @@ public class Controller implements ActionListener {
 			if(loginId == null) {
 				showBox.showMsg("로그인을 해주세요!!");
 			}else {
-				ClassDAO dao = new ClassDAO();
-				
+				ClassDAO dao = new ClassDAO();	
 				if(dao.registerCheck(classId, loginId) > 0) {
-					showBox.showMsg("이미 신청한 강의입니다!!");
+					showBox.showMsg("이미 신청한 강의입니다.");
+				}else if(dao.checkMy(classId).equals(loginId)){
+					showBox.showMsg("자신의 강의는 수강할 수 없습니다.");
 				}else if(dao.registerClass(classId, loginId)) {
-					showBox.showMsg("강의 신청 완료!!");
+					showBox.showMsg("강의 신청 완료.");
 					dao.updateStudent(classId);
 				}
 			}

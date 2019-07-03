@@ -64,7 +64,7 @@ public class ClassDAO {
 	}
 	
 	
-	public boolean cancleClass(String userid, int classid) {
+	public boolean cancelClass(String userid, int classid) {
 
 		connect();
 		try {
@@ -104,6 +104,25 @@ public class ClassDAO {
 		}
 			
 	}//updateStudent
+	
+	public String checkMy(int no) {//자신의 강의 수강 금지
+		connect();
+		try {
+			String sql = "select userid from class where classid = ?";
+			stmt = conn.prepareStatement(sql);
+				stmt.setInt(1, no);
+			rs = stmt.executeQuery();
+			if(rs.next()) {
+				String id = rs.getString("userid");
+				return id;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+		return null;	
+	}//checkMy
 	
 	public int registerCheck(int classid, String userid) {//같은 id로 동일 강의 수강 금지
 		connect();
@@ -172,7 +191,7 @@ public class ClassDAO {
 	}//searchByNo
 	
 	
-	public ArrayList<ClassVO> searchById(String id) {//강의의 no값으로 테이블에서 선택된 강의 선택
+	public ArrayList<ClassVO> searchById(String id) {//강의의 id값으로 테이블에서 선택된 강의 선택
 		connect();
 		ArrayList<ClassVO> list = new ArrayList<ClassVO>();
 
