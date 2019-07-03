@@ -186,17 +186,7 @@ public class Controller implements ActionListener {
 		managerForm.bt_all_select.addActionListener(this);
 		managerForm.bt_id_search.addActionListener(this);
 		managerForm.bt_id_delete.addActionListener(this);
-		managerForm.p_table.addMouseListener(new MouseAdapter() { // ====JTable 클릭시 게시글창뷰 오픈
-			public void mouseClicked(MouseEvent me) {
-				JTable table = (JTable) me.getSource();
-				Point p = me.getPoint();
-				int row = table.rowAtPoint(p);
-				if (me.getClickCount() == 1) {
-					classForm.controlsetEnabled();
-					classForm.bt_new.setVisible(false);
-				}
-			}
-		});
+
 		// ManagerForm-post
 		managerForm.bt_p_all_select.addActionListener(this);
 		managerForm.bt_p_id_delete.addActionListener(this);
@@ -414,27 +404,37 @@ public class Controller implements ActionListener {
 
 		} else if (ob == managerForm.bt_p_id_delete) {// 게시글관리 삭제
 
-			String str = showBox.showInput("삭제할 강의 NO는? ");
-
-			int no = Integer.parseInt(str);
-
+			int row = managerForm.p_table.getSelectedRow();
+	        int id = Integer.parseInt((managerForm.p_table.getValueAt(row, 0)).toString());
+			System.out.println(id);
 			ClassDAO dao = new ClassDAO();
-
 			if (showBox.showConfirm("정말 삭제하시겠습니까?") == 0) {
 
-				if (dao.delete(no)) {
-
-					showBox.showMsg("삭제성공!!");
+				if (dao.delete(id)) {
+					showBox.showMsg("삭제성공");
 					displayclassManager(dao.findAll());
-
 				} else {
 
-					showBox.showMsg("삭제실패!!");
+					showBox.showMsg("삭제실패");
 
 				}
 			}
 
 		} else if (ob == managerForm.bt_p_info) {// 게시글관리 정보조회
+			ClassDAO dao = new ClassDAO();
+			int row = managerForm.p_table.getSelectedRow();
+	        int id = Integer.parseInt(managerForm.p_table.getValueAt(row, 0).toString());
+			ClassVO vo = dao.searchByNo(id);
+
+			classForm.tf_name.setText(vo.getCname());
+			classForm.tf_close.setText(vo.getCloseDate());
+			classForm.tf_open.setText(vo.getOpenDate());
+			classForm.tf_student.setText("" + vo.getLimit());
+			classForm.ta_desc.setText(vo.getClassinfo());
+			classForm.jb_category.setSelectedIndex(vo.getCateno() - 1);
+	  
+			classForm.controlsetEnabled();
+			classForm.bt_new.setVisible(false);
 
 		} else if (ob == managerForm.bt_agree) {// 멘토 승인
 			// id랑 confirm
