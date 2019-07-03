@@ -33,7 +33,7 @@ public class SearchForm extends JFrame {
 		group.add(radio_asc);
 		group.add(radio_desc);
 
-		String[] categoryTitle = { "NO", "분류", "강의명", "개강일", "종강일", "멘토명", "수강생", "정원" };
+		String[] categoryTitle = {"목록", "NO", "분류", "강의명", "개강일", "종강일", "멘토명", "수강생", "정원" };
 		cb_columnTitle = new JComboBox<String>(categoryTitle);
 		cb_columnSort = new JComboBox<String>(categoryTitle); 
 		
