@@ -239,13 +239,14 @@ public class ClassDAO {
 		connect();
 		ArrayList<ClassVO> list = new ArrayList<ClassVO>();
 		
-		int column_idx =  (int) map.get("column");
-		String sort = (String) map.get("sort");
+		int columnTitle_idx =  (int) map.get("columnTitle");
 		String keyword = (String) map.get("keyword");
+		int columnSort_idx =  (int) map.get("columnSort");
+		String sort = (String) map.get("sort");
 		
 		//String[] categoryTitle = { "NO", "분류", "강의명", "개강일", "종강일", "멘토명", "수강생", "정원" }
 		
-		System.out.println(column_idx);
+		System.out.println(columnTitle_idx);
 		
 		String[] column = {"classid", "cname", "classinfo", "opendate", "closedate",  "userid", "student", "limit"};
 
@@ -253,31 +254,44 @@ public class ClassDAO {
 			
 			String sql = "select * from class ";
 			
-			switch(column[column_idx]) {
+			switch(column[columnTitle_idx]) {
 			
 			case "classid" : sql += "where classid=?"; break;
 			case "cname" :  sql += "where upper(cname) like upper(?)"; break;
-			case "classinfo" :  sql += "where classinfo like '%"+"?"+"%'"; break;
+			case "classinfo" :  sql += "where classinfo like ?"; break;
 			case "opendate" :  sql += "where opendate=?"; break;
 			case "closedate" : sql += "where closedate=?"; break; 
-			case "userid" :  sql += "where userid=?"; break;
+			case "userid" :  sql += "where userid like ?"; break;
 			case "student" :  sql += "where student=?"; break;
 			case "limit" : sql += "where limit=?"; break;
 			}
 			
 
 			if (sort.equals("오름차순"))
-				sql +=" order by " + column[column_idx];
+				sql +=" order by " + column[columnSort_idx];
 			else if (sort.equals("내림차순"))
-				sql += " order by " + column[column_idx] + " desc";
+				sql += " order by " + column[columnSort_idx] + " desc";
 			
 			System.out.println("sql: "+sql);
 			
 			stmt = conn.prepareStatement(sql);// sql문 전송
 			
-			stmt.setObject(1,  keyword );// '%홍%'
-			
 			System.out.println("key: "+sql);
+			System.out.println("columnTitle_idx: "+column[columnTitle_idx]);
+			System.out.println("columnSort_idx: "+column[columnSort_idx]);
+			
+			if(column[columnTitle_idx] == "classinfo" ||
+			   column[columnTitle_idx] == "cname" ||
+			   column[columnTitle_idx] == "userid" 	) {
+				
+				stmt.setObject(1,  "%" + keyword + "%" );// '%홍%'
+				
+			}else {
+				stmt.setObject(1,  keyword );// '%홍%'
+				
+				
+			}
+			          
 			
 			rs = stmt.executeQuery();// sql문 실행요청(실행시점!!)
 			
