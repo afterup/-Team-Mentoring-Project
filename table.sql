@@ -119,8 +119,8 @@ values (class_seq.nextval, '명상강의 입니다. (3명)','juwon', 6, 'Meditat
 
 
 -- registerTable insert 	★ insert할때 classid와 userid가 일치하는지 확인!!
-insert into register values (9,'solbi94', 4);
-insert into register values (10,'lime', 5);
+insert into register values (2,'solbi94', 4);
+insert into register values (4,'lime', 5);
 
 
 -- mentorTable insert

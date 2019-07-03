@@ -235,13 +235,19 @@ public class Controller implements ActionListener {
 		newclassForm.tf_name.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				newclassForm.tf_name.setText("");
+				String tf = newclassForm.tf_name.getText();
+				if(tf.equals("강의 이름")) {
+					newclassForm.tf_name.setText("");
+				}
 			}
 		});
 		newclassForm.ta_desc.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				newclassForm.ta_desc.setText("");
+				String ta = newclassForm.ta_desc.getText();
+				if(ta.equals("400자 이내의 강의 내용을 작성해주세요.")) {
+					newclassForm.ta_desc.setText("");
+				}
 			}
 		});
 
@@ -255,14 +261,6 @@ public class Controller implements ActionListener {
 		mentorRegForm.bt_submit.addActionListener(this);
 		mentorRegForm.bt_cancel.addActionListener(this);
 		
-		
-		
-		newclassForm.tf_name.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				newclassForm.tf_name.setText("");
-			}
-		});
 		
 
 		//SearchFrom
