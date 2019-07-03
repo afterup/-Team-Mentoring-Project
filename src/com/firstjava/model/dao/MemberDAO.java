@@ -389,7 +389,7 @@ public class MemberDAO {
 		connect();
 		try {
 
-			String sql = "insert into mentor values (?,?,?,?,?)";
+			String sql = "insert into mentor (userid,job,major,license,plan) values (?,?,?,?,?)";
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1, m.getUserid());
 			stmt.setString(2, m.getJob());

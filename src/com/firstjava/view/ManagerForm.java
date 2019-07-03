@@ -281,6 +281,27 @@ public class ManagerForm extends JFrame{
 
    }
    
+   public void menuColor(String menu) {
+	   
+	   if(menu.equals("member")) {
+		   bt_member.setForeground(Color.WHITE);
+		   bt_post.setForeground(Color.BLACK);
+		   bt_mento.setForeground(Color.BLACK);
+	   }
+	   if(menu.equals("post")) {
+		   bt_member.setForeground(Color.BLACK);
+		   bt_post.setForeground(Color.WHITE);
+		   bt_mento.setForeground(Color.BLACK);
+	   }
+
+	   if(menu.equals("mento")) {
+		   bt_member.setForeground(Color.BLACK);
+		   bt_post.setForeground(Color.BLACK);
+		   bt_mento.setForeground(Color.WHITE);
+	   }
+	   
+   }
+   
    
    
 
