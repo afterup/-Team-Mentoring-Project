@@ -145,41 +145,9 @@ select * from mentor;
 
 
 
---update, join select
-
-update member set uname = '솔비',email = 'gosolbi@gmail.com'
-where userid = 'solbi94';
-	
-update member set password = '1111'
-where userid = 'solbi94' and password = '1234';
 
 
-select r.userid , c.cname , c.userid, rate
-from register r, class c
-where r.classid = c.classid;
-
-select c.classid, c.cname, c.userid, r.rate from register r, class c 
-where r.classid = c.classid and r.userid = 'solbi94';
-
-
-select r.classid, c.cname, c.userid, r.rate
-from register r, class c
-where r.classid = c.classid and r.userid = 'lime';
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+----------------------------------------------------------------------------------------------------------------------------
 
 
 
