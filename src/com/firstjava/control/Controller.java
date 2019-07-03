@@ -292,7 +292,7 @@ public class Controller implements ActionListener {
 			MemberDAO dao = new MemberDAO();
 			if (loginId == null) {
 				showBox.showMsg("로그인 해 주세요");
-			} else if (dao.findMentor(loginId)==0){
+			} else if (dao.findMentor(loginId)==0||dao.findMentor(loginId)==1){
 				showBox.showMsg("이미 신청하셨습니다.");
 			} else {
 				mainForm.menuColor("mento");
@@ -324,9 +324,12 @@ public class Controller implements ActionListener {
 
 		} else if (ob == mainForm.bt_create_class) {// 강의개설
 			
+			MemberDAO dao = new MemberDAO();
 			if(loginId == null) {
-				showBox.showMsg("로그인을 해주세요!!");
-			} else {
+				showBox.showMsg("로그인을 해주세요");
+			}else if(dao.findMentor(loginId)!=1) {
+				showBox.showMsg("멘토신청 후 승인시 개설 가능합니다.");
+			}else {
 				newclassForm.setVisible(true);
 				newclassForm.initText();
 			}
@@ -349,15 +352,16 @@ public class Controller implements ActionListener {
 			
 		} else if(ob == classForm.bt_new) {//classForm에서 강의신청버튼 클릭
 			if(loginId == null) {
-				showBox.showMsg("로그인을 해주세요!!");
+				showBox.showMsg("로그인을 해주세요");
 			}else {
 				ClassDAO dao = new ClassDAO();
 				
 				if(dao.registerCheck(classId, loginId) > 0) {
-					showBox.showMsg("이미 신청한 강의입니다!!");
+					showBox.showMsg("이미 신청한 강의입니다");
 				}else if(dao.registerClass(classId, loginId)) {
-					showBox.showMsg("강의 신청 완료!!");
+					showBox.showMsg("강의 신청 완료");
 					dao.updateStudent(classId);
+					classForm.setVisible(false);
 				}
 			}
 

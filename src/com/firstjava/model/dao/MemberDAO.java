@@ -443,10 +443,12 @@ public class MemberDAO {
 			rs = stmt.executeQuery();
 
 			if (rs.next()) {
-				if (rs.getString("confirm").equals("대기")||rs.getString("confirm").equals("승인")) {
-					return 0;//"불가";
+				if (rs.getString("confirm").equals("대기")) {
+					return 0;//"멘토게시글 작성불가";
+				}else if(rs.getString("confirm").equals("승인")) {
+					return 1;//"멘토게시글 작성가능"
 				}else {
-					return 1;//"가능";
+					return 2;//"멘토신청가능";
 				}
 			}
 		} catch (SQLException e) {
@@ -454,7 +456,7 @@ public class MemberDAO {
 		} finally {
 			disconnect();
 		}
-		return 1;//"가능";
+		return 2;//"멘토신청가능";
 	}// findMentor
 	
 	
