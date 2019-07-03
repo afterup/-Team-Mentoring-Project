@@ -252,7 +252,32 @@ public class ClassDAO {
 	}//createClass
 	
 	//강의 테이블 수정
-	public void update() {}
+	public boolean updateClass(ClassVO vo) {
+		connect();
+		try {
+
+			String sql = "update class set classinfo=?,cateno=?,cname=?,opendate=?,closedate=?,limit=?"
+					+ "where classid = ?";
+
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, vo.getClassinfo());
+			stmt.setInt(2,vo.getCateno());
+			stmt.setString(3,vo.getCname());
+			stmt.setString(4,vo.getOpenDate());
+			stmt.setString(5,vo.getCloseDate());
+			stmt.setInt(6,vo.getLimit());
+			stmt.setInt(7,vo.getClassno());
+
+			stmt.executeUpdate();
+			return true;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+		return false;
+	}
 	
 	
 	//강의 테이블 삭제 
