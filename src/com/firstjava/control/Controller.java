@@ -46,6 +46,7 @@ public class Controller implements ActionListener {
 	MentorReviewForm review;
 	ManagerForm managerForm;
 	NewclassForm newclassForm;
+	NewclassForm updateclassForm;
 	ShowBoxForm showBox;
 	SearchForm showBox2;
 
@@ -66,6 +67,7 @@ public class Controller implements ActionListener {
 		managerForm = new ManagerForm();
 
 		newclassForm = new NewclassForm();
+		updateclassForm = new NewclassForm();
 		showBox = new ShowBoxForm();
 		showBox2 = new SearchForm();
 
@@ -125,9 +127,6 @@ public class Controller implements ActionListener {
 		mainForm.bt_create_class.addActionListener(this);
 		mainForm.table.addMouseListener(new MouseAdapter() { // ====JTable 클릭시 게시글창뷰 오픈
 			public void mouseClicked(MouseEvent me) {
-				JTable table = (JTable) me.getSource();
-				Point p = me.getPoint();
-				int row = table.rowAtPoint(p);
 
 				ClassDAO dao = new ClassDAO();
 				int r = mainForm.table.getSelectedRow();
@@ -250,6 +249,11 @@ public class Controller implements ActionListener {
 		//MentorRegForm
 		mentorRegForm.bt_submit.addActionListener(this);
 		mentorRegForm.bt_cancel.addActionListener(this);
+		
+		//updateclassForm
+		updateclassForm.bt_cancel.addActionListener(this);
+		updateclassForm.bt_new.addActionListener(this);
+		
 
 	}// eventUp
 
@@ -726,6 +730,50 @@ public class Controller implements ActionListener {
 			
 			review.cb_score.setSelectedIndex(0);
 			}
+		}else if(ob==myPageForm.bt_info) {//내강의 정보조회
+
+			ClassDAO dao = new ClassDAO();
+			int r = myPageForm.table_menti.getSelectedRow();
+
+			classForm.controlsetEnabled();
+			classForm.bt_new.setVisible(true);
+			
+			classId = Integer.parseInt(myPageForm.table_menti.getValueAt(r, 0).toString());
+			ClassVO vo = dao.searchByNo(classId);
+			if(dao.limitCheck(classId)) {
+				classForm.limitMember();
+			}else {
+				classForm.rightMember();
+			}
+
+			classForm.tf_name.setText(vo.getCname());
+			classForm.tf_close.setText(vo.getCloseDate());
+			classForm.tf_close.setText(vo.getCloseDate());
+			classForm.tf_open.setText(vo.getOpenDate());
+			classForm.tf_student.setText("" + vo.getLimit());
+			classForm.ta_desc.setText(vo.getClassinfo());
+			classForm.jb_category.setSelectedIndex(vo.getCateno() - 1);
+
+		
+		}else if(ob==myPageForm.bt_classupdate) {//개설한강의 강의수정
+
+			ClassDAO dao = new ClassDAO();
+			int r = myPageForm.table_mentor.getSelectedRow();
+
+			classId = Integer.parseInt(myPageForm.table_mentor.getValueAt(r, 0).toString());
+			ClassVO vo = dao.searchByNo(classId);
+			classId = vo.getClassno();
+
+			updateclassForm.tf_name.setText(vo.getCname());
+			updateclassForm.tf_close.setText(vo.getCloseDate());
+			updateclassForm.tf_close.setText(vo.getCloseDate());
+			updateclassForm.tf_open.setText(vo.getOpenDate());
+			updateclassForm.tf_student.setText("" + vo.getLimit());
+			updateclassForm.ta_desc.setText(vo.getClassinfo());
+			updateclassForm.jb_category.setSelectedIndex(vo.getCateno() - 1);
+			
+			updateclassForm.bt_new.setText("수정");
+			updateclassForm.setVisible(true);
 			
 			
 		}else if(ob ==review.bt_submit) {
@@ -841,8 +889,36 @@ public class Controller implements ActionListener {
 			mainForm.menuColor("mentoOut");
 			mentorRegForm.initText();
 			mentorRegForm.setVisible(false);
-		}
+//===========updateclassForm(마이페이지에서 내강의 수정)=================
+		}else if(ob==updateclassForm.bt_new) {
 
+			Map<String, Integer> map = new HashMap<>();
+			map.put("IT", 1);
+			map.put("디자인", 2);
+			map.put("뷰티", 3);
+			map.put("외국어", 4);
+			map.put("음악", 5);
+			map.put("라이프", 6);
+			
+			String category=updateclassForm.jb_category.getSelectedItem().toString();
+			
+			ClassVO vo = new ClassVO(classId,"",updateclassForm.ta_desc.getText(),map.get(category)
+					,updateclassForm.tf_name.getText(),updateclassForm.tf_open.getText(),updateclassForm.tf_close.getText(),0,Integer.parseInt(updateclassForm.tf_student.getText()));
+			ClassDAO dao = new ClassDAO();
+
+			if(dao.updateClass(vo)) {
+				showBox.showMsg("수정완료");
+				updateclassForm.setVisible(false);
+			}else {
+				showBox.showMsg("수정실패");
+			}
+			
+			
+			
+		}else if(ob==updateclassForm.bt_cancel) {
+			updateclassForm.setVisible(false);
+		}
+		
 	}// actionPerformed
 
 	public void checkId() {
