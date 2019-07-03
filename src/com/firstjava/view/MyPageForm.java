@@ -34,7 +34,9 @@ public class MyPageForm extends JFrame{
 	public JButton bt_menti_request_cancel,bt_classupdate,bt_classdelete,bt_info,bt_review;
 	public JComboBox<String> cb_menti_category;
 	JLabel la_menticlass,la_mentoclass;
-	JTable table_menti,table_mentor;
+	public JTable table_menti;
+
+	public JTable table_mentor;
 	JScrollPane scroll_table_menti,scroll_table_mento;
 	
 	public DefaultTableModel dtm_menti;

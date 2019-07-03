@@ -42,6 +42,57 @@ public class ClassDAO {
 		}
 	}// 생성자
 	
+	
+	public boolean updateReview(String userid, int classid, int rate) {
+
+		connect();
+		try {
+
+			String sql = "update register set rate = ? "
+					+ "where classid = ? and userid = ?";
+
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, rate);
+			stmt.setInt(2, classid);
+			stmt.setString(3, userid);
+
+			stmt.executeUpdate();
+			return true;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+		return false;
+	}
+	
+	
+	public boolean cancleClass(String userid, int classid) {
+
+		connect();
+		try {
+
+			String sql = "update register set rate = ? "
+					+ "where classid = ? and userid = ?";
+
+			stmt = conn.prepareStatement(sql);
+		
+			stmt.setInt(2, classid);
+			stmt.setString(3, userid);
+
+			stmt.executeUpdate();
+			return true;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+		return false;
+	}
+	
+	
 	public void updateStudent(int classid) {
 		connect();
 		try {
@@ -109,8 +160,8 @@ public class ClassDAO {
 				String cname = rs.getString("cname");
 				int cateno = rs.getInt("cateno");
 				int limit = rs.getInt("limit");
-				String opendate = rs.getString("opendate");
-				String closedate = rs.getString("closedate");
+				String opendate = rs.getDate("opendate").toString();
+				String closedate = rs.getDate("closedate").toString();
 				String classinfo = rs.getString("classinfo");	
 				
 				vo = new ClassVO(no, null, classinfo, cateno, cname, opendate, closedate, 0, limit);
