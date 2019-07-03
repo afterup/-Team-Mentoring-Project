@@ -326,9 +326,7 @@ public class Controller implements ActionListener {
 				showBox.showMsg("로그인을 해주세요!!");
 			} else {
 				newclassForm.setVisible(true);
-				newclassForm.tf_name.setText("강의 이름");
-				newclassForm.ta_desc.setText("400자 이내의 강의 내용을 작성해주세요.");
-				newclassForm.jb_category.setSelectedIndex(0);
+				newclassForm.initText();
 			}
 		} else if (ob == mainForm.cb_category) {// 카테고리 검색
 			System.out.println("검색");
@@ -756,7 +754,6 @@ public class Controller implements ActionListener {
 			
 		} else if(ob == newclassForm.bt_cancel) {
 			newclassForm.setVisible(false);
-			
 			
 //=============mentorRegForm(멘토신청 폼)=========================
 		} else if (ob == mentorRegForm.bt_submit) {// 신청
