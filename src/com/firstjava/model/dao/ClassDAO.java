@@ -64,18 +64,19 @@ public class ClassDAO {
 	}
 	
 	
+
 	public boolean cancelClass(String userid, int classid) {
 
 		connect();
 		try {
 
-			String sql = "update register set rate = ? "
+			String sql = "delete from register "
 					+ "where classid = ? and userid = ?";
 
 			stmt = conn.prepareStatement(sql);
 		
-			stmt.setInt(2, classid);
-			stmt.setString(3, userid);
+			stmt.setInt(1, classid);
+			stmt.setString(2, userid);
 
 			stmt.executeUpdate();
 			return true;
@@ -440,6 +441,29 @@ public class ClassDAO {
 
 		return list;
 	}// findAll
+	
+	
+	public boolean limitCheck(int classId) {//같은 id로 동일 강의 수강 금지
+		connect();
+		try {
+			String sql = "select count(*) as cnt from class where classid = ? and student=limit";
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, classId);
+			
+			rs = stmt.executeQuery();
+			if(rs.next()) {
+				if(rs.getInt("cnt")>0){
+					return true;
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+		return false;
+	}//registerCheck
+	
 	
 	
 	private void connect() {// 연결객체생성

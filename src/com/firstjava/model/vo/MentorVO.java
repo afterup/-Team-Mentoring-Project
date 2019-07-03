@@ -16,7 +16,7 @@ public class MentorVO
 	{
 	}
 	
-	public MentorVO(String userid,String job, String major, String license, String plan)
+	public MentorVO(String userid,String job, String major, String license, String plan,String confirm)
 	{
 		super();
 		this.userid = userid;
@@ -24,6 +24,7 @@ public class MentorVO
 		this.major = major;
 		this.license = license;
 		this.plan = plan;
+		this.confirm = confirm;
 	}
 	
 	public String getUserid()

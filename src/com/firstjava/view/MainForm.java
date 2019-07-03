@@ -83,7 +83,7 @@ public class MainForm extends JFrame {
 
 		bt_manager = new JButton("관리자");
 		bt_manager.setBounds(12, 520, 120, 34);
-		bt_manager.setVisible(true);//추후 false 수정
+		bt_manager.setVisible(false);
 		panel_main.add(bt_manager);
 		
 		JLabel lblNewLabel_2 = new JLabel("");
