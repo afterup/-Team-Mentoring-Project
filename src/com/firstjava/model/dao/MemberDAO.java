@@ -389,13 +389,14 @@ public class MemberDAO {
 		connect();
 		try {
 
-			String sql = "insert into mentor (userid,job,major,license,plan) values (?,?,?,?,?)";
+			String sql = "insert into mentor values (?,?,?,?,?,?)";
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1, m.getUserid());
 			stmt.setString(2, m.getJob());
 			stmt.setString(3, m.getMajor());
 			stmt.setString(4, m.getLicense());
 			stmt.setString(5, m.getPlan());
+			stmt.setString(6, m.getConfirm());
 
 			stmt.executeUpdate();
 			return true;

@@ -814,7 +814,7 @@ public class Controller implements ActionListener {
 
 			if (showBox.showConfirm("신청하시겠습니까?") == 0) {
 				MentorVO m = new MentorVO(loginId, mentorRegForm.tf_job.getText(), mentorRegForm.tf_license.getText(),
-						mentorRegForm.tf_major.getText(), mentorRegForm.ta_plan.getText());
+						mentorRegForm.tf_major.getText(), mentorRegForm.ta_plan.getText(),"대기");
 				MemberDAO dao = new MemberDAO();
 				dao.mentorRequest(m);
 				showBox.showMsg("신청되셨습니다.");
