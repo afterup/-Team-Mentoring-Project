@@ -218,6 +218,7 @@ public class Controller implements ActionListener {
 
 		// NewclassForm
 		newclassForm.bt_new.addActionListener(this);
+		newclassForm.bt_cancel.addActionListener(this);
 		newclassForm.jb_category.addActionListener(this);
 		newclassForm.tf_name.addMouseListener(new MouseAdapter() {
 			@Override
@@ -320,17 +321,15 @@ public class Controller implements ActionListener {
 			displayclass(dao.findAll());
 
 		} else if (ob == mainForm.bt_create_class) {// 강의개설
-
-			newclassForm.setVisible(true);
-			/*
-			 * } else if (ob == mainForm.bt_class_delete) {// 강의삭제 String str =
-			 * mainForm.showInput("삭제할 강의 NO는? "); int no = Integer.parseInt(str); ClassDAO
-			 * dao = new ClassDAO(); if(mainForm.showConfirm("정말 삭제하시겠습니까?")==0) { if
-			 * (dao.delete(no)) { mainForm.showMsg("삭제성공!!");
-			 * mainForm.classDisplayTable(dao.findAll()); } else {
-			 * mainForm.showMsg("삭제실패!!"); } }
-			 */
-
+			
+			if(loginId == null) {
+				showBox.showMsg("로그인을 해주세요!!");
+			} else {
+				newclassForm.setVisible(true);
+				newclassForm.tf_name.setText("강의 이름");
+				newclassForm.ta_desc.setText("400자 이내의 강의 내용을 작성해주세요.");
+				newclassForm.jb_category.setSelectedIndex(0);
+			}
 		} else if (ob == mainForm.cb_category) {// 카테고리 검색
 			System.out.println("검색");
 
@@ -754,6 +753,11 @@ public class Controller implements ActionListener {
 			} else {
 				showBox.showMsg("생성실패");
 			}
+			
+		} else if(ob == newclassForm.bt_cancel) {
+			newclassForm.setVisible(false);
+			
+			
 //=============mentorRegForm(멘토신청 폼)=========================
 		} else if (ob == mentorRegForm.bt_submit) {// 신청
 
