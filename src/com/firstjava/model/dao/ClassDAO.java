@@ -42,6 +42,59 @@ public class ClassDAO {
 		}
 	}// 생성자
 	
+	public void updateStudent(int classid) {
+		connect();
+		try {
+			String sql = "update class set student = (select count(*) from register where classid = ?) where classid = ?";
+			stmt = conn.prepareStatement(sql);
+				stmt.setInt(1, classid);
+				stmt.setInt(2, classid);
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+			
+	}//updateStudent
+	
+	public int registerCheck(int classid, String userid) {//같은 id로 동일 강의 수강 금지
+		connect();
+		int count = 0;
+		try {
+			String sql = "select count(*) as cnt from register where classid = ? and userid = ?";
+			stmt = conn.prepareStatement(sql);
+				stmt.setInt(1, classid);
+				stmt.setString(2, userid);
+			rs = stmt.executeQuery();
+			if(rs.next()) {
+				count = rs.getInt("cnt");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+		return count;
+	}//registerCheck
+	
+	public boolean registerClass(int classid, String userid) {
+		connect();
+		try {
+			String sql = "insert into register (classid, userid) values (?, ?)";
+			stmt = conn.prepareStatement(sql);
+				stmt.setInt(1,classid);
+				stmt.setString(2,userid);
+			stmt.executeUpdate();
+			
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+		return false;
+	}//registerClass
 	
 	public ClassVO searchByNo(int no) {//강의의 no값으로 테이블에서 선택된 강의 선택
 		connect();
@@ -160,43 +213,6 @@ public class ClassDAO {
 
 		return list;
 	}
-//	public ArrayList<ClassVO> search(String category) { // 검색
-//		connect();	
-//		ArrayList<ClassVO> list = new ArrayList<ClassVO>();
-//		
-//		try {
-//			String sql = "select  * from class " + "where lower(cname) like lower(?)";
-//			stmt = conn.prepareStatement(sql);
-//
-//			stmt.setString(1, "%" + category + "%");
-//
-//			rs = stmt.executeQuery();
-//
-//			while (rs.next()) {
-//
-//				ClassVO vo = new ClassVO();
-//				vo.setClassno(rs.getInt("classid"));
-//				vo.setClassinfo(rs.getString("classinfo"));
-//				vo.setUserid(rs.getString("userid"));
-//				vo.setCateno(rs.getInt("cateno"));
-//				vo.setCname(rs.getString("cname"));
-//				vo.setOpenDate(rs.getDate("opendate").toString());
-//				vo.setCloseDate(rs.getDate("closedate").toString());
-//				vo.setStudent(rs.getInt("student"));
-//				vo.setLimit(rs.getInt("limit"));
-//
-//				list.add(vo);
-//
-//			}
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} finally {
-//			disconnect();
-//		}
-//
-//		return list;
-//	}
 
 	public ArrayList<ClassVO> findAll() { // 전체검색
 		connect();

@@ -58,6 +58,9 @@ create table register(
 	constraint class_id_fk foreign key(classid) references class(classid)
 );
 
+-- 제약 추가
+alter table register
+add primary key (classid, userid);
 	
 ----------------------------------------------------------------------------------------------------------------------------
 -- mentorTable(멘토테이블)
@@ -100,13 +103,13 @@ insert into category values (5, '음악');
 insert into category values (6, '라이프');
 
 
--- classTable insert
+-- classTable insert 	★ 수강인원은 5이상 20이하!!
 insert into class 
 values (class_seq.nextval, '자바 강의입니다','solbi94', 1, 'JAVA','19/07/01','19/07/08',0,10);
 insert into class 
 values (class_seq.nextval, 'html 강의입니다','gildong', 1, 'html','19/07/01','19/07/10',0,10);
 insert into class 
-values (class_seq.nextval, 'CSS 강의입니다','lime', 2, 'html','19/07/01','19/07/10',0,30);
+values (class_seq.nextval, 'CSS 강의입니다','lime', 2, 'html','19/07/01','19/07/10',0,20);
 insert into class 
 values (class_seq.nextval, 'Script 강의입니다','juwon', 2, 'html','19/07/01','19/07/10',0,5);
 insert into class 
@@ -115,9 +118,9 @@ insert into class
 values (class_seq.nextval, 'XML 강의입니다','gildong', 3, 'html','19/07/01','19/07/10',0,10);
 
 
--- registerTable insert
-insert into register values (10,'solbi94', 4);
-insert into register values (10,'lime', 5);
+-- registerTable insert 	★ insert할때 classid와 userid가 일치하는지 확인!!
+insert into register values (1,'solbi94', 4);
+insert into register values (4,'lime', 5);
 
 
 -- mentorTable insert
