@@ -20,7 +20,7 @@ public class SearchForm extends JFrame {
 	ButtonGroup group;
 
 	// 둘째패널에 위치할 컴포넌트 ==> 라벨, 텍스트필드
-	JTextField tf_search;
+	public JTextField tf_search;
 
 	JPanel panel_first, panel_second, panel_third, panel_option;
 
@@ -35,9 +35,12 @@ public class SearchForm extends JFrame {
 
 		String[] categoryTitle = {"목록", "NO", "분류", "강의명", "개강일", "종강일", "멘토명", "수강생", "정원" };
 		cb_columnTitle = new JComboBox<String>(categoryTitle);
-		cb_columnSort = new JComboBox<String>(categoryTitle); 
 		
-		tf_search = new JTextField(15);
+		String[] categorySort = {"NO", "분류", "강의명", "개강일", "종강일", "멘토명", "수강생", "정원" };
+		cb_columnSort = new JComboBox<String>(categorySort); 
+		
+		tf_search = new JTextField("목록을 선택해주세요.", 15);
+			tf_search.setEditable(false);
 		panel_first = new JPanel();
 		panel_first.add(cb_columnTitle);
 		panel_first.add(tf_search);
@@ -59,9 +62,7 @@ public class SearchForm extends JFrame {
 		panel_option.add(panel_second);
 		panel_option.add(panel_third);
 
-
-		setBounds(300, 200, 450, 300);
-		//setVisible(true);
+		
 
 	}
 
@@ -78,6 +79,8 @@ public class SearchForm extends JFrame {
 		int columnTitle = cb_columnTitle.getSelectedIndex();
 		
 		int columnSort = cb_columnSort.getSelectedIndex();
+		
+		tf_search.setEditable(true);
 		
 		String keyword = tf_search.getText();
 		

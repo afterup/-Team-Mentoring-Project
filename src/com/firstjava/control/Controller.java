@@ -3,6 +3,8 @@ package com.firstjava.control;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
@@ -12,6 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
 
+import javax.swing.JComboBox;
 import javax.swing.JTable;
 
 import com.firstjava.model.dao.ClassDAO;
@@ -47,7 +50,7 @@ public class Controller implements ActionListener {
 	ManagerForm managerForm;
 	NewclassForm newclassForm;
 	ShowBoxForm showBox;
-	SearchForm showBox2;
+	SearchForm searchForm;
 
 	String loginId;
 	int classId;
@@ -67,7 +70,7 @@ public class Controller implements ActionListener {
 
 		newclassForm = new NewclassForm();
 		showBox = new ShowBoxForm();
-		showBox2 = new SearchForm();
+		searchForm = new SearchForm();
 
 		eventUp();
 	}// 생성자
@@ -209,6 +212,10 @@ public class Controller implements ActionListener {
 		managerForm.bt_mento.addActionListener(this);
 		managerForm.bt_agree.addActionListener(this);
 		managerForm.bt_disagree.addActionListener(this);
+		
+		
+		
+		
 
 		// findForm
 		findForm.bt_idView.addActionListener(this);
@@ -244,6 +251,34 @@ public class Controller implements ActionListener {
 		//MentorRegForm
 		mentorRegForm.bt_submit.addActionListener(this);
 		mentorRegForm.bt_cancel.addActionListener(this);
+		
+		
+		
+		newclassForm.tf_name.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				newclassForm.tf_name.setText("");
+			}
+		});
+		
+
+		//SearchFrom
+		searchForm.cb_columnTitle.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				JComboBox cb = (JComboBox) e.getSource();
+				
+		        if(!(cb.getSelectedItem().equals("목록"))) {
+		        	searchForm.tf_search.setEditable(true);
+		        	searchForm.tf_search.setText("");
+		        }else {
+		        	searchForm.tf_search.setEditable(false);
+		        	searchForm.tf_search.setText("목록을 선택해주세요.");
+		        }
+			}
+		});
 
 	}// eventUp
 
@@ -404,9 +439,7 @@ public class Controller implements ActionListener {
 
 		} else if (ob == managerForm.bt_p_id_search) {// 게시글관리 상세검색
 
-			System.out.println("클릭");
-
-			Map<String, Object> map = showBox2.showOption();
+			Map<String, Object> map = searchForm.showOption();
 
 			ClassDAO dao = new ClassDAO();
 			// ArrayList<MembershipVO> list = dao.findByName(name);
