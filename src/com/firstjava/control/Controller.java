@@ -76,6 +76,7 @@ public class Controller implements ActionListener {
 
 		// login
 		loginForm.bt_login.addActionListener(this);
+		loginForm.bt_cancel.addActionListener(this);
 		loginForm.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
@@ -531,12 +532,13 @@ public class Controller implements ActionListener {
 			  }
 
 		} else if (ob == loginForm.la_join) { // 회원가입
-
 			joinForm.setVisible(true);
 
 		} else if (ob == loginForm.la_idPassSearch) { // 아이디,비밀번호찾기
-
 			findForm.setVisible(true);
+		
+		} else if(ob==loginForm.bt_cancel) {
+			loginForm.setVisible(false);
 
 			/*-------------------------JoinForm(회원가입창)--------------------*/
 		} else if (ob == joinForm.bt_submit) { // 가입 등록
@@ -597,8 +599,9 @@ public class Controller implements ActionListener {
 			}
 
 		} else if (ob == joinForm.bt_cancel) { // 취소
-
 			joinForm.initText();
+			joinForm.setVisible(false);
+			loginForm.setVisible(true);
 
 		} else if (ob == joinForm.bt_checkid) {// 중복확인
 			checkId();
@@ -626,6 +629,7 @@ public class Controller implements ActionListener {
 			}
 
 		} else if (ob == pChangeForm.bt_cancel) {// 취소
+			pChangeForm.setVisible(false);
 
 //----------------------FIND FORM(아이디 비밀번호찾기창) --------------------
 
@@ -662,8 +666,12 @@ public class Controller implements ActionListener {
 		}
 
 		else if (ob == findForm.bt_cancel) {// 아이디찾기에서 취소
+			findForm.setVisible(false);
+			loginForm.setVisible(true);
 
 		} else if (ob == findForm.bt_p_cancel) {// 비번찾기에서 취소
+			findForm.setVisible(false);
+			loginForm.setVisible(true);
 
 //-----------------------MYPAGE FORM(마이페이지)-----------------
 
@@ -737,7 +745,7 @@ public class Controller implements ActionListener {
 			
 			
 		}else if(ob == review.bt_cancel) {
-			
+			review.setVisible(false);
 			
 			
 		} else if (ob == myPageForm.bt_my) {// 카드레이아웃_내정보
