@@ -421,9 +421,30 @@ public class Controller implements ActionListener {
 			
 		} else if (ob==managerForm.bt_agree) {//멘토 승인
 			//id랑 confirm
+			
 			MemberDAO dao = new MemberDAO();
-			dao.updateMentor(loginId);
-	
+			int row = managerForm.m_table.getSelectedRow();
+			String id = (managerForm.m_table.getValueAt(row, 0)).toString();
+			System.out.println(id);
+			if(dao.updateMentor("승인",id)) {
+				showBox.showMsg("승인완료");
+				displayMentor(dao.viewMentor());
+			}else {
+				showBox.showMsg("승인실패");
+			}
+			
+		} else if(ob==managerForm.bt_disagree) {
+			MemberDAO dao = new MemberDAO();
+			int row = managerForm.m_table.getSelectedRow();
+			String id = (managerForm.m_table.getValueAt(row, 0)).toString();
+			System.out.println(id);
+			if(dao.updateMentor("거부",id)) {
+				showBox.showMsg("거부완료");
+				displayMentor(dao.viewMentor());
+			}else {
+				showBox.showMsg("거부실패");
+			}
+			
 			
 		} else if (ob == managerForm.bt_member) {// 카드레이아웃_회원관리
 			managerForm.menuColor("member");

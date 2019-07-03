@@ -409,15 +409,16 @@ public class MemberDAO {
 	}// insert
 	
 	
-	public boolean updateMentor(String id) {
+	public boolean updateMentor(String confirm,String id) {
 
 		connect();
 		try {
 
-			String sql = "update mentor set confirm = '승인' where userid = ?";
+			String sql = "update mentor set confirm = ? where userid = ?";
 
 			stmt = conn.prepareStatement(sql);
-			stmt.setString(1, id);
+			stmt.setString(1, confirm);
+			stmt.setString(2, id);
 
 			stmt.executeUpdate();
 			return true;
