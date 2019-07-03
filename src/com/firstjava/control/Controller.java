@@ -681,10 +681,15 @@ public class Controller implements ActionListener {
 			}
 		} else if (ob == myPageForm.bt_review) {// 내강의_평점작성
 			review.setVisible(true);
-
+			
+		} else if (ob == myPageForm.bt_my) {// 카드레이아웃_내정보
+			myPageForm.menuColor("mydata");
+			myPageForm.card.show(myPageForm.panel_my_page, "1");
+	
+			
 		} else if (ob == myPageForm.bt_class_request) {// 카드레이아웃_내강의
 			myPageForm.menuColor("class");
-			myPageForm.card.show(myPageForm.panel_my_page, "menti");
+			myPageForm.card.show(myPageForm.panel_my_page, "2");
 
 			MemberDAO dao = new MemberDAO();
 			ClassDAO cdao = new ClassDAO();
@@ -714,12 +719,6 @@ public class Controller implements ActionListener {
 				myPageForm.dtm_mentor.addRow(rowData);
 			}
 
-		} else if (ob == myPageForm.bt_my)
-
-		{// 카드레이아웃_내정보
-		} else if (ob == myPageForm.bt_my) {// 카드레이아웃_내정보
-			myPageForm.menuColor("mydata");
-			myPageForm.card.show(myPageForm.panel_my_page, "my");
 
 //------------------------NewclassForm FORM(강의개설페이지)-----------------
 		} else if (ob == newclassForm.bt_new) {// 강의개설

@@ -217,16 +217,16 @@ public class MyPageForm extends JFrame{
 		//=========카드 레이아웃===========
 		card = new CardLayout();
 		panel_my_page = new JPanel();
-		panel_my_page.setBounds(25, 80, 736, 564);
-
 		panel_my_page.setLayout(card);// 카드레이아웃
-		panel_my_page.add(panel_my_data, "my"); // 카드붙이기
+		panel_my_page.setBounds(25, 80, 736, 564);
+		
+		panel_my_page.add(panel_my_data, "1"); // 카드붙이기
+		panel_my_page.add(panel_class, "2"); 
 		
 		JLabel lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setIcon(new ImageIcon("image/logo_blacksmall.png"));
 		lblNewLabel_1.setBounds(42, 37, 150, 177);
 		panel_my_data.add(lblNewLabel_1);
-		panel_my_page.add(panel_class, "menti"); // 카드붙이기
 		
 		bt_review = new JButton("평점 작성");
 		bt_review.setBounds(31, 513, 100, 40);
