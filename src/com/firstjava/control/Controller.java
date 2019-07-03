@@ -190,6 +190,7 @@ public class Controller implements ActionListener {
 				int row = table.rowAtPoint(p);
 				if (me.getClickCount() == 1) {
 					classForm.controlsetEnabled();
+					classForm.bt_new.setVisible(false);
 				}
 			}
 		});

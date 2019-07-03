@@ -1,23 +1,18 @@
 package com.firstjava.view;
 
-import java.awt.BorderLayout;
+
 import java.awt.Color;
-import java.awt.EventQueue;
-import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
-import com.firstjava.model.vo.ClassVO;
-import com.firstjava.model.vo.MemberVO;
 
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.JScrollBar;
+
 
 public class ClassForm extends JFrame {
 
@@ -25,7 +20,7 @@ public class ClassForm extends JFrame {
 	public JTextField tf_name, tf_student, tf_open, tf_close;
 	public JComboBox jb_category;
 	public JTextArea ta_desc;
-	public JButton bt_new, bt_update, bt_delete, bt_cancel; 
+	public JButton bt_new, bt_cancel; 
 		
 	/**
 	 * Create the frame.
@@ -104,17 +99,9 @@ public class ClassForm extends JFrame {
 		
 		//버튼
 		
-		bt_new = new JButton("신청");
-		bt_new.setBounds(120, 580, 105, 30);
+		bt_new = new JButton("강의신청");
+		bt_new.setBounds(490, 580, 105, 30);
 		contentPane.add(bt_new);
-		
-		bt_update = new JButton("수정");
-		bt_update.setBounds(280, 580, 105, 30);
-		contentPane.add(bt_update);
-		
-		bt_delete = new JButton("삭제");                                            
-		bt_delete.setBounds(440, 580, 105, 30);
-		contentPane.add(bt_delete);
 		
 		bt_cancel = new JButton("취소");
 		bt_cancel.setBounds(600, 580, 105, 30);
