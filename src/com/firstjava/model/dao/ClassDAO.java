@@ -13,6 +13,7 @@ import java.util.Map;
 import java.util.Properties;
 
 import com.firstjava.model.vo.ClassVO;
+import com.firstjava.view.SearchForm;
 
 
 public class ClassDAO {
@@ -20,6 +21,7 @@ public class ClassDAO {
 	Connection conn;
 	PreparedStatement stmt;
 	ResultSet rs;
+	SearchForm searchForm;
 	
 
 	Properties pro;// DB접속관련 정보 저장 객체
@@ -365,6 +367,7 @@ public class ClassDAO {
 		System.out.println(columnTitle_idx);
 		
 		String[] column = {"목록", "classid", "cname", "classinfo", "opendate", "closedate",  "userid", "student", "limit"};
+		
 
 		try {
 			
@@ -372,8 +375,6 @@ public class ClassDAO {
 			
 			switch(column[columnTitle_idx]) {
 			
-			
-			case "목록" : break;
 			case "classid" : sql += "where classid=?"; break;
 			case "cname" :  sql += "where upper(cname) like upper(?)"; break;
 			case "classinfo" :  sql += "where classinfo like ?"; break;
@@ -384,24 +385,15 @@ public class ClassDAO {
 			case "limit" : sql += "where limit=?"; break;
 			}
 			
-
 			if (sort.equals("오름차순"))
-				sql +=" order by " + column[columnSort_idx];
+				sql +=" order by " + column[columnSort_idx+1];
 			else if (sort.equals("내림차순"))
-				sql += " order by " + column[columnSort_idx] + " desc";
-			
-			System.out.println("sql: "+sql);
+				sql += " order by " + column[columnSort_idx+1] + " desc";
 			
 			stmt = conn.prepareStatement(sql);// sql문 
 			
-			System.out.println("key: "+sql);
-			System.out.println("columnTitle_idx: "+column[columnTitle_idx]);
-			System.out.println("columnSort_idx: "+column[columnSort_idx]);
-			
-			
 			if(column[columnTitle_idx] == "목록") {
 					
-			
 			}else if(column[columnTitle_idx] == "classinfo" ||
 			   column[columnTitle_idx] == "cname" ||
 			   column[columnTitle_idx] == "userid" 	) {
@@ -411,9 +403,7 @@ public class ClassDAO {
 			}else {
 				stmt.setObject(1,  keyword );// '%홍%'
 				
-				
 			}
-			          
 			
 			rs = stmt.executeQuery();// sql문 실행요청(실행시점!!)
 			
