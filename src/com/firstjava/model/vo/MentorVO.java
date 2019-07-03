@@ -4,22 +4,25 @@ public class MentorVO
 {
 	
 	private String userid;
-	private String academy;
+	private String job;
 	private String major;
-	private String certification;
+	private String license;
 	private String plan;
+	private String confirm;
 	
+
+
 	public MentorVO()
 	{
 	}
 	
-	public MentorVO(String userid,String academy, String major, String certification, String plan)
+	public MentorVO(String userid,String job, String major, String license, String plan)
 	{
 		super();
 		this.userid = userid;
-		this.academy = academy;
+		this.job = job;
 		this.major = major;
-		this.certification = certification;
+		this.license = license;
 		this.plan = plan;
 	}
 	
@@ -33,13 +36,13 @@ public class MentorVO
 		this.userid = userid;
 	}
 	
-	public String getAcademy()
+	public String getJob()
 	{
-		return academy;
+		return job;
 	}
-	public void setAcademy(String academy)
+	public void setJob(String job)
 	{
-		this.academy = academy;
+		this.job = job;
 	}
 	public String getMajor()
 	{
@@ -49,14 +52,16 @@ public class MentorVO
 	{
 		this.major = major;
 	}
-	public String getCertification()
+	public String getLicense()
 	{
-		return certification;
+		return license;
 	}
-	public void setCertification(String certification)
+
+	public void setLicense(String license)
 	{
-		this.certification = certification;
+		this.license = license;
 	}
+
 	public String getPlan()
 	{
 		return plan;
@@ -64,6 +69,15 @@ public class MentorVO
 	public void setPlan(String plan)
 	{
 		this.plan = plan;
+	}
+	public String getConfirm()
+	{
+		return confirm;
+	}
+
+	public void setConfirm(String confirm)
+	{
+		this.confirm = confirm;
 	}
 
 	

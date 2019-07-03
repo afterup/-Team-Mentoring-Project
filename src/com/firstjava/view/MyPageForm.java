@@ -35,8 +35,11 @@ public class MyPageForm extends JFrame{
 	JLabel la_menticlass,la_mentoclass;
 	JTable table_menti,table_mentor;
 	JScrollPane scroll_table_menti,scroll_table_mento;
-
-
+	
+	public DefaultTableModel dtm_menti;
+	public DefaultTableModel dtm_mentor;
+	
+	
 	public MyPageForm() {
 		setTitle("마이 페이지");
 		
@@ -140,7 +143,7 @@ public class MyPageForm extends JFrame{
 
 		String[] columnTitle_menti = { "No.", "Name", "ID" };
 		Object[][] rowData_menti = new Object[0][3];
-		DefaultTableModel dtm_menti = new DefaultTableModel(rowData_menti, columnTitle_menti);
+		dtm_menti = new DefaultTableModel(rowData_menti, columnTitle_menti);
 
 		table_menti = new JTable(dtm_menti) {
 			@Override
@@ -165,7 +168,7 @@ public class MyPageForm extends JFrame{
 		
 		String[] columnTitle_mentor = { "No.", "Name", "ID" };
 		Object[][] rowData_mentor = new Object[0][3];
-		DefaultTableModel dtm_mentor = new DefaultTableModel(rowData_mentor, columnTitle_mentor);
+		dtm_mentor = new DefaultTableModel(rowData_mentor, columnTitle_mentor);
 		
 		table_mentor = new JTable(dtm_mentor) {
 			@Override

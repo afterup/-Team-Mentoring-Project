@@ -10,9 +10,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import com.firstjava.model.vo.ClassVO;
+import com.firstjava.model.vo.MemberVO;
+import com.firstjava.view.SearchForm;
 
 
 public class ClassDAO {
@@ -229,6 +233,80 @@ public class ClassDAO {
 		return list;
 	}// findAll
 
+	
+	
+	public ArrayList<ClassVO> searchClass(Map<String, Object> map) {
+		connect();
+		ArrayList<ClassVO> list = new ArrayList<ClassVO>();
+		
+		int column_idx =  (int) map.get("column");
+		String sort = (String) map.get("sort");
+		String keyword = (String) map.get("keyword");
+		
+		//String[] categoryTitle = { "NO", "분류", "강의명", "개강일", "종강일", "멘토명", "수강생", "정원" }
+		
+		System.out.println(column_idx);
+		
+		String[] column = {"classid", "cname", "classinfo", "opendate", "closedate",  "userid", "student", "limit"};
+
+		try {
+			
+			String sql = "select * from class ";
+			
+			switch(column[column_idx]) {
+			
+			case "classid" : sql += "where classid=?"; break;
+			case "cname" :  sql += "where upper(cname) like upper(?)"; break;
+			case "classinfo" :  sql += "where classinfo like '%"+"?"+"%'"; break;
+			case "opendate" :  sql += "where opendate=?"; break;
+			case "closedate" : sql += "where closedate=?"; break; 
+			case "userid" :  sql += "where userid=?"; break;
+			case "student" :  sql += "where student=?"; break;
+			case "limit" : sql += "where limit=?"; break;
+			}
+			
+
+			if (sort.equals("오름차순"))
+				sql +=" order by " + column[column_idx];
+			else if (sort.equals("내림차순"))
+				sql += " order by " + column[column_idx] + " desc";
+			
+			System.out.println("sql: "+sql);
+			
+			stmt = conn.prepareStatement(sql);// sql문 전송
+			
+			stmt.setObject(1,  keyword );// '%홍%'
+			
+			System.out.println("key: "+sql);
+			
+			rs = stmt.executeQuery();// sql문 실행요청(실행시점!!)
+			
+			while (rs.next()) {// 행얻기
+				// 열데이터 얻기
+				ClassVO vo = new ClassVO();
+				// 7개의 관련있는 속성데이터를 묶어주기 위해 사용.
+				vo.setClassno(rs.getInt("classid"));
+				vo.setClassinfo(rs.getString("classinfo"));
+				vo.setUserid(rs.getString("userid"));
+				vo.setCateno(rs.getInt("cateno"));
+				vo.setCname(rs.getString("cname"));
+				vo.setOpenDate(rs.getDate("opendate").toString());
+				vo.setCloseDate(rs.getDate("closedate").toString());
+				vo.setStudent(rs.getInt("student"));
+				vo.setLimit(rs.getInt("limit"));
+
+				list.add(vo);
+			} // while
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+
+		return list;
+	}// findAll
+	
+	
 	private void connect() {// 연결객체생성
 		try {
 			conn = DriverManager.getConnection(pro.getProperty("url"), pro);

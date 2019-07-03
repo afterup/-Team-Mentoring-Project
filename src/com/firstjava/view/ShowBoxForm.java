@@ -75,11 +75,45 @@ public class ShowBoxForm extends JFrame {
 		// JOptionPane.showOptionDialog(parentComponent, message, title,
 		// optionType, messageType, icon, options, initialValue)
 		String[] options = { "확인", "취소" };
-		int t = JOptionPane.showOptionDialog(this, panel_option, "Search", JOptionPane.OK_CANCEL_OPTION,
-				JOptionPane.PLAIN_MESSAGE, // JOptionPane.ERROR_MESSAGE,
-				null, null, // options,
-				null);// options[1])
-		// t==> 확인, 취소, X : 0, 1, -1
+		JOptionPane.showOptionDialog(this, panel_option, "Search", 
+									JOptionPane.OK_CANCEL_OPTION,
+									JOptionPane.PLAIN_MESSAGE, // JOptionPane.ERROR_MESSAGE,
+									null, null, // options,
+									null);// options[1])
+							// t==> 확인, 취소, X : 0, 1, -1
+
+		String keyword = tf_search.getText();
+		String title = "";// 만약 라디오 버튼 중 아이디가 선택되었다면 title= "아이디";
+					// "아이디" , "이름", "주소"
+
+		if (radio_id.isSelected()) {// 버튼그룹 중 아이디가 선택되었다면
+			title = "아이디"; // title=radio_id.getText();
+		} else if (radio_name.isSelected()) {// 버튼그룹 중 이름이 선택되었다면
+			title = "이름";
+		} else if (radio_email.isSelected()) {// 버튼그룹 중 이름이 선택되었다면
+			title = "이메일";
+		} else {// if(radio_addr.isSelected()) {//버튼그룹 중 주소가 선택되었다면
+			title = "전화번호";
+		}
+
+		Map<String, String> map = new HashMap<>();
+		map.put("keyword", keyword);
+		map.put("title", title);
+
+		return map;
+	}// showOption
+	
+	
+	public Map<String, String> showOptionClass() {
+		// JOptionPane.showOptionDialog(parentComponent, message, title,
+		// optionType, messageType, icon, options, initialValue)
+		String[] options = { "확인", "취소" };
+		JOptionPane.showOptionDialog(this, panel_option, "Search", 
+									JOptionPane.OK_CANCEL_OPTION,
+									JOptionPane.PLAIN_MESSAGE, // JOptionPane.ERROR_MESSAGE,
+									null, null, // options,
+									null);// options[1])
+							// t==> 확인, 취소, X : 0, 1, -1
 
 		String keyword = tf_search.getText();
 		String title = "";// 만약 라디오 버튼 중 아이디가 선택되었다면 title= "아이디";
