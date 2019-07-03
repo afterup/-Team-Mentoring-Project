@@ -408,6 +408,34 @@ public class MemberDAO {
 		return false;
 	}// insert
 	
+	
+	public boolean updateMentor(String id) {
+
+		connect();
+		try {
+
+			String sql = "update mentor set confirm = '승인' where userid = ?";
+
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, id);
+
+			stmt.executeUpdate();
+			return true;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+		return false;
+	}
+	
+	
+	
+	
+	
+	
+	
 	public ArrayList<MentorVO> viewMentor() { // 멘토대기중인 사람들 뷰
 		connect();
 		ArrayList<MentorVO> list = new ArrayList<MentorVO>();

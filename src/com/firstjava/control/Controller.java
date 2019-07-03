@@ -203,6 +203,8 @@ public class Controller implements ActionListener {
 		managerForm.bt_member.addActionListener(this);
 		managerForm.bt_post.addActionListener(this);
 		managerForm.bt_mento.addActionListener(this);
+		managerForm.bt_agree.addActionListener(this);
+		managerForm.bt_disagree.addActionListener(this);
 
 		// findForm
 		findForm.bt_idView.addActionListener(this);
@@ -416,6 +418,12 @@ public class Controller implements ActionListener {
 			
 			
 		
+			
+		} else if (ob==managerForm.bt_agree) {//멘토 승인
+			//id랑 confirm
+			MemberDAO dao = new MemberDAO();
+			dao.updateMentor(loginId);
+	
 			
 		} else if (ob == managerForm.bt_member) {// 카드레이아웃_회원관리
 			managerForm.menuColor("member");
