@@ -286,12 +286,16 @@ public class Controller implements ActionListener {
 
 		} else if (ob == mainForm.bt_mento_demand) { // 멘토신청
 
+			MemberDAO dao = new MemberDAO();
 			if (loginId == null) {
 				showBox.showMsg("로그인 해 주세요");
+			} else if (dao.findMentor(loginId)==0){
+				showBox.showMsg("이미 신청하셨습니다.");
 			} else {
 				mainForm.menuColor("mento");
-				mentorRegForm.setVisible(true);
+				mentorRegForm.setVisible(true);				
 			}
+			
 			// mentorForm.bt_search
 
 		} else if (ob == mainForm.bt_manager) {// 관리자페이지 이동버튼

@@ -223,7 +223,7 @@ public class MyPageForm extends JFrame{
 		panel_my_page.add(panel_my_data, "my"); // 카드붙이기
 		
 		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\Playdata\\Desktop\\[TORING]\\image\\logo_blacksmall.png"));
+		lblNewLabel_1.setIcon(new ImageIcon("image/logo_blacksmall.png"));
 		lblNewLabel_1.setBounds(42, 37, 150, 177);
 		panel_my_data.add(lblNewLabel_1);
 		panel_my_page.add(panel_class, "menti"); // 카드붙이기
@@ -235,7 +235,7 @@ public class MyPageForm extends JFrame{
 		getContentPane().add(panel_my_page);
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Playdata\\Desktop\\[TORING]\\image\\background_800.jpg"));
+		lblNewLabel.setIcon(new ImageIcon("image/background_800.jpg"));
 		lblNewLabel.setBounds(0, 0, 794, 665);
 		getContentPane().add(lblNewLabel);
 

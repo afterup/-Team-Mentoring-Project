@@ -78,7 +78,7 @@ public class PassChangeForm extends JFrame {
 		getContentPane().add(lblNewLabel_1);
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Playdata\\Desktop\\[TORING]\\image\\background_800.jpg"));
+		lblNewLabel.setIcon(new ImageIcon("image/background_800.jpg"));
 		lblNewLabel.setBounds(0, 0, 342, 553);
 		getContentPane().add(lblNewLabel);
 		
