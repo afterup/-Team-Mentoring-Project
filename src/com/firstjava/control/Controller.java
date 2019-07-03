@@ -293,10 +293,11 @@ public class Controller implements ActionListener {
 
 		} else if (ob == mainForm.bt_search) { // 검색
 
-			String category = (String) mainForm.cb_category.getSelectedItem();
-
+			int category = mainForm.cb_category.getSelectedIndex()+1;
+			System.out.println(category);
 			ClassDAO dao = new ClassDAO();
 			ArrayList<ClassVO> list = dao.search(category);
+			System.out.println(list);
 			Displayclass(list);
 
 		} else if (ob == mainForm.bt_select) { // 전체조회
@@ -386,9 +387,9 @@ public class Controller implements ActionListener {
 
 			ClassDAO dao = new ClassDAO();
 
-			ArrayList<ClassVO> list = dao.search(category);
+//			ArrayList<ClassVO> list = dao.search(category);
 
-			DisplayclassManager(list);
+//			DisplayclassManager(list);
 
 		} else if (ob == managerForm.bt_p_all_select) {
 

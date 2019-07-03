@@ -126,37 +126,29 @@ public class ClassDAO {
 
 	}	
 	
-
-	public ArrayList<ClassVO> search(String category) { // 검색
+	
+	public ArrayList<ClassVO> search(int no){ //검색
 		connect();	
 		ArrayList<ClassVO> list = new ArrayList<ClassVO>();
 		
 		try {
-			String sql = "select  * from class " + "where lower(cname) like lower(?)";
+			String sql = "select classid, cname, classinfo, opendate, closedate from class where cateno = ?";
 			stmt = conn.prepareStatement(sql);
-
-			stmt.setString(1, "%" + category + "%");
-
+			stmt.setInt(1,no);
 			rs = stmt.executeQuery();
-
+			
 			while (rs.next()) {
-
 				ClassVO vo = new ClassVO();
 				vo.setClassno(rs.getInt("classid"));
 				vo.setClassinfo(rs.getString("classinfo"));
-				vo.setUserid(rs.getString("userid"));
-				vo.setCateno(rs.getInt("cateno"));
 				vo.setCname(rs.getString("cname"));
 				vo.setOpenDate(rs.getDate("opendate").toString());
 				vo.setCloseDate(rs.getDate("closedate").toString());
-				vo.setStudent(rs.getInt("student"));
-				vo.setLimit(rs.getInt("limit"));
-
+				vo.setCateno(no);
 				list.add(vo);
-
 			}
+			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			disconnect();
@@ -164,6 +156,43 @@ public class ClassDAO {
 
 		return list;
 	}
+//	public ArrayList<ClassVO> search(String category) { // 검색
+//		connect();	
+//		ArrayList<ClassVO> list = new ArrayList<ClassVO>();
+//		
+//		try {
+//			String sql = "select  * from class " + "where lower(cname) like lower(?)";
+//			stmt = conn.prepareStatement(sql);
+//
+//			stmt.setString(1, "%" + category + "%");
+//
+//			rs = stmt.executeQuery();
+//
+//			while (rs.next()) {
+//
+//				ClassVO vo = new ClassVO();
+//				vo.setClassno(rs.getInt("classid"));
+//				vo.setClassinfo(rs.getString("classinfo"));
+//				vo.setUserid(rs.getString("userid"));
+//				vo.setCateno(rs.getInt("cateno"));
+//				vo.setCname(rs.getString("cname"));
+//				vo.setOpenDate(rs.getDate("opendate").toString());
+//				vo.setCloseDate(rs.getDate("closedate").toString());
+//				vo.setStudent(rs.getInt("student"));
+//				vo.setLimit(rs.getInt("limit"));
+//
+//				list.add(vo);
+//
+//			}
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} finally {
+//			disconnect();
+//		}
+//
+//		return list;
+//	}
 
 	public ArrayList<ClassVO> findAll() { // 전체검색
 		connect();
