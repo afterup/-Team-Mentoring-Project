@@ -61,7 +61,7 @@ public class PassChangeForm extends JFrame {
 		la_passCheck.setBounds(55, 337, 159, 15);
 		getContentPane().add(la_passCheck);
 		
-		bt_submit = new JButton("등록");
+		bt_submit = new JButton("확인");
 		bt_submit.setFont(new Font("맑은 고딕", Font.PLAIN, 18));
 		bt_submit.setBounds(55, 463, 111, 46);
 		getContentPane().add(bt_submit);

@@ -22,14 +22,14 @@ public class MyPageForm extends JFrame{
 	public JPanel panel_my_data, panel_class;// 카드
 	public CardLayout card;
 
-	//MyDATA Component
+	//내정보 Component
 	public JButton bt_infoUpdate, bt_pwChange;
 	public JTextField tf_id, tf_name, tf_phone1, tf_phone2, tf_phone3, tf_email;
 	public JComboBox<String> cb_job;
 	public JLabel la_my_data ,la_id, la_name, la_phone, la_addr, la_mento, la_mentoYN;
 	public JComboBox<String> cb_mentor_category;
 
-	//Class Component
+	//내강의 Component
 	public JButton bt_menti_request_cancel,bt_classupdate,bt_classdelete,bt_info,bt_review;
 	public JComboBox<String> cb_menti_category;
 	JLabel la_menticlass,la_mentoclass;
