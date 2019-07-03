@@ -64,18 +64,18 @@ public class ClassDAO {
 	}
 	
 	
-	public boolean cancleClass(String userid, int classid) {
+	public boolean cancleClass(int classid, String userid) {
 
 		connect();
 		try {
 
-			String sql = "update register set rate = ? "
+			String sql = "delete from register "
 					+ "where classid = ? and userid = ?";
 
 			stmt = conn.prepareStatement(sql);
 		
-			stmt.setInt(2, classid);
-			stmt.setString(3, userid);
+			stmt.setInt(1, classid);
+			stmt.setString(2, userid);
 
 			stmt.executeUpdate();
 			return true;

@@ -227,8 +227,7 @@ public class MemberDAO {
 		connect();
 
 		try {
-			System.out.println(id);
-			String sql = "DELETE FROM member WHERE userid=? ";
+			String sql = "DELETE FROM member WHERE userid= ? ";
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1, id);
 
