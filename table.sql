@@ -41,7 +41,7 @@ create table class
 	opendate 	date 			not null,
 	closedate 	date 			not null,
 	student 	number		    not null,
-	limit       number	        not null check (limit between 5 and 20),
+	limit       number	        not null check (limit between 1 and 5),
 	constraint userid_fk foreign key(userid) references member(userid),
 	constraint cateno_fk foreign key(cateno) references category(cateno)
 );
@@ -103,24 +103,24 @@ insert into category values (5, '음악');
 insert into category values (6, '라이프');
 
 
--- classTable insert 	★ 수강인원은 5이상 20이하!!
+-- classTable insert 	★ 수강인원은 1이상 5이하!!
 insert into class 
-values (class_seq.nextval, '자바 강의입니다','solbi94', 1, 'JAVA','19/07/01','19/07/08',0,10);
+values (class_seq.nextval, '자바 강의입니다','solbi94', 1, 'JAVA','19/07/01','19/07/08',0,5);
 insert into class 
-values (class_seq.nextval, 'html 강의입니다','gildong', 1, 'html','19/07/01','19/07/10',0,10);
+values (class_seq.nextval, 'html 강의입니다','gildong', 1, 'html','19/07/01','19/07/10',0,5);
 insert into class 
-values (class_seq.nextval, 'CSS 강의입니다','lime', 2, 'html','19/07/01','19/07/10',0,20);
+values (class_seq.nextval, 'PhotoShop 강의입니다','lime', 2, 'PhotoShop','19/07/01','19/07/10',0,5);
 insert into class 
-values (class_seq.nextval, 'Script 강의입니다','juwon', 2, 'html','19/07/01','19/07/10',0,5);
+values (class_seq.nextval, '네일아트 강의입니다.','juwon', 2, 'Nail Art','19/07/01','19/07/10',0,5);
 insert into class 
-values (class_seq.nextval, 'Spring 강의입니다','gildong', 3, 'html','19/07/01','19/07/10',0,10);
+values (class_seq.nextval, '1:1 알고리즘 강의입니다.','gildong', 1, '알고리즘','19/07/01','19/07/10',0,1);
 insert into class 
-values (class_seq.nextval, 'XML 강의입니다','gildong', 3, 'html','19/07/01','19/07/10',0,10);
+values (class_seq.nextval, '명상강의 입니다. (3명)','juwon', 6, 'Meditation','19/07/01','19/07/10',0,3);
 
 
 -- registerTable insert 	★ insert할때 classid와 userid가 일치하는지 확인!!
 insert into register values (1,'solbi94', 4);
-insert into register values (4,'lime', 5);
+insert into register values (3,'lime', 5);
 
 
 -- mentorTable insert
