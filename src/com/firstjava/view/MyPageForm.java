@@ -161,7 +161,7 @@ public class MyPageForm extends JFrame{
 		bt_menti_request_cancel = new JButton("신청 취소");
 		bt_menti_request_cancel.setBounds(228, 513, 103, 40);
 
-		String[] columnTitle_menti = { "No.", "Name", "ID" };
+		String[] columnTitle_menti = { "번호", "강의명", "멘토" };
 		Object[][] rowData_menti = new Object[0][3];
 		dtm_menti = new DefaultTableModel(rowData_menti, columnTitle_menti);
 
@@ -171,9 +171,12 @@ public class MyPageForm extends JFrame{
 				return false;
 			}
 		};
+		table_menti.setRowHeight(30);
+		table_menti.getColumn("번호").setPreferredWidth(20);
+		table_menti.getColumn("강의명").setPreferredWidth(100);
+		table_menti.getColumn("멘토").setPreferredWidth(50);
 		scroll_table_menti = new JScrollPane(table_menti);
 		scroll_table_menti.setBounds(31, 169, 300, 332);
-		table_menti.setRowHeight(30);
 		
 		//개설한 강의
 		la_mentoclass = new JLabel("개설한 강의");
@@ -186,7 +189,7 @@ public class MyPageForm extends JFrame{
 		bt_classdelete = new JButton("강의삭제");
 		bt_classdelete.setBounds(613, 513, 86, 40);
 		
-		String[] columnTitle_mentor = { "No.", "Name" };
+		String[] columnTitle_mentor = { "번호", "강의명" };
 		Object[][] rowData_mentor = new Object[0][2];
 		dtm_mentor = new DefaultTableModel(rowData_mentor, columnTitle_mentor);
 		
@@ -197,6 +200,8 @@ public class MyPageForm extends JFrame{
 			}
 		};
 		
+		table_mentor.getColumn("번호").setPreferredWidth(20);
+		table_mentor.getColumn("강의명").setPreferredWidth(100);
 		scroll_table_mento = new JScrollPane(table_mentor);
 		scroll_table_mento.setBounds(399, 169, 300, 332);
 		
