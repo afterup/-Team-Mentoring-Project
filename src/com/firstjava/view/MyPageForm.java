@@ -107,7 +107,7 @@ public class MyPageForm extends JFrame{
 		la_name.setBounds(42, 277, 80, 25);
 		la_phone = new JLabel("전화번호 :");
 		la_phone.setBounds(42, 317, 80, 25);
-		la_addr = new JLabel("주소 :");
+		la_addr = new JLabel("Email 주소 :");
 		la_addr.setBounds(42, 357, 80, 25);
 		la_mento = new JLabel("멘토신청:");
 		la_mento.setBounds(42, 412, 80, 25);
