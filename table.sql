@@ -29,6 +29,20 @@ create table category(
 	
 
 ----------------------------------------------------------------------------------------------------------------------------
+-- mentorTable(멘토테이블)
+drop table mentor;
+create table mentor(
+	userid		varchar2(20 char) constraint mentor_pk primary key,
+	job			varchar2(20 char) not null,
+	major		varchar2(100 char) not null,
+	license		varchar2(100 char),
+	plan		varchar2(800 char) not null,
+	confirm	varchar2(20) DEFAULT '대기',
+	constraint m_userid_fk foreign key(userid) references member(userid) on delete cascade
+);
+
+	
+----------------------------------------------------------------------------------------------------------------------------
 -- classTable(강의테이블)
 drop table class;
 create table class
@@ -42,10 +56,9 @@ create table class
 	closedate 	date 			not null,
 	student 	number		    not null,
 	limit       number	        not null check (limit between 1 and 5),
-	constraint userid_fk foreign key(userid) references member(userid) on delete cascade,
+	constraint userid_fk foreign key(userid) references mentor(userid) on delete cascade,
 	constraint cateno_fk foreign key(cateno) references category(cateno) on delete cascade
 );
-
 	
 ----------------------------------------------------------------------------------------------------------------------------
 -- registerTable(수강신청테이블)
@@ -61,19 +74,6 @@ create table register(
 -- 제약 추가
 alter table register
 add primary key (classid, userid);
-	
-----------------------------------------------------------------------------------------------------------------------------
--- mentorTable(멘토테이블)
-drop table mentor;
-create table mentor(
-	userid		varchar2(20 char) not null,
-	job			varchar2(20 char) not null,
-	major		varchar2(100 char) not null,
-	license		varchar2(100 char),
-	plan		varchar2(800 char) not null,
-	confirm	varchar2(20) DEFAULT '대기',
-	constraint m_userid_fk foreign key(userid) references member(userid) on delete cascade
-);
 
 
 	
