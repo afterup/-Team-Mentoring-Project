@@ -85,10 +85,22 @@ create table mentor(
 ------------------------------------------- Table insert ---------------------------------------------------
 
 -- memberTable insert
-insert into member values ('solbi94', '1234', '고솔비', 'gosolb0904@gmail.com', '010-4010-9537');
-insert into member values ('gildong', '1111', '홍길동', 'gildong@gmail.com', '010-1234-5678');
-insert into member values ('lime', '2222', '길라임', 'lime@gmail.com', '010-1111-2222');
-insert into member values ('juwon', '3333', '김주원', 'juwon@gmail.com', '010-1245-7890');
+insert into member values ('gosolbi','123encore!','고솔비','gosolbi@gmail.com','01015345678');
+insert into member values ('gubonjin','123encore!','구본진','gubonjin@gmail.com','01017435678');
+insert into member values ('kimyongjin','123encore!','김용진','kimyongjin@gmail.com','01016345678');
+insert into member values ('kimjiwoo','123encore!','김지우','kimjiwoo@gmail.com','01012234678');
+insert into member values ('kimhyenwoo','123encore!','김현우','kimhyenwoo@gmail.com','01053445678');
+insert into member values ('kangsejin','123encore!','강세진','kangsejin@gmail.com','01012341478');
+insert into member values ('parkmunha','123encore!','박문하','parkmunha@gmail.com','01011265678');
+insert into member values ('parkjongsu','123encore!','박종수','parkjongsu@gmail.com','01012287778');
+insert into member values ('bangjimin','123encore!','방지민','bangjimin@gmail.com','01016445678');
+insert into member values ('baekgihyeon','123encore!','백기현','baekgihyeon@gmail.com','01012235678');
+insert into member values ('simahyoung','123encore!','심아영','simahyoung@gmail.com','01016445678');
+insert into member values ('jaelee','123encore!','이길재','jaelee@gmail.com','01012345678');
+insert into member values ('egoing','123encore!','이고잉','egoing@gmail.com','01012345678');
+insert into member values ('nomardcorder','123encore!','노마드코더','nomardcorder@gmail.com','01012345678');
+insert into member values ('eboakgi','123encore!','이복기','eboakgi@gmail.com','01012345678');
+
 
 -- memberTable insert (admin)
 insert into member values ('admin','1234','관리자','admin@encore.com','010-1234-5678');
@@ -124,7 +136,7 @@ insert into register values (4,'lime', 5);
 
 
 -- mentorTable insert
-insert into mentor (userid,job,major,license,plan)values('solbi94', '소속','컴퓨터공학','자격증','강의 계획입니다');
+
 insert into mentor (userid,job,major,license,plan)values('lime', '소속','전공','자격증','강의 계획입니다');
 
 
