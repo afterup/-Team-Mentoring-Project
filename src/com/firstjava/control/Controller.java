@@ -3,6 +3,8 @@ package com.firstjava.control;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
@@ -160,10 +162,10 @@ public class Controller implements ActionListener {
 		joinForm.bt_submit.addActionListener(this);
 		joinForm.bt_cancel.addActionListener(this);
 		joinForm.tf_id.addKeyListener(new KeyAdapter(){
+			
 			public void keyReleased(KeyEvent e){ 
-				MemberDAO dao = new MemberDAO();
-								
-				if(dao.findExistID(joinForm.tf_id.getText()) || !joinForm.tf_id.getText().matches("^[\\da-zA-Z]{5,12}+$")){
+				MemberDAO dao = new MemberDAO();					
+				if(dao.findExistId(joinForm.tf_id.getText()) || !joinForm.tf_id.getText().matches("^[\\da-zA-Z]{5,12}+$")){
 					joinForm.la_checkid.setText("사용 불가 아이디");
 					joinForm.la_checkid.setForeground(new Color(255, 192, 203));
 				}else {
@@ -726,29 +728,22 @@ public class Controller implements ActionListener {
 				return;
 			}
 			else if(!newPass.equals(passCk)) {
-				showBox.showMsg("변경할 비밀번호를 확인해주세요. ");
-				pChangeForm.tf_newPass.setText("");
-				pChangeForm.tf_newPassCheck.setText("");
-				pChangeForm.tf_newPass.requestFocus();
-				
+				showBox.showMsg("변경할 비밀번호를 확인해주세요. ");		
+				showBox.showMsg("비밀번호를 확인해주세요. ");
+				pChangeForm.pw_newPass.requestFocus();
 			}
+			
 			else {
 				MemberVO vo = new MemberVO(loginId, null, null, null, null);
+				
 				if (dao.updatePass(newPass, vo)) {
 					showBox.showMsg("비밀번호 변경 성공 ");
 				} else {
 					showBox.showMsg("비밀번호 변경 실패 ");
+					pChangeForm.pw_oldPass.setText("");
+					pChangeForm.pw_newPass.setText("");
+					pChangeForm.pw_newPassCheck.setText("");
 				}
-				pChangeForm.tf_oldPass.setText("");
-				pChangeForm.tf_newPass.setText("");
-				pChangeForm.tf_newPassCheck.setText("");
-				pChangeForm.pw_oldPass.setText("");
-				pChangeForm.pw_newPass.setText("");
-				pChangeForm.pw_newPassCheck.setText("");
-
-			} else {
-				showBox.showMsg("비밀번호를 확인해주세요. ");
-				pChangeForm.pw_newPass.requestFocus();
 			}
 
 		} else if (ob == pChangeForm.bt_cancel) {// 취소
@@ -1126,18 +1121,7 @@ public class Controller implements ActionListener {
 		
 	}// actionPerformed
 
-	public void checkId() {
-		MemberDAO dao = new MemberDAO();
-		String id = joinForm.tf_id.getText();
-		if (dao.findExistId(id) == 1) {
-			showBox.showMsg("이미 사용중인 아이디입니다.");
-			joinForm.tf_id.setText("");
-			joinForm.tf_id.requestFocus();
-		} else {
-			showBox.showMsg("사용가능한 아이디입니다.");
-		}
-	}// checkId
-
+	
 	public void displayclass(ArrayList<ClassVO> list) {
 
 		mainForm.dtm.setRowCount(0);
