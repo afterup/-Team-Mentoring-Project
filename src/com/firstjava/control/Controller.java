@@ -76,8 +76,6 @@ public class Controller implements ActionListener {
 	}// 생성자
 
 	private void eventUp() {
-		
-		
 
 		// login
 		loginForm.bt_login.addActionListener(this);
@@ -112,7 +110,6 @@ public class Controller implements ActionListener {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				joinForm.initText();
-				joinForm.checkid("no");
 				joinForm.setVisible(true);
 				loginForm.setVisible(false);
 			}
@@ -166,10 +163,13 @@ public class Controller implements ActionListener {
 		joinForm.tf_id.addKeyListener(new KeyAdapter(){
 			public void keyReleased(KeyEvent e){ 
 				MemberDAO dao = new MemberDAO();
-				if(dao.findExistID(joinForm.tf_id.getText()) || !joinForm.tf_id.getText().matches("^[\\\\da-zA-Z]{5,12}+$")){
-					joinForm.checkid("no");
+								
+				if(dao.findExistID(joinForm.tf_id.getText()) || !joinForm.tf_id.getText().matches("^[\\da-zA-Z]{5,12}+$")){
+					joinForm.la_checkid.setText("사용 불가 아이디");
+					joinForm.la_checkid.setForeground(new Color(255, 192, 203));
 				}else {
-					joinForm.checkid("yes");
+					joinForm.la_checkid.setText("사용 가능 아이디");
+					joinForm.la_checkid.setForeground(Color.BLUE);
 				}
 		  }
 		});
@@ -622,7 +622,6 @@ public class Controller implements ActionListener {
 			}
 
 		} else if (ob == loginForm.la_join) { // 회원가입
-		
 			joinForm.setVisible(true);
 
 		} else if (ob == loginForm.la_idPassSearch) { // 아이디,비밀번호찾기
@@ -706,7 +705,6 @@ public class Controller implements ActionListener {
 			joinForm.setVisible(false);
 			loginForm.setVisible(true);
 
-
 			/*-----------------------PassChangeForm(비번변경창)--------------------*/
 		} else if (ob == pChangeForm.bt_submit) {// 확인버튼
 			
@@ -715,25 +713,36 @@ public class Controller implements ActionListener {
 			String newPass = pChangeForm.pw_newPass.getText();
 			String passCk = pChangeForm.pw_newPassCheck.getText();
 
-			if(oldPass.equals(newPass)) {
+			if(!dao.findPassById(loginId).equals(oldPass)) {
+				showBox.showMsg("현재 비밀번호를 확인해주세요. " );
+			}
+			else if(oldPass.equals(newPass)) {
 				showBox.showMsg("비밀번호가 같습니다. ");
 			}
-			
-			if (!newPass.matches("^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&])[\\da-zA-Z!@#$%^&]{8,12}$")) {
+			else if (!newPass.matches("^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&])[\\da-zA-Z!@#$%^&]{8,12}$")) {
 				showBox.showMsg("비밀번호 확인");
 				pChangeForm.pw_newPass.setText("");
 				pChangeForm.pw_newPassCheck.setText("");
 				pChangeForm.pw_newPass.requestFocus();
 				return;
 			}
-			
-			if (newPass.equals(passCk)) {
-				MemberVO vo = new MemberVO(loginId, oldPass, null, null, null);
+			else if(!newPass.equals(passCk)) {
+				showBox.showMsg("변경할 비밀번호를 확인해주세요. ");
+				pChangeForm.tf_newPass.setText("");
+				pChangeForm.tf_newPassCheck.setText("");
+				pChangeForm.tf_newPass.requestFocus();
+				
+			}
+			else {
+				MemberVO vo = new MemberVO(loginId, null, null, null, null);
 				if (dao.updatePass(newPass, vo)) {
 					showBox.showMsg("비밀번호 변경 성공 ");
 				} else {
 					showBox.showMsg("비밀번호 변경 실패 ");
 				}
+				pChangeForm.tf_oldPass.setText("");
+				pChangeForm.tf_newPass.setText("");
+				pChangeForm.tf_newPassCheck.setText("");
 				pChangeForm.pw_oldPass.setText("");
 				pChangeForm.pw_newPass.setText("");
 				pChangeForm.pw_newPassCheck.setText("");
@@ -1016,6 +1025,8 @@ public class Controller implements ActionListener {
 			String max =newclassForm.tf_student.getText();
 			if(!max.matches("[1-5]")) {
 				showBox.showMsg("최대인원을 확인해주세요.");
+				newclassForm.tf_student.setText("");
+				newclassForm.tf_student.requestFocus();
 				return;
 			}
 			int max2=Integer.parseInt(max);
@@ -1025,11 +1036,16 @@ public class Controller implements ActionListener {
 			
 			if(!open.matches("^(19|20)(19|20)(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[0-1])$")||!close.matches("^(19|20)(19|20)(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[0-1])$")) {
 				showBox.showMsg("날짜형식을 확인해주세요.");
+				newclassForm.tf_open.setText("");
+				newclassForm.tf_close.setText("");
+				newclassForm.tf_open.requestFocus();
 				return;
 			}
 			
 			if((Integer.parseInt(open)-Integer.parseInt(close))>0) {
 				showBox.showMsg("종강일자가 개강일자보다 빠릅니다. 확인해주세요.");
+				newclassForm.tf_close.setText("");
+				newclassForm.tf_close.requestFocus();
 				return;
 			}
 
@@ -1109,6 +1125,17 @@ public class Controller implements ActionListener {
 		
 	}// actionPerformed
 
+	public void checkId() {
+		MemberDAO dao = new MemberDAO();
+		String id = joinForm.tf_id.getText();
+		if (dao.findExistId(id) == 1) {
+			showBox.showMsg("이미 사용중인 아이디입니다.");
+			joinForm.tf_id.setText("");
+			joinForm.tf_id.requestFocus();
+		} else {
+			showBox.showMsg("사용가능한 아이디입니다.");
+		}
+	}// checkId
 
 	public void displayclass(ArrayList<ClassVO> list) {
 

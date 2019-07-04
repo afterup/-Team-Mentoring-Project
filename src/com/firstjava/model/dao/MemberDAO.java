@@ -199,6 +199,30 @@ public class MemberDAO {
 		}
 		return pass;
 
+	}//findPass
+	
+	
+	
+	public String findPassById(String id) {
+		connect();
+		String pass = "";
+		try {
+			String sql = "select password  FROM member where userid = ? ";
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, id);
+			
+			rs = stmt.executeQuery();
+
+			if (rs.next()) {
+				pass = rs.getString("password");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+		return pass;
+
 	}
 
 	public String deleteMember(String id) {
@@ -486,28 +510,6 @@ public class MemberDAO {
 		}
 		return null;
 	}// MemberTable
-	
-	public boolean findExistID(String id)
-	{ 
-		connect();
-		try {
-			String sql = "SELECT count(*) cnt FROM member WHERE userid=?";
-			stmt = conn.prepareStatement(sql);
-			stmt.setString(1, id);
-			rs = stmt.executeQuery();
-			if (rs.next()) {
-				int cnt = rs.getInt("cnt");
-				if (cnt > 0) {
-					return true;
-				}
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			disconnect();
-		}
-		return false;
-	}//find
 	
 	
 	
