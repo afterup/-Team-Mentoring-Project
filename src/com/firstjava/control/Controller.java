@@ -77,6 +77,7 @@ public class Controller implements ActionListener {
 
 		// login
 		loginForm.bt_login.addActionListener(this);
+		loginForm.tf_pass.addActionListener(this);
 		loginForm.bt_cancel.addActionListener(this);
 		loginForm.addWindowListener(new WindowAdapter() {
 			@Override
@@ -539,7 +540,7 @@ public class Controller implements ActionListener {
 			managerForm.card.show(managerForm.panel_lecture, "3");
 
 			/*----------------------LoginForm(로그인창)--------------------*/
-		} else if (ob == loginForm.bt_login) { // 로그인 버튼 클릭
+		} else if (ob == loginForm.bt_login || ob == loginForm.tf_pass) { // 로그인 버튼 클릭
 
 			MemberDAO dao = new MemberDAO();
 
