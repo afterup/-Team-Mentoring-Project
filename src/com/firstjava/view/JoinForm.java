@@ -21,7 +21,7 @@ public class JoinForm extends JFrame {
 	private JLabel label;
 	private JLabel lblNewLabel_1;
 	public JLabel la_checkid;
-	public JLabel la_id_check;
+	private JLabel lblNewLabel_2;
 
 	public JoinForm() {
 		//비밀번호는 영문자, 숫자, 특수문자(!@#$%^&)의 조합 8~12자로 설정해주세요.
@@ -49,19 +49,19 @@ public class JoinForm extends JFrame {
 		bt_cancel.setBackground(new Color(140, 143, 143));	
 
 		// ---------------------컴포넌트 바운즈--------------------------
-		tf_id.setBounds(117, 223, 100, 25);
-		tf_pass.setBounds(117, 263, 100, 25);
-		tf_pass2.setBounds(117, 303, 100, 25);
-		tf_name.setBounds(117, 343, 100, 25);
+		tf_id.setBounds(135, 189, 100, 25);
+		tf_pass.setBounds(135, 229, 100, 25);
+		tf_pass2.setBounds(135, 292, 100, 25);
+		tf_name.setBounds(135, 340, 100, 25);
 
-		tf_phone1.setBounds(117, 380, 40, 25);
-		tf_phone2.setBounds(167, 380, 40, 25);
-		tf_phone3.setBounds(217, 380, 40, 25);
+		tf_phone1.setBounds(136, 384, 40, 25);
+		tf_phone2.setBounds(186, 384, 40, 25);
+		tf_phone3.setBounds(236, 384, 40, 25);
 
-		tf_email.setBounds(117, 420, 200, 25);
+		tf_email.setBounds(135, 431, 200, 25);
 
-		bt_submit.setBounds(74, 499, 90, 34);
-		bt_cancel.setBounds(174, 499, 90, 34);
+		bt_submit.setBounds(92, 488, 90, 34);
+		bt_cancel.setBounds(192, 488, 90, 34);
 		// -----------------------------------------------------------
 		getContentPane().setLayout(null);
 
@@ -80,71 +80,72 @@ public class JoinForm extends JFrame {
 		la_ID = new JLabel("아이디 :");
 		la_ID.setForeground(Color.WHITE);
 		la_ID.setFont(new Font("나눔바른고딕", Font.PLAIN, 17));
-		la_ID.setBounds(30, 223, 90, 15);
+		la_ID.setBounds(48, 189, 90, 25);
 		getContentPane().add(la_ID);
 
 		la_pass = new JLabel("비밀번호 :");
 		la_pass.setForeground(Color.WHITE);
 		la_pass.setFont(new Font("나눔바른고딕", Font.PLAIN, 17));
-		la_pass.setBounds(30, 265, 90, 15);
+		la_pass.setBounds(48, 231, 90, 23);
 		getContentPane().add(la_pass);
 
 		la_passCheck = new JLabel("비번확인 :");
 		la_passCheck.setForeground(Color.WHITE);
 		la_passCheck.setFont(new Font("나눔바른고딕", Font.PLAIN, 17));
-		la_passCheck.setBounds(30, 305, 90, 15);
+		la_passCheck.setBounds(48, 294, 90, 23);
 		getContentPane().add(la_passCheck);
 
 		la_name = new JLabel("이 름 :");
 		la_name.setForeground(Color.WHITE);
 		la_name.setFont(new Font("나눔바른고딕", Font.PLAIN, 17));
-		la_name.setBounds(30, 345, 90, 15);
+		la_name.setBounds(48, 342, 90, 23);
 		getContentPane().add(la_name);
 
 		la_phone = new JLabel("휴대번호 :");
 		la_phone.setForeground(Color.WHITE);
 		la_phone.setFont(new Font("나눔바른고딕", Font.PLAIN, 17));
-		la_phone.setBounds(30, 382, 90, 15);
+		la_phone.setBounds(49, 386, 90, 23);
 		getContentPane().add(la_phone);
 
 		la_email = new JLabel("이메일주소 :");
 		la_email.setForeground(Color.WHITE);
 		la_email.setFont(new Font("나눔바른고딕", Font.PLAIN, 17));
-		la_email.setBounds(30, 422, 90, 15);
+		la_email.setBounds(48, 433, 90, 23);
 		getContentPane().add(la_email);
 
 		JLabel la_join = new JLabel("회 원 가 입");
 		la_join.setForeground(Color.WHITE);
 		la_join.setFont(new Font("나눔바른고딕 UltraLight", Font.BOLD, 20));
-		la_join.setBounds(117, 96, 108, 41);
+		la_join.setBounds(147, 89, 108, 41);
 		getContentPane().add(la_join);
 
 		lblNewLabel = new JLabel("-");
-		lblNewLabel.setBounds(157, 384, 8, 18);
+		lblNewLabel.setBounds(176, 388, 8, 18);
 		getContentPane().add(lblNewLabel);
 
 		label = new JLabel("-");
-		label.setBounds(207, 383, 8, 18);
+		label.setBounds(226, 387, 8, 18);
 		getContentPane().add(label);
 		
 		la_checkid = new JLabel("사용 불가 아이디");
 		la_checkid.setFont(new Font("나눔바른고딕 UltraLight", Font.PLAIN, 16));
 		la_checkid.setForeground(new Color(255, 192, 203));
-		la_checkid.setBounds(231, 226, 111, 18);
+		la_checkid.setBounds(249, 192, 111, 18);
 		getContentPane().add(la_checkid);
+		
+		lblNewLabel_2 = new JLabel("(영문자, 숫자, 특수문자(!@#$%^&)의 조합 8~12자)");
+		lblNewLabel_2.setFont(new Font("나눔바른고딕", Font.PLAIN, 15));
+		lblNewLabel_2.setForeground(Color.LIGHT_GRAY);
+		lblNewLabel_2.setBounds(48, 262, 346, 18);
+		getContentPane().add(lblNewLabel_2);
 		
 		lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setIcon(new ImageIcon("image/background_800.jpg"));
-		lblNewLabel_1.setBounds(0, 0, 342, 553);
+		lblNewLabel_1.setBounds(0, 0, 542, 553);
 		getContentPane().add(lblNewLabel_1);
-		
-		la_id_check = new JLabel("중복확인라벨입니다");
-		la_id_check.setFont(new Font("나눔바른고딕", Font.PLAIN, 15));
-		la_id_check.setBounds(230, 300, 200, 40);
-		getContentPane().add(la_id_check);
 
 		setVisible(false);
-		setBounds(1280, 170, 360, 600);
+		setBounds(1280, 170, 426, 600);
 
 	}
 	
