@@ -13,6 +13,7 @@ import java.util.Map;
 import java.util.Properties;
 
 import com.firstjava.model.vo.ClassVO;
+import com.firstjava.model.vo.RegisterVO;
 import com.firstjava.view.SearchForm;
 
 
@@ -328,6 +329,32 @@ public class ClassDAO {
 		return false;
 
 	}	
+	
+	public ArrayList<RegisterVO> searchClassRate(int classid){ //검색
+		connect();	
+		ArrayList<RegisterVO> list = new ArrayList<RegisterVO>();
+		
+		try {
+			String sql = "select classid, rate from register";
+			stmt = conn.prepareStatement(sql);
+			rs = stmt.executeQuery();
+			
+			while (rs.next()) {
+				RegisterVO vo = new RegisterVO();
+				vo.setClassno(rs.getInt("classid"));
+				vo.setRate(rs.getInt("rate"));
+				list.add(vo);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+
+		return list;
+	}
+	
 	
 	
 	public ArrayList<ClassVO> search(int no){ //검색
