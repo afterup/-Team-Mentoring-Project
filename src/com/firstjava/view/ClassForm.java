@@ -117,11 +117,15 @@ public class ClassForm extends JFrame {
 		bt_new = new JButton("강의신청");
 		bt_new.setFont(new Font("나눔바른고딕", Font.PLAIN, 18));
 		bt_new.setBounds(490, 580, 105, 30);
+		bt_new.setForeground(new Color(211, 211, 211));
+		bt_new.setBackground(new Color(140, 143, 143));
 		contentPane.add(bt_new);
 		
 		bt_cancel = new JButton("취소");
 		bt_cancel.setFont(new Font("나눔바른고딕", Font.PLAIN, 18));
 		bt_cancel.setBounds(600, 580, 105, 30);
+		bt_cancel.setForeground(new Color(211, 211, 211));
+		bt_cancel.setBackground(new Color(140, 143, 143));
 		contentPane.add(bt_cancel);
 		
 		lblNewLabel = new JLabel("");

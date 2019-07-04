@@ -969,7 +969,12 @@ public class Controller implements ActionListener {
 			ClassDAO dao = new ClassDAO();
 			
 			String cname = newclassForm.tf_name.getText();
-			int max = Integer.parseInt(newclassForm.tf_student.getText());
+			String max =newclassForm.tf_student.getText();
+			if(!max.matches("[1-5]")) {
+				showBox.showMsg("최대인원을 확인해주세요.");
+				return;
+			}
+			int max2=Integer.parseInt(max);
 			
 			String open = newclassForm.tf_open.getText();
 			String close = newclassForm.tf_close.getText();
@@ -995,7 +1000,7 @@ public class Controller implements ActionListener {
 			map.put("음악", 5);
 			map.put("라이프", 6);
 
-			ClassVO vo = new ClassVO(0, loginId, classinfo, map.get(category), cname, open, close, 0, max);
+			ClassVO vo = new ClassVO(0, loginId, classinfo, map.get(category), cname, open, close, 0, max2);
 
 			if (dao.createClass(vo)) {
 				showBox.showMsg("강의개설");
