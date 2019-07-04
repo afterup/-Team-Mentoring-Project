@@ -20,6 +20,7 @@ public class JoinForm extends JFrame {
 	private JLabel lblNewLabel;
 	private JLabel label;
 	private JLabel lblNewLabel_1;
+	public JLabel la_id_check;
 	public JLabel la_checkid;
 
 	public JoinForm() {
@@ -44,7 +45,6 @@ public class JoinForm extends JFrame {
 		bt_cancel = new JButton("취소");
 		bt_cancel.setFont(new Font("나눔바른고딕", Font.PLAIN, 17));
 		bt_cancel.setForeground(new Color(211, 211, 211));
-		bt_cancel.setBackground(new Color(140, 143, 143));
 		bt_cancel.setBackground(new Color(140, 143, 143));	
 
 		// ---------------------컴포넌트 바운즈--------------------------
@@ -142,7 +142,6 @@ public class JoinForm extends JFrame {
 		setBounds(1280, 170, 360, 600);
 
 	}
-	
 
 	// tf_id, tf_name, tf_ssn1, tf_phone1, tf_phone2, tf_phone3, tf_email
 	public void initText() {

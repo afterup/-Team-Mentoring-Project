@@ -56,13 +56,17 @@ public class MemberDAO {
 		}
 		return false;
 	}
-
+	
+	
+	
+	
 	public boolean updatePass(String newPass, MemberVO m) {
 
 		connect();
 		try {
 
-			String sql = "update member set password = ? " + "where userid = ? and password = ? ";
+			String sql = "update member set password = ? " 
+						+ "where userid = ? and password = ? ";
 
 			stmt = conn.prepareStatement(sql);
 
@@ -105,6 +109,27 @@ public class MemberDAO {
 		return false;
 	}// insert
 
+	public int findExistId(String id) {
+		connect();
+		int count = 0;
+		try {
+			String sql = "select count(*) as count from member where userid= ?";
+
+			stmt = conn.prepareStatement(sql);// sql문 DB에 전송
+			// stmt.set자료형(물음표인덱스1~, 설정데이터);//?(바인드변수)에 대한 데이터 설정
+			stmt.setString(1, id);
+			rs = stmt.executeQuery();// 전송한 sql문 실행요청
+			if (rs.next()) {
+				count = rs.getInt("count");// rs.getInt(인덱스1,2,3..또는 "컬럼명" 또는 "별명")
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+
+		return count;
+	}// findExistId
 
 	public boolean findLogin(String id, String pass) {
 
@@ -187,6 +212,30 @@ public class MemberDAO {
 			stmt.setString(2, name);
 			stmt.setString(3, email);
 
+			rs = stmt.executeQuery();
+
+			if (rs.next()) {
+				pass = rs.getString("password");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+		return pass;
+
+	}//findPass
+	
+	
+	
+	public String findPassById(String id) {
+		connect();
+		String pass = "";
+		try {
+			String sql = "select password  FROM member where userid = ? ";
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, id);
+			
 			rs = stmt.executeQuery();
 
 			if (rs.next()) {
@@ -486,28 +535,6 @@ public class MemberDAO {
 		}
 		return null;
 	}// MemberTable
-	
-	public boolean findExistID(String id)
-	{ 
-		connect();
-		try {
-			String sql = "SELECT count(*) cnt FROM member WHERE userid=?";
-			stmt = conn.prepareStatement(sql);
-			stmt.setString(1, id);
-			rs = stmt.executeQuery();
-			if (rs.next()) {
-				int cnt = rs.getInt("cnt");
-				if (cnt > 0) {
-					return true;
-				}
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			disconnect();
-		}
-		return false;
-	}//find
 	
 	
 	
