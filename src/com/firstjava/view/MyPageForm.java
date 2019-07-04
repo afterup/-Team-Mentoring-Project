@@ -112,7 +112,7 @@ public class MyPageForm extends JFrame{
 		la_mento = new JLabel("멘토신청:");
 		la_mento.setBounds(42, 412, 80, 25);
 		
-		la_mentoYN = new JLabel("메인홈페이지에서 멘토신청을 해주세요.");
+		la_mentoYN = new JLabel("");
 		la_mentoYN.setForeground(new Color(128, 0, 0));
 		la_mentoYN.setBounds(114, 415, 302, 18);
 		

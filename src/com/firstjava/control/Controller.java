@@ -9,7 +9,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
@@ -338,6 +340,16 @@ public class Controller implements ActionListener {
 				if(loginId.equals("admin")) {
 					myPageForm.bt_drop_id.setVisible(false);
 				}
+				
+				int result = dao.findMentor(loginId);
+				if(result==0) {
+					myPageForm.la_mentoYN.setText("승인 대기중입니다.");
+				}else if(result==2) {
+					myPageForm.la_mentoYN.setText("멘토를 신청해주세요.");
+				}else {
+					myPageForm.la_mentoYN.setText("멘토 승인되셨습니다.");
+				}
+					
 				myPageForm.menuColor("mydata");
 				myPageForm.card.show(myPageForm.panel_my_page, "1");
 				mainForm.setVisible(false);
@@ -1039,6 +1051,16 @@ public class Controller implements ActionListener {
 				newclassForm.tf_open.requestFocus();
 				return;
 			}
+	        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+	        Calendar c1 = Calendar.getInstance();
+
+	        int strToday = Integer.parseInt(sdf.format(c1.getTime()));
+	        if(Integer.parseInt(open)<strToday) {
+	        	showBox.showMsg("개강일은 현재날짜의 이전날짜 일 수 없습니다. 다시 확인해주세요.");
+	        	return;
+	        }
+
+			
 			
 			if((Integer.parseInt(open)-Integer.parseInt(close))>0) {
 				showBox.showMsg("종강일자가 개강일자보다 빠릅니다. 확인해주세요.");
@@ -1046,6 +1068,7 @@ public class Controller implements ActionListener {
 				newclassForm.tf_close.requestFocus();
 				return;
 			}
+			
 
 			String classinfo = newclassForm.ta_desc.getText();
 			String category = newclassForm.jb_category.getSelectedItem().toString();
