@@ -41,6 +41,28 @@ public class ClassDAO {
 	}// 생성자
 	
 	
+	public int classLimit(String userid) {
+		connect();
+		int cnt = 0;
+		try {
+			String sql="select count(userid) cnt from class where userid = ?";
+			stmt = conn.prepareStatement(sql);
+				stmt.setString(1, userid);
+			rs = stmt.executeQuery();
+			
+			if(rs.next()) {
+				cnt = rs.getInt("cnt");
+				return cnt;
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+		return cnt;
+	}//classLimit
+	
 	public boolean updateReview(String userid, int classid, int rate) {
 
 		connect();
