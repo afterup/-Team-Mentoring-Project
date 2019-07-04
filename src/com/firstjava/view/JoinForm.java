@@ -3,10 +3,8 @@ package com.firstjava.view;
 import java.awt.EventQueue;
 
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import java.awt.Font;
@@ -23,9 +21,10 @@ public class JoinForm extends JFrame {
 	private JLabel label;
 	private JLabel lblNewLabel_1;
 	public JLabel la_checkid;
+	public JLabel la_id_check;
 
 	public JoinForm() {
-
+		//비밀번호는 영문자, 숫자, 특수문자(!@#$%^&)의 조합 8~12자로 설정해주세요.
 		setTitle("회원가입");
 
 		tf_id = new JTextField();
@@ -47,6 +46,7 @@ public class JoinForm extends JFrame {
 		bt_cancel.setFont(new Font("나눔바른고딕", Font.PLAIN, 17));
 		bt_cancel.setForeground(new Color(211, 211, 211));
 		bt_cancel.setBackground(new Color(140, 143, 143));
+		bt_cancel.setBackground(new Color(140, 143, 143));	
 
 		// ---------------------컴포넌트 바운즈--------------------------
 		tf_id.setBounds(117, 223, 100, 25);
@@ -137,6 +137,11 @@ public class JoinForm extends JFrame {
 		lblNewLabel_1.setIcon(new ImageIcon("image/background_800.jpg"));
 		lblNewLabel_1.setBounds(0, 0, 342, 553);
 		getContentPane().add(lblNewLabel_1);
+		
+		la_id_check = new JLabel("중복확인라벨입니다");
+		la_id_check.setFont(new Font("나눔바른고딕", Font.PLAIN, 15));
+		la_id_check.setBounds(230, 300, 200, 40);
+		getContentPane().add(la_id_check);
 
 		setVisible(false);
 		setBounds(1280, 170, 360, 600);
@@ -145,8 +150,10 @@ public class JoinForm extends JFrame {
 	
 	public void checkid(String msg) {
 		if(msg.equals("no")) {
+			la_checkid.setText("사용 불가 아이디");
 			la_checkid.setForeground(new Color(255, 192, 203));
 		}else{
+			la_checkid.setText("사용 가능 아이디");
 			la_checkid.setForeground(Color.BLUE);
 		}
 	}
