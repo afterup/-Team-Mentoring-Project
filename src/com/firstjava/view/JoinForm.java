@@ -20,6 +20,7 @@ public class JoinForm extends JFrame {
 	private JLabel lblNewLabel;
 	private JLabel label;
 	private JLabel lblNewLabel_1;
+	public JLabel la_checkid;
 	public JLabel la_id_check;
 
 	public JoinForm() {
@@ -44,6 +45,7 @@ public class JoinForm extends JFrame {
 		bt_cancel = new JButton("취소");
 		bt_cancel.setFont(new Font("나눔바른고딕", Font.PLAIN, 17));
 		bt_cancel.setForeground(new Color(211, 211, 211));
+		bt_cancel.setBackground(new Color(140, 143, 143));
 		bt_cancel.setBackground(new Color(140, 143, 143));	
 
 		// ---------------------컴포넌트 바운즈--------------------------
@@ -125,6 +127,12 @@ public class JoinForm extends JFrame {
 		label.setBounds(207, 383, 8, 18);
 		getContentPane().add(label);
 		
+		la_checkid = new JLabel("사용 불가 아이디");
+		la_checkid.setFont(new Font("나눔바른고딕 UltraLight", Font.PLAIN, 16));
+		la_checkid.setForeground(new Color(255, 192, 203));
+		la_checkid.setBounds(231, 226, 111, 18);
+		getContentPane().add(la_checkid);
+		
 		lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setIcon(new ImageIcon("image/background_800.jpg"));
 		lblNewLabel_1.setBounds(0, 0, 342, 553);
@@ -138,6 +146,16 @@ public class JoinForm extends JFrame {
 		setVisible(false);
 		setBounds(1280, 170, 360, 600);
 
+	}
+	
+	public void checkid(String msg) {
+		if(msg.equals("no")) {
+			la_checkid.setText("사용 불가 아이디");
+			la_checkid.setForeground(new Color(255, 192, 203));
+		}else{
+			la_checkid.setText("사용 가능 아이디");
+			la_checkid.setForeground(Color.BLUE);
+		}
 	}
 
 	// tf_id, tf_name, tf_ssn1, tf_phone1, tf_phone2, tf_phone3, tf_email

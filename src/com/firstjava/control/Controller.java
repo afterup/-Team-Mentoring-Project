@@ -2,6 +2,8 @@ package com.firstjava.control;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
@@ -74,6 +76,8 @@ public class Controller implements ActionListener {
 	}// 생성자
 
 	private void eventUp() {
+		
+		
 
 		// login
 		loginForm.bt_login.addActionListener(this);
@@ -108,6 +112,7 @@ public class Controller implements ActionListener {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				joinForm.initText();
+				joinForm.checkid("no");
 				joinForm.setVisible(true);
 				loginForm.setVisible(false);
 			}
@@ -158,6 +163,16 @@ public class Controller implements ActionListener {
 		// joinForm
 		joinForm.bt_submit.addActionListener(this);
 		joinForm.bt_cancel.addActionListener(this);
+		joinForm.tf_id.addKeyListener(new KeyAdapter(){
+			public void keyReleased(KeyEvent e){ 
+				MemberDAO dao = new MemberDAO();
+				if(dao.findExistID(joinForm.tf_id.getText()) || !joinForm.tf_id.getText().matches("^[\\\\da-zA-Z]{5,12}+$")){
+					joinForm.checkid("no");
+				}else {
+					joinForm.checkid("yes");
+				}
+		  }
+		});
 		joinForm.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
 				joinForm.setVisible(false);
@@ -603,6 +618,7 @@ public class Controller implements ActionListener {
 			}
 
 		} else if (ob == loginForm.la_join) { // 회원가입
+		
 			joinForm.setVisible(true);
 
 		} else if (ob == loginForm.la_idPassSearch) { // 아이디,비밀번호찾기
@@ -685,6 +701,7 @@ public class Controller implements ActionListener {
 			joinForm.initText();
 			joinForm.setVisible(false);
 			loginForm.setVisible(true);
+
 
 			/*-----------------------PassChangeForm(비번변경창)--------------------*/
 		} else if (ob == pChangeForm.bt_submit) {// 확인버튼
@@ -1088,17 +1105,6 @@ public class Controller implements ActionListener {
 		
 	}// actionPerformed
 
-	public void checkId() {
-		MemberDAO dao = new MemberDAO();
-		String id = joinForm.tf_id.getText();
-		if (dao.findExistId(id) == 1) {
-			showBox.showMsg("이미 사용중인 아이디입니다.");
-			joinForm.tf_id.setText("");
-			joinForm.tf_id.requestFocus();
-		} else {
-			showBox.showMsg("사용가능한 아이디입니다.");
-		}
-	}// checkId
 
 	public void displayclass(ArrayList<ClassVO> list) {
 
