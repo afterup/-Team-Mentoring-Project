@@ -23,7 +23,7 @@ public class JoinForm extends JFrame {
 	public JLabel la_checkid;
 	private JLabel lblNewLabel_2;
 	public JLabel la_id_check;
-	public JLabel la_checkid;
+
 
 	public JoinForm() {
 		//비밀번호는 영문자, 숫자, 특수문자(!@#$%^&)의 조합 8~12자로 설정해주세요.
