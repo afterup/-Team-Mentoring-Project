@@ -694,20 +694,28 @@ public class Controller implements ActionListener {
 			String newPass = pChangeForm.tf_newPass.getText();
 			String passCk = pChangeForm.tf_newPassCheck.getText();
 
-			if(oldPass.equals(newPass)) {
+			if(!dao.findPassById(loginId).equals(oldPass)) {
+				showBox.showMsg("현재 비밀번호를 확인해주세요. " );
+			}
+			else if(oldPass.equals(newPass)) {
 				showBox.showMsg("비밀번호가 같습니다. ");
 			}
-			
-			if (!newPass.matches("^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&])[\\da-zA-Z!@#$%^&]{8,12}$")) {
+			else if (!newPass.matches("^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&])[\\da-zA-Z!@#$%^&]{8,12}$")) {
 				showBox.showMsg("비밀번호 확인");
 				pChangeForm.tf_newPass.setText("");
 				pChangeForm.tf_newPassCheck.setText("");
 				pChangeForm.tf_newPass.requestFocus();
 				return;
 			}
-			
-			if (newPass.equals(passCk)) {
-				MemberVO vo = new MemberVO(loginId, oldPass, null, null, null);
+			else if(!newPass.equals(passCk)) {
+				showBox.showMsg("변경할 비밀번호를 확인해주세요. ");
+				pChangeForm.tf_newPass.setText("");
+				pChangeForm.tf_newPassCheck.setText("");
+				pChangeForm.tf_newPass.requestFocus();
+				
+			}
+			else {
+				MemberVO vo = new MemberVO(loginId, null, null, null, null);
 				if (dao.updatePass(newPass, vo)) {
 					showBox.showMsg("비밀번호 변경 성공 ");
 				} else {
@@ -716,10 +724,6 @@ public class Controller implements ActionListener {
 				pChangeForm.tf_oldPass.setText("");
 				pChangeForm.tf_newPass.setText("");
 				pChangeForm.tf_newPassCheck.setText("");
-
-			} else {
-				showBox.showMsg("비밀번호를 확인해주세요. ");
-				pChangeForm.tf_newPass.requestFocus();
 			}
 
 		} else if (ob == pChangeForm.bt_cancel) {// 취소

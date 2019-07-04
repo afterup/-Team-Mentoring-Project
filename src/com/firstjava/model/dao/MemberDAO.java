@@ -56,13 +56,17 @@ public class MemberDAO {
 		}
 		return false;
 	}
-
+	
+	
+	
+	
 	public boolean updatePass(String newPass, MemberVO m) {
 
 		connect();
 		try {
 
-			String sql = "update member set password = ? " + "where userid = ? and password = ? ";
+			String sql = "update member set password = ? " 
+						+ "where userid = ? and password = ? ";
 
 			stmt = conn.prepareStatement(sql);
 
@@ -208,6 +212,30 @@ public class MemberDAO {
 			stmt.setString(2, name);
 			stmt.setString(3, email);
 
+			rs = stmt.executeQuery();
+
+			if (rs.next()) {
+				pass = rs.getString("password");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+		return pass;
+
+	}//findPass
+	
+	
+	
+	public String findPassById(String id) {
+		connect();
+		String pass = "";
+		try {
+			String sql = "select password  FROM member where userid = ? ";
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, id);
+			
 			rs = stmt.executeQuery();
 
 			if (rs.next()) {
