@@ -117,7 +117,6 @@ public class MemberDAO {
 			rs = stmt.executeQuery();// 전송한 sql문 실행요청
 			if (rs.next()) {
 				count = rs.getInt("count");// rs.getInt(인덱스1,2,3..또는 "컬럼명" 또는 "별명")
-				System.out.println(count);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -297,10 +296,8 @@ public class MemberDAO {
 				sql += "where phone like ?";
 
 			stmt = conn.prepareStatement(sql);// sql문 전송
-			System.out.println("stmt: " + sql);
 			stmt.setString(1, "%" + keyword + "%");// '%홍%'
 			rs = stmt.executeQuery();// sql문 실행요청(실행시점!!)
-			System.out.println("keyword: " + sql);
 			// 덩어리
 
 			while (rs.next()) {// 행얻기
@@ -337,7 +334,6 @@ public class MemberDAO {
 
 			rs = stmt.executeQuery();
 
-			System.out.println(userid);
 
 			while (rs.next()) {
 				
