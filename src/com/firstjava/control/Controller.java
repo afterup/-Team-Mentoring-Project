@@ -714,6 +714,7 @@ public class Controller implements ActionListener {
 			String newPass = new String (pChangeForm.pw_newPass.getPassword());
 			String passCk = new String (pChangeForm.pw_newPassCheck.getPassword());
 
+
 			if(!dao.findPassById(loginId).equals(oldPass)) {
 				showBox.showMsg("현재 비밀번호를 확인해주세요. " );
 			}
@@ -734,10 +735,13 @@ public class Controller implements ActionListener {
 			}
 			
 			else {
-				MemberVO vo = new MemberVO(loginId, null, null, null, null);
-				
-				if (dao.updatePass(newPass, vo)) {
+					
+				if (dao.updatePass(newPass, loginId)) {
 					showBox.showMsg("비밀번호 변경 성공 ");
+					pChangeForm.pw_oldPass.setText("");
+					pChangeForm.pw_newPass.setText("");
+					pChangeForm.pw_newPassCheck.setText("");
+					pChangeForm.setVisible(false);
 				} else {
 					showBox.showMsg("비밀번호 변경 실패 ");
 					pChangeForm.pw_oldPass.setText("");
