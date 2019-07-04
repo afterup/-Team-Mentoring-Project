@@ -158,7 +158,6 @@ public class Controller implements ActionListener {
 		// joinForm
 		joinForm.bt_submit.addActionListener(this);
 		joinForm.bt_cancel.addActionListener(this);
-		joinForm.bt_checkid.addActionListener(this);
 		joinForm.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
 				joinForm.setVisible(false);
@@ -591,34 +590,43 @@ public class Controller implements ActionListener {
 
 			String email = joinForm.tf_email.getText();
 
-			if (!id.matches("^[a-zA-Z]{5,12}+$")) {
-				showBox.showMsg("아이디를 영문자 5~12자로 설정해주세요. ");
+			if (!id.matches("^[\\da-zA-Z]{5,12}+$")) {
+				showBox.showMsg("아이디는 영문자와 숫자 포함 5~12자로 설정해주세요.");
 				joinForm.tf_id.setText("");
 				joinForm.tf_id.requestFocus();
 				return;
 				
 				
-			} else if (!pwd.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).{8,12}$")) {
-				showBox.showMsg("비밀번호를 영문자, 숫자, 특수문자의 조합 8~12자로 설정해주세요. ");
+			} else if (!pwd.matches("^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&])[\\da-zA-Z!@#$%^&]{8,12}$")) {
+				showBox.showMsg("비밀번호는 영문자, 숫자, 특수문자(!@#$%^&)의 조합 8~12자로 설정해주세요. ");
 				joinForm.tf_pass.setText("");
 				joinForm.tf_pass.requestFocus();
 				return;
 
 			} else if (!pwd.equals(new String(joinForm.tf_pass2.getPassword()))) {
-				showBox.showMsg("비밀번호가 일치하지 않습니다");
+				showBox.showMsg("비밀번호가 일치하지 않습니다.");
 				joinForm.tf_pass.setText("");
 				joinForm.tf_pass2.setText("");
 				joinForm.tf_pass.requestFocus();
 				return;
 			
 			}else if (!name.matches("[ㄱ-힣a-zA-Z]+")) {
-				showBox.showMsg("이름확인");
+				showBox.showMsg("이름을 확인해주세요.");
 				joinForm.tf_name.setText("");
 				joinForm.tf_name.requestFocus();
 				return;
 			} else if (((!phone1.matches("^[0-9]{2,3}$")) || (!phone2.matches("^[0-9]{2,4}$"))
 					|| (!phone3.matches("^[0-9]{2,4}$")))) {
-				showBox.showMsg("전화번호 확인");
+				showBox.showMsg("전화번호를 다시 확인해주세요.");
+				joinForm.tf_phone1.setText("");
+				joinForm.tf_phone2.setText("");
+				joinForm.tf_phone3.setText("");
+				joinForm.tf_phone1.requestFocus();
+				return;
+			} else if(!email.matches("^[\\w]+@[a-z]+\\.[a-z]+$")) {
+				showBox.showMsg("이메일을 다시 확인해주세요.");
+				joinForm.tf_email.setText("");
+				joinForm.tf_email.requestFocus();
 				return;
 			}
 
@@ -642,9 +650,6 @@ public class Controller implements ActionListener {
 			joinForm.setVisible(false);
 			loginForm.setVisible(true);
 
-		} else if (ob == joinForm.bt_checkid) {// 중복확인
-			checkId();
-
 			/*-----------------------PassChangeForm(비번변경창)--------------------*/
 		} else if (ob == pChangeForm.bt_submit) {// 확인버튼
 			
@@ -657,7 +662,7 @@ public class Controller implements ActionListener {
 				showBox.showMsg("비밀번호가 같습니다. ");
 			}
 			
-			if (!newPass.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).{8,12}$")) {
+			if (!newPass.matches("^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&])[\\da-zA-Z!@#$%^&]{8,12}$")) {
 				showBox.showMsg("비밀번호 확인");
 				pChangeForm.tf_newPass.setText("");
 				pChangeForm.tf_newPassCheck.setText("");
@@ -1023,6 +1028,8 @@ public class Controller implements ActionListener {
 		String id = joinForm.tf_id.getText();
 		if (dao.findExistId(id) == 1) {
 			showBox.showMsg("이미 사용중인 아이디입니다.");
+			joinForm.tf_id.setText("");
+			joinForm.tf_id.requestFocus();
 		} else {
 			showBox.showMsg("사용가능한 아이디입니다.");
 		}

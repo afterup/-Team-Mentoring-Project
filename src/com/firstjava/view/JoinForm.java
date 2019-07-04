@@ -3,10 +3,8 @@ package com.firstjava.view;
 import java.awt.EventQueue;
 
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import java.awt.Font;
@@ -17,14 +15,15 @@ public class JoinForm extends JFrame {
 
 	public JTextField tf_id, tf_name, tf_phone1, tf_phone2, tf_phone3, tf_email;
 	public JPasswordField tf_pass, tf_pass2;
-	public JButton bt_submit, bt_cancel, bt_checkid;
+	public JButton bt_submit, bt_cancel;
 	JLabel la_ID, la_pass, la_passCheck, la_name, la_phone, la_email;
 	private JLabel lblNewLabel;
 	private JLabel label;
 	private JLabel lblNewLabel_1;
+	public JLabel la_id_check;
 
 	public JoinForm() {
-
+		//비밀번호는 영문자, 숫자, 특수문자(!@#$%^&)의 조합 8~12자로 설정해주세요.
 		setTitle("회원가입");
 
 		tf_id = new JTextField();
@@ -41,8 +40,6 @@ public class JoinForm extends JFrame {
 		bt_submit.setFont(new Font("나눔바른고딕", Font.PLAIN, 17));
 		bt_cancel = new JButton("취소");
 		bt_cancel.setFont(new Font("나눔바른고딕", Font.PLAIN, 17));
-		bt_checkid = new JButton("중복확인");
-		bt_checkid.setFont(new Font("나눔바른고딕", Font.PLAIN, 15));
 
 		// ---------------------컴포넌트 바운즈--------------------------
 		tf_id.setBounds(117, 223, 100, 25);
@@ -58,7 +55,6 @@ public class JoinForm extends JFrame {
 
 		bt_submit.setBounds(74, 499, 90, 34);
 		bt_cancel.setBounds(174, 499, 90, 34);
-		bt_checkid.setBounds(227, 223, 90, 25);
 		// -----------------------------------------------------------
 		getContentPane().setLayout(null);
 
@@ -73,7 +69,6 @@ public class JoinForm extends JFrame {
 
 		getContentPane().add(bt_submit);
 		getContentPane().add(bt_cancel);
-		getContentPane().add(bt_checkid);
 
 		la_ID = new JLabel("아이디 :");
 		la_ID.setForeground(Color.WHITE);
@@ -129,6 +124,11 @@ public class JoinForm extends JFrame {
 		lblNewLabel_1.setIcon(new ImageIcon("image/background_800.jpg"));
 		lblNewLabel_1.setBounds(0, 0, 342, 553);
 		getContentPane().add(lblNewLabel_1);
+		
+		la_id_check = new JLabel("중복확인라벨입니다");
+		la_id_check.setFont(new Font("나눔바른고딕", Font.PLAIN, 15));
+		la_id_check.setBounds(230, 300, 200, 40);
+		getContentPane().add(la_id_check);
 
 		setVisible(false);
 		setBounds(1280, 170, 360, 600);
