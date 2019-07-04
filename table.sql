@@ -95,7 +95,7 @@ insert into member values ('parkjongsu1','123encore!','박종수','parkjongsu@gm
 insert into member values ('baekgihyeon1','123encore!','백기현','baekgihyeon@gmail.com','010-1223-5678');
 
 
-insert into member values ('kimhyenwoo1','123encore!','김현우','kimhyenwoo@gmail.com','010-5344-5678');
+insert into member values ('kimhyunwoo1','123encore!','김현우','kimhyenwoo@gmail.com','010-5344-5678');
 insert into member values ('solbi94','solbi94!','고솔비','gosolbi@gmail.com','010-4010-9537');
 insert into member values ('simahyoung1','123encore!','심아영','simahyoung@gmail.com','010-1644-5678');
 insert into member values ('jaelee1','123encore!','이길재','jaelee@gmail.com','010-1234-5678');
@@ -133,7 +133,7 @@ insert into mentor (userid,job,major,license,plan)values('solbi94', '엔코아',
 insert into mentor (userid,job,major,license,plan)values('simahyoung1', '엔코아','작곡과','자격증','강의 계획입니다');
 insert into mentor (userid,job,major,license,plan)values('jaelee1', '엔코아','컴퓨터공학과','자격증','걸어다니는 자바');
 insert into mentor (userid,job,major,license,plan)values('egoing1', '엔코아','컴퓨터공학과','자격증','생활코딩');
-insert into mentor (userid,job,major,license,plan)values('kimhyenwoo1', '엔코아','컴퓨터공학과','자격증','강의 계획입니다');
+insert into mentor (userid,job,major,license,plan)values('kimhyunwoo1', '엔코아','컴퓨터공학과','자격증','강의 계획입니다');
 insert into mentor (userid,job,major,license,plan)values('nomardcorder1', '엔코아','컴퓨터공학과','자격증','강의 계획입니다');
 
 
