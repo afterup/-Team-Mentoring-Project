@@ -924,11 +924,24 @@ public class Controller implements ActionListener {
 //------------------------NewclassForm FORM(강의개설페이지)-----------------
 		} else if (ob == newclassForm.bt_new) {// 강의개설
 			ClassDAO dao = new ClassDAO();
-
+			
 			String cname = newclassForm.tf_name.getText();
 			int max = Integer.parseInt(newclassForm.tf_student.getText());
+			
 			String open = newclassForm.tf_open.getText();
+			System.out.println(open);
 			String close = newclassForm.tf_close.getText();
+			
+			if(!open.matches("^(19|20)(19|20)(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[0-1])$")||!close.matches("^(19|20)(19|20)(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[0-1])$")) {
+				showBox.showMsg("날짜형식을 확인해주세요.");
+				return;
+			}
+			
+			if((Integer.parseInt(open)-Integer.parseInt(close))>0) {
+				showBox.showMsg("종강일자가 개강일자보다 빠릅니다. 확인해주세요.");
+				return;
+			}
+
 			String classinfo = newclassForm.ta_desc.getText();
 			String category = newclassForm.jb_category.getSelectedItem().toString();
 
