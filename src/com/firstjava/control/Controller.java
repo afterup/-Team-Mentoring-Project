@@ -333,6 +333,10 @@ public class Controller implements ActionListener {
 					myPageForm.tf_phone2.setText(st.nextToken());
 					myPageForm.tf_phone3.setText(st.nextToken());
 				}
+				
+				if(loginId.equals("admin")) {
+					myPageForm.bt_drop_id.setVisible(false);
+				}
 				myPageForm.menuColor("mydata");
 				myPageForm.card.show(myPageForm.panel_my_page, "1");
 				mainForm.setVisible(false);
