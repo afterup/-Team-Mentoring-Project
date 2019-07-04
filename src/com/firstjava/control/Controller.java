@@ -1,5 +1,6 @@
 package com.firstjava.control;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -158,6 +159,19 @@ public class Controller implements ActionListener {
 		// joinForm
 		joinForm.bt_submit.addActionListener(this);
 		joinForm.bt_cancel.addActionListener(this);
+		joinForm.tf_id.addKeyListener(new KeyAdapter(){
+			public void keyReleased(KeyEvent e){ 
+				MemberDAO dao = new MemberDAO();
+								
+				if(dao.findExistID(joinForm.tf_id.getText()) || !joinForm.tf_id.getText().matches("^[\\da-zA-Z]{5,12}+$")){
+					joinForm.la_checkid.setText("사용 불가 아이디");
+					joinForm.la_checkid.setForeground(new Color(255, 192, 203));
+				}else {
+					joinForm.la_checkid.setText("사용 가능 아이디");
+					joinForm.la_checkid.setForeground(Color.BLUE);
+				}
+		  }
+		});
 		joinForm.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
 				joinForm.setVisible(false);
@@ -317,6 +331,10 @@ public class Controller implements ActionListener {
 					myPageForm.tf_phone1.setText(st.nextToken());
 					myPageForm.tf_phone2.setText(st.nextToken());
 					myPageForm.tf_phone3.setText(st.nextToken());
+				}
+				
+				if(loginId.equals("admin")) {
+					myPageForm.bt_drop_id.setVisible(false);
 				}
 				myPageForm.menuColor("mydata");
 				myPageForm.card.show(myPageForm.panel_my_page, "1");
@@ -651,8 +669,8 @@ public class Controller implements ActionListener {
 				joinForm.tf_name.setText("");
 				joinForm.tf_name.requestFocus();
 				return;
-			} else if (((!phone1.matches("^[0-9]{2,3}$")) || (!phone2.matches("^[0-9]{2,4}$"))
-					|| (!phone3.matches("^[0-9]{2,4}$")))) {
+			} else if (((!phone1.matches("^[0-9]{2,3}$")) || (!phone2.matches("^[0-9]{3,4}$"))
+					|| (!phone3.matches("^[0-9]{3,4}$")))) {
 				showBox.showMsg("전화번호를 다시 확인해주세요.");
 				joinForm.tf_phone1.setText("");
 				joinForm.tf_phone2.setText("");
@@ -690,9 +708,9 @@ public class Controller implements ActionListener {
 		} else if (ob == pChangeForm.bt_submit) {// 확인버튼
 			
 			MemberDAO dao = new MemberDAO();
-			String oldPass = pChangeForm.tf_oldPass.getText();
-			String newPass = pChangeForm.tf_newPass.getText();
-			String passCk = pChangeForm.tf_newPassCheck.getText();
+			String oldPass = pChangeForm.pw_oldPass.getText();
+			String newPass = pChangeForm.pw_newPass.getText();
+			String passCk = pChangeForm.pw_newPassCheck.getText();
 
 			if(!dao.findPassById(loginId).equals(oldPass)) {
 				showBox.showMsg("현재 비밀번호를 확인해주세요. " );
@@ -702,9 +720,9 @@ public class Controller implements ActionListener {
 			}
 			else if (!newPass.matches("^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&])[\\da-zA-Z!@#$%^&]{8,12}$")) {
 				showBox.showMsg("비밀번호 확인");
-				pChangeForm.tf_newPass.setText("");
-				pChangeForm.tf_newPassCheck.setText("");
-				pChangeForm.tf_newPass.requestFocus();
+				pChangeForm.pw_newPass.setText("");
+				pChangeForm.pw_newPassCheck.setText("");
+				pChangeForm.pw_newPass.requestFocus();
 				return;
 			}
 			else if(!newPass.equals(passCk)) {
@@ -724,6 +742,13 @@ public class Controller implements ActionListener {
 				pChangeForm.tf_oldPass.setText("");
 				pChangeForm.tf_newPass.setText("");
 				pChangeForm.tf_newPassCheck.setText("");
+				pChangeForm.pw_oldPass.setText("");
+				pChangeForm.pw_newPass.setText("");
+				pChangeForm.pw_newPassCheck.setText("");
+
+			} else {
+				showBox.showMsg("비밀번호를 확인해주세요. ");
+				pChangeForm.pw_newPass.requestFocus();
 			}
 
 		} else if (ob == pChangeForm.bt_cancel) {// 취소
@@ -792,10 +817,28 @@ public class Controller implements ActionListener {
 			MemberDAO dao = new MemberDAO();
 			// 이름, 아이디 변경 불가
 			// 전화번호, 이메일만 변경 가능
-
-			String phone = myPageForm.tf_phone1.getText() + "-" + myPageForm.tf_phone2.getText() + "-"
-					+ myPageForm.tf_phone3.getText();
+			
+			String phone1 = myPageForm.tf_phone1.getText();
+			String phone2 = myPageForm.tf_phone2.getText();
+			String phone3 = myPageForm.tf_phone3.getText();
+			
+			String phone = phone1 +"-" +phone2 +"-" +phone3;
 			String email = myPageForm.tf_email.getText();
+			
+			if (((!phone1.matches("^[0-9]{2,3}$")) || (!phone2.matches("^[0-9]{3,4}$")) || (!phone3.matches("^[0-9]{3,4}$")))){
+				showBox.showMsg("전화번호를 다시 확인해주세요.");
+				myPageForm.tf_phone1.setText("");
+				myPageForm.tf_phone2.setText("");
+				myPageForm.tf_phone3.setText("");
+				myPageForm.tf_phone1.requestFocus();
+				return;
+			}else if(!email.matches("^[\\w]+@[a-z]+\\.[a-z]+$")) {
+				showBox.showMsg("이메일을 다시 확인해주세요.");
+				myPageForm.tf_email.setText("");
+				myPageForm.tf_email.requestFocus();
+				return;
+			}
+			
 			MemberVO vo = new MemberVO(loginId, null, null, email, phone);
 			
 			if (dao.updateMember(vo)) {
@@ -981,6 +1024,8 @@ public class Controller implements ActionListener {
 			String max =newclassForm.tf_student.getText();
 			if(!max.matches("[1-5]")) {
 				showBox.showMsg("최대인원을 확인해주세요.");
+				newclassForm.tf_student.setText("");
+				newclassForm.tf_student.requestFocus();
 				return;
 			}
 			int max2=Integer.parseInt(max);
@@ -990,11 +1035,16 @@ public class Controller implements ActionListener {
 			
 			if(!open.matches("^(19|20)(19|20)(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[0-1])$")||!close.matches("^(19|20)(19|20)(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[0-1])$")) {
 				showBox.showMsg("날짜형식을 확인해주세요.");
+				newclassForm.tf_open.setText("");
+				newclassForm.tf_close.setText("");
+				newclassForm.tf_open.requestFocus();
 				return;
 			}
 			
 			if((Integer.parseInt(open)-Integer.parseInt(close))>0) {
 				showBox.showMsg("종강일자가 개강일자보다 빠릅니다. 확인해주세요.");
+				newclassForm.tf_close.setText("");
+				newclassForm.tf_close.requestFocus();
 				return;
 			}
 
