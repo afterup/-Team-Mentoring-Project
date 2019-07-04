@@ -80,7 +80,7 @@ public class MentorReviewForm extends JFrame {
 		contentPane.add(cb_score);
 		
 		lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Playdata\\Desktop\\[TORING]\\image\\background_800.jpg"));
+		lblNewLabel.setIcon(new ImageIcon("image/background_800.jpg"));
 		lblNewLabel.setBounds(0, 0, 582, 343);
 		contentPane.add(lblNewLabel);
 		

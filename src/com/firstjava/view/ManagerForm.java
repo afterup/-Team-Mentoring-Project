@@ -95,7 +95,7 @@ public class ManagerForm extends JFrame{
       cb_category.setBounds(110, 525, 80, 30);
 
       
-      String [] columnTitle = {"ID", "Name", "Email","Phone"};
+      String [] columnTitle = {"번호", "이름", "이메일","폰번호"};
       Object[][] rowData = new Object[0][4];
       dtm = new DefaultTableModel(rowData,columnTitle);
       
@@ -107,13 +107,16 @@ public class ManagerForm extends JFrame{
           };
       
       table.setRowHeight(30);
-	  table.getColumn("ID").setPreferredWidth(20);
-	  table.getColumn("Name").setPreferredWidth(20);
-	  table.getColumn("Email").setPreferredWidth(200);
-	  table.getColumn("Phone").setPreferredWidth(50);
+	  table.getColumn("번호").setPreferredWidth(20);
+	  table.getColumn("이름").setPreferredWidth(20);
+	  table.getColumn("이메일").setPreferredWidth(200);
+	  table.getColumn("폰번호").setPreferredWidth(50);
+	  table.getTableHeader().setReorderingAllowed(false); // 컬럼들 이동 불가
+      table.getTableHeader().setResizingAllowed(false); // 컬럼 크기 조절 불가
 	  
       scroll_table = new JScrollPane(table);
       scroll_table.setBounds(50, 202, 653, 312);
+      
       panel_member.setLayout(null);
       
       panel_member.add(bt_search);
@@ -160,6 +163,18 @@ public class ManagerForm extends JFrame{
           };
       
       p_table.setRowHeight(30);
+      p_table.getColumn("번호").setPreferredWidth(10);
+      p_table.getColumn("강의명").setPreferredWidth(50);
+      p_table.getColumn("강의 계획").setPreferredWidth(200);
+      p_table.getColumn("개강일").setPreferredWidth(50);
+      p_table.getColumn("종강일").setPreferredWidth(50);
+      p_table.getColumn("멘토명").setPreferredWidth(50);
+      p_table.getColumn("수강생").setPreferredWidth(10);
+      p_table.getColumn("정원").setPreferredWidth(10);
+      
+      
+	  p_table.getTableHeader().setReorderingAllowed(false); // 컬럼들 이동 불가
+	  p_table.getTableHeader().setResizingAllowed(false); // 컬럼 크기 조절 불가
       p_scroll_table = new JScrollPane(p_table);
       p_scroll_table.setBounds(50, 202, 653, 312);
       panel_post.setLayout(null);
@@ -190,7 +205,7 @@ public class ManagerForm extends JFrame{
       bt_disagree = new JButton("거부");
       bt_disagree.setBounds(613, 522, 90, 30);
       
-      String [] m_columnTitle = {"ID", "job", "major","license","plan","confirm"};
+      String [] m_columnTitle = {"번호", "직업", "전공/분야","자격증","강의계획","승인여부"};
       Object[][] m_rowData = new Object[0][6];
       m_dtm = new DefaultTableModel(m_rowData,m_columnTitle);
       
@@ -200,7 +215,17 @@ public class ManagerForm extends JFrame{
              return false;
            }
           };
+      m_table.setRowHeight(30);    
+      m_table.getColumn("번호").setPreferredWidth(10);
+      m_table.getColumn("직업").setPreferredWidth(30);
+      m_table.getColumn("전공/분야").setPreferredWidth(30);
+      m_table.getColumn("자격증").setPreferredWidth(50);
+      m_table.getColumn("강의계획").setPreferredWidth(100);
+      m_table.getColumn("승인여부").setPreferredWidth(10);
       
+  	  m_table.getTableHeader().setReorderingAllowed(false); // 컬럼들 이동 불가
+	  m_table.getTableHeader().setResizingAllowed(false); // 컬럼 크기 조절 불가
+          
       m_scroll_table = new JScrollPane(m_table);
       m_scroll_table.setBounds(50, 202, 653, 312);
       

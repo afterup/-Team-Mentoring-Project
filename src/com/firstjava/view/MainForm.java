@@ -182,6 +182,8 @@ public class MainForm extends JFrame {
 		table.getColumn("종강일").setPreferredWidth(25);
 
 		table.setRowHeight(30);
+		table.getTableHeader().setReorderingAllowed(false); // 컬럼들 이동 불가
+	    table.getTableHeader().setResizingAllowed(false); // 컬럼 크기 조절 불가
 		scroll_table = new JScrollPane(table);
 		scroll_table.setBounds(50, 202, 653, 312);
 		panel_mentor.setLayout(null);

@@ -172,6 +172,8 @@ public class MyPageForm extends JFrame{
 			}
 		};
 		table_menti.setRowHeight(30);
+		table_menti.getTableHeader().setReorderingAllowed(false); // 컬럼들 이동 불가
+		table_menti.getTableHeader().setResizingAllowed(false); // 컬럼 크기 조절 불가
 		table_menti.getColumn("번호").setPreferredWidth(20);
 		table_menti.getColumn("강의명").setPreferredWidth(100);
 		table_menti.getColumn("멘토").setPreferredWidth(50);
@@ -200,6 +202,8 @@ public class MyPageForm extends JFrame{
 			}
 		};
 		table_mentor.setRowHeight(30);
+		table_mentor.getTableHeader().setReorderingAllowed(false); // 컬럼들 이동 불가
+		table_mentor.getTableHeader().setResizingAllowed(false); // 컬럼 크기 조절 불가
 		table_mentor.getColumn("번호").setPreferredWidth(20);
 		table_mentor.getColumn("강의명").setPreferredWidth(100);
 		scroll_table_mento = new JScrollPane(table_mentor);

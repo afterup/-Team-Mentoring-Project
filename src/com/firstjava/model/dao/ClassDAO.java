@@ -519,6 +519,25 @@ public class ClassDAO {
 		return false;
 	}//registerCheck
 	
+	public String dateCheck(int classId) {//같은 id로 동일 강의 수강 금지
+		connect();
+		try {
+			String sql = "select opendate from class where classid = ?";
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, classId);
+			
+			rs = stmt.executeQuery();
+			if(rs.next()) {
+				return rs.getDate("opendate").toString();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+		return null;
+	}//registerCheck
+	
 	
 	
 	private void connect() {// 연결객체생성

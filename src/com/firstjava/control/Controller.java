@@ -885,6 +885,22 @@ public class Controller implements ActionListener {
 			classId = (int) myPageForm.table_menti.getValueAt(row, 0);
 			String cname = (myPageForm.table_menti.getValueAt(row, 1)).toString();
 
+			ClassDAO dao = new ClassDAO();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+	        Calendar c1 = Calendar.getInstance();
+	        int strToday = Integer.parseInt(sdf.format(c1.getTime()));
+	        
+	        StringTokenizer st = new StringTokenizer(dao.dateCheck(classId), "-");
+	        String date = ""; 
+	        date += st.nextToken();
+	        date += st.nextToken();
+	        date += st.nextToken();
+	        
+	        if(Integer.parseInt(date)<strToday) {
+	        	showBox.showMsg("아직 개강하지 않은 강의는 평점을 작성하실 수 없습니다.");
+	        	return;
+	        }
+
 			review.tf_class.setText(cname);
 			review.tf_class.setEditable(false);
 			review.setVisible(true);
@@ -953,6 +969,7 @@ public class Controller implements ActionListener {
 			int rate = Integer.parseInt(review.cb_score.getSelectedItem().toString());
 
 			if (dao.updateReview(loginId, classid, rate)) {
+				
 				showBox.showMsg("평점 작성 완료");
 				review.cb_score.setSelectedIndex(0);
 				review.setVisible(false);
