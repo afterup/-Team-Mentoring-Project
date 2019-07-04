@@ -9,7 +9,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
@@ -727,6 +729,7 @@ public class Controller implements ActionListener {
 			String newPass = new String (pChangeForm.pw_newPass.getPassword());
 			String passCk = new String (pChangeForm.pw_newPassCheck.getPassword());
 
+
 			if(!dao.findPassById(loginId).equals(oldPass)) {
 				showBox.showMsg("현재 비밀번호를 확인해주세요. " );
 			}
@@ -747,10 +750,13 @@ public class Controller implements ActionListener {
 			}
 			
 			else {
-				MemberVO vo = new MemberVO(loginId, null, null, null, null);
-				
-				if (dao.updatePass(newPass, vo)) {
+					
+				if (dao.updatePass(newPass, loginId)) {
 					showBox.showMsg("비밀번호 변경 성공 ");
+					pChangeForm.pw_oldPass.setText("");
+					pChangeForm.pw_newPass.setText("");
+					pChangeForm.pw_newPassCheck.setText("");
+					pChangeForm.setVisible(false);
 				} else {
 					showBox.showMsg("비밀번호 변경 실패 ");
 					pChangeForm.pw_oldPass.setText("");
@@ -1048,6 +1054,16 @@ public class Controller implements ActionListener {
 				newclassForm.tf_open.requestFocus();
 				return;
 			}
+	        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+	        Calendar c1 = Calendar.getInstance();
+
+	        int strToday = Integer.parseInt(sdf.format(c1.getTime()));
+	        if(Integer.parseInt(open)<strToday) {
+	        	showBox.showMsg("개강일은 현재날짜의 이전날짜 일 수 없습니다. 다시 확인해주세요.");
+	        	return;
+	        }
+
+			
 			
 			if((Integer.parseInt(open)-Integer.parseInt(close))>0) {
 				showBox.showMsg("종강일자가 개강일자보다 빠릅니다. 확인해주세요.");
@@ -1055,6 +1071,7 @@ public class Controller implements ActionListener {
 				newclassForm.tf_close.requestFocus();
 				return;
 			}
+			
 
 			String classinfo = newclassForm.ta_desc.getText();
 			String category = newclassForm.jb_category.getSelectedItem().toString();

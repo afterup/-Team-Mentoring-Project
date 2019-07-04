@@ -60,23 +60,20 @@ public class MemberDAO {
 	
 	
 	
-	public boolean updatePass(String newPass, MemberVO m) {
+	public boolean updatePass(String newPass, String id) {
 
 		connect();
 		try {
 
-			String sql = "update member set password = ? " 
-						+ "where userid = ? and password = ? ";
+			String sql = "update member set password = ? where userid = ?";
 
 			stmt = conn.prepareStatement(sql);
-
-			stmt.setString(1, newPass);
-			stmt.setString(2, m.getUserId());
-			stmt.setString(3, m.getPassword());
-
-			stmt.executeUpdate();
-			return true;
-
+				stmt.setString(1, newPass);
+				stmt.setString(2, id);
+			int t = stmt.executeUpdate();
+			if (t == 1) {
+				return true;
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
