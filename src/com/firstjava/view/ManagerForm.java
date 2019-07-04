@@ -52,7 +52,7 @@ public class ManagerForm extends JFrame{
 	public DefaultTableModel p_dtm; // 클래스
 	
 	//멘토대기 컴포넌트
-	public JButton bt_mento,bt_agree,bt_disagree;
+	public JButton bt_mento,bt_agree,bt_disagree,bt_mentorInfo;
 	JLabel la_memberpost;
 	private JLabel la_background;
 	public JTable m_table;
@@ -208,6 +208,10 @@ public class ManagerForm extends JFrame{
       panel_mento.setLayout(null);
       
       panel_mento.add(bt_agree);
+      
+      bt_mentorInfo = new JButton("상세조회");
+      bt_mentorInfo.setBounds(405, 522, 90, 30);
+      panel_mento.add(bt_mentorInfo);
       panel_mento.add(m_scroll_table);
       panel_mento.add(la_mento);
       panel_mento.add(bt_disagree);

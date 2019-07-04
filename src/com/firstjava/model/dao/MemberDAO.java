@@ -11,8 +11,8 @@ import java.util.Map;
 import java.util.Properties;
 
 import com.firstjava.model.vo.MemberVO;
-import com.firstjava.model.vo.RegisterVO;
 import com.firstjava.model.vo.MentorVO;
+import com.firstjava.model.vo.RegisterVO;
 
 public class MemberDAO {
 
@@ -486,6 +486,30 @@ public class MemberDAO {
 			disconnect();
 		}
 		return list;
+	}// MemberTable
+	
+	public MentorVO viewMentor2(String id) { // 멘토 상세정보
+		connect();
+		try {
+			String sql = "SELECT job,major,license,plan FROM mentor WHERE userid=?";
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, id);
+			rs = stmt.executeQuery();
+
+			if (rs.next()) {
+				MentorVO vo= new MentorVO();
+				vo.setJob(rs.getString("job"));
+				vo.setMajor(rs.getString("major"));
+				vo.setLicense(rs.getString("license"));
+				vo.setPlan(rs.getString("plan"));
+				return vo;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+		return null;
 	}// MemberTable
 	
 	

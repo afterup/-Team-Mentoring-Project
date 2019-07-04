@@ -211,6 +211,7 @@ public class Controller implements ActionListener {
 		managerForm.bt_mento.addActionListener(this);
 		managerForm.bt_agree.addActionListener(this);
 		managerForm.bt_disagree.addActionListener(this);
+		managerForm.bt_mentorInfo.addActionListener(this);
 		
 		
 		
@@ -514,7 +515,7 @@ public class Controller implements ActionListener {
 				showBox.showMsg("승인실패");
 			}
 
-		} else if (ob == managerForm.bt_disagree) {
+		} else if (ob == managerForm.bt_disagree) {//멘토 거부
 			MemberDAO dao = new MemberDAO();
 			int row = managerForm.m_table.getSelectedRow();
 			String id = (managerForm.m_table.getValueAt(row, 0)).toString();
@@ -525,6 +526,21 @@ public class Controller implements ActionListener {
 			} else {
 				showBox.showMsg("거부실패");
 			}
+		
+		}else if(ob==managerForm.bt_mentorInfo) {//멘토 상세정보
+			
+			MemberDAO dao = new MemberDAO();
+			int row = managerForm.m_table.getSelectedRow();
+	        String id = (managerForm.m_table.getValueAt(row, 0)).toString();
+			MentorVO vo = dao.viewMentor2(id);
+			mentorRegForm.tf_job.setText(vo.getJob());
+			mentorRegForm.tf_major.setText(vo.getMajor());
+			mentorRegForm.tf_license.setText(vo.getLicense());
+			mentorRegForm.ta_plan.setText(vo.getPlan());
+			
+			mentorRegForm.enabled();
+			mentorRegForm.setVisible(true);
+		
 
 		} else if (ob == managerForm.bt_member) {// 카드레이아웃_회원관리
 			managerForm.menuColor("member");
