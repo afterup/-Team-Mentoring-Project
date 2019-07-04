@@ -318,7 +318,8 @@ public class Controller implements ActionListener {
 					myPageForm.tf_phone2.setText(st.nextToken());
 					myPageForm.tf_phone3.setText(st.nextToken());
 				}
-
+				myPageForm.menuColor("mydata");
+				myPageForm.card.show(myPageForm.panel_my_page, "1");
 				mainForm.setVisible(false);
 				myPageForm.setVisible(true);
 			}
@@ -344,6 +345,8 @@ public class Controller implements ActionListener {
 
 			MemberDAO dao = new MemberDAO();
 			displayMember(dao.selectAll());
+			managerForm.menuColor("member");
+			managerForm.card.show(managerForm.panel_lecture, "1");
 			managerForm.setVisible(true);
 
 		} else if (ob == mainForm.bt_search) { // 검색
@@ -414,6 +417,8 @@ public class Controller implements ActionListener {
 // -------------------ManagerForm(매니저페이지)----------------
 		} else if (ob == managerForm.bt_homepage) { // 홈페이지로
 			managerForm.setVisible(false);
+			mainForm.menuColor("main");
+			mainForm.card.show(mainForm.panel_lecture, "1");
 			mainForm.setVisible(true);
 
 		} else if (ob == managerForm.bt_all_select) {// 회원관리 전체조회
@@ -739,6 +744,8 @@ public class Controller implements ActionListener {
 
 		} else if (ob == myPageForm.bt_homepage) {// 홈페이지로
 			myPageForm.setVisible(false);
+			mainForm.card.show(mainForm.panel_lecture, "1");
+			mainForm.menuColor("main");
 			mainForm.setVisible(true);
 		} else if (ob == myPageForm.bt_infoUpdate) {// 내정보_정보변경
 
@@ -896,8 +903,6 @@ public class Controller implements ActionListener {
 			myPageForm.menuColor("mydata");
 			myPageForm.card.show(myPageForm.panel_my_page, "1");
 
-			
-			
 			
 		} else if (ob == myPageForm.bt_class_request) {// 카드레이아웃_내강의
 			myPageForm.menuColor("class");
