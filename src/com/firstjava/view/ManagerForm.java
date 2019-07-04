@@ -148,7 +148,7 @@ public class ManagerForm extends JFrame{
       bt_p_id_delete.setBounds(613,524,90,30);
       
       
-      String [] p_columnTitle = { "번호", "분류", "강의명", "개강일", "종강일", "멘토명", "수강생", "정원" };
+      String [] p_columnTitle = { "번호", "강의명", "강의 계획", "개강일", "종강일", "멘토명", "수강생", "정원" };
       Object[][] p_rowData = new Object[0][9];
       p_dtm = new DefaultTableModel(p_rowData,p_columnTitle);
       
@@ -228,7 +228,7 @@ public class ManagerForm extends JFrame{
       la_logo2.setBounds(50, 10, 144, 150);
       panel_post.add(la_logo2);
       
-      la_post = new JLabel("게시글 관리");
+      la_post = new JLabel("강의 관리");
       la_post.setFont(new Font("나눔바른고딕 UltraLight", Font.PLAIN, 18));
       la_post.setBounds(193, 73, 144, 47);
       panel_post.add(la_post);
@@ -248,7 +248,7 @@ public class ManagerForm extends JFrame{
       bt_member.setBorderPainted ( false );
       bt_member.setBounds(335,30,111,40);
       
-      bt_post = new JButton("게시글관리");
+      bt_post = new JButton("강의 관리");
       bt_post.setFont(font16);
       bt_post.setBackground(Color.white);
       bt_post.setOpaque(false);
