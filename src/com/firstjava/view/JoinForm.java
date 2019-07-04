@@ -38,8 +38,13 @@ public class JoinForm extends JFrame {
 
 		bt_submit = new JButton("등록");
 		bt_submit.setFont(new Font("나눔바른고딕", Font.PLAIN, 17));
+		bt_submit.setForeground(new Color(211, 211, 211));
+		bt_submit.setBackground(new Color(140, 143, 143));
+		
 		bt_cancel = new JButton("취소");
 		bt_cancel.setFont(new Font("나눔바른고딕", Font.PLAIN, 17));
+		bt_cancel.setForeground(new Color(211, 211, 211));
+		bt_cancel.setBackground(new Color(140, 143, 143));	
 
 		// ---------------------컴포넌트 바운즈--------------------------
 		tf_id.setBounds(117, 223, 100, 25);

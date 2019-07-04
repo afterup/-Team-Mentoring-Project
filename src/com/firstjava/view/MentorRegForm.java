@@ -104,6 +104,19 @@ public class MentorRegForm extends JFrame {
 
 	}
 	
+	public void enabled() {
+		tf_job.setEnabled(false);
+		tf_major.setEnabled(false);
+		tf_license.setEnabled(false);
+		ta_plan.setEnabled(false);
+		bt_submit.setVisible(false);
+		
+		tf_job.setDisabledTextColor(Color.BLACK); 
+		tf_major.setDisabledTextColor(Color.BLACK); 
+		tf_license.setDisabledTextColor(Color.BLACK); 
+		ta_plan.setDisabledTextColor(Color.BLACK); 
+	}
+	
 	public void initText() {
 		tf_job.setText("");
 		tf_major.setText("");

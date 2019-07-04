@@ -120,12 +120,22 @@ public class NewclassForm extends JFrame {
 		bt_new = new JButton("신청");
 		bt_new.setFont(new Font("나눔바른고딕", Font.PLAIN, 17));
 		bt_new.setBounds(250, 580, 105, 30);
+		bt_new.setForeground(new Color(211, 211, 211));
+		bt_new.setBackground(new Color(140, 143, 143));
 		contentPane.add(bt_new);
 		
 		bt_cancel = new JButton("취소");
 		bt_cancel.setFont(new Font("나눔바른고딕", Font.PLAIN, 17));
 		bt_cancel.setBounds(450, 580, 105, 30);
+		bt_cancel.setForeground(new Color(211, 211, 211));
+		bt_cancel.setBackground(new Color(140, 143, 143));
 		contentPane.add(bt_cancel);
+		
+		JLabel lblyyyymmdd = new JLabel("날짜 형식(YYYYMMDD)");
+		lblyyyymmdd.setForeground(Color.LIGHT_GRAY);
+		lblyyyymmdd.setFont(new Font("나눔바른고딕", Font.PLAIN, 16));
+		lblyyyymmdd.setBounds(290, 163, 300, 18);
+		contentPane.add(lblyyyymmdd);
 		
 		lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon("image/background_800.jpg"));
@@ -157,5 +167,4 @@ public class NewclassForm extends JFrame {
 		new NewclassForm();
 			
 	}
-	
 }

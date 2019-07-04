@@ -296,8 +296,6 @@ public class ClassDAO {
 			if (t == 1)
 				return true;
 
-			System.out.println("삭제성공");
-
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -387,8 +385,6 @@ public class ClassDAO {
 		String sort = (String) map.get("sort");
 		
 		//String[] categoryTitle = { "NO", "분류", "강의명", "개강일", "종강일", "멘토명", "수강생", "정원" }
-		
-		System.out.println(columnTitle_idx);
 		
 		String[] column = {"목록", "classid", "cname", "classinfo", "opendate", "closedate",  "userid", "student", "limit"};
 		

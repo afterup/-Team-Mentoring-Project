@@ -11,8 +11,8 @@ import java.util.Map;
 import java.util.Properties;
 
 import com.firstjava.model.vo.MemberVO;
-import com.firstjava.model.vo.RegisterVO;
 import com.firstjava.model.vo.MentorVO;
+import com.firstjava.model.vo.RegisterVO;
 
 public class MemberDAO {
 
@@ -117,7 +117,6 @@ public class MemberDAO {
 			rs = stmt.executeQuery();// 전송한 sql문 실행요청
 			if (rs.next()) {
 				count = rs.getInt("count");// rs.getInt(인덱스1,2,3..또는 "컬럼명" 또는 "별명")
-				System.out.println(count);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -232,11 +231,11 @@ public class MemberDAO {
 			stmt.setString(1, id);
 
 			stmt.executeUpdate();
-			return "탈퇴되었습니다.";
+			return "삭제되었습니다.";
 		} catch (SQLException e) {
 			disconnect();
 		}
-		return "탈퇴에 실패하였습니다.";
+		return "삭제에 실패하였습니다.";
 
 	}
 	
@@ -297,10 +296,8 @@ public class MemberDAO {
 				sql += "where phone like ?";
 
 			stmt = conn.prepareStatement(sql);// sql문 전송
-			System.out.println("stmt: " + sql);
 			stmt.setString(1, "%" + keyword + "%");// '%홍%'
 			rs = stmt.executeQuery();// sql문 실행요청(실행시점!!)
-			System.out.println("keyword: " + sql);
 			// 덩어리
 
 			while (rs.next()) {// 행얻기
@@ -337,7 +334,6 @@ public class MemberDAO {
 
 			rs = stmt.executeQuery();
 
-			System.out.println(userid);
 
 			while (rs.next()) {
 				
@@ -486,6 +482,30 @@ public class MemberDAO {
 			disconnect();
 		}
 		return list;
+	}// MemberTable
+	
+	public MentorVO viewMentor2(String id) { // 멘토 상세정보
+		connect();
+		try {
+			String sql = "SELECT job,major,license,plan FROM mentor WHERE userid=?";
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, id);
+			rs = stmt.executeQuery();
+
+			if (rs.next()) {
+				MentorVO vo= new MentorVO();
+				vo.setJob(rs.getString("job"));
+				vo.setMajor(rs.getString("major"));
+				vo.setLicense(rs.getString("license"));
+				vo.setPlan(rs.getString("plan"));
+				return vo;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+		return null;
 	}// MemberTable
 	
 	
