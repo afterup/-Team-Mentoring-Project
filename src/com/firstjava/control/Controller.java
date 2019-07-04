@@ -1,5 +1,6 @@
 package com.firstjava.control;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -112,7 +113,6 @@ public class Controller implements ActionListener {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				joinForm.initText();
-				joinForm.checkid("no");
 				joinForm.setVisible(true);
 				loginForm.setVisible(false);
 			}
@@ -166,10 +166,13 @@ public class Controller implements ActionListener {
 		joinForm.tf_id.addKeyListener(new KeyAdapter(){
 			public void keyReleased(KeyEvent e){ 
 				MemberDAO dao = new MemberDAO();
-				if(dao.findExistID(joinForm.tf_id.getText()) || !joinForm.tf_id.getText().matches("^[\\\\da-zA-Z]{5,12}+$")){
-					joinForm.checkid("no");
+								
+				if(dao.findExistID(joinForm.tf_id.getText()) || !joinForm.tf_id.getText().matches("^[\\da-zA-Z]{5,12}+$")){
+					joinForm.la_checkid.setText("사용 불가 아이디");
+					joinForm.la_checkid.setForeground(new Color(255, 192, 203));
 				}else {
-					joinForm.checkid("yes");
+					joinForm.la_checkid.setText("사용 가능 아이디");
+					joinForm.la_checkid.setForeground(Color.BLUE);
 				}
 		  }
 		});
@@ -1012,6 +1015,8 @@ public class Controller implements ActionListener {
 			String max =newclassForm.tf_student.getText();
 			if(!max.matches("[1-5]")) {
 				showBox.showMsg("최대인원을 확인해주세요.");
+				newclassForm.tf_student.setText("");
+				newclassForm.tf_student.requestFocus();
 				return;
 			}
 			int max2=Integer.parseInt(max);
@@ -1021,11 +1026,16 @@ public class Controller implements ActionListener {
 			
 			if(!open.matches("^(19|20)(19|20)(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[0-1])$")||!close.matches("^(19|20)(19|20)(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[0-1])$")) {
 				showBox.showMsg("날짜형식을 확인해주세요.");
+				newclassForm.tf_open.setText("");
+				newclassForm.tf_close.setText("");
+				newclassForm.tf_open.requestFocus();
 				return;
 			}
 			
 			if((Integer.parseInt(open)-Integer.parseInt(close))>0) {
 				showBox.showMsg("종강일자가 개강일자보다 빠릅니다. 확인해주세요.");
+				newclassForm.tf_close.setText("");
+				newclassForm.tf_close.requestFocus();
 				return;
 			}
 
