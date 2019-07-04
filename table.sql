@@ -95,7 +95,6 @@ insert into member values ('parkjongsu1','123encore!','박종수','parkjongsu@gm
 insert into member values ('baekgihyeon1','123encore!','백기현','baekgihyeon@gmail.com','010-1223-5678');
 
 
-
 insert into member values ('kimhyenwoo1','123encore!','김현우','kimhyenwoo@gmail.com','010-5344-5678');
 insert into member values ('solbi94','solbi94!','고솔비','gosolbi@gmail.com','010-4010-9537');
 insert into member values ('simahyoung1','123encore!','심아영','simahyoung@gmail.com','010-1644-5678');
@@ -154,7 +153,10 @@ select * from mentor;
 
 
 
-
+select classid, avg(rate) rate
+from register 
+where classid = 1
+group by classid;
 
 
 ----------------------------------------------------------------------------------------------------------------------------
@@ -189,4 +191,5 @@ alter table class
 add constraint cateno_fk foreign key(cateno) references category(cateno);
 
 
+select classid, avg(rate) from register group by classid;
 

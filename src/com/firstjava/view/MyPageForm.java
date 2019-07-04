@@ -199,7 +199,7 @@ public class MyPageForm extends JFrame{
 				return false;
 			}
 		};
-		
+		table_mentor.setRowHeight(30);
 		table_mentor.getColumn("번호").setPreferredWidth(20);
 		table_mentor.getColumn("강의명").setPreferredWidth(100);
 		scroll_table_mento = new JScrollPane(table_mentor);

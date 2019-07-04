@@ -330,29 +330,25 @@ public class ClassDAO {
 
 	}	
 	
-	public ArrayList<RegisterVO> searchClassRate(int classid){ //검색
+	public int searchClassRate(int classid){ //검색
 		connect();	
-		ArrayList<RegisterVO> list = new ArrayList<RegisterVO>();
 		
 		try {
-			String sql = "select classid, rate from register";
+			String sql = "select classid, avg(rate) rate from register "
+					+ "where classid = ? group by classid ";
 			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, classid);
 			rs = stmt.executeQuery();
-			
-			while (rs.next()) {
-				RegisterVO vo = new RegisterVO();
-				vo.setClassno(rs.getInt("classid"));
-				vo.setRate(rs.getInt("rate"));
-				list.add(vo);
-			}
-			
+			if(rs.next()){
+				int rate = rs.getInt("rate");
+				return rate;
+			}	
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			disconnect();
 		}
-
-		return list;
+		return 0;
 	}
 	
 	
