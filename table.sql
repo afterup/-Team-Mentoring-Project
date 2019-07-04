@@ -3,11 +3,11 @@
 -- memberTable(회원테이블)
 	drop table member;
 	create table member(
-		userid varchar2(20) constraint member_pk primary key,
-		password varchar2(15) not null,
-		uname varchar2(15) not null,
-		email varchar2(40) not null,
-		phone varchar2(17) not null
+		userid varchar2(20 char) constraint member_pk primary key,
+		password varchar2(13 char) not null,
+		uname varchar2(10 char) not null,
+		email varchar2(30 char) not null,
+		phone varchar2(15 char) not null
 	);
 
 ----------------------------------------------------------------------------------------------------------------------------
@@ -24,7 +24,7 @@
 drop   table category;
 create table category(
 	cateno number constraint category_pk primary key,
-	cname varchar2(20) not null
+	cname varchar2(20 char) not null
 );
 	
 
@@ -34,10 +34,10 @@ drop table class;
 create table class
 (
 	classid 	number constraint class_pk primary key,
-	classinfo 	varchar2(800),
-	userid 		varchar2(20),
+	classinfo 	varchar2(400 char),
+	userid 		varchar2(20 char),
 	cateno	    number 			not null,
-	cname 	    varchar2(15)  	not null,
+	cname 	    varchar2(20 char)  	not null,
 	opendate 	date 			not null,
 	closedate 	date 			not null,
 	student 	number		    not null,
@@ -52,7 +52,7 @@ create table class
 drop table register;
 create table register(
 	classid 	number		 not null,
-	userid 		varchar2(20)  not null,
+	userid 		varchar2(20 char)  not null,
 	rate 		number,
 	constraint r_userid_fk foreign key(userid) references member(userid)  ON DELETE CASCADE,
 	constraint class_id_fk foreign key(classid) references class(classid)  ON DELETE CASCADE
@@ -66,11 +66,11 @@ add primary key (classid, userid);
 -- mentorTable(멘토테이블)
 drop table mentor;
 create table mentor(
-	userid		varchar2(20) not null,
-	job			varchar2(20) not null,
-	major		varchar2(20) not null,
-	license		varchar2(20),
-	plan		varchar2(100) not null,
+	userid		varchar2(20 char) not null,
+	job			varchar2(20 char) not null,
+	major		varchar2(100 char) not null,
+	license		varchar2(100 char),
+	plan		varchar2(800 char) not null,
 	confirm	varchar2(20) DEFAULT '대기',
 	constraint m_userid_fk foreign key(userid) references member(userid) on delete cascade
 );
