@@ -708,9 +708,9 @@ public class Controller implements ActionListener {
 		} else if (ob == pChangeForm.bt_submit) {// 확인버튼
 			
 			MemberDAO dao = new MemberDAO();
-			String oldPass = pChangeForm.pw_oldPass.getText();
-			String newPass = pChangeForm.pw_newPass.getText();
-			String passCk = pChangeForm.pw_newPassCheck.getText();
+			String oldPass = new String (pChangeForm.pw_oldPass.getPassword());
+			String newPass = new String (pChangeForm.pw_newPass.getPassword());
+			String passCk = new String (pChangeForm.pw_newPassCheck.getPassword());
 
 			if(!dao.findPassById(loginId).equals(oldPass)) {
 				showBox.showMsg("현재 비밀번호를 확인해주세요. " );
@@ -1060,8 +1060,10 @@ public class Controller implements ActionListener {
 			map.put("라이프", 6);
 
 			ClassVO vo = new ClassVO(0, loginId, classinfo, map.get(category), cname, open, close, 0, max2);
-
-			if (dao.createClass(vo)) {
+			
+			if(dao.classLimit(loginId) == 3) {
+				showBox.showMsg("강의는 최대 3개까지 개설할 수 있습니다.");
+			} else if (dao.createClass(vo)) {
 				showBox.showMsg("강의개설");
 				newclassForm.initText();
 				displayclass(dao.findAll());
