@@ -22,6 +22,7 @@ public class ClassForm extends JFrame {
 	public JTextField tf_name, tf_student, tf_open, tf_close;
 	public JComboBox jb_category;
 	public JTextArea ta_desc;
+	public JTextField tf_rate;
 	public JButton bt_new, bt_cancel; 
 	private JLabel lblNewLabel;
 		
@@ -128,6 +129,17 @@ public class ClassForm extends JFrame {
 		bt_cancel.setBackground(new Color(140, 143, 143));
 		contentPane.add(bt_cancel);
 		
+		JLabel la_rate = new JLabel("평점");
+		la_rate.setBounds(490, 80, 62, 18);
+		contentPane.add(la_rate);
+		
+		tf_rate = new JTextField();
+		tf_rate.setBounds(566, 77, 116, 24);
+		tf_rate.setEnabled(false);
+		tf_rate.setDisabledTextColor(Color.BLACK); 
+		tf_rate.setColumns(10);
+		contentPane.add(tf_rate);
+		
 		lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon("image/background_800.jpg"));
 		lblNewLabel.setBounds(0, 0, 782, 653);
@@ -162,5 +174,4 @@ public class ClassForm extends JFrame {
 		
 		setVisible(true);
 	}
-	
 }
