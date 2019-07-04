@@ -232,11 +232,11 @@ public class MemberDAO {
 			stmt.setString(1, id);
 
 			stmt.executeUpdate();
-			return "탈퇴되었습니다.";
+			return "삭제되었습니다.";
 		} catch (SQLException e) {
 			disconnect();
 		}
-		return "탈퇴에 실패하였습니다.";
+		return "삭제에 실패하였습니다.";
 
 	}
 	
