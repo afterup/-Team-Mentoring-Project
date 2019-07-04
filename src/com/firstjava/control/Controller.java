@@ -671,8 +671,8 @@ public class Controller implements ActionListener {
 				joinForm.tf_name.setText("");
 				joinForm.tf_name.requestFocus();
 				return;
-			} else if (((!phone1.matches("^[0-9]{2,3}$")) || (!phone2.matches("^[0-9]{2,4}$"))
-					|| (!phone3.matches("^[0-9]{2,4}$")))) {
+			} else if (((!phone1.matches("^[0-9]{2,3}$")) || (!phone2.matches("^[0-9]{3,4}$"))
+					|| (!phone3.matches("^[0-9]{3,4}$")))) {
 				showBox.showMsg("전화번호를 다시 확인해주세요.");
 				joinForm.tf_phone1.setText("");
 				joinForm.tf_phone2.setText("");
@@ -809,10 +809,28 @@ public class Controller implements ActionListener {
 			MemberDAO dao = new MemberDAO();
 			// 이름, 아이디 변경 불가
 			// 전화번호, 이메일만 변경 가능
-
-			String phone = myPageForm.tf_phone1.getText() + "-" + myPageForm.tf_phone2.getText() + "-"
-					+ myPageForm.tf_phone3.getText();
+			
+			String phone1 = myPageForm.tf_phone1.getText();
+			String phone2 = myPageForm.tf_phone2.getText();
+			String phone3 = myPageForm.tf_phone3.getText();
+			
+			String phone = phone1 +"-" +phone2 +"-" +phone3;
 			String email = myPageForm.tf_email.getText();
+			
+			if (((!phone1.matches("^[0-9]{2,3}$")) || (!phone2.matches("^[0-9]{3,4}$")) || (!phone3.matches("^[0-9]{3,4}$")))){
+				showBox.showMsg("전화번호를 다시 확인해주세요.");
+				myPageForm.tf_phone1.setText("");
+				myPageForm.tf_phone2.setText("");
+				myPageForm.tf_phone3.setText("");
+				myPageForm.tf_phone1.requestFocus();
+				return;
+			}else if(!email.matches("^[\\w]+@[a-z]+\\.[a-z]+$")) {
+				showBox.showMsg("이메일을 다시 확인해주세요.");
+				myPageForm.tf_email.setText("");
+				myPageForm.tf_email.requestFocus();
+				return;
+			}
+			
 			MemberVO vo = new MemberVO(loginId, null, null, email, phone);
 			
 			if (dao.updateMember(vo)) {
