@@ -338,6 +338,16 @@ public class Controller implements ActionListener {
 				if(loginId.equals("admin")) {
 					myPageForm.bt_drop_id.setVisible(false);
 				}
+				
+				int result = dao.findMentor(loginId);
+				if(result==0) {
+					myPageForm.la_mentoYN.setText("승인 대기중입니다.");
+				}else if(result==2) {
+					myPageForm.la_mentoYN.setText("멘토를 신청해주세요.");
+				}else {
+					myPageForm.la_mentoYN.setText("멘토 승인되셨습니다.");
+				}
+					
 				myPageForm.menuColor("mydata");
 				myPageForm.card.show(myPageForm.panel_my_page, "1");
 				mainForm.setVisible(false);

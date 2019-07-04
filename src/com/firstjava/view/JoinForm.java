@@ -22,8 +22,6 @@ public class JoinForm extends JFrame {
 	private JLabel lblNewLabel_1;
 	public JLabel la_checkid;
 	private JLabel lblNewLabel_2;
-	public JLabel la_id_check;
-
 
 	public JoinForm() {
 		//비밀번호는 영문자, 숫자, 특수문자(!@#$%^&)의 조합 8~12자로 설정해주세요.
@@ -47,6 +45,7 @@ public class JoinForm extends JFrame {
 		bt_cancel = new JButton("취소");
 		bt_cancel.setFont(new Font("나눔바른고딕", Font.PLAIN, 17));
 		bt_cancel.setForeground(new Color(211, 211, 211));
+		bt_cancel.setBackground(new Color(140, 143, 143));
 		bt_cancel.setBackground(new Color(140, 143, 143));	
 
 		// ---------------------컴포넌트 바운즈--------------------------
@@ -128,7 +127,7 @@ public class JoinForm extends JFrame {
 		label.setBounds(226, 387, 8, 18);
 		getContentPane().add(label);
 		
-		la_checkid = new JLabel();
+		la_checkid = new JLabel("");
 		la_checkid.setFont(new Font("나눔바른고딕 UltraLight", Font.PLAIN, 16));
 		la_checkid.setForeground(new Color(255, 192, 203));
 		la_checkid.setBounds(249, 192, 111, 18);
@@ -146,8 +145,18 @@ public class JoinForm extends JFrame {
 		getContentPane().add(lblNewLabel_1);
 
 		setVisible(false);
-		setBounds(1280, 170, 426, 600);
+		setBounds(1280, 170, 400, 600);
 
+	}
+	
+	public void checkid(String msg) {
+		if(msg.equals("no")) {
+			la_checkid.setText("사용 불가 아이디");
+			la_checkid.setForeground(new Color(255, 192, 203));
+		}else{
+			la_checkid.setText("사용 가능 아이디");
+			la_checkid.setForeground(Color.BLUE);
+		}
 	}
 
 	// tf_id, tf_name, tf_ssn1, tf_phone1, tf_phone2, tf_phone3, tf_email
