@@ -83,8 +83,16 @@ add primary key (classid, userid);
 
 
 ------------------------------------------- Table insert ---------------------------------------------------
+-- categoryTable insert
+insert into category values (1, 'IT');
+insert into category values (2, '디자인');
+insert into category values (3, '뷰티');
+insert into category values (4, '외국어');
+insert into category values (5, '음악');
+insert into category values (6, '라이프');
+
 -- memberTable insert (admin)
-insert into member values ('admin','admin1234!','관리자','admin@encore.com','010-1234-5678');
+insert into member values ('admin','1234','관리자','admin@encore.com','010-1234-5678');
 
 -- memberTable insert
 insert into member values ('gubonjin1','123encore!','구본진','gubonjin@gmail.com','010-1743-5678');
@@ -102,32 +110,6 @@ insert into member values ('jaelee1','123encore!','이길재','jaelee@gmail.com'
 insert into member values ('egoing1','123encore!','이고잉','egoing@gmail.com','010-1234-5678');
 insert into member values ('nomardcorder1','123encore!','노마드코더','nomardcorder@gmail.com','010-1234-5678');
 
--- categoryTable insert
-insert into category values (1, 'IT');
-insert into category values (2, '디자인');
-insert into category values (3, '뷰티');
-insert into category values (4, '외국어');
-insert into category values (5, '음악');
-insert into category values (6, '라이프');
-
--- classTable insert 	★ 수강인원은 1이상 5이하!!
-
-insert into class values (class_seq.nextval, '자바 강의입니다','jaelee1', 1, 'JAVA','19/07/01','19/07/08',0,5);
-insert into class values (class_seq.nextval, 'html 강의입니다','jaelee1', 1, 'html','19/07/01','19/07/10',0,5);
-insert into class values (class_seq.nextval, '1:1 알고리즘 강의입니다.','gildong', 1, '알고리즘','19/07/01','19/07/10',0,1);
-insert into class values (class_seq.nextval, 'PhotoShop 강의입니다','egoing1', 2, 'PhotoShop','19/07/01','19/07/10',0,5);
-insert into class values (class_seq.nextval, '네일아트 강의입니다.','solbi94', 3, 'Nail Art','19/07/01','19/07/10',0,5);
-insert into class values (class_seq.nextval, '메이크업 강의입니다','solbi94', 3, '메이크업','19/07/01','19/07/05',0,3);
-insert into class values (class_seq.nextval, '중국어 강의입니다','nomardcorder1', 4, '중국어','19/07/01','19/07/12',0,5);
-insert into class values (class_seq.nextval, '독일어 강의입니다','nomardcorder1', 4, '독일어','19/07/01','19/07/12',0,5);
-insert into class values (class_seq.nextval, '보컬 강의입니다','simahyoung1', 5, '보컬강의','19/07/08','19/07/12',0,2);
-insert into class values (class_seq.nextval, '피아노 강의입니다','simahyoung1', 5, '피아노강의','19/07/08','19/07/12',0,1);
-insert into class values (class_seq.nextval, '직접 만드는 핸드드립 커피입니다','bangjimin1', 6, '핸드드립 커피','19/07/01','19/07/3',0,5);
-insert into class values (class_seq.nextval, '세계자유여행 강좌입니다','kimhyenwoo1', 6, '자유여행 계획 ','19/07/08','19/07/11',0,3);
-insert into class values (class_seq.nextval, '명상강의 입니다. (3명)','kimhyenwoo1', 6, 'Meditation','19/07/01','19/07/10',0,3);
-
-
-
 -- mentorTable insert
 insert into mentor (userid,job,major,license,plan)values('solbi94', '엔코아','컴퓨터공학과','없음','다양한 뷰티 강의 계획입니다');
 insert into mentor (userid,job,major,license,plan)values('simahyoung1', '엔코아','작곡과','자격증','강의 계획입니다');
@@ -135,6 +117,23 @@ insert into mentor (userid,job,major,license,plan)values('jaelee1', '엔코아',
 insert into mentor (userid,job,major,license,plan)values('egoing1', '엔코아','컴퓨터공학과','자격증','생활코딩');
 insert into mentor (userid,job,major,license,plan)values('kimhyunwoo1', '엔코아','컴퓨터공학과','자격증','강의 계획입니다');
 insert into mentor (userid,job,major,license,plan)values('nomardcorder1', '엔코아','컴퓨터공학과','자격증','강의 계획입니다');
+
+-- classTable insert 	★ 수강인원은 1이상 5이하!!
+
+insert into class values (class_seq.nextval, '자바 강의입니다','jaelee1', 1, 'JAVA','19/07/01','19/07/08',0,5);
+insert into class values (class_seq.nextval, '1:1 알고리즘 강의입니다.','jaelee1', 1, 'html','19/07/01','19/07/10',0,5);
+insert into class values (class_seq.nextval, 'PhotoShop 강의입니다','egoing1', 2, 'PhotoShop','19/07/01','19/07/10',0,5);
+insert into class values (class_seq.nextval, '네일아트 강의입니다.','solbi94', 3, 'Nail Art','19/07/01','19/07/10',0,5);
+insert into class values (class_seq.nextval, '메이크업 강의입니다','solbi94', 3, '메이크업','19/07/01','19/07/05',0,3);
+insert into class values (class_seq.nextval, '중국어 강의입니다','nomardcorder1', 4, '중국어','19/07/01','19/07/12',0,5);
+insert into class values (class_seq.nextval, '독일어 강의입니다','nomardcorder1', 4, '독일어','19/07/01','19/07/12',0,5);
+insert into class values (class_seq.nextval, '보컬 강의입니다','simahyoung1', 5, '보컬강의','19/07/08','19/07/12',0,2);
+insert into class values (class_seq.nextval, '피아노 강의입니다','simahyoung1', 5, '피아노강의','19/07/08','19/07/12',0,1);
+insert into class values (class_seq.nextval, '세계자유여행 강좌입니다','kimhyunwoo1', 6, '자유여행 계획 ','19/07/08','19/07/11',0,3);
+insert into class values (class_seq.nextval, '명상강의 입니다. (3명)','kimhyunwoo1', 6, 'Meditation','19/07/01','19/07/10',0,3);
+
+
+
 
 
 ----------------------------------------------------------------------------------------------------------------------------
@@ -152,11 +151,6 @@ select * from register;
 select * from mentor;
 
 
-
-select classid, avg(rate) rate
-from register 
-where classid = 1
-group by classid;
 
 
 ----------------------------------------------------------------------------------------------------------------------------
@@ -191,5 +185,4 @@ alter table class
 add constraint cateno_fk foreign key(cateno) references category(cateno);
 
 
-select classid, avg(rate) from register group by classid;
 
