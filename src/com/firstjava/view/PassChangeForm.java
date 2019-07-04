@@ -1,18 +1,19 @@
 package com.firstjava.view;
 
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import javax.swing.ImageIcon;
-import java.awt.Color;
 
 public class PassChangeForm extends JFrame {
 
-	 public JTextField tf_newPass, tf_newPassCheck, tf_oldPass;
+	 public JPasswordField pw_newPass, pw_newPassCheck, pw_oldPass;
 	 public JButton bt_cancel, bt_submit;
 	 JLabel lb_oldPass, lb_newPass, la_passCheck;
 
@@ -22,17 +23,17 @@ public class PassChangeForm extends JFrame {
 
 		getContentPane().setLayout(null);
 
-		tf_oldPass = new JTextField();
-		tf_oldPass.setColumns(10);
-		tf_oldPass.setBounds(55, 199, 234, 39);
+		pw_oldPass = new JPasswordField();
+		pw_oldPass.setColumns(10);
+		pw_oldPass.setBounds(55, 199, 234, 39);
 		
-		tf_newPass = new JTextField();
-		tf_newPass.setBounds(55, 285, 234, 39);
-		tf_newPass.setColumns(10);
+		pw_newPass = new JPasswordField();
+		pw_newPass.setBounds(55, 285, 234, 39);
+		pw_newPass.setColumns(10);
 		
-		tf_newPassCheck = new JTextField();
-		tf_newPassCheck.setColumns(10);
-		tf_newPassCheck.setBounds(55, 362, 234, 39);
+		pw_newPassCheck = new JPasswordField();
+		pw_newPassCheck.setColumns(10);
+		pw_newPassCheck.setBounds(55, 362, 234, 39);
 		
 		bt_cancel = new JButton("취소");
 		bt_cancel.setFont(new Font("나눔바른고딕", Font.PLAIN, 18));
@@ -48,9 +49,9 @@ public class PassChangeForm extends JFrame {
 		lb_newPass.setFont(new Font("나눔바른고딕", Font.PLAIN, 18));
 		lb_newPass.setBounds(55, 250, 174, 23);
 		
-		getContentPane().add(tf_oldPass);
-		getContentPane().add(tf_newPass);
-		getContentPane().add(tf_newPassCheck);
+		getContentPane().add(pw_oldPass);
+		getContentPane().add(pw_newPass);
+		getContentPane().add(pw_newPassCheck);
 		getContentPane().add(bt_cancel);
 		getContentPane().add(lb_oldPass);
 		getContentPane().add(lb_newPass);

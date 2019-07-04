@@ -336,6 +336,10 @@ public class Controller implements ActionListener {
 					myPageForm.tf_phone2.setText(st.nextToken());
 					myPageForm.tf_phone3.setText(st.nextToken());
 				}
+				
+				if(loginId.equals("admin")) {
+					myPageForm.bt_drop_id.setVisible(false);
+				}
 				myPageForm.menuColor("mydata");
 				myPageForm.card.show(myPageForm.panel_my_page, "1");
 				mainForm.setVisible(false);
@@ -710,9 +714,9 @@ public class Controller implements ActionListener {
 		} else if (ob == pChangeForm.bt_submit) {// 확인버튼
 			
 			MemberDAO dao = new MemberDAO();
-			String oldPass = pChangeForm.tf_oldPass.getText();
-			String newPass = pChangeForm.tf_newPass.getText();
-			String passCk = pChangeForm.tf_newPassCheck.getText();
+			String oldPass = pChangeForm.pw_oldPass.getText();
+			String newPass = pChangeForm.pw_newPass.getText();
+			String passCk = pChangeForm.pw_newPassCheck.getText();
 
 			if(oldPass.equals(newPass)) {
 				showBox.showMsg("비밀번호가 같습니다. ");
@@ -720,9 +724,9 @@ public class Controller implements ActionListener {
 			
 			if (!newPass.matches("^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&])[\\da-zA-Z!@#$%^&]{8,12}$")) {
 				showBox.showMsg("비밀번호 확인");
-				pChangeForm.tf_newPass.setText("");
-				pChangeForm.tf_newPassCheck.setText("");
-				pChangeForm.tf_newPass.requestFocus();
+				pChangeForm.pw_newPass.setText("");
+				pChangeForm.pw_newPassCheck.setText("");
+				pChangeForm.pw_newPass.requestFocus();
 				return;
 			}
 			
@@ -733,13 +737,13 @@ public class Controller implements ActionListener {
 				} else {
 					showBox.showMsg("비밀번호 변경 실패 ");
 				}
-				pChangeForm.tf_oldPass.setText("");
-				pChangeForm.tf_newPass.setText("");
-				pChangeForm.tf_newPassCheck.setText("");
+				pChangeForm.pw_oldPass.setText("");
+				pChangeForm.pw_newPass.setText("");
+				pChangeForm.pw_newPassCheck.setText("");
 
 			} else {
 				showBox.showMsg("비밀번호를 확인해주세요. ");
-				pChangeForm.tf_newPass.requestFocus();
+				pChangeForm.pw_newPass.requestFocus();
 			}
 
 		} else if (ob == pChangeForm.bt_cancel) {// 취소
