@@ -17,11 +17,12 @@ public class JoinForm extends JFrame {
 
 	public JTextField tf_id, tf_name, tf_phone1, tf_phone2, tf_phone3, tf_email;
 	public JPasswordField tf_pass, tf_pass2;
-	public JButton bt_submit, bt_cancel, bt_checkid;
+	public JButton bt_submit, bt_cancel;
 	JLabel la_ID, la_pass, la_passCheck, la_name, la_phone, la_email;
 	private JLabel lblNewLabel;
 	private JLabel label;
 	private JLabel lblNewLabel_1;
+	public JLabel la_checkid;
 
 	public JoinForm() {
 
@@ -46,9 +47,6 @@ public class JoinForm extends JFrame {
 		bt_cancel.setFont(new Font("나눔바른고딕", Font.PLAIN, 17));
 		bt_cancel.setForeground(new Color(211, 211, 211));
 		bt_cancel.setBackground(new Color(140, 143, 143));
-		
-		bt_checkid = new JButton("중복확인");
-		bt_checkid.setFont(new Font("나눔바른고딕", Font.PLAIN, 15));
 
 		// ---------------------컴포넌트 바운즈--------------------------
 		tf_id.setBounds(117, 223, 100, 25);
@@ -64,7 +62,6 @@ public class JoinForm extends JFrame {
 
 		bt_submit.setBounds(74, 499, 90, 34);
 		bt_cancel.setBounds(174, 499, 90, 34);
-		bt_checkid.setBounds(227, 223, 90, 25);
 		// -----------------------------------------------------------
 		getContentPane().setLayout(null);
 
@@ -79,7 +76,6 @@ public class JoinForm extends JFrame {
 
 		getContentPane().add(bt_submit);
 		getContentPane().add(bt_cancel);
-		getContentPane().add(bt_checkid);
 
 		la_ID = new JLabel("아이디 :");
 		la_ID.setForeground(Color.WHITE);
@@ -131,6 +127,12 @@ public class JoinForm extends JFrame {
 		label.setBounds(207, 383, 8, 18);
 		getContentPane().add(label);
 		
+		la_checkid = new JLabel("사용 불가 아이디");
+		la_checkid.setFont(new Font("나눔바른고딕 UltraLight", Font.PLAIN, 16));
+		la_checkid.setForeground(new Color(255, 192, 203));
+		la_checkid.setBounds(231, 226, 111, 18);
+		getContentPane().add(la_checkid);
+		
 		lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setIcon(new ImageIcon("image/background_800.jpg"));
 		lblNewLabel_1.setBounds(0, 0, 342, 553);
@@ -139,6 +141,14 @@ public class JoinForm extends JFrame {
 		setVisible(false);
 		setBounds(1280, 170, 360, 600);
 
+	}
+	
+	public void checkid(String msg) {
+		if(msg.equals("no")) {
+			la_checkid.setForeground(new Color(255, 192, 203));
+		}else{
+			la_checkid.setForeground(Color.BLUE);
+		}
 	}
 
 	// tf_id, tf_name, tf_ssn1, tf_phone1, tf_phone2, tf_phone3, tf_email
