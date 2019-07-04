@@ -353,7 +353,6 @@ public class Controller implements ActionListener {
 		} else if (ob == mainForm.bt_search) { // 검색
 
 			int category = mainForm.cb_category.getSelectedIndex() + 1;
-			System.out.println(category);
 			ClassDAO dao = new ClassDAO();
 			ArrayList<ClassVO> list = dao.search(category);
 			displayclass(list);
@@ -380,9 +379,6 @@ public class Controller implements ActionListener {
 					newclassForm.initText();
 				}
 			}
-
-		} else if (ob == mainForm.cb_category) {// 카테고리 검색
-			System.out.println("검색");
 
 		} else if (ob == mainForm.bt_main) { // 카드레이아웃_ 메인
 			mainForm.card.show(mainForm.panel_lecture, "1");
@@ -434,7 +430,6 @@ public class Controller implements ActionListener {
 				return;
 			}
 			String id = (managerForm.table.getValueAt(row, 0)).toString();
-			System.out.println(id);
 
 			if (showBox.showConfirm("삭제하시겠습니까?") == 0) {
 				showBox.showMsg(dao.deleteMember(id));
@@ -450,7 +445,6 @@ public class Controller implements ActionListener {
 
 		} else if (ob == managerForm.bt_id_search) {// 회원관리 상세검색
 
-			System.out.println("클릭");
 			Map<String, String> map = showBox.showOption();
 			MemberDAO dao = new MemberDAO();
 			ArrayList<MemberVO> list = dao.searchMember(map);
@@ -479,7 +473,6 @@ public class Controller implements ActionListener {
 				return;
 			}
 			int id = Integer.parseInt((managerForm.p_table.getValueAt(row, 0)).toString());
-			System.out.println(id);
 			ClassDAO dao = new ClassDAO();
 			if (showBox.showConfirm("정말 삭제하시겠습니까?") == 0) {
 
@@ -523,7 +516,6 @@ public class Controller implements ActionListener {
 				return;
 			}
 			String id = (managerForm.m_table.getValueAt(row, 0)).toString();
-			System.out.println(id);
 			if (dao.updateMentor("승인", id)) {
 				showBox.showMsg("승인완료");
 				displayMentor(dao.viewMentor());
@@ -539,7 +531,6 @@ public class Controller implements ActionListener {
 				return;
 			}
 			String id = (managerForm.m_table.getValueAt(row, 0)).toString();
-			System.out.println(id);
 			if (dao.updateMentor("거부", id)) {
 				showBox.showMsg("거부완료");
 				displayMentor(dao.viewMentor());
@@ -895,9 +886,6 @@ public class Controller implements ActionListener {
 			int classid = classId;
 			int rate = Integer.parseInt(review.cb_score.getSelectedItem().toString());
 
-			System.out.println(loginId);
-			System.out.println(classid);
-			System.out.println(rate);
 			if (dao.updateReview(loginId, classid, rate)) {
 				showBox.showMsg("평점 작성 완료");
 				review.cb_score.setSelectedIndex(0);
@@ -984,7 +972,6 @@ public class Controller implements ActionListener {
 			int max = Integer.parseInt(newclassForm.tf_student.getText());
 			
 			String open = newclassForm.tf_open.getText();
-			System.out.println(open);
 			String close = newclassForm.tf_close.getText();
 			
 			if(!open.matches("^(19|20)(19|20)(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[0-1])$")||!close.matches("^(19|20)(19|20)(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[0-1])$")) {
