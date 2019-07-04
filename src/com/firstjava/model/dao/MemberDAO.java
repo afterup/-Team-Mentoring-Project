@@ -95,8 +95,10 @@ public class MemberDAO {
 			stmt.setString(4, m.getEmail());
 			stmt.setString(5, m.getPhone());
 
-			stmt.executeUpdate();
-		
+			int t = stmt.executeUpdate();
+			if(t == 1) {
+				return true;
+			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
