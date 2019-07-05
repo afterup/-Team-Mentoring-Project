@@ -162,15 +162,6 @@ public class JoinForm extends JFrame {
 
 	}
 	
-	public void checkid(String msg) {
-		if(msg.equals("no")) {
-			la_checkid.setText("사용 불가 아이디");
-			la_checkid.setForeground(new Color(255, 192, 203));
-		}else{
-			la_checkid.setText("사용 가능 아이디");
-			la_checkid.setForeground(Color.BLUE);
-		}
-	}
 
 	// tf_id, tf_name, tf_ssn1, tf_phone1, tf_phone2, tf_phone3, tf_email
 	public void initText() {
@@ -182,6 +173,7 @@ public class JoinForm extends JFrame {
 		tf_phone2.setText("");
 		tf_phone3.setText("");
 		tf_email.setText("");
+		la_checkid.setText("");
 		tf_id.requestFocus();
 
 	}
