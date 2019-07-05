@@ -170,7 +170,7 @@ public class Controller implements ActionListener {
 			
 			public void keyReleased(KeyEvent e){ 
 				MemberDAO dao = new MemberDAO();					
-				if(dao.findExistId(joinForm.tf_id.getText()) || !joinForm.tf_id.getText().matches("^[\\da-zA-Z]{5,12}+$")){
+				if(dao.findExistId(joinForm.tf_id.getText()) || !joinForm.tf_id.getText().matches("^[a-zA-Z]{1}[\\da-zA-Z]{5,12}+$")){
 					joinForm.la_checkid.setText("사용 불가 아이디");
 					joinForm.la_checkid.setForeground(new Color(255, 192, 203));
 				}else {
@@ -667,7 +667,7 @@ public class Controller implements ActionListener {
 
 			String email = joinForm.tf_email.getText();
 
-			if (!id.matches("^[\\da-zA-Z]{5,12}+$")) {
+			if (!id.matches("^[a-zA-Z]{1}[\\da-zA-Z]{5,12}+$")) {
 				showBox.showMsg("아이디는 영문자와 숫자 포함 5~12자로 설정해주세요.");
 				joinForm.tf_id.setText("");
 				joinForm.tf_id.requestFocus();
