@@ -21,6 +21,7 @@ public class NewclassForm extends JFrame {
 	public JTextArea ta_desc;
 	public JButton bt_new, bt_cancel; 
 	private JLabel lblNewLabel;
+	public JLabel ta_sizeCheck;
 		
 	/**
 	 * Create the frame.
@@ -37,6 +38,12 @@ public class NewclassForm extends JFrame {
 		
 		
 		//라벨
+		
+		ta_sizeCheck = new JLabel("400자 이내의 강의 내용을 작성해주세요.");
+		ta_sizeCheck.setForeground(Color.red);
+		ta_sizeCheck.setFont(new Font("나눔바른고딕", Font.PLAIN, 16));
+		ta_sizeCheck.setBounds(470, 220, 300, 18);
+		contentPane.add(ta_sizeCheck);
 		
 		JLabel label_1 = new JLabel("강의");
 		label_1.setForeground(Color.WHITE);
@@ -150,7 +157,7 @@ public class NewclassForm extends JFrame {
 		tf_close.setText("");
 		tf_open.setText("");
 		tf_student.setText("");
-		ta_desc.setText("400자 이내의 강의 내용을 작성해주세요.");
+		ta_desc.setText("[강사이름] \n\n\n\n[강의내용]\n");
 		jb_category.setSelectedIndex(0);
 	}//initText
 	

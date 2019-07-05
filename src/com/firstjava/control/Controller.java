@@ -258,16 +258,22 @@ public class Controller implements ActionListener {
 				}
 			}
 		});
-		newclassForm.ta_desc.addMouseListener(new MouseAdapter() {
+		newclassForm.ta_desc.addKeyListener(new KeyAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
-				String ta = newclassForm.ta_desc.getText();
-				if(ta.equals("400자 이내의 강의 내용을 작성해주세요.")) {
-					newclassForm.ta_desc.setText("");
+			public void keyReleased(KeyEvent e) {
+				int length = 0;
+					length = newclassForm.ta_desc.getText().length();
+				if(length < 401) {
+					newclassForm.ta_sizeCheck.setText("현재 글자수 >> " +length +"자");
+					newclassForm.ta_sizeCheck.setForeground(Color.BLUE);
+				}
+				else {
+					newclassForm.ta_sizeCheck.setText("현재 글자수 >> " +length +"자 (입력범위 초과)");
+					newclassForm.ta_sizeCheck.setForeground(Color.red);
 				}
 			}
 		});
-
+		
 		// MentorRegForm
 
 		// ClassForm
@@ -694,7 +700,7 @@ public class Controller implements ActionListener {
 				joinForm.tf_phone3.setText("");
 				joinForm.tf_phone1.requestFocus();
 				return;
-			} else if(!email.matches("^[\\w]+@[a-z]+\\.[a-z]+$")) {
+			} else if(!email.matches("^[\\w]+@[a-z]+\\.[a-z]{2,3}+$")) {
 				showBox.showMsg("이메일을 다시 확인해주세요.");
 				joinForm.tf_email.setText("");
 				joinForm.tf_email.requestFocus();
@@ -846,7 +852,7 @@ public class Controller implements ActionListener {
 				myPageForm.tf_phone3.setText("");
 				myPageForm.tf_phone1.requestFocus();
 				return;
-			}else if(!email.matches("^[\\w]+@[a-z]+\\.[a-z]+$")) {
+			}else if(!email.matches("^[\\w]+@[a-z]+\\.[a-z]{2,3}+$")) {
 				showBox.showMsg("이메일을 다시 확인해주세요.");
 				myPageForm.tf_email.setText("");
 				myPageForm.tf_email.requestFocus();
