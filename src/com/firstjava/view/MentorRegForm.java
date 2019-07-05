@@ -118,6 +118,14 @@ public class MentorRegForm extends JFrame {
 		ta_plan.setDisabledTextColor(Color.BLACK); 
 	}
 	
+	public void enabledTrue() {
+		tf_job.setEnabled(true);
+		tf_major.setEnabled(true);
+		tf_license.setEnabled(true);
+		ta_plan.setEnabled(true);
+		bt_submit.setVisible(true);
+	}
+	
 	public void initText() {
 		tf_job.setText("");
 		tf_major.setText("");
