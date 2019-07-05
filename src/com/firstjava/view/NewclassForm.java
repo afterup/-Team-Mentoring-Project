@@ -122,7 +122,7 @@ public class NewclassForm extends JFrame {
 		
 		
 		ta_desc = new JTextArea();
-		ta_desc.setDocument((new JTextFieldLimit(400)));
+		ta_desc.setDocument((new JTextFieldLimit(450)));
 		scrollPane = new JScrollPane(ta_desc);
 		scrollPane.setBounds(150, 240, 580, 300);
 		contentPane.add(scrollPane);
@@ -130,7 +130,7 @@ public class NewclassForm extends JFrame {
 		
 		
 		
-		//버튼
+		//버튼	
 		bt_new = new JButton("신청");
 		bt_new.setFont(new Font("나눔바른고딕", Font.PLAIN, 17));
 		bt_new.setBounds(250, 580, 105, 30);

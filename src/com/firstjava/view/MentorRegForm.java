@@ -14,10 +14,11 @@ import javax.swing.JTextArea;
 
 public class MentorRegForm extends JFrame {
 
-	private JLabel la_passImage, la_background, la_idImage,la_mento,la_plan,la_idPassSearch, la_job, la_major, la_license;
+	private JLabel la_passImage, la_background, la_idImage,la_plan,la_idPassSearch, la_job, la_major, la_license;
 	public JTextField tf_job, tf_major, tf_license ; 
 	public JTextArea ta_plan;
 	public JButton bt_submit, bt_cancel;
+	public JLabel la_mento;
 
 	public MentorRegForm() {
 		

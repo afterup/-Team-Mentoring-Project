@@ -13,6 +13,7 @@ import java.util.Map;
 import java.util.Properties;
 
 import com.firstjava.model.vo.ClassVO;
+import com.firstjava.model.vo.MentorVO;
 import com.firstjava.view.SearchForm;
 
 
@@ -40,6 +41,30 @@ public class ClassDAO {
 		}
 	}// 생성자
 	
+	public MentorVO search_mInfo(int classid) {
+		System.out.println(classid);
+		connect();
+		try {
+			String sql = "select job, major, license, plan from mentor natural join class where classid = ?";
+			stmt = conn.prepareStatement(sql);
+				stmt.setInt(1, classid);
+			rs = stmt.executeQuery();
+			
+			while(rs.next()) {
+				MentorVO vo = new MentorVO();
+					vo.setJob(rs.getString("job"));
+					vo.setMajor(rs.getString("major"));
+					vo.setLicense(rs.getString("license"));	
+					vo.setPlan(rs.getString("plan"));
+				return vo;
+			}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				disconnect();
+			}
+		return null;
+	}//search_mInfo
 	
 	public int classLimit(String userid) {
 		connect();

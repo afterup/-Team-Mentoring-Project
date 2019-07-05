@@ -23,7 +23,7 @@ public class ClassForm extends JFrame {
 	public JComboBox jb_category;
 	public JTextArea ta_desc;
 	public JTextField tf_rate;
-	public JButton bt_new, bt_cancel; 
+	public JButton bt_new, bt_cancel, bt_mentorInfo; 
 	private JLabel lblNewLabel;
 		
 	/**
@@ -114,6 +114,13 @@ public class ClassForm extends JFrame {
 		
 		
 		//버튼
+		
+		bt_mentorInfo = new JButton("멘토정보");
+		bt_mentorInfo.setFont(new Font("나눔바른고딕", Font.PLAIN, 17));
+		bt_mentorInfo.setBounds(620, 205, 105, 30);
+		bt_mentorInfo.setForeground(new Color(211, 211, 211));
+		bt_mentorInfo.setBackground(new Color(140, 143, 143));
+		contentPane.add(bt_mentorInfo);
 		
 		bt_new = new JButton("강의신청");
 		bt_new.setFont(new Font("나눔바른고딕", Font.PLAIN, 18));

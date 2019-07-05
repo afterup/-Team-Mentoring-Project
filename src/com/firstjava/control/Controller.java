@@ -279,6 +279,7 @@ public class Controller implements ActionListener {
 		// ClassForm
 		classForm.bt_cancel.addActionListener(this);
 		classForm.bt_new.addActionListener(this);
+		classForm.bt_mentorInfo.addActionListener(this);
 
 		// MentorRegForm
 		mentorRegForm.bt_submit.addActionListener(this);
@@ -366,7 +367,7 @@ public class Controller implements ActionListener {
 			}
 
 		} else if (ob == mainForm.bt_mento_demand) { // 멘토신청
-
+			
 			MemberDAO dao = new MemberDAO();
 			if (loginId == null) {
 				showBox.showMsg("로그인 해 주세요");
@@ -375,6 +376,8 @@ public class Controller implements ActionListener {
 				showBox.showMsg("이미 신청하셨습니다.");
 			} else {
 				mainForm.menuColor("mento");
+				mentorRegForm.setTitle("멘토신청");
+				mentorRegForm.la_mento.setText("멘토 신청");
 				mentorRegForm.setVisible(true);
 			}
 
@@ -450,7 +453,23 @@ public class Controller implements ActionListener {
 					classForm.setVisible(false);
 				}
 			}
+		} else if(ob == classForm.bt_mentorInfo) {
+			ClassDAO dao = new ClassDAO();
+			
+			MentorVO vo = dao.search_mInfo(classId);
+				mentorRegForm.tf_job.setText(vo.getJob());
+				mentorRegForm.tf_license.setText(vo.getLicense());
+				mentorRegForm.tf_major.setText(vo.getMajor());
+				mentorRegForm.ta_plan.setText(vo.getPlan());
+				
+				mentorRegForm.enabled();
+				
+				mentorRegForm.setTitle("멘토정보");
+				mentorRegForm.la_mento.setText("멘토 정보");
 
+			mentorRegForm.setVisible(true);
+					
+			
 // -------------------ManagerForm(매니저페이지)----------------
 		} else if (ob == managerForm.bt_homepage) { // 홈페이지로
 			managerForm.setVisible(false);
@@ -593,6 +612,8 @@ public class Controller implements ActionListener {
 			mentorRegForm.tf_license.setText(vo.getLicense());
 			mentorRegForm.ta_plan.setText(vo.getPlan());
 			
+			mentorRegForm.la_mento.setText("멘토 정보");
+			mentorRegForm.setTitle("멘토정보");
 			mentorRegForm.enabled();
 			mentorRegForm.setVisible(true);
 		

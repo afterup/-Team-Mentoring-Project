@@ -32,6 +32,7 @@ public class MemberDAO {
 			e.printStackTrace();
 		}
 	}// 생성자
+	
 
 	public boolean updateMember(MemberVO m) {
 
