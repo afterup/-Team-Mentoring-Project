@@ -22,6 +22,7 @@ public class JoinForm extends JFrame {
 	private JLabel lblNewLabel_1;
 	public JLabel la_checkid;
 	private JLabel lblNewLabel_2;
+	private JLabel lblhonggildonggmailcom;
 
 	public JoinForm() {
 		//비밀번호는 영문자, 숫자, 특수문자(!@#$%^&)의 조합 8~12자로 설정해주세요.
@@ -49,7 +50,7 @@ public class JoinForm extends JFrame {
 		bt_cancel.setBackground(new Color(140, 143, 143));	
 
 		// ---------------------컴포넌트 바운즈--------------------------
-		tf_id.setBounds(135, 189, 100, 25);
+		tf_id.setBounds(135, 175, 100, 25);
 		tf_pass.setBounds(135, 229, 100, 25);
 		tf_pass2.setBounds(135, 292, 100, 25);
 		tf_name.setBounds(135, 340, 100, 25);
@@ -60,8 +61,8 @@ public class JoinForm extends JFrame {
 
 		tf_email.setBounds(135, 431, 200, 25);
 
-		bt_submit.setBounds(92, 488, 90, 34);
-		bt_cancel.setBounds(192, 488, 90, 34);
+		bt_submit.setBounds(135, 487, 90, 34);
+		bt_cancel.setBounds(235, 487, 90, 34);
 		// -----------------------------------------------------------
 		getContentPane().setLayout(null);
 
@@ -80,7 +81,7 @@ public class JoinForm extends JFrame {
 		la_ID = new JLabel("아이디 :");
 		la_ID.setForeground(Color.WHITE);
 		la_ID.setFont(new Font("나눔바른고딕", Font.PLAIN, 17));
-		la_ID.setBounds(48, 189, 90, 25);
+		la_ID.setBounds(48, 175, 90, 25);
 		getContentPane().add(la_ID);
 
 		la_pass = new JLabel("비밀번호 :");
@@ -116,7 +117,7 @@ public class JoinForm extends JFrame {
 		JLabel la_join = new JLabel("회 원 가 입");
 		la_join.setForeground(Color.WHITE);
 		la_join.setFont(new Font("나눔바른고딕 UltraLight", Font.BOLD, 20));
-		la_join.setBounds(147, 89, 108, 41);
+		la_join.setBounds(186, 76, 108, 41);
 		getContentPane().add(la_join);
 
 		lblNewLabel = new JLabel("-");
@@ -130,14 +131,26 @@ public class JoinForm extends JFrame {
 		la_checkid = new JLabel("");
 		la_checkid.setFont(new Font("나눔바른고딕 UltraLight", Font.PLAIN, 16));
 		la_checkid.setForeground(new Color(255, 192, 203));
-		la_checkid.setBounds(249, 192, 111, 18);
+		la_checkid.setBounds(249, 178, 111, 18);
 		getContentPane().add(la_checkid);
 		
-		lblNewLabel_2 = new JLabel("(영문자, 숫자, 특수문자(!@#$%^&)의 조합 8~12자)");
+		lblNewLabel_2 = new JLabel("(비밀번호는 영문자, 숫자, 특수문자(!@#$%^&)의 조합 8~12자)");
 		lblNewLabel_2.setFont(new Font("나눔바른고딕", Font.PLAIN, 15));
 		lblNewLabel_2.setForeground(Color.LIGHT_GRAY);
-		lblNewLabel_2.setBounds(48, 262, 346, 18);
+		lblNewLabel_2.setBounds(48, 262, 420, 18);
 		getContentPane().add(lblNewLabel_2);
+		
+		JLabel label_1 = new JLabel("(아이디는 영문자와 숫자 포함 5~12자로 설정해주세요)");
+		label_1.setForeground(Color.LIGHT_GRAY);
+		label_1.setFont(new Font("나눔바른고딕", Font.PLAIN, 15));
+		label_1.setBounds(48, 208, 346, 18);
+		getContentPane().add(label_1);
+		
+		lblhonggildonggmailcom = new JLabel("(이메일 형식 예)honggildong@gmail.com");
+		lblhonggildonggmailcom.setForeground(Color.LIGHT_GRAY);
+		lblhonggildonggmailcom.setFont(new Font("나눔바른고딕", Font.PLAIN, 15));
+		lblhonggildonggmailcom.setBounds(48, 457, 312, 18);
+		getContentPane().add(lblhonggildonggmailcom);
 		
 		lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setIcon(new ImageIcon("image/background_800.jpg"));
@@ -145,7 +158,7 @@ public class JoinForm extends JFrame {
 		getContentPane().add(lblNewLabel_1);
 
 		setVisible(false);
-		setBounds(1280, 170, 400, 600);
+		setBounds(1280, 170, 500, 600);
 
 	}
 	
