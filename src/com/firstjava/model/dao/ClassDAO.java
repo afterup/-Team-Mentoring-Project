@@ -13,7 +13,6 @@ import java.util.Map;
 import java.util.Properties;
 
 import com.firstjava.model.vo.ClassVO;
-import com.firstjava.model.vo.RegisterVO;
 import com.firstjava.view.SearchForm;
 
 
@@ -305,30 +304,23 @@ public class ClassDAO {
 	
 	//강의 테이블 삭제 
 	public boolean delete(int id) {
-
 		connect();
-
 		try {
-			String sql = "delete from class " + "where classid=?";
-
+			String sql = "delete from class where classid = ?";
 			stmt = conn.prepareStatement(sql);
-			stmt.setInt(1, id);
-
+				stmt.setInt(1, id);
 			int t = stmt.executeUpdate();
 
 			if (t == 1)
 				return true;
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-
 			disconnect();
 		}
 		return false;
-
-	}	
+	}//delete	
 	
 	public int searchClassRate(int classid){ //검색
 		connect();	
