@@ -375,6 +375,7 @@ public class Controller implements ActionListener {
 				showBox.showMsg("이미 신청하셨습니다.");
 			} else {
 				mainForm.menuColor("mento");
+				mentorRegForm.enabledTrue();
 				mentorRegForm.setVisible(true);
 			}
 
