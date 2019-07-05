@@ -164,7 +164,7 @@ public class NewclassForm extends JFrame {
 		tf_close.setText("");
 		tf_open.setText("");
 		tf_student.setText("");
-		ta_desc.setText("[강사이름] \n\n\n\n[강의내용]\n");
+		ta_desc.setText("[강사이름]\n\n\n\n[강의내용]\n\n\n\n[수강료]\n");
 		jb_category.setSelectedIndex(0);
 	}//initText
 	

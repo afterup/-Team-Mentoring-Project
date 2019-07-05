@@ -115,13 +115,13 @@ insert into mentor values('solbi94', '엔코아','컴퓨터공학과','없음','
 insert into mentor values('simahyoung1', '엔코아','작곡과','자격증','강의 계획입니다','승인');
 insert into mentor values('jaelee1', '엔코아','컴퓨터공학과','자격증','걸어다니는 자바','승인');
 insert into mentor values('egoing1', '엔코아','컴퓨터공학과','자격증','생활코딩','승인');
-insert into mentor values('kimhyunwoo1', '엔코아','컴퓨터공학과','자격증','강의 계획입니다','승인');
+insert into mentor values('kimhyunwoo1', '엔코아','전자공학과','자격증','강의 계획입니다','승인');
 insert into mentor values('nomardcorder1', '엔코아','컴퓨터공학과','자격증','강의 계획입니다','승인');
 
 -- classTable insert 	★ 수강인원은 1이상 5이하!!
 
 insert into class values (class_seq.nextval, '자바 강의입니다','jaelee1', 1, 'JAVA','19/07/01','19/07/08',0,5);
-insert into class values (class_seq.nextval, '1:1 알고리즘 강의입니다.','jaelee1', 1, 'html','19/07/01','19/07/10',0,5);
+insert into class values (class_seq.nextval, '1:1 알고리즘 강의입니다.','jaelee1', 1, '1:1알고리즘','19/07/15','19/07/29',0,1);
 insert into class values (class_seq.nextval, 'PhotoShop 강의입니다','egoing1', 2, 'PhotoShop','19/07/01','19/07/10',0,5);
 insert into class values (class_seq.nextval, '네일아트 강의입니다.','solbi94', 3, 'Nail Art','19/07/01','19/07/10',0,5);
 insert into class values (class_seq.nextval, '메이크업 강의입니다','solbi94', 3, '메이크업','19/07/01','19/07/05',0,3);
