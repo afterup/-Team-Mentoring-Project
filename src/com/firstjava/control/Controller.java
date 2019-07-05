@@ -896,7 +896,7 @@ public class Controller implements ActionListener {
 	        date += st.nextToken();
 	        date += st.nextToken();
 	        
-	        if(Integer.parseInt(date)<strToday) {
+	        if(Integer.parseInt(date)>strToday) {
 	        	showBox.showMsg("아직 개강하지 않은 강의는 평점을 작성하실 수 없습니다.");
 	        	return;
 	        }

@@ -82,7 +82,7 @@ public class ShowBoxForm extends JFrame {
 									null);// options[1])
 							// t==> 확인, 취소, X : 0, 1, -1
 
-		String keyword = tf_search.getText();
+		String keyword = tf_search.getText().toLowerCase();
 		String title = "";// 만약 라디오 버튼 중 아이디가 선택되었다면 title= "아이디";
 					// "아이디" , "이름", "주소"
 

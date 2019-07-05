@@ -16,6 +16,8 @@ public class PassChangeForm extends JFrame {
 	 public JPasswordField pw_newPass, pw_newPassCheck, pw_oldPass;
 	 public JButton bt_cancel, bt_submit;
 	 JLabel lb_oldPass, lb_newPass, la_passCheck;
+	 private JLabel lblNewLabel_2;
+	 private JLabel label;
 
 
 
@@ -25,15 +27,15 @@ public class PassChangeForm extends JFrame {
 
 		pw_oldPass = new JPasswordField();
 		pw_oldPass.setColumns(10);
-		pw_oldPass.setBounds(55, 199, 234, 39);
+		pw_oldPass.setBounds(55, 174, 234, 39);
 		
 		pw_newPass = new JPasswordField();
-		pw_newPass.setBounds(55, 285, 234, 39);
+		pw_newPass.setBounds(55, 260, 234, 39);
 		pw_newPass.setColumns(10);
 		
 		pw_newPassCheck = new JPasswordField();
 		pw_newPassCheck.setColumns(10);
-		pw_newPassCheck.setBounds(55, 362, 234, 39);
+		pw_newPassCheck.setBounds(55, 389, 234, 39);
 		
 		bt_cancel = new JButton("취소");
 		bt_cancel.setFont(new Font("나눔바른고딕", Font.PLAIN, 18));
@@ -42,12 +44,12 @@ public class PassChangeForm extends JFrame {
 		lb_oldPass = new JLabel("현재 비밀번호");
 		lb_oldPass.setForeground(Color.WHITE);
 		lb_oldPass.setFont(new Font("나눔바른고딕", Font.PLAIN, 18));
-		lb_oldPass.setBounds(55, 155, 174, 32);
+		lb_oldPass.setBounds(55, 130, 174, 32);
 		
 		lb_newPass = new JLabel("새로운 비밀번호");
 		lb_newPass.setForeground(Color.WHITE);
 		lb_newPass.setFont(new Font("나눔바른고딕", Font.PLAIN, 18));
-		lb_newPass.setBounds(55, 250, 174, 23);
+		lb_newPass.setBounds(55, 225, 174, 23);
 		
 		getContentPane().add(pw_oldPass);
 		getContentPane().add(pw_newPass);
@@ -59,7 +61,7 @@ public class PassChangeForm extends JFrame {
 		la_passCheck = new JLabel("새로운 비밀번호 확인");
 		la_passCheck.setForeground(Color.WHITE);
 		la_passCheck.setFont(new Font("나눔바른고딕", Font.PLAIN, 18));
-		la_passCheck.setBounds(55, 329, 174, 23);
+		la_passCheck.setBounds(55, 356, 174, 23);
 		getContentPane().add(la_passCheck);
 		
 		bt_submit = new JButton("확인");
@@ -72,6 +74,16 @@ public class PassChangeForm extends JFrame {
 		lblNewLabel_1.setForeground(Color.WHITE);
 		lblNewLabel_1.setBounds(106, 42, 171, 57);
 		getContentPane().add(lblNewLabel_1);
+		
+		lblNewLabel_2 = new JLabel("(비밀번호는 영문자, 숫자,");
+		lblNewLabel_2.setForeground(Color.GRAY);
+		lblNewLabel_2.setBounds(55, 311, 426, 18);
+		getContentPane().add(lblNewLabel_2);
+		
+		label = new JLabel("특수문자(!@#$%^&)의 조합 8~12자)");
+		label.setForeground(Color.GRAY);
+		label.setBounds(55, 329, 349, 18);
+		getContentPane().add(label);
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon("image/background_800.jpg"));
