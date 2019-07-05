@@ -1,17 +1,19 @@
 package com.firstjava.view;
 
 
+import java.awt.Color;
+import java.awt.Font;
+
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-import javax.swing.ImageIcon;
-import java.awt.Font;
-import java.awt.Color;
 
 public class NewclassForm extends JFrame {
 
@@ -21,6 +23,8 @@ public class NewclassForm extends JFrame {
 	public JTextArea ta_desc;
 	public JButton bt_new, bt_cancel; 
 	private JLabel lblNewLabel;
+	JScrollPane scrollPane;
+
 		
 	/**
 	 * Create the frame.
@@ -111,8 +115,11 @@ public class NewclassForm extends JFrame {
 		
 		
 		ta_desc = new JTextArea();
-		ta_desc.setBounds(150, 240, 580, 300);
-		contentPane.add(ta_desc);
+		ta_desc.setDocument((new JTextFieldLimit(400)));
+		scrollPane = new JScrollPane(ta_desc);
+		scrollPane.setBounds(150, 240, 580, 300);
+		contentPane.add(scrollPane);
+		
 		
 		
 		
