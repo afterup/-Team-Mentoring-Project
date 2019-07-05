@@ -111,12 +111,12 @@ insert into member values ('egoing1','123encore!','이고잉','egoing@gmail.com'
 insert into member values ('nomardcorder1','123encore!','노마드코더','nomardcorder@gmail.com','010-1234-5678');
 
 -- mentorTable insert
-insert into mentor (userid,job,major,license,plan)values('solbi94', '엔코아','컴퓨터공학과','없음','다양한 뷰티 강의 계획입니다');
-insert into mentor (userid,job,major,license,plan)values('simahyoung1', '엔코아','작곡과','자격증','강의 계획입니다');
-insert into mentor (userid,job,major,license,plan)values('jaelee1', '엔코아','컴퓨터공학과','자격증','걸어다니는 자바');
-insert into mentor (userid,job,major,license,plan)values('egoing1', '엔코아','컴퓨터공학과','자격증','생활코딩');
-insert into mentor (userid,job,major,license,plan)values('kimhyunwoo1', '엔코아','컴퓨터공학과','자격증','강의 계획입니다');
-insert into mentor (userid,job,major,license,plan)values('nomardcorder1', '엔코아','컴퓨터공학과','자격증','강의 계획입니다');
+insert into mentor values('solbi94', '엔코아','컴퓨터공학과','없음','다양한 뷰티 강의 계획입니다','승인');
+insert into mentor values('simahyoung1', '엔코아','작곡과','자격증','강의 계획입니다','승인');
+insert into mentor values('jaelee1', '엔코아','컴퓨터공학과','자격증','걸어다니는 자바','승인');
+insert into mentor values('egoing1', '엔코아','컴퓨터공학과','자격증','생활코딩','승인');
+insert into mentor values('kimhyunwoo1', '엔코아','컴퓨터공학과','자격증','강의 계획입니다','승인');
+insert into mentor values('nomardcorder1', '엔코아','컴퓨터공학과','자격증','강의 계획입니다','승인');
 
 -- classTable insert 	★ 수강인원은 1이상 5이하!!
 

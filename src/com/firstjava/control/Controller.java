@@ -940,6 +940,7 @@ public class Controller implements ActionListener {
 			classForm.tf_student.setText("" + vo.getLimit());
 			classForm.ta_desc.setText(vo.getClassinfo());
 			classForm.jb_category.setSelectedIndex(vo.getCateno() - 1);
+			classForm.tf_rate.setText(Integer.toString(dao.searchClassRate(classId)));
 
 		
 		}else if(ob==myPageForm.bt_classupdate) {//개설한강의 강의수정
