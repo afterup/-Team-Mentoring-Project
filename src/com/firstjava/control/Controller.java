@@ -380,8 +380,12 @@ public class Controller implements ActionListener {
 				mentorRegForm.initText();
 				mentorRegForm.setTitle("멘토신청");
 				mentorRegForm.la_mento.setText("멘토 신청");
-
-				mentorRegForm.enabled();
+				mentorRegForm.tf_job.setEnabled(true);
+				mentorRegForm.tf_major.setEnabled(true);
+				mentorRegForm.tf_license.setEnabled(true);
+				mentorRegForm.ta_plan.setEnabled(true);
+				mentorRegForm.bt_submit.setVisible(true);
+			
 
 				mentorRegForm.setVisible(true);
 			}
